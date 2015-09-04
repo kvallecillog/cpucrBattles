@@ -15,12 +15,38 @@ __status__ = "WIP: Working In Progress"
 
 import re
 
-class file_processor:
 
-    # def __init__(self):
-    #
-    #     file.self=file
+'''
+    Clase FileProcessor
+    Descripcion:
+        La clase FileProcessor se encapsula los metodos y atributos del modulo preprocesador.
+        Metodos principales de la clase FileProcessor son:
+            1-delete_comments()
+            2-
+            3-
+    Entradas: Archivo original del .ASM
+    Salidas: Archivo procesado sin comentarios.
+    Fecha: 30/08/15.
+    Revision: 1.0.1
+'''
 
+class FileProcessor:
+
+
+    ###################################################################################################################
+    '''
+    Constructor del archivo raw.
+    Entradas:
+    Salidas:
+    Fecha: 30/08/15.
+    Revision: 1.0.1
+    '''
+    ###################################################################################################################
+
+    def __init__(self):
+
+        #Se crea el objeto raw_file para lectura que contiene el archivo .ASM sin procesar.
+        self.raw_file=open(file_input,'r')
 
     ###################################################################################################################
     '''
@@ -34,8 +60,6 @@ class file_processor:
 
     def delete_comments(self):
 
-        #Se crea el objeto raw_file para lectura que contiene el archivo .ASM sin procesar.
-        raw_file=open('raw_file.ASM','r')
         #Se obtienen las lineas del .ASM sin procesar.
         raw_file_lines=raw_file.readlines()
         #Se crea el objeto non_comments_file para escritura, este archivo contiene el .ASM sin comentarios.
@@ -57,18 +81,12 @@ class file_processor:
                 new_line = ""
                 line=line.replace(line,new_line)
                 non_comments_file.writelines(line)
+
         # Se cierra el archivo original sin editar.
         raw_file.close()
         # Se cierra el nuevo archivo sin comentarios
         non_comments_file.close()
 
+        return raw_file,non_comments_file
+
     ###################################################################################################################
-
-
-    def main():
-
-        File=File_processor()
-        File.delete_comments()
-        print("Fin de la ejecucion")
-
-    main()
