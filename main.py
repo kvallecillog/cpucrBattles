@@ -17,31 +17,34 @@ __status__ = "WIP: Working In Progress"
     Revision: 1.0.1
 '''
 
-#import preprocesador
-import sys, getopt
+import sys
+import preprocesador
+import assembly_tables
 
-# file = preprocesador.FileProcessor()
+# def main(argv):
+def main():
+
+    raw_file_name = 'raw_file.ASM'
+    deleted_comments_file_name = 'deleted_comments_file.ASM'
+    list_of_comments = 'list_of_comments.list'
+    deleted_blanks_file_name = 'deleted_blanks_file_name.ASM'
+    checked_inst_file_name = 'checked_inst_file_name.ASM'
 
 
-def main(argv):
 
-   file_input = ''
-   file_output = ''
-   try:
-      opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
-   except getopt.GetoptError:
-      print('test.py -i <inputfile> -o <outputfile>')
-      sys.exit(2)
-   for opt, arg in opts:
-      if opt == '-h':
-         print('test.py -i <inputfile> -o <outputfile>')
-         sys.exit()
-      elif opt in ("-i", "--ifile"):
-         file_input = arg
-      elif opt in ("-o", "--ofile"):
-         file_output = arg
-   print('Input file is "', file_input)
-   print('Output file is "', file_output)
+    comments_file = preprocesador.open_file(raw_file_name)
+    preprocesador.delete_comments(comments_file, deleted_comments_file_name, list_of_comments)
 
-if __name__ == "__main__":
-   main(sys.argv[1:])
+    deleted_comments_file = preprocesador.open_file(deleted_comments_file_name)
+    preprocesador.delete_blanks(deleted_comments_file, deleted_blanks_file_name)
+
+    deleted_blanks_file = preprocesador.open_file(deleted_blanks_file_name)
+    preprocesador.instruction_checker(deleted_blanks_file, checked_inst_file_name, instruction_hash)
+
+
+
+  #  comments_file = preprocesador.open_file(raw_file_name)
+
+if __name__ == "__main__": main()
+
+print("Finished!")
