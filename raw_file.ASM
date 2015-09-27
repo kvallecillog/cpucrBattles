@@ -6,4 +6,4 @@
 
 
 LDA #02 ; Tambien este
-STA
+STA ; lalalala

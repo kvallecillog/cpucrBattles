@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e884eca-5d13-4def-8528-72d310f45b6b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/deleted_blanks_file_name.ASM" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deleted_blanks_file.ASM" afterPath="$PROJECT_DIR$/deleted_blanks_file.ASM" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deleted_comments_file.ASM" afterPath="$PROJECT_DIR$/deleted_comments_file.ASM" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lines_raw_file_name.ASM" afterPath="$PROJECT_DIR$/lines_raw_file_name.ASM" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/preprocesador.py" afterPath="$PROJECT_DIR$/preprocesador.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raw_file.ASM" afterPath="$PROJECT_DIR$/raw_file.ASM" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cpucrBattles.iws" />
@@ -26,14 +28,14 @@
     <favorites_list name="cpucrBattles" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5682951">
+    <splitter split-orientation="horizontal" split-proportion="0.8295107">
       <split-first>
         <leaf>
           <file leaf-file-name="preprocesador.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/preprocesador.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.80561554">
-                  <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.5032258">
+                  <caret line="73" column="50" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
                   <folding />
                 </state>
               </provider>
@@ -43,7 +45,7 @@
             <entry file="file://$PROJECT_DIR$/deleted_comments_file.ASM">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="6" />
+                  <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
                   <folding />
                 </state>
               </provider>
@@ -53,7 +55,17 @@
             <entry file="file://$PROJECT_DIR$/raw_file.ASM">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="3" />
+                  <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="lines_raw_file_name.ASM" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lines_raw_file_name.ASM">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -63,11 +75,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.5097192">
-                  <caret line="43" column="77" selection-start-line="43" selection-start-column="77" selection-end-line="43" selection-end-column="77" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="39" column="61" selection-start-line="39" selection-start-column="61" selection-end-line="39" selection-end-column="61" />
                   <folding>
                     <element signature="e#551#561#0" expanded="true" />
                   </folding>
@@ -79,7 +91,17 @@
             <entry file="file://$PROJECT_DIR$/deleted_blanks_file.ASM">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0">
-                  <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+                  <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="checked_inst_file_name.ASM" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/checked_inst_file_name.ASM">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -108,9 +130,9 @@
         <option value="$PROJECT_DIR$/delete_comments_file.ASM" />
         <option value="$PROJECT_DIR$/deleted_blanks_file_name.ASM" />
         <option value="$PROJECT_DIR$/lines_raw_file_name.ASM" />
-        <option value="$PROJECT_DIR$/raw_file.ASM" />
         <option value="$PROJECT_DIR$/deleted_comments_file.ASM" />
         <option value="$PROJECT_DIR$/deleted_blanks_file.ASM" />
+        <option value="$PROJECT_DIR$/raw_file.ASM" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/preprocesador.py" />
       </list>
@@ -402,10 +424,10 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884902" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24942966" sideWeight="0.4947839" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23726235" sideWeight="0.43145162" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23726235" sideWeight="0.43145162" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39968896" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26527572" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26229507" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23726235" sideWeight="0.5685484" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884902" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -676,6 +698,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/raw_file.ASM">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lines_raw_file_name.ASM">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -684,44 +714,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/raw_file.ASM">
+    <entry file="file://$PROJECT_DIR$/deleted_comments_file.ASM">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deleted_blanks_file.ASM">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5097192">
-          <caret line="43" column="77" selection-start-line="43" selection-start-column="77" selection-end-line="43" selection-end-column="77" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="61" selection-start-line="39" selection-start-column="61" selection-end-line="39" selection-end-column="61" />
           <folding>
             <element signature="e#551#561#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deleted_comments_file.ASM">
+    <entry file="file://$PROJECT_DIR$/deleted_blanks_file.ASM">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="2" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="6" />
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/checked_inst_file_name.ASM">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/preprocesador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80561554">
-          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.5032258">
+          <caret line="73" column="50" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
           <folding />
         </state>
       </provider>

@@ -1,3 +1,3 @@
 2     LDA 
 8 LDA #02 
-9 STA
+9 STA 

@@ -6,4 +6,4 @@
 6 
 7 
 8 LDA #02 ; Tambien este
-9 STA
+9 STA ; lalalala

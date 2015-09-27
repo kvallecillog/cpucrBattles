@@ -34,32 +34,10 @@ def main():
     data_list = []
     ###########################################################################################
 
-    # lines_raw_file_name = preprocesador.lines_mapper(raw_file_name, lines_counter)
-    # deleted_blanks_file_name = preprocesador.delete_blanks(lines_raw_file_name)
-    # deleted_comments_file_name = preprocesador.delete_comments(deleted_blanks_file_name)
-    # preprocesador.instruction_checker(deleted_blanks_file)
-
     lines_raw_list = preprocesador.lines_mapper(raw_file_name, lines_counter, data_list)
     deleted_blanks_list = preprocesador.delete_blanks(lines_raw_list)
     deleted_comments_list = preprocesador.delete_comments(deleted_blanks_list)
-    # preprocesador.instruction_checker(deleted_blanks_file)
-
-
-    #
-    # raw_file = preprocesador.open_file(raw_file_name)
-    # preprocesador.lines_mapper(raw_file, lines_raw_file_name, lines_counter)
-    #
-    # deleted_comments_file = preprocesador.open_file(deleted_comments_file_name)
-    # preprocesador.delete_blanks(deleted_comments_file, deleted_blanks_file_name)
-    #
-    # comments_file = preprocesador.open_file(lines_raw_file_name)
-    # preprocesador.delete_comments(comments_file, deleted_comments_file_name, list_of_comments)
-    # deleted_blanks_file = preprocesador.open_file(deleted_blanks_file_name)
-    # preprocesador.instruction_checker(deleted_blanks_file)
-
-
-
-    #  comments_file = preprocesador.open_file(raw_file_name)
+    preprocesador.instruction_checker(deleted_comments_list, lines_raw_list)
 
 
 if __name__ == "__main__": main()

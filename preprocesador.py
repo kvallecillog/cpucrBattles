@@ -61,22 +61,17 @@ def delete_blanks(data_list):
     delete_blanks_list = []
     deleted_blanks_file_name = 'deleted_blanks_file.ASM'
     non_blanks_file = open(deleted_blanks_file_name, 'w+')
+    blank_regex = re.compile(r'^\d+\s+$')
 
     for x in range(0, len(data_list)):
 
         data_list_x = ''.join(data_list[x])
-        blank_non_comment_regex = re.match(r'^\d+\s+$', data_list_x)
+        blank_non_comment_regex = re.match(blank_regex, data_list_x)
         num_line = data_list_x.split(" ")
 
-        if blank_non_comment_regex:
-            print("Blank line detected at:", "Line #", num_line[0])
-            #data_list.pop(x)
-        else:
-            print("Non blank line detected at:", "Line #", num_line[0])
+        if not blank_non_comment_regex:
             non_blanks_file.writelines(data_list_x)
             delete_blanks_list.append(data_list_x)
-
-    print("List of non blank lines: ", delete_blanks_list)
 
     return delete_blanks_list
 
@@ -105,30 +100,33 @@ def delete_comments(data_list):
     return data_list
 
 
-def instruction_checker(non_blanks_file):
+def instruction_checker(data_list, lines_raw_list):
 
     # Se comprueban que las instrucciones ingresadas sean validas.
     # Se obtienen las lineas del .ASM sin lineas en blanco.
-    # checked_inst_file_name = 'checked_inst_file_name.ASM'
-    # checked_inst_file = open(checked_inst_file_name, 'w')
-    inst_file_lines = non_blanks_file.readlines()
+    checked_inst_file_name = 'checked_inst_file_name.ASM'
+    checked_inst_file = open(checked_inst_file_name, 'w+')
 
-    for line in inst_file_lines:
+    inst_regex = re.compile(r'(LDA)')
+    for x in range(0, len(data_list)):
 
-        #inst_regex = re.compile(r'(LDA)')
-
-        num_line = line.split(" ")
-        #print(num_line[0])
+        data_list_x = ''.join(data_list[x])
+        num_line = data_list_x.split(" ")
         non_num_line = " ".join(num_line[1:len(num_line)])
-        non_num_line_list = non_num_line.split(" ")
-        print(non_num_line_list[0])
-        #inst_regex_match = re.match(inst_regex,non_num_line[1])
-        #print("Instrucción invalida en línea: ", "#", num_line[0], "Instrucción ingresada: ", num_line[2])
-        # print(num_line[6])
-        # if inst_regex_match:
-        #     print(num_line)
-        # else:
-        #     print("Instruccion invalida, error en línea")
+        inst_regex_match = re.match(inst_regex, non_num_line)
+
+        num_line_int = int(num_line[0]) - 1
+        data_source_line = lines_raw_list[num_line_int]
+        data_source_line_list = data_source_line.split(" ")
+        data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
+
+
+        if inst_regex_match:
+            print(num_line)
+        else:
+            print("Instruccion invalida, error en línea", "#", num_line[0], "->", data_source_line_n)
+
+    #print(lines_raw_list)
 # AND
 # BCC
 # BCS
