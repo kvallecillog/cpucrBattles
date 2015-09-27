@@ -23,7 +23,6 @@ import preprocesador
 
 # def main(argv):
 def main():
-
     ###########################################################################################
     # Files names
     ###########################################################################################
@@ -32,12 +31,18 @@ def main():
     # Global variables
     ###########################################################################################
     lines_counter = 0
+    data_list = []
     ###########################################################################################
 
-    lines_raw_file_name=preprocesador.lines_mapper(raw_file_name, lines_counter)
-    deleted_blanks_file_name = preprocesador.delete_blanks(lines_raw_file_name)
-    preprocesador.delete_comments(deleted_blanks_file_name)
-    #preprocesador.instruction_checker(deleted_blanks_file)
+    # lines_raw_file_name = preprocesador.lines_mapper(raw_file_name, lines_counter)
+    # deleted_blanks_file_name = preprocesador.delete_blanks(lines_raw_file_name)
+    # deleted_comments_file_name = preprocesador.delete_comments(deleted_blanks_file_name)
+    # preprocesador.instruction_checker(deleted_blanks_file)
+
+    lines_raw_list = preprocesador.lines_mapper(raw_file_name, lines_counter, data_list)
+    deleted_blanks_list = preprocesador.delete_blanks(lines_raw_list)
+    deleted_comments_list = preprocesador.delete_comments(deleted_blanks_list)
+    # preprocesador.instruction_checker(deleted_blanks_file)
 
 
     #
@@ -54,7 +59,8 @@ def main():
 
 
 
-  #  comments_file = preprocesador.open_file(raw_file_name)
+    #  comments_file = preprocesador.open_file(raw_file_name)
+
 
 if __name__ == "__main__": main()
 
