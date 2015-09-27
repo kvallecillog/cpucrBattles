@@ -19,27 +19,38 @@ __status__ = "WIP: Working In Progress"
 
 import sys
 import preprocesador
-import assembly_tables
+
 
 # def main(argv):
 def main():
 
+    ###########################################################################################
+    # Files names
+    ###########################################################################################
     raw_file_name = 'raw_file.ASM'
-    deleted_comments_file_name = 'deleted_comments_file.ASM'
-    list_of_comments = 'list_of_comments.list'
-    deleted_blanks_file_name = 'deleted_blanks_file_name.ASM'
-    checked_inst_file_name = 'checked_inst_file_name.ASM'
+    ###########################################################################################
+    # Global variables
+    ###########################################################################################
+    lines_counter = 0
+    ###########################################################################################
+
+    lines_raw_file_name=preprocesador.lines_mapper(raw_file_name, lines_counter)
+    deleted_blanks_file_name = preprocesador.delete_blanks(lines_raw_file_name)
+    preprocesador.delete_comments(deleted_blanks_file_name)
+    #preprocesador.instruction_checker(deleted_blanks_file)
 
 
-
-    comments_file = preprocesador.open_file(raw_file_name)
-    preprocesador.delete_comments(comments_file, deleted_comments_file_name, list_of_comments)
-
-    deleted_comments_file = preprocesador.open_file(deleted_comments_file_name)
-    preprocesador.delete_blanks(deleted_comments_file, deleted_blanks_file_name)
-
-    deleted_blanks_file = preprocesador.open_file(deleted_blanks_file_name)
-    preprocesador.instruction_checker(deleted_blanks_file, checked_inst_file_name, instruction_hash)
+    #
+    # raw_file = preprocesador.open_file(raw_file_name)
+    # preprocesador.lines_mapper(raw_file, lines_raw_file_name, lines_counter)
+    #
+    # deleted_comments_file = preprocesador.open_file(deleted_comments_file_name)
+    # preprocesador.delete_blanks(deleted_comments_file, deleted_blanks_file_name)
+    #
+    # comments_file = preprocesador.open_file(lines_raw_file_name)
+    # preprocesador.delete_comments(comments_file, deleted_comments_file_name, list_of_comments)
+    # deleted_blanks_file = preprocesador.open_file(deleted_blanks_file_name)
+    # preprocesador.instruction_checker(deleted_blanks_file)
 
 
 
