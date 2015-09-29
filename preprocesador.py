@@ -36,7 +36,7 @@ import re
 # Revision: 1.0.1
 '''
 ###################################################################################################################
-print("Executing Preprocessor")
+print("Inicio del analisis de sintaxis \n")
 
 
 def lines_mapper(raw_file_name, lines_counter, data_list):
@@ -54,8 +54,6 @@ def lines_mapper(raw_file_name, lines_counter, data_list):
 
     return data_list
 
-print("Lines printed")
-
 
 def delete_blanks(data_list):
     delete_blanks_list = []
@@ -67,9 +65,10 @@ def delete_blanks(data_list):
 
         data_list_x = ''.join(data_list[x])
         blank_non_comment_regex = re.match(blank_regex, data_list_x)
-        num_line = data_list_x.split(" ")
+        #num_line = data_list_x.split(" ")
 
         if not blank_non_comment_regex:
+
             non_blanks_file.writelines(data_list_x)
             delete_blanks_list.append(data_list_x)
 
@@ -100,6 +99,22 @@ def delete_comments(data_list):
     return data_list
 
 
+def delete_spaces (data_list):
+     # Se crea el objeto non_comments_file para escritura, este archivo contiene el .ASM sin comentarios.
+    deleted_spaces_file_name = 'deleted_spaces_file.ASM'
+    deleted_spaces_file = open(deleted_spaces_file_name, 'w+')
+    spaces_regex = re.compile(r' +')
+    for x in range(0, len(data_list)):
+
+        data_list_x = "".join(data_list[x])
+        data_list_x = re.sub(spaces_regex, ' ', data_list_x)
+        data_list[x] = data_list_x
+        deleted_spaces_file.writelines(data_list[x])
+
+    return data_list
+
+
+
 def instruction_checker(data_list, lines_raw_list):
 
     # Se comprueban que las instrucciones ingresadas sean validas.
@@ -121,9 +136,7 @@ def instruction_checker(data_list, lines_raw_list):
         data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
 
 
-        if inst_regex_match:
-            print(num_line)
-        else:
+        if not inst_regex_match:
             print("Instruccion invalida, error en línea", "#", num_line[0], "->", data_source_line_n)
 
     #print(lines_raw_list)

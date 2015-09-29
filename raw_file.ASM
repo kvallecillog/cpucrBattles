@@ -1,5 +1,5 @@
 ; Este file es de ejemplo
-    LDA ; Hola este es un comentario
+                LDA ; Hola este es un comentario
 
 
 ; Este tambien es otro comentario

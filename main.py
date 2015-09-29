@@ -37,9 +37,10 @@ def main():
     lines_raw_list = preprocesador.lines_mapper(raw_file_name, lines_counter, data_list)
     deleted_blanks_list = preprocesador.delete_blanks(lines_raw_list)
     deleted_comments_list = preprocesador.delete_comments(deleted_blanks_list)
-    preprocesador.instruction_checker(deleted_comments_list, lines_raw_list)
+    deleted_spaces_list = preprocesador.delete_spaces(deleted_comments_list)
+    preprocesador.instruction_checker(deleted_spaces_list, lines_raw_list)
 
 
 if __name__ == "__main__": main()
 
-print("Finished!")
+print("\nAnalisis de sintaxis finalizado!")
