@@ -99,7 +99,7 @@ def delete_comments(data_list):
     return data_list
 
 
-def delete_spaces (data_list):
+def delete_spaces(data_list):
      # Se crea el objeto non_comments_file para escritura, este archivo contiene el .ASM sin comentarios.
     deleted_spaces_file_name = 'deleted_spaces_file.ASM'
     deleted_spaces_file = open(deleted_spaces_file_name, 'w+')
@@ -112,7 +112,6 @@ def delete_spaces (data_list):
         deleted_spaces_file.writelines(data_list[x])
 
     return data_list
-
 
 
 def instruction_checker(data_list, lines_raw_list):
@@ -136,7 +135,34 @@ def instruction_checker(data_list, lines_raw_list):
         data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
 
 
-        if not inst_regex_match:
+        if inst_regex_match:
+
+            if inst_inm_match:
+                print("Es una instruccion de direccionamiento inmediato")
+
+            if inst_abs_match:
+                print("Es una instruccion de direccionamiento absoluto")
+
+            if inst_rel_match:
+                print("Es una instruccion de direccionamiento relativo")
+
+            if inst_ind_match:
+                print("Es una instruccion de direccionamiento indirecto")
+
+            if inst_imp_match:
+                print("Es una instruccion de direccionamiento implicito ")
+
+            if inst_acum_match:
+                print("Es una instruccion de direccionamiento de acumulador ")
+
+            if inst_ctrl_match:
+                print("Es una instruccion de direccionamiento de control ")
+
+            if inst_inout_match:
+                print("Es una instruccion de direccionamiento entrada/salida ")
+
+
+        else:
             print("Instruccion invalida, error en línea", "#", num_line[0], "->", data_source_line_n)
 
     #print(lines_raw_list)

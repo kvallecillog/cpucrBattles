@@ -5,5 +5,5 @@
 ; Este tambien es otro comentario
 
 
-LDA #02 ; Tambien este
+LDA         #  02 ; Tambien este
 STA ; lalalala

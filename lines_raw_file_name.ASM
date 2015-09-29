@@ -5,5 +5,5 @@
 5 ; Este tambien es otro comentario
 6 
 7 
-8 LDA #02 ; Tambien este
+8 LDA         #  02 ; Tambien este
 9 STA ; lalalala
