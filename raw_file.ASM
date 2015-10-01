@@ -1,12 +1,14 @@
 ; Este file es de ejemplo
-LDA ; Hola este es un comentario
-LDA; LOLI LIA
+LDA             # ; Hola este es un comentario
+LDA@; LOLI LIA
 
 ; Este tambien es otro comentario
 
+LDA#
+LDA #
 LDA
 LDASTA
-lda
+ldax
 sta@
 LDA()         #  02 ; Tambien este
 STA# ; lalalala

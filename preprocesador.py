@@ -38,6 +38,7 @@ import re
 ###################################################################################################################
 print("Inicio del analisis de sintaxis \n")
 
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -47,6 +48,7 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
 
 def lines_mapper(raw_file_name, lines_counter, data_list):
     raw_file = open(raw_file_name, 'r')
@@ -120,34 +122,28 @@ def delete_spaces(data_list):
 
 
 def instruction_checker(data_list, lines_raw_list):
-
     ##################################################################################################################
     # Instruction checker analiza si la instruccion ingresada esta dentro del conjunto de instrucciones de la CPUCR.
     # Las instruciones son validas en mayuscula o en minuscula,
     ##################################################################################################################
     checked_inst_file_name = 'checked_inst_file_name.ASM'
     checked_inst_file = open(checked_inst_file_name, 'w+')
-    #inst_regex = re.compile(r'^(LDA|AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|RTS|SEC|SEI|STA|SUB|TAP|TPA)\b', re.IGNORECASE)
-
-    regex_inst_abs_ind = re.compile(r'^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)$', re.IGNORECASE)
+    #(\s??|@??)
+    regex_inst_abs_ind = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s|\@)', re.IGNORECASE)
     regex_inst_rel = re.compile(r'^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)$', re.IGNORECASE)
     regex_inst_acum = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
     regex_inst_ctrl = re.compile(r'^(TPA|TAP|RTI|RTS|HTL|NOP|PLS|PHS)$', re.IGNORECASE)
-    regex_inst_inm = re.compile(r'^(LDA|ADD|SUB|AND|ORA)$', re.IGNORECASE)
+    regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s|\#)', re.IGNORECASE)
     regex_inst_imp = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
     regex_inst_io = re.compile(r'^(INP|OUT)$', re.IGNORECASE)
 
-    # regex_inst_abs_ind = ( [LDA | STA | ADD | SUB | AND | ORA | JMP | JSR ]*[ @ | ( ] )
-    # regex_inst_rel = ([ BCC | BCS | BEQ | BMI | BNE | BPL | BVC | BVS]+[\S]+[\w])
-    # regex_inst_acum = ([ CLA | CPA | INA | DCA | ROL | ROR | PLA | PHA ]+ )
 
     for x in range(0, len(data_list)):
 
         data_list_x = ''.join(data_list[x])
         num_line = data_list_x.split(" ")
         non_num_line = " ".join(num_line[1:len(num_line)])
-        #print(non_num_line)
-        #
+
         inst_abs_ind_match = re.match(regex_inst_abs_ind, non_num_line)
         inst_rel_match = re.match(regex_inst_rel, non_num_line)
         inst_acum_match = re.match(regex_inst_acum, non_num_line)
@@ -162,12 +158,11 @@ def instruction_checker(data_list, lines_raw_list):
         data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
 
         if inst_abs_ind_match or inst_rel_match or inst_acum_match \
-                 or inst_ctrl_match or inst_inm_match \
-                 or inst_imp_match or inst_io_match:
+                or inst_ctrl_match or inst_inm_match \
+                or inst_imp_match or inst_io_match:
 
-
-            print(x,bcolors.OKBLUE + "Ok: Instruccion invalida en línea #"+num_line[0]+"->"+data_source_line_n+bcolors.ENDC)
-
+            print(x, bcolors.OKBLUE + "Ok: Instruccion valida en línea #" + num_line[
+                0] + "->" + data_source_line_n + bcolors.ENDC)
 
             if inst_abs_ind_match:
                 print(x, "Es una instruccion de direccionamiento absoluto\n")
@@ -192,4 +187,5 @@ def instruction_checker(data_list, lines_raw_list):
 
         else:
 
-            print(x,bcolors.FAIL + "Error: instruccion invalida en línea #"+num_line[0]+"->"+data_source_line_n+bcolors.ENDC)
+            print(x, bcolors.FAIL + "Error: instruccion invalida en línea #" + num_line[
+                0] + "->" + data_source_line_n + bcolors.ENDC)
