@@ -1,18 +1,19 @@
 1 ; Este file es de ejemplo
-2 LDA             # ; Hola este es un comentario
+2 LDA@            # ; Hola este es un comentario
 3 LDA@; LOLI LIA
 4 
 5 ; Este tambien es otro comentario
 6 
 7 LDA#
-8 LDA #
-9 LDA
-10 LDASTA
-11 ldax
-12 sta@
-13 LDA()         #  02 ; Tambien este
-14 STA# ; lalalala
-15 TAP@
-16 INA#
-17 XXX
-18 YYY
+8 LDA@0000 ; Direccionamiento absoluto validado.
+9 LDA(@77) ; Direccionamiento indirecto Validado.
+10 LDA#07 ; Direccionamiento inmediato validado.
+11 LDASTA
+12 ldax
+13 sta@
+14 LDA()         #  02 ; Tambien este
+15 STA# ; lalalala
+16 TAP@
+17 INA#
+18 XXX
+19 YYY

@@ -1,14 +1,15 @@
-2 LDA             #
+2 LDA@            #
 3 LDA@
 7 LDA#
-8 LDA #
-9 LDA
-10 LDASTA
-11 ldax
-12 sta@
-13 LDA()         #  02
-14 STA#
-15 TAP@
-16 INA#
-17 XXX
-18 YYY
+8 LDA@0000
+9 LDA(@77)
+10 LDA#07
+11 LDASTA
+12 ldax
+13 sta@
+14 LDA()         #  02
+15 STA#
+16 TAP@
+17 INA#
+18 XXX
+19 YYY

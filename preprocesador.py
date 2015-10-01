@@ -129,11 +129,12 @@ def instruction_checker(data_list, lines_raw_list):
     checked_inst_file_name = 'checked_inst_file_name.ASM'
     checked_inst_file = open(checked_inst_file_name, 'w+')
     #(\s??|@??)
-    regex_inst_abs_ind = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s|\@)', re.IGNORECASE)
+    regex_inst_abs = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\@)[0-7]{1,4}$', re.IGNORECASE)
+    regex_inst_ind = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\()(\@)[0-7]{1,4}(\))$', re.IGNORECASE)
     regex_inst_rel = re.compile(r'^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)$', re.IGNORECASE)
     regex_inst_acum = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
     regex_inst_ctrl = re.compile(r'^(TPA|TAP|RTI|RTS|HTL|NOP|PLS|PHS)$', re.IGNORECASE)
-    regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s|\#)', re.IGNORECASE)
+    regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\#)[0-7]{1,2}$', re.IGNORECASE)
     regex_inst_imp = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
     regex_inst_io = re.compile(r'^(INP|OUT)$', re.IGNORECASE)
 
@@ -144,7 +145,8 @@ def instruction_checker(data_list, lines_raw_list):
         num_line = data_list_x.split(" ")
         non_num_line = " ".join(num_line[1:len(num_line)])
 
-        inst_abs_ind_match = re.match(regex_inst_abs_ind, non_num_line)
+        inst_ind_match = re.match(regex_inst_ind, non_num_line)
+        inst_abs_match = re.match(regex_inst_abs, non_num_line)
         inst_rel_match = re.match(regex_inst_rel, non_num_line)
         inst_acum_match = re.match(regex_inst_acum, non_num_line)
         inst_ctrl_match = re.match(regex_inst_ctrl, non_num_line)
@@ -157,14 +159,17 @@ def instruction_checker(data_list, lines_raw_list):
         data_source_line_list = data_source_line.split(" ")
         data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
 
-        if inst_abs_ind_match or inst_rel_match or inst_acum_match \
+        if inst_ind_match or inst_abs_match or inst_rel_match or inst_acum_match \
                 or inst_ctrl_match or inst_inm_match \
                 or inst_imp_match or inst_io_match:
 
             print(x, bcolors.OKBLUE + "Ok: Instruccion valida en línea #" + num_line[
                 0] + "->" + data_source_line_n + bcolors.ENDC)
 
-            if inst_abs_ind_match:
+            if inst_ind_match:
+                print(x, "Es una instruccion de direccionamiento indirecto\n")
+
+            if inst_abs_match:
                 print(x, "Es una instruccion de direccionamiento absoluto\n")
 
             if inst_rel_match:
