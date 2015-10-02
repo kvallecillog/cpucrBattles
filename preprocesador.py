@@ -128,15 +128,21 @@ def instruction_checker(data_list, lines_raw_list):
     ##################################################################################################################
     checked_inst_file_name = 'checked_inst_file_name.ASM'
     checked_inst_file = open(checked_inst_file_name, 'w+')
-    #(\s??|@??)
-    regex_inst_abs = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\@)[0-7]{1,4}$', re.IGNORECASE)
-    regex_inst_ind = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\()(\@)[0-7]{1,4}(\))$', re.IGNORECASE)
+
+    # Direccionamiento absoluto validado sin etiquetas funcionales.
+    regex_inst_abs = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\@)[0-7]{1,4}$', re.IGNORECASE)
+    # Direccionamiento indirecto validado sin etiquetas funcionales.
+    regex_inst_ind = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(\@)[0-7]{1,4}(\))$', re.IGNORECASE)
+    # Direccionamiento inmediato validado sin etiquetas funcionales.
+    regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)[0-7]{1,2}$', re.IGNORECASE)
+    # Direccionamiento de entradas y salidas.
+    regex_inst_io = re.compile(r'^(INP|OUT)\b(\s)(\@)[0-7]{1,2}$', re.IGNORECASE)
+    # Falta la capacidad de etiquetas!
     regex_inst_rel = re.compile(r'^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)$', re.IGNORECASE)
     regex_inst_acum = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
     regex_inst_ctrl = re.compile(r'^(TPA|TAP|RTI|RTS|HTL|NOP|PLS|PHS)$', re.IGNORECASE)
-    regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\#)[0-7]{1,2}$', re.IGNORECASE)
     regex_inst_imp = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
-    regex_inst_io = re.compile(r'^(INP|OUT)$', re.IGNORECASE)
+
 
 
     for x in range(0, len(data_list)):
