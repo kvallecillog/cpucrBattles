@@ -9,7 +9,7 @@
 9 LDA (@77) ; Direccionamiento indirecto Validado.
 10 LDA #07 ; Direccionamiento inmediato validado.
 11 INP @77 ; Direccionamiento de entradas y salidas validado para 64 puertos.
-12 LDASTA
+12 LDASTA INP @77
 13 ldax
 14 sta@
 15 LDA()         #  02 ; Tambien este

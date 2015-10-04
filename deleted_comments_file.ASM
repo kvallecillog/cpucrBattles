@@ -5,7 +5,7 @@
 9 LDA (@77)
 10 LDA #07
 11 INP @77
-12 LDASTA
+12 LDASTA INP @77
 13 ldax
 14 sta@
 15 LDA()         #  02

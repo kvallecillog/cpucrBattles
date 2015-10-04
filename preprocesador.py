@@ -130,9 +130,31 @@ def label_checker(data_list, lines_raw_list):
     #  el primero sea una letra.
     regex_label_abs_inst = re.compile(r'^[a-zA-Z]\w{1,7}\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\@)[0-7]{1,4}$', re.IGNORECASE)
     regex_inst_abs = re.compile(r'^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\@)[0-7]{1,4}$', re.IGNORECASE)
-    regex_resword = re.compile(r'^(AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
+
+    regex_label_ind_inst = re.compile(r'^[a-zA-Z]\w{1,7}\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(\@)[0-7]{1,4}(\))$', re.IGNORECASE)
+    regex_inst_ind = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(\@)[0-7]{1,4}(\))$', re.IGNORECASE)
+
+    regex_label_inm_inst = re.compile(r'^[a-zA-Z]\w{1,7}\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)[0-7]{1,2}$', re.IGNORECASE)
+    regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)[0-7]{1,2}$', re.IGNORECASE)
+
+    regex_label_io_inst = re.compile(r'^[a-zA-Z]\w{1,7}\s(INP|OUT)\b(\s)(\@)[0-7]{1,2}$', re.IGNORECASE)
+    regex_inst_io = re.compile(r'^(INP|OUT)\b(\s)(\@)[0-7]{1,2}$', re.IGNORECASE)
+
+    regex_label_rel_inst = re.compile(r'^[a-zA-Z]\w{1,7}\s(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)$', re.IGNORECASE)
+    regex_inst_rel = re.compile(r'^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)$', re.IGNORECASE)
+
+    regex_label_acum_inst = re.compile(r'^[a-zA-Z]\w{1,7}\s^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
+    regex_inst_acum = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
+
+    regex_label_ctrl_inst = re.compile(r'^[a-zA-Z]\w{1,7}\s(TPA|TAP|RTI|RTS|HTL|NOP|PLS|PHS)$', re.IGNORECASE)
+    regex_inst_ctrl = re.compile(r'^(TPA|TAP|RTI|RTS|HTL|NOP|PLS|PHS)$', re.IGNORECASE)
+
+    regex_label_imp_inst = re.compile(r'^[a-zA-Z]\w{1,7}\s(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
+    regex_inst_imp = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
+
+    regex_resword = re.compile(r'\b^(AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
                     DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
-                    RTS|SEC|SEI|STA|SUB|TAP|TPA)', re.IGNORECASE)
+                    RTS|SEC|SEI|STA|SUB|TAP|TPA)\s.*', re.IGNORECASE)
 
 
     for x in range(0, len(data_list)):
@@ -142,27 +164,77 @@ def label_checker(data_list, lines_raw_list):
         num_line = data_list_x.split(" ")
         non_num_line = " ".join(num_line[1:len(num_line)])
 
-        label_match = re.match(regex_label_abs_inst, non_num_line)
-        label_inst_match = re.match(regex_inst_abs, non_num_line)
-        inst_match = re.match(regex_resword, non_num_line)
+        label_inst_abs_match = re.match(regex_label_abs_inst, non_num_line)
+        inst_abs_match = re.match(regex_inst_abs, non_num_line)
+
+        label_inst_ind_match = re.match(regex_label_ind_inst, non_num_line)
+        inst_ind_match = re.match(regex_inst_ind, non_num_line)
+
+        label_inst_inm_match = re.match(regex_label_inm_inst, non_num_line)
+        inst_inm_match = re.match(regex_inst_inm, non_num_line)
+
+        label_inst_io_match = re.match(regex_label_io_inst, non_num_line)
+        inst_io_match = re.match(regex_inst_io, non_num_line)
+
+        label_inst_rel_match = re.match(regex_label_rel_inst, non_num_line)
+        inst_rel_match = re.match(regex_inst_rel, non_num_line)
+
+        label_inst_acum_match = re.match(regex_label_acum_inst, non_num_line)
+        inst_acum_match = re.match(regex_inst_acum, non_num_line)
+
+        label_inst_ctrl_match = re.match(regex_label_ctrl_inst, non_num_line)
+        inst_ctrl_match = re.match(regex_inst_ctrl, non_num_line)
+
+        label_inst_imp_match = re.match(regex_label_imp_inst, non_num_line)
+        inst_imp_match = re.match(regex_inst_imp, non_num_line)
+
+        resword_match = re.match(regex_resword, non_num_line)
 
         num_line_int = int(num_line[0]) - 1
         data_source_line = lines_raw_list[num_line_int]
         data_source_line_list = data_source_line.split(" ")
         data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
 
-        if label_inst_match:
+        if inst_abs_match or inst_ind_match or inst_inm_match or inst_io_match\
+                or inst_rel_match or inst_acum_match or inst_ctrl_match or inst_imp_match:
 
             print("Cumple con la condicion de instruccion")
             print(non_num_line)
 
         else:
 
-            if not inst_match:
+            if not resword_match:
 
-                if label_match:
+                if label_inst_abs_match or label_inst_ind_match or \
+                        label_inst_inm_match or label_inst_io_match \
+                        or label_inst_rel_match or label_inst_acum_match \
+                        or label_inst_ctrl_match or label_inst_imp_match:
                     print("Cumple con la condicion de etiqueta de 8 caracteres + instruccion")
-                    print(non_num_line)
+
+                    if label_inst_abs_match:
+                        print("Es una instruccion de direccionamiento absoluto")
+                        print(non_num_line)
+                    if label_inst_ind_match:
+                        print("Es una instruccion de direccionamiento indirecto")
+                        print(non_num_line)
+                    if label_inst_inm_match:
+                        print("Es una instruccion de direccionamiento inmediato")
+                        print(non_num_line)
+                    if label_inst_io_match:
+                        print("Es una instruccion de direccionamiento entrada/salida")
+                        print(non_num_line)
+                    if label_inst_rel_match:
+                        print("Es una instruccion de direccionamiento relativo")
+                        print(non_num_line)
+                    if label_inst_acum_match:
+                        print("Es una instruccion de direccionamiento acumulador")
+                        print(non_num_line)
+                    if label_inst_ctrl_match:
+                        print("Es una instruccion de direccionamiento control")
+                        print(non_num_line)
+                    if label_inst_imp_match:
+                        print("Es una instruccion de direccionamiento implicito")
+                        print(non_num_line)
                 else:
                     print("Error: No es un formato de etiqueta + instruccion valido.")
                     print(non_num_line)

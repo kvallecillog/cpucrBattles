@@ -9,7 +9,7 @@ LOOP1 LDA @0000 ; Direccionamiento absoluto validado.
 LDA (@77) ; Direccionamiento indirecto Validado.
 LDA #07 ; Direccionamiento inmediato validado.
 INP @77 ; Direccionamiento de entradas y salidas validado para 64 puertos.
-LDASTA
+LDASTA INP @77
 ldax
 sta@
 LDA()         #  02 ; Tambien este
