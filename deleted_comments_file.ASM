@@ -1,7 +1,7 @@
 2 LDA @            #
 3 LDA @
-7 LDA #
-8 LDA @0000
+7 LDA @00
+8 LOOP1 LDA @0000
 9 LDA (@77)
 10 LDA #07
 11 INP @77
@@ -12,5 +12,6 @@
 16 STA#
 17 TAP@
 18 INA#
-19 XXX
-20 YYY
+19 L12222
+20 YYY LDA (xaxasaxas
+21 XXX LDA (@77)

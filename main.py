@@ -38,8 +38,8 @@ def main():
     deleted_blanks_list = preprocesador.delete_blanks(lines_raw_list)
     deleted_comments_list = preprocesador.delete_comments(deleted_blanks_list)
     deleted_spaces_list = preprocesador.delete_spaces(deleted_comments_list)
-    preprocesador.instruction_checker(deleted_spaces_list, lines_raw_list)
-
+    #inst_check_list = preprocesador.instruction_checker(deleted_spaces_list, lines_raw_list)
+    label_check_list = preprocesador.label_checker(deleted_spaces_list, lines_raw_list)
 
 if __name__ == "__main__": main()
 

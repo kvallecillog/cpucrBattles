@@ -121,6 +121,54 @@ def delete_spaces(data_list):
     return data_list
 
 
+def label_checker(data_list, lines_raw_list):
+    print("Checking labels")
+    #regex_label = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\@)[0-7]{1,4}$', re.IGNORECASE)
+    # Reparar
+    # Los simbolos utilizados para representar etiquetas variables direcciones
+    # y constantes pueden tener hasta 8 caracteres alfanumericos siempre que
+    #  el primero sea una letra.
+    regex_label_abs_inst = re.compile(r'^[a-zA-Z]\w{1,7}\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\@)[0-7]{1,4}$', re.IGNORECASE)
+    regex_inst_abs = re.compile(r'^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\@)[0-7]{1,4}$', re.IGNORECASE)
+    regex_resword = re.compile(r'^(AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
+                    DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
+                    RTS|SEC|SEI|STA|SUB|TAP|TPA)', re.IGNORECASE)
+
+
+    for x in range(0, len(data_list)):
+
+        data_list_x = ''.join(data_list[x])
+        #print(data_list_x)
+        num_line = data_list_x.split(" ")
+        non_num_line = " ".join(num_line[1:len(num_line)])
+
+        label_match = re.match(regex_label_abs_inst, non_num_line)
+        label_inst_match = re.match(regex_inst_abs, non_num_line)
+        inst_match = re.match(regex_resword, non_num_line)
+
+        num_line_int = int(num_line[0]) - 1
+        data_source_line = lines_raw_list[num_line_int]
+        data_source_line_list = data_source_line.split(" ")
+        data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
+
+        if label_inst_match:
+
+            print("Cumple con la condicion de instruccion")
+            print(non_num_line)
+
+        else:
+
+            if not inst_match:
+
+                if label_match:
+                    print("Cumple con la condicion de etiqueta de 8 caracteres + instruccion")
+                    print(non_num_line)
+                else:
+                    print("Error: No es un formato de etiqueta + instruccion valido.")
+                    print(non_num_line)
+            else:
+                print("Error: Palabra reservada utilizada como etiqueta.")
+                print(non_num_line)
 def instruction_checker(data_list, lines_raw_list):
     ##################################################################################################################
     # Instruction checker analiza si la instruccion ingresada esta dentro del conjunto de instrucciones de la CPUCR.
@@ -142,8 +190,6 @@ def instruction_checker(data_list, lines_raw_list):
     regex_inst_acum = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
     regex_inst_ctrl = re.compile(r'^(TPA|TAP|RTI|RTS|HTL|NOP|PLS|PHS)$', re.IGNORECASE)
     regex_inst_imp = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
-
-
 
     for x in range(0, len(data_list)):
 
