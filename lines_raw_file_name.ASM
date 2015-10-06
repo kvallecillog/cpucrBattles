@@ -8,8 +8,11 @@
 8 X LDA X
 9 LDA LDA+1
 10 LDA LDA @00
-11 LDA LDA LDA
+11 LDA1 LDA LDA1
 12 LABEL LDA LDA
-13 ABS1 LDA @0000 ; Direccionamiento absoluto validado.
-14 ABS2 LDA A1234567 ; Direccionamiento absoluto validado.
-15 LDA A1234567 ; Direccionamiento absoluto validado.
+13 LABEL
+14 LDA STA JSR
+15 LABEL LDA LDA+1
+16 ABS1 LDA @0000 ; Direccionamiento absoluto validado.
+17 ABS2 LDA A1234567 ; Direccionamiento absoluto validado.
+18 LDA A1234567 ; Direccionamiento absoluto validado.

@@ -33,13 +33,12 @@ def main():
     lines_counter = 0
     data_list = []
     ###########################################################################################
-
+    OK = 0
     lines_raw_list = preprocesador.lines_mapper(raw_file_name, lines_counter, data_list)
     deleted_blanks_list = preprocesador.delete_blanks(lines_raw_list)
     deleted_comments_list = preprocesador.delete_comments(deleted_blanks_list)
     deleted_spaces_list = preprocesador.delete_spaces(deleted_comments_list)
-    #inst_check_list = preprocesador.instruction_checker(deleted_spaces_list, lines_raw_list)
-    label_check_list = preprocesador.label_checker(deleted_spaces_list, lines_raw_list)
+    inst_check_list = preprocesador.instruction_checker(deleted_spaces_list, lines_raw_list)
 
 if __name__ == "__main__": main()
 
