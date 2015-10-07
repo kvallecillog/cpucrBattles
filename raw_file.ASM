@@ -1,10 +1,10 @@
-*=@7777
-PUNT=*
-*=@1111
-PA=*
-*=@0000
-PBT=*
-XXX
+* = @7777
+PUNT = *
+* = @1111
+PA = *
+* = @0000
+PBT = *
+DBWRD @0000
 LDA @00
 LDA LABEL+1000
 LABEL LDA @00

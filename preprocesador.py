@@ -126,9 +126,12 @@ def init_checker(data_list, lines_raw_list):
 
 
     delete_init_list = []
-    regex_pos_def = re.compile(r"^(\*)(\=)((\@)[0-7]{1,4})$", re.IGNORECASE)
-    regex_pos_assign = re.compile(r"^([a-zA-Z](\w{1,7})?)(\=)(\*)$", re.IGNORECASE)
-
+    regex_pos_def = re.compile(r"^(\*)(\s)(\=)(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
+    regex_pos_assign = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)(\*)$", re.IGNORECASE)
+    regex_init_res_words = re.compile(r"\b^((DBWRD)|(WRD))\b(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
+    regex_init_const = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
+    # revisar para constantes decimales
+    #regex_init_const = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
     regex_res_word = re.compile(r"\b(AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
                      DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
                      RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
@@ -150,20 +153,45 @@ def init_checker(data_list, lines_raw_list):
         pos_def_match = re.match(regex_pos_def, non_num_line)
         pos_assign_match = re.match(regex_pos_assign, non_num_line)
 
+        init_const_match = re.match(regex_init_res_words, non_num_line)
+        init_res_words_match = re.match(regex_init_const, non_num_line)
+
         cont_res_word_dic = Counter(w.lower() for w in re.findall(regex_res_word, non_num_line))
         # print(cont_res_word_dic)
         cont_res_word_int = sum(cont_res_word_dic.values())
 
 
-        if pos_def_match or pos_assign_match:
+        if pos_def_match or pos_assign_match or init_res_words_match or init_const_match:
         # if cont_res_word_int == 0:
 
             print("ok")
             if cont_res_word_int == 0:
             # if pos_def_match or pos_assign_match:
-                print("Position counter")
+
                 init_line_cont += 1
-                print(num_line_int, "|", non_num_line)
+
+                if pos_def_match:
+
+                    print("Position counter")
+                    print(num_line_int, "|", non_num_line)
+
+                elif pos_assign_match:
+
+                    print("Constant assign")
+                    print(num_line_int, "|", non_num_line)
+
+                elif regex_init_res_words:
+
+                    print("DBWORD or WRD reserved words")
+                    print(num_line_int, "|", non_num_line)
+
+                elif regex_init_const:
+
+                    print("Constant assign explicit")
+                    print(num_line_int, "|", non_num_line)
+
+
+
 
             # elif pos_assign_match:
             #
