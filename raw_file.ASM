@@ -1,4 +1,5 @@
 LDA @00
+STA @77
 LDA LDA
 LDA LABEL+1000
 LABEL LDA @00
@@ -16,3 +17,7 @@ LABEL LDA LDA+1
 ABS1 LDA @0000 ; Direccionamiento absoluto validado.
 ABS2 LDA A1234567 ; Direccionamiento absoluto validado.
 LDA A1234567 ; Direccionamiento absoluto validado.
+INP @77 ; Loading from port
+INP HOLA+1
+C1 CLA
+S123 SEC
