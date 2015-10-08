@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e884eca-5d13-4def-8528-72d310f45b6b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deleted_blanks_file.ASM" afterPath="$PROJECT_DIR$/deleted_blanks_file.ASM" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deleted_comments_file.ASM" afterPath="$PROJECT_DIR$/deleted_comments_file.ASM" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deleted_spaces_file.ASM" afterPath="$PROJECT_DIR$/deleted_spaces_file.ASM" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lines_raw_file_name.ASM" afterPath="$PROJECT_DIR$/lines_raw_file_name.ASM" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/preprocesador.py" afterPath="$PROJECT_DIR$/preprocesador.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raw_file.ASM" afterPath="$PROJECT_DIR$/raw_file.ASM" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cpucrBattles.iws" />
@@ -43,8 +37,8 @@
       <file leaf-file-name="preprocesador.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/preprocesador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24590164">
-              <caret line="191" column="54" selection-start-line="191" selection-start-column="54" selection-end-line="191" selection-end-column="54" />
+            <state vertical-scroll-proportion="-2.6393442">
+              <caret line="267" column="23" selection-start-line="267" selection-start-column="23" selection-end-line="267" selection-end-column="23" />
               <folding>
                 <element signature="e#406#415#0" expanded="true" />
               </folding>
@@ -465,7 +459,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/preprocesador.py</url>
-          <line>394</line>
+          <line>400</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
@@ -880,8 +874,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/preprocesador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24590164">
-          <caret line="191" column="54" selection-start-line="191" selection-start-column="54" selection-end-line="191" selection-end-column="54" />
+        <state vertical-scroll-proportion="-2.6393442">
+          <caret line="267" column="23" selection-start-line="267" selection-start-column="23" selection-end-line="267" selection-end-column="23" />
           <folding>
             <element signature="e#406#415#0" expanded="true" />
           </folding>
