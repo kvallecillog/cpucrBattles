@@ -130,6 +130,9 @@ def init_checker(data_list, lines_raw_list):
     regex_pos_assign = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)(\*)$", re.IGNORECASE)
     regex_init_res_words = re.compile(r"\b^((DBWRD)|(WRD))\b(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
     regex_init_const = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
+
+    # ^(?!(?:static|my|admin|www)$).*$
+
     # revisar para constantes decimales
     #regex_init_const = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
     regex_res_word = re.compile(r"\b(AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
@@ -153,8 +156,8 @@ def init_checker(data_list, lines_raw_list):
         pos_def_match = re.match(regex_pos_def, non_num_line)
         pos_assign_match = re.match(regex_pos_assign, non_num_line)
 
-        init_const_match = re.match(regex_init_res_words, non_num_line)
-        init_res_words_match = re.match(regex_init_const, non_num_line)
+        init_const_match = re.match(regex_init_const, non_num_line)
+        init_res_words_match = re.match(regex_init_res_words, non_num_line)
 
         cont_res_word_dic = Counter(w.lower() for w in re.findall(regex_res_word, non_num_line))
         # print(cont_res_word_dic)
@@ -164,7 +167,6 @@ def init_checker(data_list, lines_raw_list):
         if pos_def_match or pos_assign_match or init_res_words_match or init_const_match:
         # if cont_res_word_int == 0:
 
-            print("ok")
             if cont_res_word_int == 0:
             # if pos_def_match or pos_assign_match:
 
@@ -180,12 +182,12 @@ def init_checker(data_list, lines_raw_list):
                     print("Constant assign")
                     print(num_line_int, "|", non_num_line)
 
-                elif regex_init_res_words:
+                elif init_res_words_match:
 
                     print("DBWORD or WRD reserved words")
                     print(num_line_int, "|", non_num_line)
 
-                elif regex_init_const:
+                elif init_const_match:
 
                     print("Constant assign explicit")
                     print(num_line_int, "|", non_num_line)
