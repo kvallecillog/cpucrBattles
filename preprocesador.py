@@ -124,10 +124,13 @@ def delete_spaces(data_list):
 def init_checker(data_list, lines_raw_list):
 
     delete_init_list = []
+
+    const_dic = dict()
+    const_dic.clear()
     regex_pos_def = re.compile(r"^(\*)(\s)(\=)(\s)((\@)([0-7]{1,4}))$", re.IGNORECASE)
     regex_pos_assign = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)(\*)$", re.IGNORECASE)
     regex_init_res_words = re.compile(r"\b^((DBWRD)|(WRD))\b(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
-    regex_init_const = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
+    regex_init_const = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)((\@)([0-7]{1,4}))$", re.IGNORECASE)
 
     regex_res_word = re.compile(r"\b(AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
                      DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
@@ -184,6 +187,12 @@ def init_checker(data_list, lines_raw_list):
 
                 elif init_const_match:
 
+                    const_oct = init_const_match.group(8)
+                    const_dec = int(const_oct,8)
+                    const_dic[init_const_match.group(1)] = const_oct
+                    print("AK7 CONSTANTE",const_dec,init_const_match.group(1))
+
+                    print("kkkkkkkkkkkkk!:", init_const_match.group(8) )
                     print("Constant assign explicit")
                     print(num_line_int, "|", non_num_line)
 
@@ -208,8 +217,9 @@ def init_checker(data_list, lines_raw_list):
                 print("Please define a position counter!")
 
     hash_init = []
+    print("diccionario", const_dic)
 
-    return hash_init, delete_init_list, pos_cont_dec
+    return hash_init, delete_init_list, pos_cont_dec, const_dic
 
 
 def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
