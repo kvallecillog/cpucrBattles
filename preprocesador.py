@@ -124,7 +124,7 @@ def delete_spaces(data_list):
 def init_checker(data_list, lines_raw_list):
 
     delete_init_list = []
-    regex_pos_def = re.compile(r"^(\*)(\s)(\=)(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
+    regex_pos_def = re.compile(r"^(\*)(\s)(\=)(\s)((\@)([0-7]{1,4}))$", re.IGNORECASE)
     regex_pos_assign = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)(\*)$", re.IGNORECASE)
     regex_init_res_words = re.compile(r"\b^((DBWRD)|(WRD))\b(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
     regex_init_const = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
@@ -133,7 +133,7 @@ def init_checker(data_list, lines_raw_list):
                      DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
                      RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
 
-    init_line_cont = 1
+    pos_cont_dec = 0
     pos_cont = False
 
     for x in range(0, len(data_list)):
@@ -161,10 +161,13 @@ def init_checker(data_list, lines_raw_list):
 
             if cont_res_word_int == 0:
 
-                init_line_cont += 1
-
                 if pos_def_match:
 
+                    pos_cont_oct = pos_def_match.group(7)
+                    pos_cont_dec = int(pos_cont_oct,8)
+                    print("AK7 CONTADOR",pos_cont_dec)
+
+                    print("OPERANDO!:", pos_def_match.group(7))
                     pos_cont = True
                     print("Position counter")
                     print(num_line_int, "|", non_num_line)
@@ -188,11 +191,14 @@ def init_checker(data_list, lines_raw_list):
 
                 print("Error!:" + str(cont_res_word_int - 1) + " Reserved words as a label")
                 print(num_line_int, "|", non_num_line)
-                init_line_cont = init_line_cont
 
         else:
 
             if pos_cont:
+                #pos_cont_oct = pos_def_match.group(0)
+
+
+
                 print("No match")
                 print(num_line_int, "|", non_num_line)
                 delete_init_list.append(data_list_x)
@@ -203,14 +209,13 @@ def init_checker(data_list, lines_raw_list):
 
     hash_init = []
 
-    return hash_init, delete_init_list
+    return hash_init, delete_init_list, pos_cont_dec
 
 
-def label_checker(data_list, lines_raw_list, hash_init):
+def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
     print("Checking labels\n")
 
-
-    cont_mem_pos = 0
+    cont_mem_pos = pos_cont_dec
 
     # Se identifica si se esta utilizando como etiqueta una palabra reservada.
 
@@ -249,6 +254,7 @@ def label_checker(data_list, lines_raw_list, hash_init):
 
     for x in range(0, len(data_list)):
 
+        print( "MEM position counter updating", cont_mem_pos)
         data_list_x = ''.join(data_list[x])
         num_line = data_list_x.split(" ")
         non_num_line = " ".join(num_line[1:len(num_line)])
@@ -385,29 +391,76 @@ def label_checker(data_list, lines_raw_list, hash_init):
                         print("Cumple con la condicion de etiqueta de 8 caracteres + instruccion")
 
                         if label_inst_abs_match:
+
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento absoluto cuenta con 3 palabras.
+                            cont_mem_pos += 3
+
                             print("OPERANDO!:", label_inst_abs_match.group(6))
                             print("Es una instruccion de direccionamiento absoluto")
                             print(num_line_int, "|", data_source_line_n)
 
                         if label_inst_ind_match:
+
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento absoluto cuenta con 3 palabras.
+                            cont_mem_pos += 3
+
+
                             print("Es una instruccion de direccionamiento indirecto")
                             print(num_line_int, "|", data_source_line_n)
+
                         if label_inst_inm_match:
+
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento absoluto cuenta con 3 palabras.
+                            cont_mem_pos += 2
+
                             print("Es una instruccion de direccionamiento inmediato")
                             print(num_line_int, "|", data_source_line_n)
+
                         if label_inst_io_match:
+
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento absoluto cuenta con 3 palabras.
+                            cont_mem_pos += 2
+
                             print("Es una instruccion de direccionamiento entrada/salida")
                             print(num_line_int, "|", data_source_line_n)
+
                         if label_inst_rel_match:
+
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento absoluto cuenta con 3 palabras.
+                            cont_mem_pos += 2
+
                             print("Es una instruccion de direccionamiento relativo")
                             print(num_line_int, "|", data_source_line_n)
+
                         if label_inst_acum_match:
+
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento acumulador cuenta con 1 palabra.
+                            cont_mem_pos += 1
+
                             print("Es una instruccion de direccionamiento acumulador")
                             print(num_line_int, "|", data_source_line_n)
+
                         if label_inst_ctrl_match:
+
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento control cuenta con 1 palabra.
+                            cont_mem_pos += 1
+
                             print("Es una instruccion de direccionamiento control")
                             print(num_line_int, "|", data_source_line_n)
+
                         if label_inst_imp_match:
+
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento implicito cuenta con 1 palabra.
+                            cont_mem_pos += 1
+
                             print("Es una instruccion de direccionamiento implicito")
                             print(num_line_int, "|", data_source_line_n)
 
