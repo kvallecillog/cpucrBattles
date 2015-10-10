@@ -40,6 +40,7 @@ from collections import Counter
 print("Inicio del analisis de sintaxis \n")
 
 
+# Clase para definir colores de las impresiones de pantalla.
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -52,84 +53,162 @@ class bcolors:
 
 
 def lines_mapper(raw_file_name, lines_counter, data_list):
+
+    # Este metodo se encarga de obtener los datos del archivo fuente.
+    # Se lee el ASM original sin modificaciones y se ingresa a una lista.
+    # Luego se mapean los numeros de linea en la primera columna de izquierda derecha.
+
+    # Se lee el archivo fuente y se crea un objeto file de lectura.
     raw_file = open(raw_file_name, 'r')
+
+    # Se lee linea por linea del objeto file ASM original.
     lines_raw_file_lines = raw_file.readlines()
+
+    # Se ingresa el nombre del archivo a leer. !!!!! Cambiar esta HardCoded!
     lines_raw_file_name = 'lines_raw_file_name.ASM'
+
+    # Se crea un nuevo objeto file para escritura, contiene las lineas mapeadas.
     lines_raw_file = open(lines_raw_file_name, 'w+')
+
+    # Se lee linea a linea del archivo ASM original.
     for line in lines_raw_file_lines:
+
+        # Se crea un contador para mapear el numero de linea leida.
         lines_counter += 1
+
+        # Se crea el string con el numero de linea mas el contenido original.
         counter_string = str(lines_counter) + " " + line
+
+        # Se escribe en el archivo el nuevo string
         lines_raw_file.writelines(counter_string)
+
+        # Se agrega a la lista el nuevo string.
         data_list.append(counter_string)
 
+    # Se cierra el objeto file de lectura.
     lines_raw_file.close()
 
+    # Se retorna la lista que contiene las nuevas lineas con los numeros mapeados.
     return data_list
 
 
 def delete_blanks(data_list):
+
+    # Se encarga de eliminar las lineas blancas, sin contenido,
+    # de la lista del archivo fuente original, se crea una nueva lista.
+
+    # Se declara la lista que solo contiene lineas con datos.
     delete_blanks_list = []
+
+    # Se crea un objeto file que solo contiene lineas con datos.
     deleted_blanks_file_name = 'deleted_blanks_file.ASM'
     non_blanks_file = open(deleted_blanks_file_name, 'w+')
+
+    # Se define la regex que identifica lineas blancas sin datos.
     blank_regex = re.compile(r'^\d+\s+$')
 
+    # Se lee cada indice de la lista.
     for x in range(0, len(data_list)):
 
+        # Se convierte a string el indice leido.
         data_list_x = ''.join(data_list[x])
+        # Si la regex identifica una linea en blanca devuelve verdadero.
         blank_non_comment_regex = re.match(blank_regex, data_list_x)
 
+        # Si no es una linea en blanco ingresela a la lista y al archivo.
         if not blank_non_comment_regex:
             non_blanks_file.writelines(data_list_x)
             delete_blanks_list.append(data_list_x)
+        # Si es una linea blanca no haga nada.
 
+    # Retorne la lista final sin lineas blancas.
     return delete_blanks_list
 
 
 def delete_comments(data_list):
+    # Se encarga de detectar y eliminar comentarios linea por linea del .ASM
+
     # Se crea el objeto non_comments_file para escritura, este archivo contiene el .ASM sin comentarios.
     deleted_comments_file_name = 'deleted_comments_file.ASM'
     non_comments_file = open(deleted_comments_file_name, 'w+')
-    comment_regex = re.compile(r'\s??;.*')
-    # Se lee linea por linea el archivo ASM raw_file para determinar si la linea es un comentario o no.
 
+    # La regex se encarga de encontrar comentarios identificados por el semicolon, ";"
+    comment_regex = re.compile(r'\s??;.*')
+
+    # Se lee linea por linea el archivo ASM raw_file para determinar si la linea es un comentario o no.
     for x in range(0, len(data_list)):
         data_list_x = ''.join(data_list[x])
+        # Se eliminan los comentarios del string.
         data_list_x = re.sub(comment_regex, "", data_list_x)
+        # Se ingresa el nuevo string a su posicion original en la lista.
         data_list[x] = data_list_x
-
+    # Se eliminan las nuevas lineas en blanco generados.
     data_list = delete_blanks(data_list)
     for x in range(0, len(data_list)):
         data_list_x = ''.join(data_list[x])
+        # Se escribe en el archivo las lineas sin comentarios.
         non_comments_file.writelines(data_list_x)
 
+    # Se cierra el archivo sin comentarios
     non_comments_file.close()
 
+    # Se retorna la lista sin comentarios y sin lineas en blanco.
     return data_list
 
 
 def delete_spaces(data_list):
+
+    # Se encarga de eliminar los multiespacios, e identaciones.
+
     # Se crea el objeto non_comments_file para escritura, este archivo contiene el .ASM sin comentarios.
     deleted_spaces_file_name = 'deleted_spaces_file.ASM'
     deleted_spaces_file = open(deleted_spaces_file_name, 'w+')
+    # Regex que identifica los multiples espacios.
     spaces_regex = re.compile(r' +')
+
+    # Se recorre cada indice de la lista para identificar multiples espacios.
     for x in range(0, len(data_list)):
         data_list_x = "".join(data_list[x])
+        # Se sustituyen por un unico espacio.
         data_list_x = re.sub(spaces_regex, ' ', data_list_x)
+        # Se sustituye el string sin multiples espacios en el indice original.
         data_list[x] = data_list_x
+        # Se escribe la linea sin multiples espacios al nuevo archivo.
         deleted_spaces_file.writelines(data_list[x])
 
+    # Se retorna la lista sin multiples espacios.
     return data_list
 
 
 def init_checker(data_list, lines_raw_list):
 
+    # Inicializacion de la lista que contiene el programa principal
+    # La seccion de inicializacion no esta contenida en esta lista.
     delete_init_list = []
 
+    # Inicializacion el diccionario de constantes.
     const_dic = dict()
+
+    # Limpia la memoria del diccionario
     const_dic.clear()
+
+    # Regex para identificar el contador de posicion de memoria.
+    # Un ejemplo de declaracion de contador de posicion de memoria:
+    # * = @7777; Notese que debe declararse con espacios blancos.
     regex_pos_def = re.compile(r"^(\*)(\s)(\=)(\s)((\@)([0-7]{1,4}))$", re.IGNORECASE)
+
+    # Regex para identificar declaraciones de constantes.
+    # Un ejemplo de declaracion de constantes:
+    # CONST = @7777 ; Notese que debe declararse con espacios en blanco.
     regex_pos_assign = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)(\*)$", re.IGNORECASE)
+
+    # Regex para identificar constantes en tiempo de ejecucion,DBWRD, WRD.
+    # Un ejemplo de declaracion de constantes en tiempo de ejecucion:
+    # DBWRD @7777; Notese que debe declararse con espacios en blanco.
+    # WRD @77; Notese que debe de ser 1 palabra, 6 bits maximo.
     regex_init_res_words = re.compile(r"\b^((DBWRD)|(WRD))\b(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
+
+
     regex_init_const = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)((\@)([0-7]{1,4}))$", re.IGNORECASE)
 
     regex_res_word = re.compile(r"\b(AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
