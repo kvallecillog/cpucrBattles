@@ -202,6 +202,16 @@ def init_checker(data_list, lines_raw_list):
     # CONST = @7777 ; Notese que debe declararse con espacios en blanco.
     regex_pos_assign = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)(\*)$", re.IGNORECASE)
 
+    # Regex para identificar el contador de posicion de memoria.
+    # Un ejemplo de declaracion de contador de posicion de memoria:
+    # * = @7777; Notese que debe declararse con espacios blancos.
+    regex_pos_def_plus = re.compile(r"^(\*)(\s)(\=)(\s)(\*)(\s)(\+)(\s)(\d*)$", re.IGNORECASE)
+
+    # Regex para identificar declaraciones de constantes.
+    # Un ejemplo de declaracion de constantes:
+    # CONST = @7777 ; Notese que debe declararse con espacios en blanco.
+    regex_pos_assign_plus = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)((\*)(\s)(\+)(\s)(\d*))$", re.IGNORECASE)
+
     # Regex para identificar constantes en tiempo de ejecucion,DBWRD, WRD.
     # Un ejemplo de declaracion de constantes en tiempo de ejecucion:
     # DBWRD @7777; Notese que debe declararse con espacios en blanco.
@@ -232,6 +242,10 @@ def init_checker(data_list, lines_raw_list):
         pos_def_match = re.match(regex_pos_def, non_num_line)
         pos_assign_match = re.match(regex_pos_assign, non_num_line)
 
+        pos_def_match_plus = re.match(regex_pos_def_plus, non_num_line)
+        pos_assign_match_plus = re.match(regex_pos_assign_plus, non_num_line)
+
+
         init_const_match = re.match(regex_init_const, non_num_line)
         init_res_words_match = re.match(regex_init_res_words, non_num_line)
 
@@ -239,25 +253,55 @@ def init_checker(data_list, lines_raw_list):
 
         cont_res_word_int = sum(cont_res_word_dic.values())
 
-        if pos_def_match or pos_assign_match or init_res_words_match or init_const_match:
+        if pos_def_match or pos_assign_match or pos_def_match_plus or pos_assign_match_plus or\
+                init_res_words_match or init_const_match:
 
             if cont_res_word_int == 0:
 
+
+                # * = @0000
                 if pos_def_match:
 
                     pos_cont_oct = pos_def_match.group(7)
                     pos_cont_dec = int(pos_cont_oct,8)
-                    print("AK7 CONTADOR",pos_cont_dec)
+                    print("Position counter declaration:", pos_cont_oct)
 
-                    print("OPERANDO!:", pos_def_match.group(7))
+                    #print("Value:", pos_def_match.group(7))
                     pos_cont = True
-                    print("Position counter")
+                    print("Position counter line:")
                     print(num_line_int, "|", non_num_line)
 
+                # CONST = *
                 elif pos_assign_match:
 
-                    print("Constant assign")
+                    const_dic[pos_assign_match.group(1)] = pos_cont_dec
+                    #print("Constant assignation dictionary:", const_dic)
+                    print("Constant assignation line:")
                     print(num_line_int, "|", non_num_line)
+
+                # * = * + 1
+                elif pos_def_match_plus:
+
+                    print("Before position counter decimal declaration", pos_cont_dec)
+                    pos_cont_dec = pos_cont_dec + int(pos_def_match_plus.group(9))
+                    #print("Position counter declaration:", pos_cont_dec)
+                    print("Before position counter decimal declaration", pos_cont_dec)
+                    #print("Value:", pos_def_match.group(7))
+                    pos_cont = True
+                    print("Position counter line:")
+                    print(num_line_int, "|", non_num_line)
+
+                # CONST = * + 1
+                elif pos_assign_match_plus:
+
+                    print("Before position counter decimal assignation", pos_cont_dec)
+                    pos_cont_dec = pos_cont_dec + int(pos_assign_match_plus.group(11))
+                    const_dic[pos_assign_match_plus.group(1)] = pos_cont_dec
+                    print("After position counter decimal assignation", pos_cont_dec)
+                    #print("Constant assignation dictionary:", const_dic)
+                    print("Constant assignation line:")
+                    print(num_line_int, "|", non_num_line)
+
 
                 elif init_res_words_match:
 
@@ -269,10 +313,8 @@ def init_checker(data_list, lines_raw_list):
                     const_oct = init_const_match.group(8)
                     const_dec = int(const_oct,8)
                     const_dic[init_const_match.group(1)] = const_oct
-                    print("AK7 CONSTANTE",const_dec,init_const_match.group(1))
-
-                    print("kkkkkkkkkkkkk!:", init_const_match.group(8) )
-                    print("Constant assign explicit")
+                    print("Constant declaration:",init_const_match.group(1), ":", const_oct)
+                    print("Constant assign line:")
                     print(num_line_int, "|", non_num_line)
 
             else:
@@ -287,7 +329,7 @@ def init_checker(data_list, lines_raw_list):
 
 
 
-                print("No match")
+                print("Warning: No matching line!")
                 print(num_line_int, "|", non_num_line)
                 delete_init_list.append(data_list_x)
             elif not pos_cont and (x == len(data_list)-1):
@@ -296,7 +338,12 @@ def init_checker(data_list, lines_raw_list):
                 print("Please define a position counter!")
 
     hash_init = []
-    print("diccionario", const_dic)
+
+    print("\nConstant extracted, dictionary (Decimal):", const_dic)
+
+    print("\nList without init data:", delete_init_list)
+
+    print("\n"+bcolors.FAIL+"\nPosition counter for main program:"+str(pos_cont_dec)+bcolors.ENDC,"\n")
 
     return hash_init, delete_init_list, pos_cont_dec, const_dic
 
@@ -564,7 +611,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             print(num_line_int, "|", data_source_line_n)
 
                 else:
-                    print("Error!: no instruction in the line")
+                    print("Error!: no valid argument in line")
                     print(num_line_int, "|", data_source_line_n)
             else:
                 print("Error: Macro is not supported")
