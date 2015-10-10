@@ -53,7 +53,6 @@ class bcolors:
 
 
 def lines_mapper(raw_file_name, lines_counter, data_list):
-
     # Este metodo se encarga de obtener los datos del archivo fuente.
     # Se lee el ASM original sin modificaciones y se ingresa a una lista.
     # Luego se mapean los numeros de linea en la primera columna de izquierda derecha.
@@ -72,7 +71,6 @@ def lines_mapper(raw_file_name, lines_counter, data_list):
 
     # Se lee linea a linea del archivo ASM original.
     for line in lines_raw_file_lines:
-
         # Se crea un contador para mapear el numero de linea leida.
         lines_counter += 1
 
@@ -93,7 +91,6 @@ def lines_mapper(raw_file_name, lines_counter, data_list):
 
 
 def delete_blanks(data_list):
-
     # Se encarga de eliminar las lineas blancas, sin contenido,
     # de la lista del archivo fuente original, se crea una nueva lista.
 
@@ -119,7 +116,7 @@ def delete_blanks(data_list):
         if not blank_non_comment_regex:
             non_blanks_file.writelines(data_list_x)
             delete_blanks_list.append(data_list_x)
-        # Si es una linea blanca no haga nada.
+            # Si es una linea blanca no haga nada.
 
     # Retorne la lista final sin lineas blancas.
     return delete_blanks_list
@@ -157,7 +154,6 @@ def delete_comments(data_list):
 
 
 def delete_spaces(data_list):
-
     # Se encarga de eliminar los multiespacios, e identaciones.
 
     # Se crea el objeto non_comments_file para escritura, este archivo contiene el .ASM sin comentarios.
@@ -181,7 +177,6 @@ def delete_spaces(data_list):
 
 
 def init_checker(data_list, lines_raw_list):
-
     # Inicializacion de la lista que contiene el programa principal
     # La seccion de inicializacion no esta contenida en esta lista.
     delete_init_list = []
@@ -218,7 +213,6 @@ def init_checker(data_list, lines_raw_list):
     # WRD @77; Notese que debe de ser 1 palabra, 6 bits maximo.
     regex_init_res_words = re.compile(r"\b^((DBWRD)|(WRD))\b(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
 
-
     regex_init_const = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)((\@)([0-7]{1,4}))$", re.IGNORECASE)
 
     regex_res_word = re.compile(r"\b(AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
@@ -245,7 +239,6 @@ def init_checker(data_list, lines_raw_list):
         pos_def_match_plus = re.match(regex_pos_def_plus, non_num_line)
         pos_assign_match_plus = re.match(regex_pos_assign_plus, non_num_line)
 
-
         init_const_match = re.match(regex_init_const, non_num_line)
         init_res_words_match = re.match(regex_init_res_words, non_num_line)
 
@@ -253,20 +246,19 @@ def init_checker(data_list, lines_raw_list):
 
         cont_res_word_int = sum(cont_res_word_dic.values())
 
-        if pos_def_match or pos_assign_match or pos_def_match_plus or pos_assign_match_plus or\
+        if pos_def_match or pos_assign_match or pos_def_match_plus or pos_assign_match_plus or \
                 init_res_words_match or init_const_match:
 
             if cont_res_word_int == 0:
-
 
                 # * = @0000
                 if pos_def_match:
 
                     pos_cont_oct = pos_def_match.group(7)
-                    pos_cont_dec = int(pos_cont_oct,8)
+                    pos_cont_dec = int(pos_cont_oct, 8)
                     print("Position counter declaration:", pos_cont_oct)
 
-                    #print("Value:", pos_def_match.group(7))
+                    # print("Value:", pos_def_match.group(7))
                     pos_cont = True
                     print("Position counter line:")
                     print(num_line_int, "|", non_num_line)
@@ -275,7 +267,7 @@ def init_checker(data_list, lines_raw_list):
                 elif pos_assign_match:
 
                     const_dic[pos_assign_match.group(1)] = pos_cont_dec
-                    #print("Constant assignation dictionary:", const_dic)
+                    # print("Constant assignation dictionary:", const_dic)
                     print("Constant assignation line:")
                     print(num_line_int, "|", non_num_line)
 
@@ -284,9 +276,9 @@ def init_checker(data_list, lines_raw_list):
 
                     print("Before position counter decimal declaration", pos_cont_dec)
                     pos_cont_dec = pos_cont_dec + int(pos_def_match_plus.group(9))
-                    #print("Position counter declaration:", pos_cont_dec)
+                    # print("Position counter declaration:", pos_cont_dec)
                     print("Before position counter decimal declaration", pos_cont_dec)
-                    #print("Value:", pos_def_match.group(7))
+                    # print("Value:", pos_def_match.group(7))
                     pos_cont = True
                     print("Position counter line:")
                     print(num_line_int, "|", non_num_line)
@@ -298,7 +290,7 @@ def init_checker(data_list, lines_raw_list):
                     pos_cont_dec = pos_cont_dec + int(pos_assign_match_plus.group(11))
                     const_dic[pos_assign_match_plus.group(1)] = pos_cont_dec
                     print("After position counter decimal assignation", pos_cont_dec)
-                    #print("Constant assignation dictionary:", const_dic)
+                    # print("Constant assignation dictionary:", const_dic)
                     print("Constant assignation line:")
                     print(num_line_int, "|", non_num_line)
 
@@ -311,9 +303,9 @@ def init_checker(data_list, lines_raw_list):
                 elif init_const_match:
 
                     const_oct = init_const_match.group(8)
-                    const_dec = int(const_oct,8)
+                    const_dec = int(const_oct, 8)
                     const_dic[init_const_match.group(1)] = const_oct
-                    print("Constant declaration:",init_const_match.group(1), ":", const_oct)
+                    print("Constant declaration:", init_const_match.group(1), ":", const_oct)
                     print("Constant assign line:")
                     print(num_line_int, "|", non_num_line)
 
@@ -325,14 +317,14 @@ def init_checker(data_list, lines_raw_list):
         else:
 
             if pos_cont:
-                #pos_cont_oct = pos_def_match.group(0)
+                # pos_cont_oct = pos_def_match.group(0)
 
 
 
                 print("Warning: No matching line!")
                 print(num_line_int, "|", non_num_line)
                 delete_init_list.append(data_list_x)
-            elif not pos_cont and (x == len(data_list)-1):
+            elif not pos_cont and (x == len(data_list) - 1):
 
                 print("Error: No position counter defined (Example, * = @0000)")
                 print("Please define a position counter!")
@@ -343,7 +335,7 @@ def init_checker(data_list, lines_raw_list):
 
     print("\nList without init data:", delete_init_list)
 
-    print("\n"+bcolors.FAIL+"\nPosition counter for main program:"+str(pos_cont_dec)+bcolors.ENDC,"\n")
+    print("\n" + bcolors.FAIL + "\nPosition counter for main program:" + str(pos_cont_dec) + bcolors.ENDC, "\n")
 
     return hash_init, delete_init_list, pos_cont_dec, const_dic
 
@@ -351,9 +343,38 @@ def init_checker(data_list, lines_raw_list):
 def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
     print("Checking labels\n")
 
-
-
     cont_mem_pos = pos_cont_dec
+
+    # Inicializacion el diccionario de constantes.
+    opcode_dic = dict()
+
+    # Inicializacion el diccionario de constantes.
+    fsm_dic = {
+        'LDA_ABS': '000000', 'STA_ABS': '001000', 'ADD_ABS': '010000', 'SUB_ABS': '011000', 'AND_ABS': '100000',
+        'ORA_ABS': '101000', 'JMP_ABS': '110000', 'JSR_ABS': '111000',
+        
+        'LDA_IND': '000011', 'STA_IND': '001011', 'ADD_IND': '010011', 'SUB_IND': '011011', 'AND_IND': '100011',
+        'ORA_IND': '101011', 'JMP_IND': '110011', 'JSR_IND': '111011',
+
+        'LDA_INM': '000001', 'STA_INM': '001001', 'ADD_INM': '010001', 'SUB_INM': '011001', 'AND_INM': '100001',
+        'ORA_INM': '101001', 'JMP_INM': '110001', 'JSR_INM': '111001',
+
+        'BEQ_REL': '000010', 'BNE_REL': '001010', 'BCS_REL': '010010', 'BCC_REL': '011010', 'BMI_REL': '100010',
+        'BPL_REL': '101010', 'BVS_REL': '110010', 'BVC_REL': '111010',
+        
+        'SEC_IMP': '010100', 'CLC_IMP': '011100', 'SEI_IMP': '100100', 'CLI_IMP': '101100',
+    
+        'CLA_ACU': '000101', 'CPA_ACU': '001101', 'INA_ACU': '010101', 'DCA_ACU': '011101', 'ROL_ACU': '100101',
+        'ROR_ACU': '101101', 'PLA_ACU': '110101', 'PHA_ACU': '111101',
+        
+        'TPA_CTR': '000110', 'TAP_CTR': '001110', 'RTI_CTR': '010110', 'RTS_CTR': '011110', 'HTL_CTR': '100110',
+        'NOP_CTR': '101110', 'PLS_CTR': '110110', 'PHS_CTR': '111110',
+        
+        'INP_IO': '000111', 'OUT_IO': '001111'
+    }
+
+    # Limpia la memoria del diccionario
+    opcode_dic.clear()
 
 
     # Se identifica si se esta utilizando como etiqueta una palabra reservada.
@@ -364,23 +385,33 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                      DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
                      RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
 
-    regex_label_abs_inst = re.compile(r'\b^([a-zA-Z](\w{1,7})?)\b(\s)\b(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',re.IGNORECASE)
-    regex_inst_abs = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4})|([a-zA-Z](\w{1,7})?)(\+?)(\d*))$', re.IGNORECASE)
+    regex_label_abs_inst = re.compile(
+        r'\b^([a-zA-Z](\w{1,7})?)\b(\s)\b(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        re.IGNORECASE)
+    regex_inst_abs = re.compile(
+        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4})|([a-zA-Z](\w{1,7})?)(\+?)(\d*))$', re.IGNORECASE)
 
-    regex_label_ind_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',re.IGNORECASE)
+    regex_label_ind_inst = re.compile(
+        r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
+        re.IGNORECASE)
     regex_inst_ind = re.compile(
-        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',re.IGNORECASE)
+        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
+        re.IGNORECASE)
 
     regex_label_inm_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)([0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',re.IGNORECASE)
-    regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)([0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',re.IGNORECASE)
+        r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)([0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        re.IGNORECASE)
+    regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)([0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+                                re.IGNORECASE)
 
     regex_label_io_inst = re.compile(
         r'^([a-zA-Z](\w{1,7})?)\s(INP|OUT)\b(\s)((\@)[0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
     regex_inst_io = re.compile(r'\b^(INP|OUT)\b(\s)((\@)[0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
 
-    regex_label_rel_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s\b(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b\s([a-zA-Z](\w{1,7})?)$', re.IGNORECASE)
-    regex_inst_rel = re.compile(r'\b^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b(\s)([0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+    regex_label_rel_inst = re.compile(
+        r'^([a-zA-Z](\w{1,7})?)\s\b(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b\s([a-zA-Z](\w{1,7})?)$', re.IGNORECASE)
+    regex_inst_rel = re.compile(
+        r'\b^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b(\s)([0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
 
     regex_label_acum_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
     regex_inst_acum = re.compile(r'\b^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)\b$', re.IGNORECASE)
@@ -393,10 +424,10 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
     for i in range(0, 2):
 
-        print("Pass",i)
+        print("Pass", i)
         for x in range(0, len(data_list)):
 
-            print( "MEM position counter updating", cont_mem_pos)
+            print("MEM position counter updating", cont_mem_pos)
             data_list_x = ''.join(data_list[x])
             num_line = data_list_x.split(" ")
             non_num_line = " ".join(num_line[1:len(num_line)])
@@ -451,16 +482,17 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
                         print("Cumple con la condicion de instruccion")
                         if inst_abs_match:
-
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento absoluto cuenta con 3 palabras.
                             cont_mem_pos += 3
+
+                            #opcode_dic[PC, inst, opcode, oper] = cont_mem_pos, LDA_ABS,
+
                             print("OPERANDO!:", inst_abs_match.group(3))
                             print("Es una instruccion direccionamiento pura absoluto")
                             print(num_line_int, "|", data_source_line_n)
 
                         if inst_ind_match:
-
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento indirecto cuenta con 3 palabras.
                             cont_mem_pos += 3
@@ -468,7 +500,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             print("Es una instruccion direccionamiento pura indirecto")
                             print(num_line_int, "|", data_source_line_n)
                         if inst_inm_match:
-
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento inmediato cuenta con 2 palabras.
                             cont_mem_pos += 2
@@ -477,7 +508,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             print(num_line_int, "|", data_source_line_n)
 
                         if inst_io_match:
-
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento IO cuenta con 2 palabras.
                             cont_mem_pos += 2
@@ -486,7 +516,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             print(num_line_int, "|", data_source_line_n)
 
                         if inst_rel_match:
-
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento relativo cuenta con 2 palabras.
                             cont_mem_pos += 2
@@ -498,7 +527,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             print(num_line_int, "|", data_source_line_n)
 
                         if inst_acum_match:
-
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento acumulador cuenta con 1 palabra.
                             cont_mem_pos += 1
@@ -507,7 +535,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             print(num_line_int, "|", data_source_line_n)
 
                         if inst_ctrl_match:
-
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento control cuenta con 1 palabra.
                             cont_mem_pos += 1
@@ -516,7 +543,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             print(num_line_int, "|", data_source_line_n)
 
                         if inst_imp_match:
-
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento implicito cuenta con 1 palabra.
                             cont_mem_pos += 1
@@ -533,7 +559,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             print("Cumple con la condicion de etiqueta de 8 caracteres + instruccion")
 
                             if label_inst_abs_match:
-
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento absoluto cuenta con 3 palabras.
                                 cont_mem_pos += 3
@@ -543,17 +568,14 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 print(num_line_int, "|", data_source_line_n)
 
                             if label_inst_ind_match:
-
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento absoluto cuenta con 3 palabras.
                                 cont_mem_pos += 3
-
 
                                 print("Es una instruccion de direccionamiento indirecto")
                                 print(num_line_int, "|", data_source_line_n)
 
                             if label_inst_inm_match:
-
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento absoluto cuenta con 3 palabras.
                                 cont_mem_pos += 2
@@ -562,7 +584,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 print(num_line_int, "|", data_source_line_n)
 
                             if label_inst_io_match:
-
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento absoluto cuenta con 3 palabras.
                                 cont_mem_pos += 2
@@ -571,7 +592,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 print(num_line_int, "|", data_source_line_n)
 
                             if label_inst_rel_match:
-
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento absoluto cuenta con 3 palabras.
                                 cont_mem_pos += 2
@@ -580,7 +600,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 print(num_line_int, "|", data_source_line_n)
 
                             if label_inst_acum_match:
-
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento acumulador cuenta con 1 palabra.
                                 cont_mem_pos += 1
@@ -589,7 +608,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 print(num_line_int, "|", data_source_line_n)
 
                             if label_inst_ctrl_match:
-
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento control cuenta con 1 palabra.
                                 cont_mem_pos += 1
@@ -598,7 +616,6 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 print(num_line_int, "|", data_source_line_n)
 
                             if label_inst_imp_match:
-
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento implicito cuenta con 1 palabra.
                                 cont_mem_pos += 1
