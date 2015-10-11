@@ -176,7 +176,7 @@ def delete_spaces(data_list):
     return data_list
 
 
-def init_checker(data_list, lines_raw_list):
+def init_checker(data_list, lines_raw_list,error):
     # Inicializacion de la lista que contiene el programa principal
     # La seccion de inicializacion no esta contenida en esta lista.
     delete_init_list = []
@@ -310,7 +310,7 @@ def init_checker(data_list, lines_raw_list):
                     print(num_line_int, "|", non_num_line)
 
             else:
-
+                error += 1
                 print("Error!:" + str(cont_res_word_int - 1) + " Reserved words as a label")
                 print(num_line_int, "|", non_num_line)
 
@@ -325,11 +325,10 @@ def init_checker(data_list, lines_raw_list):
                 print(num_line_int, "|", non_num_line)
                 delete_init_list.append(data_list_x)
             elif not pos_cont and (x == len(data_list) - 1):
-
+                error += 1
                 print("Error: No position counter defined (Example, * = @0000)")
                 print("Please define a position counter!")
 
-    hash_init = []
 
     print("\nConstant extracted, dictionary (Decimal):", const_dic)
 
@@ -337,10 +336,10 @@ def init_checker(data_list, lines_raw_list):
 
     print("\n" + bcolors.FAIL + "\nPosition counter for main program:" + str(pos_cont_dec) + bcolors.ENDC, "\n")
 
-    return hash_init, delete_init_list, pos_cont_dec, const_dic
+    return error, delete_init_list, pos_cont_dec, const_dic
 
 
-def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
+def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
     print("Checking labels\n")
 
     cont_mem_pos = pos_cont_dec
@@ -373,7 +372,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                       TPA_CTR='000110', TAP_CTR='001110', RTI_CTR='010110', RTS_CTR='011110', HTL_CTR='100110',
                       NOP_CTR='101110',
 
-                      PLS_IO='110110', PHS_IO='111110', INP_IO='000111', OUT_IO='001111')
+                      INP_IO='000111', OUT_IO='001111')
 
     # Limpia la memoria del diccionario
 
@@ -455,6 +454,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                 if cont_res_word_int > 1:
 
                     # raise Exception('Error: Reserved word as label')
+                    error += 1
                     print("Error!:" + str(cont_res_word_int - 1) + " Reserved words as a label")
                     print(num_line_int, "|", non_num_line)
 
@@ -854,21 +854,24 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             print(num_line_int, "|", data_source_line_n)
 
                     else:
+                        error += 1
                         print("Error!: No valid instruction format.")
                         print(num_line_int, "|", data_source_line_n)
 
                 else:
+                    error += 1
                     print("Error!: No valid argument in line")
                     print(num_line_int, "|", data_source_line_n)
             else:
+                error += 1
                 print("Error!: Macro is not supported")
                 print(num_line_int, "|", non_num_line)
 
     # print("PC list:", pc_list)
     # print("Format instruction list:",fi_list)
     # print("FINAL FSM DICTIONARY:", fsm_dic)
-
-    return fi_list
+    #print("Error's detected:", error,"\n")
+    return error, fi_list
 
 
 def instruction_checker(fi_list, lines_raw_list):

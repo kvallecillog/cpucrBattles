@@ -31,6 +31,7 @@ def main():
     # Global variables
     ###########################################################################################
     lines_counter = 0
+    error = 0
     data_list = []
     ###########################################################################################
 
@@ -38,10 +39,19 @@ def main():
     deleted_blanks_list = preprocesador.delete_blanks(lines_raw_list)
     deleted_comments_list = preprocesador.delete_comments(deleted_blanks_list)
     deleted_spaces_list = preprocesador.delete_spaces(deleted_comments_list)
-    hash_init, deleted_init_list, pos_cont_dec, const_dic = preprocesador.init_checker(deleted_spaces_list,lines_raw_list)
-    fi_list = preprocesador.label_checker(deleted_init_list, lines_raw_list, hash_init, pos_cont_dec)
-    obj_list = preprocesador.instruction_checker(fi_list, lines_raw_list)
-
+    error_init, deleted_init_list, pos_cont_dec, const_dic = preprocesador.init_checker(deleted_spaces_list,lines_raw_list, error)
+    if error_init == 0:
+        print("Init without error's:", error_init, "\n")
+        error_inst, fi_list = preprocesador.label_checker(deleted_init_list, lines_raw_list, error, pos_cont_dec)
+        if error_inst == 0:
+            print("Main program without error's:", error_inst,"\n")
+            obj_list = preprocesador.instruction_checker(fi_list, lines_raw_list)
+        else:
+            print("Error detected at main flow: ASM cannot be assembled!")
+            print("List of errors:")
+    else:
+        print("Error detected at init: ASM cannot be assembled!")
+        print("List of errors:")
 if __name__ == "__main__": main()
 
 print("\nSuccessful syntax analysis!")
