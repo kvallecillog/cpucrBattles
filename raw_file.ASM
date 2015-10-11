@@ -7,11 +7,12 @@ PUNT1 = *
 PUNT2 = * + 20
 * = * + 10
 
-
+LDA @7777
 LDA #77
 LDA #@77
 LDA #%111111
 LDA @1000
+
 BEQ JUMP1
 LDA (@1000)
 SEC

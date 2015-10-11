@@ -383,6 +383,10 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
     regex_macro = re.compile(r"\b^(MACRO|FINMAC)\b(\s)*.*", re.IGNORECASE)
 
+    regex_oper_dec = re.compile(r"^([0-7]{1,4})$", re.IGNORECASE)
+    regex_oper_oct = re.compile(r"^(\@)([0-7]{1,4})$", re.IGNORECASE)
+    regex_oper_bin = re.compile(r"^(\%)([0-1]{1,6})$", re.IGNORECASE)
+
     regex_res_word = re.compile(r"\b(AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
                      DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
                      RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
@@ -497,6 +501,28 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             opcode_abs = opcode_dic[inst_abs_key]
 
                             oper_abs = inst_abs_match.group(4)
+
+                            oper_dec_match = re.match(regex_oper_dec, oper_abs)
+                            if oper_dec_match:
+                                oper_dec = int(oper_dec_match.group(1))
+                                oper_dec_bin = format(oper_dec, '#014b')[2:]
+                                print("Decimal Operand: ", oper_dec_match.group(1))
+                                print("Decimal to bin Operand: ", oper_dec_bin)
+
+                            oper_oct_match = re.match(regex_oper_oct, oper_abs)
+                            if oper_oct_match:
+                                oper_oct = int(oper_oct_match.group(2), 8)
+                                oper_oct_bin = format(oper_oct, '#014b')[2:]
+                                print("Octal Operand: ", oper_oct)
+                                print("Octal to bin Operand: ", oper_oct_bin)
+
+                            oper_bin_match = re.match(regex_oper_bin, oper_abs)
+                            if oper_bin_match:
+                                oper_bin = int(oper_bin_match.group(2), 2)
+                                oper_bin_bin = format(oper_bin, '#014b')[2:]
+                                print("Binary Operand: ", oper_bin_match.group(2))
+                                print("Bin 2 bin: ", oper_bin_bin)
+
                             inst_abs_dic = dict(opcode=opcode_abs, oper=oper_abs)
                             fsm_dic[cont_mem_pos] = inst_abs_dic
                             
@@ -523,6 +549,31 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             oper_ind = inst_ind_match.group(4)
                             inst_ind_dic = dict(opcode=opcode_ind, oper=oper_ind)
                             fsm_dic[cont_mem_pos] = inst_ind_dic
+                            
+                            oper_dec_match = re.match(regex_oper_dec, oper_ind)
+                            if oper_dec_match:
+
+                                oper_dec = int(oper_dec_match.group(1))
+                                oper_dec_bin = format(oper_dec, '#014b')[2:]
+                                print("Decimal Operand: ", oper_dec_match.group(1))
+                                print("Decimal to bin Operand: ", oper_dec_bin)
+
+                            oper_oct_match = re.match(regex_oper_oct, oper_ind)
+                            if oper_oct_match:
+
+                                oper_oct = int(oper_oct_match.group(2), 8)
+                                oper_oct_bin = format(oper_oct, '#014b')[2:]
+                                print("Octal Operand: ", oper_oct)
+                                print("Octal to bin Operand: ", oper_oct_bin)
+
+
+                            oper_bin_match = re.match(regex_oper_bin, oper_ind)
+                            if oper_bin_match:
+
+                                oper_bin = int(oper_bin_match.group(2), 2)
+                                oper_bin_bin = format(oper_bin, '#014b')[2:]
+                                print("Binary Operand: ", oper_bin_match.group(2))
+                                print("Bin 2 bin: ", oper_bin_bin)
                             
                             ind_fi = str(cont_mem_pos)+" "+str(opcode_ind)+" "+str(oper_ind)
                             fi_list.append(ind_fi)
@@ -555,6 +606,31 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             oper_inm = inst_inm_match.group(4)
                             inst_inm_dic = dict(opcode=opcode_inm, oper=oper_inm)
                             fsm_dic[cont_mem_pos] = inst_inm_dic
+
+                            oper_dec_match = re.match(regex_oper_dec, oper_inm)
+                            if oper_dec_match:
+
+                                oper_dec = int(oper_dec_match.group(1))
+                                oper_dec_bin = format(oper_dec, '#014b')[2:]
+                                print("Decimal Operand: ", oper_dec_match.group(1))
+                                print("Decimal to bin Operand: ", oper_dec_bin)
+
+                            oper_oct_match = re.match(regex_oper_oct, oper_inm)
+                            if oper_oct_match:
+
+                                oper_oct = int(oper_oct_match.group(2), 8)
+                                oper_oct_bin = format(oper_oct, '#014b')[2:]
+                                print("Octal Operand: ", oper_oct)
+                                print("Octal to bin Operand: ", oper_oct_bin)
+
+
+                            oper_bin_match = re.match(regex_oper_bin, oper_inm)
+                            if oper_bin_match:
+
+                                oper_bin = int(oper_bin_match.group(2), 2)
+                                oper_bin_bin = format(oper_bin, '#014b')[2:]
+                                print("Binary Operand: ", oper_bin_match.group(2))
+                                print("Bin 2 bin: ", oper_bin_bin)
                             
                             inm_fi = str(cont_mem_pos)+" "+str(opcode_inm)+" "+str(oper_inm)
                             fi_list.append(inm_fi)
@@ -577,6 +653,16 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             
                             opcode_io = opcode_dic[inst_io_key]
                             oper_io = inst_io_match.group(4)
+
+                            oper_oct_match = re.match(regex_oper_oct, oper_io)
+                            if oper_oct_match:
+
+                                oper_oct = int(oper_oct_match.group(2), 8)
+                                oper_oct_bin = format(oper_oct, '#014b')[2:]
+                                print("Octal Operand: ", oper_oct)
+                                print("Octal to bin Operand: ", oper_oct_bin)
+
+
                             inst_io_dic = dict(opcode=opcode_io, oper=oper_io)
                             fsm_dic[cont_mem_pos] = inst_io_dic
                             
@@ -698,168 +784,171 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             print("This is an implicit instruction+argument:")
                             print(num_line_int, "|", data_source_line_n)
 
-                    else:
+                    elif label_inst_abs_match or label_inst_ind_match or \
+                            label_inst_inm_match or label_inst_io_match \
+                            or label_inst_rel_match or label_inst_acum_match \
+                            or label_inst_ctrl_match or label_inst_imp_match:
+                        print("Cumple con la condicion de etiqueta de 8 caracteres + instruccion")
 
-                        if label_inst_abs_match or label_inst_ind_match or \
-                                label_inst_inm_match or label_inst_io_match \
-                                or label_inst_rel_match or label_inst_acum_match \
-                                or label_inst_ctrl_match or label_inst_imp_match:
-                            print("Cumple con la condicion de etiqueta de 8 caracteres + instruccion")
+                        if label_inst_abs_match:
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento absoluto cuenta con 3 palabras.
+                            cont_mem_pos += 3
 
-                            if label_inst_abs_match:
-                                # Actualizacion del contador de posicion de memoria.
-                                # El direccionamiento absoluto cuenta con 3 palabras.
-                                cont_mem_pos += 3
-
-                                print("Operand!:", label_inst_abs_match.group(6))
-                                print("Es una instruccion de direccionamiento absoluto")
-                                print(num_line_int, "|", data_source_line_n)
-
-                            if label_inst_ind_match:
-                                # Actualizacion del contador de posicion de memoria.
-                                # El direccionamiento absoluto cuenta con 3 palabras.
-                                cont_mem_pos += 3
-
-                                print("Es una instruccion de direccionamiento indirecto")
-                                print(num_line_int, "|", data_source_line_n)
-
-                            if label_inst_inm_match:
-                                # Actualizacion del contador de posicion de memoria.
-                                # El direccionamiento absoluto cuenta con 3 palabras.
-                                cont_mem_pos += 2
-
-                                print("Es una instruccion de direccionamiento inmediato")
-                                print(num_line_int, "|", data_source_line_n)
-
-                            if label_inst_io_match:
-                                # Actualizacion del contador de posicion de memoria.
-                                # El direccionamiento absoluto cuenta con 3 palabras.
-                                cont_mem_pos += 2
-
-                                print("Es una instruccion de direccionamiento entrada/salida")
-                                print(num_line_int, "|", data_source_line_n)
-
-                            if label_inst_rel_match:
-                                # Actualizacion del contador de posicion de memoria.
-                                # El direccionamiento absoluto cuenta con 3 palabras.
-                                cont_mem_pos += 2
-
-                                print("Es una instruccion de direccionamiento relativo")
-                                print(num_line_int, "|", data_source_line_n)
-
-                            if label_inst_acum_match:
-                                # Actualizacion del contador de posicion de memoria.
-                                # El direccionamiento acumulador cuenta con 1 palabra.
-                                cont_mem_pos += 1
-
-                                print("Es una instruccion de direccionamiento acumulador")
-                                print(num_line_int, "|", data_source_line_n)
-
-                            if label_inst_ctrl_match:
-                                # Actualizacion del contador de posicion de memoria.
-                                # El direccionamiento control cuenta con 1 palabra.
-                                cont_mem_pos += 1
-
-                                print("Es una instruccion de direccionamiento control")
-                                print(num_line_int, "|", data_source_line_n)
-
-                            if label_inst_imp_match:
-                                # Actualizacion del contador de posicion de memoria.
-                                # El direccionamiento implicito cuenta con 1 palabra.
-                                cont_mem_pos += 1
-
-                                print("Es una instruccion de direccionamiento implicito")
-                                print(num_line_int, "|", data_source_line_n)
-
-                        else:
-                            print("Error: No es un formato de etiqueta + instruccion valido.")
+                            print("Operand!:", label_inst_abs_match.group(6))
+                            print("Es una instruccion de direccionamiento absoluto")
                             print(num_line_int, "|", data_source_line_n)
 
+                        if label_inst_ind_match:
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento absoluto cuenta con 3 palabras.
+                            cont_mem_pos += 3
+
+                            print("Es una instruccion de direccionamiento indirecto")
+                            print(num_line_int, "|", data_source_line_n)
+
+                        if label_inst_inm_match:
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento absoluto cuenta con 3 palabras.
+                            cont_mem_pos += 2
+
+                            print("Es una instruccion de direccionamiento inmediato")
+                            print(num_line_int, "|", data_source_line_n)
+
+                        if label_inst_io_match:
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento absoluto cuenta con 3 palabras.
+                            cont_mem_pos += 2
+
+                            print("Es una instruccion de direccionamiento entrada/salida")
+                            print(num_line_int, "|", data_source_line_n)
+
+                        if label_inst_rel_match:
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento absoluto cuenta con 3 palabras.
+                            cont_mem_pos += 2
+
+                            print("Es una instruccion de direccionamiento relativo")
+                            print(num_line_int, "|", data_source_line_n)
+
+                        if label_inst_acum_match:
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento acumulador cuenta con 1 palabra.
+                            cont_mem_pos += 1
+
+                            print("Es una instruccion de direccionamiento acumulador")
+                            print(num_line_int, "|", data_source_line_n)
+
+                        if label_inst_ctrl_match:
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento control cuenta con 1 palabra.
+                            cont_mem_pos += 1
+
+                            print("Es una instruccion de direccionamiento control")
+                            print(num_line_int, "|", data_source_line_n)
+
+                        if label_inst_imp_match:
+                            # Actualizacion del contador de posicion de memoria.
+                            # El direccionamiento implicito cuenta con 1 palabra.
+                            cont_mem_pos += 1
+
+                            print("Es una instruccion de direccionamiento implicito")
+                            print(num_line_int, "|", data_source_line_n)
+
+                    else:
+                        print("Error!: No valid instruction format.")
+                        print(num_line_int, "|", data_source_line_n)
+
                 else:
-                    print("Error!: no valid argument in line")
+                    print("Error!: No valid argument in line")
                     print(num_line_int, "|", data_source_line_n)
             else:
-                print("Error: Macro is not supported")
+                print("Error!: Macro is not supported")
                 print(num_line_int, "|", non_num_line)
 
-    print("PC list:", pc_list)
-    print("Format instruction list:",fi_list)
-    print("FINAL FSM DICTIONARY:", fsm_dic)
+    #print("PC list:", pc_list)
+    #print("Format instruction list:",fi_list)
+    #print("FINAL FSM DICTIONARY:", fsm_dic)
 
-def instruction_checker(data_list, lines_raw_list):
-    ##################################################################################################################
-    # Instruction checker analiza si la instruccion ingresada esta dentro del conjunto de instrucciones de la CPUCR.
-    # Las instruciones son validas en mayuscula o en minuscula,
-    ##################################################################################################################
-    checked_inst_file_name = 'checked_inst_file_name.ASM'
-    checked_inst_file = open(checked_inst_file_name, 'w+')
+    return fi_list
 
-    # Direccionamiento absoluto validado sin etiquetas funcionales.
-    regex_inst_abs = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\@)[0-7]{1,4}$', re.IGNORECASE)
-    # Direccionamiento indirecto validado sin etiquetas funcionales.
-    regex_inst_ind = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(\@)[0-7]{1,4}(\))$', re.IGNORECASE)
-    # Direccionamiento inmediato validado sin etiquetas funcionales.
-    regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)[0-7]{1,2}$', re.IGNORECASE)
-    # Direccionamiento de entradas y salidas.
-    regex_inst_io = re.compile(r'^(INP|OUT)\b(\s)(\@)[0-7]{1,2}$', re.IGNORECASE)
-    # Falta la capacidad de etiquetas!
-    regex_inst_rel = re.compile(r'^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)$', re.IGNORECASE)
-    regex_inst_acum = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
-    regex_inst_ctrl = re.compile(r'^(TPA|TAP|RTI|RTS|HTL|NOP|PLS|PHS)$', re.IGNORECASE)
-    regex_inst_imp = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
+def instruction_checker(fi_list, lines_raw_list):
 
-    for x in range(0, len(data_list)):
+    print(fi_list)
 
-        data_list_x = ''.join(data_list[x])
-        num_line = data_list_x.split(" ")
-        non_num_line = " ".join(num_line[1:len(num_line)])
-
-        inst_ind_match = re.match(regex_inst_ind, non_num_line)
-        inst_abs_match = re.match(regex_inst_abs, non_num_line)
-        inst_rel_match = re.match(regex_inst_rel, non_num_line)
-        inst_acum_match = re.match(regex_inst_acum, non_num_line)
-        inst_ctrl_match = re.match(regex_inst_ctrl, non_num_line)
-        inst_inm_match = re.match(regex_inst_inm, non_num_line)
-        inst_imp_match = re.match(regex_inst_imp, non_num_line)
-        inst_io_match = re.match(regex_inst_io, non_num_line)
-
-        num_line_int = int(num_line[0]) - 1
-        data_source_line = lines_raw_list[num_line_int]
-        data_source_line_list = data_source_line.split(" ")
-        data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
-
-        if inst_ind_match or inst_abs_match or inst_rel_match or inst_acum_match \
-                or inst_ctrl_match or inst_inm_match \
-                or inst_imp_match or inst_io_match:
-
-            print(x, bcolors.OKBLUE + "Ok: Instruccion valida en línea #" + num_line[
-                0] + "->" + data_source_line_n + bcolors.ENDC)
-
-            if inst_ind_match:
-                print(x, "Es una instruccion de direccionamiento indirecto\n")
-
-            if inst_abs_match:
-                print(x, "Es una instruccion de direccionamiento absoluto\n")
-
-            if inst_rel_match:
-                print(x, "Es una instruccion de direccionamiento relativo\n")
-
-            if inst_acum_match:
-                print(x, "Es una instruccion de direccionamiento de acumulador\n")
-
-            if inst_inm_match:
-                print(x, "Es una instruccion de direccionamiento inmediato\n")
-
-            if inst_ctrl_match:
-                print(x, "Es una instruccion de direccionamiento de control\n")
-
-            if inst_imp_match:
-                print(x, "Es una instruccion de direccionamiento implicito\n")
-
-            if inst_io_match:
-                print(x, "Es una instruccion de direccionamiento entrada/salida\n")
-
-        else:
-
-            print(x, bcolors.FAIL + "Error: instruccion invalida en línea #" + num_line[
-                0] + "->" + data_source_line_n + bcolors.ENDC)
+    # ##################################################################################################################
+    # # Instruction checker analiza si la instruccion ingresada esta dentro del conjunto de instrucciones de la CPUCR.
+    # # Las instruciones son validas en mayuscula o en minuscula,
+    # ##################################################################################################################
+    # checked_inst_file_name = 'checked_inst_file_name.ASM'
+    # checked_inst_file = open(checked_inst_file_name, 'w+')
+    #
+    # # Direccionamiento absoluto validado sin etiquetas funcionales.
+    # regex_inst_abs = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\@)[0-7]{1,4}$', re.IGNORECASE)
+    # # Direccionamiento indirecto validado sin etiquetas funcionales.
+    # regex_inst_ind = re.compile(r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(\@)[0-7]{1,4}(\))$', re.IGNORECASE)
+    # # Direccionamiento inmediato validado sin etiquetas funcionales.
+    # regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)[0-7]{1,2}$', re.IGNORECASE)
+    # # Direccionamiento de entradas y salidas.
+    # regex_inst_io = re.compile(r'^(INP|OUT)\b(\s)(\@)[0-7]{1,2}$', re.IGNORECASE)
+    # # Falta la capacidad de etiquetas!
+    # regex_inst_rel = re.compile(r'^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)$', re.IGNORECASE)
+    # regex_inst_acum = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
+    # regex_inst_ctrl = re.compile(r'^(TPA|TAP|RTI|RTS|HTL|NOP|PLS|PHS)$', re.IGNORECASE)
+    # regex_inst_imp = re.compile(r'^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
+    #
+    # for x in range(0, len(data_list)):
+    #
+    #     data_list_x = ''.join(data_list[x])
+    #     num_line = data_list_x.split(" ")
+    #     non_num_line = " ".join(num_line[1:len(num_line)])
+    #
+    #     inst_ind_match = re.match(regex_inst_ind, non_num_line)
+    #     inst_abs_match = re.match(regex_inst_abs, non_num_line)
+    #     inst_rel_match = re.match(regex_inst_rel, non_num_line)
+    #     inst_acum_match = re.match(regex_inst_acum, non_num_line)
+    #     inst_ctrl_match = re.match(regex_inst_ctrl, non_num_line)
+    #     inst_inm_match = re.match(regex_inst_inm, non_num_line)
+    #     inst_imp_match = re.match(regex_inst_imp, non_num_line)
+    #     inst_io_match = re.match(regex_inst_io, non_num_line)
+    #
+    #     num_line_int = int(num_line[0]) - 1
+    #     data_source_line = lines_raw_list[num_line_int]
+    #     data_source_line_list = data_source_line.split(" ")
+    #     data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
+    #
+    #     if inst_ind_match or inst_abs_match or inst_rel_match or inst_acum_match \
+    #             or inst_ctrl_match or inst_inm_match \
+    #             or inst_imp_match or inst_io_match:
+    #
+    #         print(x, bcolors.OKBLUE + "Ok: Instruccion valida en línea #" + num_line[
+    #             0] + "->" + data_source_line_n + bcolors.ENDC)
+    #
+    #         if inst_ind_match:
+    #             print(x, "Es una instruccion de direccionamiento indirecto\n")
+    #
+    #         if inst_abs_match:
+    #             print(x, "Es una instruccion de direccionamiento absoluto\n")
+    #
+    #         if inst_rel_match:
+    #             print(x, "Es una instruccion de direccionamiento relativo\n")
+    #
+    #         if inst_acum_match:
+    #             print(x, "Es una instruccion de direccionamiento de acumulador\n")
+    #
+    #         if inst_inm_match:
+    #             print(x, "Es una instruccion de direccionamiento inmediato\n")
+    #
+    #         if inst_ctrl_match:
+    #             print(x, "Es una instruccion de direccionamiento de control\n")
+    #
+    #         if inst_imp_match:
+    #             print(x, "Es una instruccion de direccionamiento implicito\n")
+    #
+    #         if inst_io_match:
+    #             print(x, "Es una instruccion de direccionamiento entrada/salida\n")
+    #
+    #     else:
+    #
+    #         print(x, bcolors.FAIL + "Error: instruccion invalida en línea #" + num_line[
+    #             0] + "->" + data_source_line_n + bcolors.ENDC)
