@@ -52,6 +52,7 @@ def main():
     else:
         print("Error detected at init: ASM cannot be assembled!")
         print("List of errors:")
+        
 if __name__ == "__main__": main()
 
 print("\nSuccessful syntax analysis!")
