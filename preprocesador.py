@@ -508,6 +508,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 oper_dec_bin = format(oper_dec, '#014b')[2:]
                                 print("Decimal Operand: ", oper_dec_match.group(1))
                                 print("Decimal to bin Operand: ", oper_dec_bin)
+                                oper_abs_12b = oper_dec_bin
 
                             oper_oct_match = re.match(regex_oper_oct, oper_abs)
                             if oper_oct_match:
@@ -515,6 +516,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 oper_oct_bin = format(oper_oct, '#014b')[2:]
                                 print("Octal Operand: ", oper_oct)
                                 print("Octal to bin Operand: ", oper_oct_bin)
+                                oper_abs_12b = oper_oct_bin
 
                             oper_bin_match = re.match(regex_oper_bin, oper_abs)
                             if oper_bin_match:
@@ -522,11 +524,12 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 oper_bin_bin = format(oper_bin, '#014b')[2:]
                                 print("Binary Operand: ", oper_bin_match.group(2))
                                 print("Bin 2 bin: ", oper_bin_bin)
-
-                            inst_abs_dic = dict(opcode=opcode_abs, oper=oper_abs)
-                            fsm_dic[cont_mem_pos] = inst_abs_dic
+                                oper_abs_12b = oper_bin_bin
+                                
+                            # inst_abs_dic = dict(opcode=opcode_abs, oper=oper_abs_12b)
+                            # fsm_dic[cont_mem_pos] = inst_abs_dic
                             
-                            abs_fi = str(cont_mem_pos)+" "+str(opcode_abs)+" "+str(oper_abs)
+                            abs_fi = str(cont_mem_pos)+" "+str(opcode_abs)+" "+str(oper_abs_12b)
                             fi_list.append(abs_fi)
 
                             # fsm_dic[PC, opcode, oper] = cont_mem_pos,opcode_abs,oper_abs
@@ -557,6 +560,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 oper_dec_bin = format(oper_dec, '#014b')[2:]
                                 print("Decimal Operand: ", oper_dec_match.group(1))
                                 print("Decimal to bin Operand: ", oper_dec_bin)
+                                oper_abs_12b = oper_dec_bin
 
                             oper_oct_match = re.match(regex_oper_oct, oper_ind)
                             if oper_oct_match:
@@ -565,7 +569,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 oper_oct_bin = format(oper_oct, '#014b')[2:]
                                 print("Octal Operand: ", oper_oct)
                                 print("Octal to bin Operand: ", oper_oct_bin)
-
+                                oper_abs_12b = oper_oct_bin
 
                             oper_bin_match = re.match(regex_oper_bin, oper_ind)
                             if oper_bin_match:
@@ -574,8 +578,9 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 oper_bin_bin = format(oper_bin, '#014b')[2:]
                                 print("Binary Operand: ", oper_bin_match.group(2))
                                 print("Bin 2 bin: ", oper_bin_bin)
+                                oper_abs_12b = oper_ooper_bin_binct_bin
                             
-                            ind_fi = str(cont_mem_pos)+" "+str(opcode_ind)+" "+str(oper_ind)
+                            ind_fi = str(cont_mem_pos)+" "+str(opcode_ind)+" "+str(oper_abs_12b)
                             fi_list.append(ind_fi)
 
 
@@ -614,6 +619,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 oper_dec_bin = format(oper_dec, '#014b')[2:]
                                 print("Decimal Operand: ", oper_dec_match.group(1))
                                 print("Decimal to bin Operand: ", oper_dec_bin)
+                                oper_abs_12b = oper_dec_bin
 
                             oper_oct_match = re.match(regex_oper_oct, oper_inm)
                             if oper_oct_match:
@@ -622,6 +628,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 oper_oct_bin = format(oper_oct, '#014b')[2:]
                                 print("Octal Operand: ", oper_oct)
                                 print("Octal to bin Operand: ", oper_oct_bin)
+                                oper_abs_12b = oper_oct_bin
 
 
                             oper_bin_match = re.match(regex_oper_bin, oper_inm)
@@ -631,8 +638,9 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 oper_bin_bin = format(oper_bin, '#014b')[2:]
                                 print("Binary Operand: ", oper_bin_match.group(2))
                                 print("Bin 2 bin: ", oper_bin_bin)
+                                oper_abs_12b = oper_bin_bin
                             
-                            inm_fi = str(cont_mem_pos)+" "+str(opcode_inm)+" "+str(oper_inm)
+                            inm_fi = str(cont_mem_pos)+" "+str(opcode_inm)+" "+str(oper_abs_12b)
                             fi_list.append(inm_fi)
 
                             #print("FSM DICTIONARY:",fsm_dic)
@@ -661,12 +669,12 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 oper_oct_bin = format(oper_oct, '#014b')[2:]
                                 print("Octal Operand: ", oper_oct)
                                 print("Octal to bin Operand: ", oper_oct_bin)
+                                oper_abs_12b = oper_oct_bin
 
-
-                            inst_io_dic = dict(opcode=opcode_io, oper=oper_io)
-                            fsm_dic[cont_mem_pos] = inst_io_dic
+                            # inst_io_dic = dict(opcode=opcode_io, oper=oper_abs_12b)
+                            # fsm_dic[cont_mem_pos] = inst_io_dic
                             
-                            io_fi = str(cont_mem_pos)+" "+str(opcode_io)+" "+str(oper_io)
+                            io_fi = str(cont_mem_pos)+" "+str(opcode_io)+" "+str(oper_abs_12b)
                             fi_list.append(io_fi)
 
 
