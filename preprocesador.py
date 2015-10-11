@@ -354,7 +354,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
     # Inicializacion el diccionario de constantes.
     opcode_dic = dict(LDA_INM='000000', STA_INM='001000', ADD_INM='010000', SUB_INM='011000', AND_INM='100000',
-                      ORA_INM='101000', JMP_INM='110000', JSR_INM='111000', 
+                      ORA_INM='101000', JMP_INM='110000', JSR_INM='111000',
 
                       LDA_ABS='000001', STA_ABS='001001', ADD_ABS='010001', SUB_ABS='011001', AND_ABS='100001',
                       ORA_ABS='101001', JMP_ABS='110001', JSR_ABS='111001',
@@ -366,13 +366,13 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                       ORA_IND='101011', JMP_IND='110011', JSR_IND='111011',
 
                       SEC_IMP='010100', CLC_IMP='011100', SEI_IMP='100100', CLI_IMP='101100',
-                      
-                      CLA_ACU='000101', CPA_ACU='001101', INA_ACU='010101', DCA_ACU='011101', ROL_ACU='100101', 
-                      ROR_ACU='101101', PLA_ACU='110101', PHA_ACU='111101', 
-                     
+
+                      CLA_ACU='000101', CPA_ACU='001101', INA_ACU='010101', DCA_ACU='011101', ROL_ACU='100101',
+                      ROR_ACU='101101', PLA_ACU='110101', PHA_ACU='111101',
+
                       TPA_CTR='000110', TAP_CTR='001110', RTI_CTR='010110', RTS_CTR='011110', HTL_CTR='100110',
                       NOP_CTR='101110',
-                     
+
                       PLS_IO='110110', PHS_IO='111110', INP_IO='000111', OUT_IO='001111')
 
     # Limpia la memoria del diccionario
@@ -487,9 +487,9 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             or inst_rel_match or inst_acum_match or inst_ctrl_match or inst_imp_match:
 
                         print("This is an Instruction+Argument entry")
-                        
+
                         if inst_abs_match:
-                        
+
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento absoluto cuenta con 3 palabras.
                             cont_mem_pos += 3
@@ -525,10 +525,10 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 print("Binary Operand: ", oper_bin_match.group(2))
                                 print("Bin 2 bin: ", oper_bin_bin)
                                 oper_abs_12b = oper_bin_bin
-                                
+
                             # inst_abs_dic = dict(opcode=opcode_abs, oper=oper_abs_12b)
                             # fsm_dic[cont_mem_pos] = inst_abs_dic
-                            
+
                             abs_fi = str(cont_mem_pos)+" "+str(opcode_abs)+" "+str(oper_abs_12b)
                             fi_list.append(abs_fi)
 
@@ -547,12 +547,12 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
                             inst_ind_key = inst_ind_match.group(1) + "_IND"
                             print("The opcode for this instruct is:", opcode_dic[inst_ind_key])
-                            
+
                             opcode_ind = opcode_dic[inst_ind_key]
                             oper_ind = inst_ind_match.group(4)
                             inst_ind_dic = dict(opcode=opcode_ind, oper=oper_ind)
                             fsm_dic[cont_mem_pos] = inst_ind_dic
-                            
+
                             oper_dec_match = re.match(regex_oper_dec, oper_ind)
                             if oper_dec_match:
 
@@ -579,7 +579,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 print("Binary Operand: ", oper_bin_match.group(2))
                                 print("Bin 2 bin: ", oper_bin_bin)
                                 oper_abs_12b = oper_ooper_bin_binct_bin
-                            
+
                             ind_fi = str(cont_mem_pos)+" "+str(opcode_ind)+" "+str(oper_abs_12b)
                             fi_list.append(ind_fi)
 
@@ -602,11 +602,11 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
                             inst_inm_key = inst_inm_match.group(1) + "_INM"
                             print("The opcode for this instruct is:", opcode_dic[inst_inm_key])
-                           
+
                             # opcode_inm = opcode_dic[inst_inm_key]
                             # oper_inm = inst_inm_match.group(4)
                             # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_inm, oper=oper_inm)
-                            
+
                             opcode_inm = opcode_dic[inst_inm_key]
                             oper_inm = inst_inm_match.group(4)
                             inst_inm_dic = dict(opcode=opcode_inm, oper=oper_inm)
@@ -639,7 +639,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 print("Binary Operand: ", oper_bin_match.group(2))
                                 print("Bin 2 bin: ", oper_bin_bin)
                                 oper_abs_12b = oper_bin_bin
-                            
+
                             inm_fi = str(cont_mem_pos)+" "+str(opcode_inm)+" "+str(oper_abs_12b)
                             fi_list.append(inm_fi)
 
@@ -658,7 +658,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
                             inst_io_key = inst_io_match.group(1) + "_IO"
                             print("The opcode for this instruct is:", opcode_dic[inst_io_key])
-                            
+
                             opcode_io = opcode_dic[inst_io_key]
                             oper_io = inst_io_match.group(4)
 
@@ -673,7 +673,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
                             # inst_io_dic = dict(opcode=opcode_io, oper=oper_abs_12b)
                             # fsm_dic[cont_mem_pos] = inst_io_dic
-                            
+
                             io_fi = str(cont_mem_pos)+" "+str(opcode_io)+" "+str(oper_abs_12b)
                             fi_list.append(io_fi)
 
@@ -697,12 +697,12 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             # oper_rel = inst_rel_match.group(4)
                             # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_rel, oper=oper_rel)
                             # print("FSM DICTIONARY:",fsm_dic)
-                            
+
                             opcode_rel = opcode_dic[inst_rel_key]
                             oper_rel = inst_rel_match.group(4)
                             inst_rel_dic = dict(opcode=opcode_rel, oper=oper_rel)
                             fsm_dic[cont_mem_pos] = inst_rel_dic
-                            
+
                             rel_fi = str(cont_mem_pos)+" "+str(opcode_rel)+" "+str(oper_rel)
                             fi_list.append(rel_fi)
 
@@ -719,14 +719,14 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
                             inst_acum_key = inst_acum_match.group(1) + "_ACU"
                             print("The opcode for this instruct is:", opcode_dic[inst_acum_key])
-                            
+
                             # opcode_acum = opcode_dic[inst_acum_key]
-                            # oper_acum = None
+                            # oper_acum = ""
                             # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_acum, oper=oper_acum)
                             # print("FSM DICTIONARY:",fsm_dic)
-                            
+
                             opcode_acum = opcode_dic[inst_acum_key]
-                            oper_acum = None
+                            oper_acum = ""
                             inst_acum_dic = dict(opcode=opcode_acum, oper=oper_acum)
                             fsm_dic[cont_mem_pos] = inst_acum_dic
 
@@ -747,17 +747,17 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
                             inst_ctrl_key = inst_ctrl_match.group(1) + "_CTR"
                             print("The opcode for this instruct is:", opcode_dic[inst_ctrl_key])
-                            
+
                             # opcode_ctrl = opcode_dic[inst_ctrl_key]
-                            # oper_ctrl = None
+                            # oper_ctrl = ""
                             # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_ctrl, oper=oper_ctrl)
                             # print("FSM DICTIONARY:",fsm_dic)
-                            
+
                             opcode_ctrl = opcode_dic[inst_ctrl_key]
-                            oper_ctrl = None
+                            oper_ctrl = ""
                             inst_ctrl_dic = dict(opcode=opcode_ctrl, oper=oper_ctrl)
                             fsm_dic[cont_mem_pos] = inst_ctrl_dic
-                            
+
                             ctrl_fi = str(cont_mem_pos)+" "+str(opcode_ctrl)+" "+str(oper_ctrl)
                             fi_list.append(ctrl_fi)
 
@@ -774,17 +774,17 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
                             inst_imp_key = inst_imp_match.group(1) + "_IMP"
                             print("The opcode for this instruct is:", opcode_dic[inst_imp_key])
-                            
+
                             # opcode_imp = opcode_dic[inst_imp_key]
-                            # oper_ctrl = None
+                            # oper_ctrl = ""
                             # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_imp, oper=oper_ctrl)
                             # print("FSM DICTIONARY:",fsm_dic)
-                            
+
                             opcode_imp = opcode_dic[inst_imp_key]
-                            oper_imp = None
+                            oper_imp = ""
                             inst_imp_dic = dict(opcode=opcode_imp, oper=oper_imp)
                             fsm_dic[cont_mem_pos] = inst_imp_dic
-                            
+
                             imp_fi = str(cont_mem_pos)+" "+str(opcode_imp)+" "+str(oper_imp)
                             fi_list.append(imp_fi)
 
@@ -882,7 +882,15 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
 
 def instruction_checker(fi_list, lines_raw_list):
 
-    print(fi_list)
+    # print(fi_list)
+    object_file_name = 'file.obj'
+    object_file = open(object_file_name, 'w+')
+
+    for fi in fi_list:
+        print(fi)
+        fi += "\n"
+        object_file.writelines(fi)
+
 
     # ##################################################################################################################
     # # Instruction checker analiza si la instruccion ingresada esta dentro del conjunto de instrucciones de la CPUCR.
