@@ -44,4 +44,4 @@ def main():
 
 if __name__ == "__main__": main()
 
-print("\nAnalisis de sintaxis finalizado!")
+print("\nSuccessful syntax analysis!")

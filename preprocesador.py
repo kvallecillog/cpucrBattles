@@ -349,6 +349,8 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
     fsm_dic = dict()
     # opcode_dic = dict()
     # opcode_dic.clear()
+    pc_list = []
+    fi_list = []
 
     # Inicializacion el diccionario de constantes.
     opcode_dic = dict(LDA_INM='000000', STA_INM='001000', ADD_INM='010000', SUB_INM='011000', AND_INM='100000',
@@ -389,7 +391,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
         r'\b^([a-zA-Z](\w{1,7})?)\b(\s)\b(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
     regex_inst_abs = re.compile(
-        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4})|([a-zA-Z](\w{1,7})?)(\+?)(\d*))$', re.IGNORECASE)
+        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)([0-7]{1,4}))|([a-zA-Z](\w{1,7})?)(\+?)(\d*))$', re.IGNORECASE)
 
     regex_label_ind_inst = re.compile(
         r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
@@ -399,14 +401,14 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
         re.IGNORECASE)
 
     regex_label_inm_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)([0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-7]{1,2})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
-    regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)([0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+    regex_inst_inm = re.compile(r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-7]{1,2})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
                                 re.IGNORECASE)
 
     regex_label_io_inst = re.compile(
         r'^([a-zA-Z](\w{1,7})?)\s(INP|OUT)\b(\s)((\@)[0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
-    regex_inst_io = re.compile(r'\b^(INP|OUT)\b(\s)((\@)[0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+    regex_inst_io = re.compile(r'\b^(INP|OUT)\b(\s)(((\@)[0-7]{1,2})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
 
     regex_label_rel_inst = re.compile(
         r'^([a-zA-Z](\w{1,7})?)\s\b(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b\s([a-zA-Z](\w{1,7})?)$', re.IGNORECASE)
@@ -422,12 +424,12 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
     regex_label_imp_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(SEC|CLC|SEI|CLI)$', re.IGNORECASE)
     regex_inst_imp = re.compile(r'\b^(SEC|CLC|SEI|CLI)\b$', re.IGNORECASE)
 
-    for i in range(0, 2):
+    for i in range(0, 1):
 
         print("Pass", i,"\n")
         for x in range(0, len(data_list)):
 
-            print("MEM position counter updating", cont_mem_pos)
+            print("MEM position counter updating:", cont_mem_pos)
             data_list_x = ''.join(data_list[x])
             num_line = data_list_x.split(" ")
             non_num_line = " ".join(num_line[1:len(num_line)])
@@ -487,56 +489,102 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento absoluto cuenta con 3 palabras.
                             cont_mem_pos += 3
+                            pc_list.append(cont_mem_pos)
 
                             inst_abs_key = inst_abs_match.group(1) + "_ABS"
+
                             print("The opcode for this instruct is:", opcode_dic[inst_abs_key])
                             opcode_abs = opcode_dic[inst_abs_key]
-                            
-                            # fsm_dic[PC, opcode, oper] = cont_mem_pos,opcode_abs,oper_abs
 
-                            print("OPERANDO!:", inst_abs_match.group(3))
+                            oper_abs = inst_abs_match.group(4)
+                            inst_abs_dic = dict(opcode=opcode_abs, oper=oper_abs)
+                            fsm_dic[cont_mem_pos] = inst_abs_dic
+                            
+                            abs_fi = str(cont_mem_pos)+" "+str(opcode_abs)+" "+str(oper_abs)
+                            fi_list.append(abs_fi)
+
+                            # fsm_dic[PC, opcode, oper] = cont_mem_pos,opcode_abs,oper_abs
+                            #print("FSM DICTIONARY:",fsm_dic)
+                            #print("Operand!:", inst_abs_match.group(3))
                             print("This is an absolute instruction+argument:")
                             print(num_line_int, "|", data_source_line_n)
 
                         if inst_ind_match:
-                            
+
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento indirecto cuenta con 3 palabras.
                             cont_mem_pos += 3
+                            pc_list.append(cont_mem_pos)
 
                             inst_ind_key = inst_ind_match.group(1) + "_IND"
                             print("The opcode for this instruct is:", opcode_dic[inst_ind_key])
+                            
                             opcode_ind = opcode_dic[inst_ind_key]
+                            oper_ind = inst_ind_match.group(4)
+                            inst_ind_dic = dict(opcode=opcode_ind, oper=oper_ind)
+                            fsm_dic[cont_mem_pos] = inst_ind_dic
+                            
+                            ind_fi = str(cont_mem_pos)+" "+str(opcode_ind)+" "+str(oper_ind)
+                            fi_list.append(ind_fi)
 
-                            # print("OPERANDO!:",inst_abs_match.group(3))
+
+                            #fsm_dic.update(cont_mem_pos=inst_ind_dic)
+                            # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_ind, oper=oper_ind)
+
+                            #print("FSM DICTIONARY:",fsm_dic)
+
+                            # print("Operand!:",inst_abs_match.group(3))
                             print("This is an indirect instruction+argument:")
                             print(num_line_int, "|", data_source_line_n)
-                            
+
                         if inst_inm_match:
-                        
+
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento inmediato cuenta con 2 palabras.
                             cont_mem_pos += 2
+                            pc_list.append(cont_mem_pos)
 
                             inst_inm_key = inst_inm_match.group(1) + "_INM"
                             print("The opcode for this instruct is:", opcode_dic[inst_inm_key])
+                           
+                            # opcode_inm = opcode_dic[inst_inm_key]
+                            # oper_inm = inst_inm_match.group(4)
+                            # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_inm, oper=oper_inm)
+                            
                             opcode_inm = opcode_dic[inst_inm_key]
+                            oper_inm = inst_inm_match.group(4)
+                            inst_inm_dic = dict(opcode=opcode_inm, oper=oper_inm)
+                            fsm_dic[cont_mem_pos] = inst_inm_dic
+                            
+                            inm_fi = str(cont_mem_pos)+" "+str(opcode_inm)+" "+str(oper_inm)
+                            fi_list.append(inm_fi)
 
-                            # print("OPERANDO!:",inst_abs_match.group(3))
+                            #print("FSM DICTIONARY:",fsm_dic)
+
+                            # print("Operand!:",inst_abs_match.group(3))
                             print("This is an inmediate instruction+argument:")
                             print(num_line_int, "|", data_source_line_n)
 
                         if inst_io_match:
-                        
+
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento IO cuenta con 2 palabras.
                             cont_mem_pos += 2
+                            pc_list.append(cont_mem_pos)
 
                             inst_io_key = inst_io_match.group(1) + "_IO"
                             print("The opcode for this instruct is:", opcode_dic[inst_io_key])
+                            
                             opcode_io = opcode_dic[inst_io_key]
+                            oper_io = inst_io_match.group(4)
+                            inst_io_dic = dict(opcode=opcode_io, oper=oper_io)
+                            fsm_dic[cont_mem_pos] = inst_io_dic
+                            
+                            io_fi = str(cont_mem_pos)+" "+str(opcode_io)+" "+str(oper_io)
+                            fi_list.append(io_fi)
 
-                            # print("OPERANDO!:",inst_abs_match.group(3))
+
+                            # print("Operand!:",inst_abs_match.group(3))
                             print("This is an IO instruction+argument:")
                             print(num_line_int, "|", data_source_line_n)
 
@@ -545,28 +593,54 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento relativo cuenta con 2 palabras.
                             cont_mem_pos += 2
+                            pc_list.append(cont_mem_pos)
 
                             inst_rel_key = inst_rel_match.group(1) + "_REL"
                             print("The opcode for this instruct is:", opcode_dic[inst_rel_key])
+
+                            # opcode_rel = opcode_dic[inst_rel_key]
+                            # # cont_mem_pos += VALOR DE ETIQUETA
+                            # oper_rel = inst_rel_match.group(4)
+                            # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_rel, oper=oper_rel)
+                            # print("FSM DICTIONARY:",fsm_dic)
+                            
                             opcode_rel = opcode_dic[inst_rel_key]
+                            oper_rel = inst_rel_match.group(4)
+                            inst_rel_dic = dict(opcode=opcode_rel, oper=oper_rel)
+                            fsm_dic[cont_mem_pos] = inst_rel_dic
+                            
+                            rel_fi = str(cont_mem_pos)+" "+str(opcode_rel)+" "+str(oper_rel)
+                            fi_list.append(rel_fi)
 
-                            # cont_mem_pos += VALOR DE ETIQUETA
-
-                            # print("OPERANDO!:",inst_abs_match.group(3))
+                            # print("Operand!:",inst_abs_match.group(3))
                             print("This is a relative instruction+argument:")
                             print(num_line_int, "|", data_source_line_n)
 
                         if inst_acum_match:
-                            
+
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento acumulador cuenta con 1 palabra.
                             cont_mem_pos += 1
-                            
+                            pc_list.append(cont_mem_pos)
+
                             inst_acum_key = inst_acum_match.group(1) + "_ACU"
                             print("The opcode for this instruct is:", opcode_dic[inst_acum_key])
-                            opcode_acum = opcode_dic[inst_acum_key]        
                             
-                            # print("OPERANDO!:",inst_abs_match.group(1))
+                            # opcode_acum = opcode_dic[inst_acum_key]
+                            # oper_acum = None
+                            # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_acum, oper=oper_acum)
+                            # print("FSM DICTIONARY:",fsm_dic)
+                            
+                            opcode_acum = opcode_dic[inst_acum_key]
+                            oper_acum = None
+                            inst_acum_dic = dict(opcode=opcode_acum, oper=oper_acum)
+                            fsm_dic[cont_mem_pos] = inst_acum_dic
+
+                            acum_fi = str(cont_mem_pos)+" "+str(opcode_acum)+" "+str(oper_acum)
+                            fi_list.append(acum_fi)
+
+
+                            # print("Operand!:",inst_abs_match.group(1))
                             print("This is an accumulator instruction+argument:")
                             print(num_line_int, "|", data_source_line_n)
 
@@ -575,27 +649,53 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento control cuenta con 1 palabra.
                             cont_mem_pos += 1
+                            pc_list.append(cont_mem_pos)
 
                             inst_ctrl_key = inst_ctrl_match.group(1) + "_CTR"
                             print("The opcode for this instruct is:", opcode_dic[inst_ctrl_key])
+                            
+                            # opcode_ctrl = opcode_dic[inst_ctrl_key]
+                            # oper_ctrl = None
+                            # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_ctrl, oper=oper_ctrl)
+                            # print("FSM DICTIONARY:",fsm_dic)
+                            
                             opcode_ctrl = opcode_dic[inst_ctrl_key]
+                            oper_ctrl = None
+                            inst_ctrl_dic = dict(opcode=opcode_ctrl, oper=oper_ctrl)
+                            fsm_dic[cont_mem_pos] = inst_ctrl_dic
+                            
+                            ctrl_fi = str(cont_mem_pos)+" "+str(opcode_ctrl)+" "+str(oper_ctrl)
+                            fi_list.append(ctrl_fi)
 
-                            # print("OPERANDO!:",inst_abs_match.group(2))
+                            # print("Operand!:",inst_abs_match.group(2))
                             print("This is an control instruction+argument:")
                             print(num_line_int, "|", data_source_line_n)
 
                         if inst_imp_match:
-                            
+
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento implicito cuenta con 1 palabra.
                             cont_mem_pos += 1
-                            
+                            pc_list.append(cont_mem_pos)
+
                             inst_imp_key = inst_imp_match.group(1) + "_IMP"
                             print("The opcode for this instruct is:", opcode_dic[inst_imp_key])
+                            
+                            # opcode_imp = opcode_dic[inst_imp_key]
+                            # oper_ctrl = None
+                            # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_imp, oper=oper_ctrl)
+                            # print("FSM DICTIONARY:",fsm_dic)
+                            
                             opcode_imp = opcode_dic[inst_imp_key]
-                                                        
-                            # print("OPERANDO!:",inst_abs_match.group(1))
-                            print("Es una instruccion direccionamiento pura implicito")
+                            oper_imp = None
+                            inst_imp_dic = dict(opcode=opcode_imp, oper=oper_imp)
+                            fsm_dic[cont_mem_pos] = inst_imp_dic
+                            
+                            imp_fi = str(cont_mem_pos)+" "+str(opcode_imp)+" "+str(oper_imp)
+                            fi_list.append(imp_fi)
+
+                            # print("Operand!:",inst_abs_match.group(1))
+                            print("This is an implicit instruction+argument:")
                             print(num_line_int, "|", data_source_line_n)
 
                     else:
@@ -611,7 +711,7 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                                 # El direccionamiento absoluto cuenta con 3 palabras.
                                 cont_mem_pos += 3
 
-                                print("OPERANDO!:", label_inst_abs_match.group(6))
+                                print("Operand!:", label_inst_abs_match.group(6))
                                 print("Es una instruccion de direccionamiento absoluto")
                                 print(num_line_int, "|", data_source_line_n)
 
@@ -682,6 +782,9 @@ def label_checker(data_list, lines_raw_list, hash_init, pos_cont_dec):
                 print("Error: Macro is not supported")
                 print(num_line_int, "|", non_num_line)
 
+    print("PC list:", pc_list)
+    print("Format instruction list:",fi_list)
+    print("FINAL FSM DICTIONARY:", fsm_dic)
 
 def instruction_checker(data_list, lines_raw_list):
     ##################################################################################################################
