@@ -91,13 +91,13 @@ void instruct_exec(int input) {
 				switch(opcode_val_dec) {
 
 					/////////////////////////////////////////////////
-					// Instrucciones de direccionamiento INDEDIATO //
+					// 1-Instrucciones de direccionamiento INDEDIATO //
 					/////////////////////////////////////////////////
-					// case LDA_IND, ADD_IND, SUB_IND, AND_IND, ORA_IND:
+					// case LDA_INM, ADD_INM, SUB_INM, AND_INM, ORA_INM:
 
-						case LDA_IND:
+						case LDA_INM:
 						    
-						    cout << "LDA IND Instruc:" << endl;
+						    cout << "LDA INM Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -106,9 +106,9 @@ void instruct_exec(int input) {
 						    break;
 
 
-						case ADD_IND:
+						case ADD_INM:
 						    
-						    cout << "ADD IND Instruc:" << endl;
+						    cout << "ADD INM Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -116,9 +116,9 @@ void instruct_exec(int input) {
 						    // BC
 						    break;
 
-						case SUB_IND:
+						case SUB_INM:
 						    
-						    cout << "SUB IND Instruc:" << endl;
+						    cout << "SUB INM Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -126,9 +126,9 @@ void instruct_exec(int input) {
 						    // BC
 						    break;
 						
-						case AND_IND:
+						case AND_INM:
 						    
-						    cout << "AND IND Instruc:" << endl;
+						    cout << "AND INM Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -136,9 +136,9 @@ void instruct_exec(int input) {
 						    // BC
 						    break;
 
-						case ORA_IND:
+						case ORA_INM:
 						    
-						    cout << "ORA IND Instruc:" << endl;
+						    cout << "ORA INM Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -147,13 +147,13 @@ void instruct_exec(int input) {
 						    break;
 
 					/////////////////////////////////////////////////
-					// Instrucciones de direccionamiento INDOLUTO //
+					// 2-Instrucciones de direccionamiento ABSOLUTO //
 					/////////////////////////////////////////////////
-					// case LDA_IND, STA_IND, ADD_IND, SUB_IND, AND_IND, ORA_IND, JMP_IND, JSR_IND:
+					// case LDA_ABS, STA_ABS, ADD_ABS, SUB_ABS, AND_ABS, ORA_ABS, JMP_ABS, JSR_ABS:
 
-						case LDA_IND:
+						case LDA_ABS:
 						    
-						    cout << "LDA IND Instruc:" << endl;
+						    cout << "LDA ABS Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -161,9 +161,9 @@ void instruct_exec(int input) {
 						    // BC
 						    break;
 
-						case STA_IND:
+						case STA_ABS:
 						    
-						    cout << "STA IND Instruc:" << endl;
+						    cout << "STA ABS Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -172,9 +172,9 @@ void instruct_exec(int input) {
 						    break;
 
 
-						case ADD_IND:
+						case ADD_ABS:
 						    
-						    cout << "ADD IND Instruc:" << endl;
+						    cout << "ADD ABS Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -182,9 +182,9 @@ void instruct_exec(int input) {
 						    // BC
 						    break;
 
-						case SUB_IND:
+						case SUB_ABS:
 						    
-						    cout << "SUB IND Instruc:" << endl;
+						    cout << "SUB ABS Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -192,9 +192,9 @@ void instruct_exec(int input) {
 						    // BC
 						    break;
 						
-						case AND_IND:
+						case AND_ABS:
 						    
-						    cout << "AND IND Instruc:" << endl;
+						    cout << "AND ABS Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -202,9 +202,9 @@ void instruct_exec(int input) {
 						    // BC
 						    break;
 
-						case ORA_IND:
+						case ORA_ABS:
 						    
-						    cout << "ORA IND Instruc:" << endl;
+						    cout << "ORA ABS Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -212,9 +212,9 @@ void instruct_exec(int input) {
 						    // BC
 						    break;
 
-						case JMP_IND:
+						case JMP_ABS:
 						    
-						    cout << "JMP IND Instruc:" << endl;
+						    cout << "JMP ABS Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -222,9 +222,9 @@ void instruct_exec(int input) {
 						    // BC
 						    break;
 
-						case JSR_IND:
+						case JSR_ABS:
 						    
-						    cout << "JSR IND Instruc:" << endl;
+						    cout << "JSR ABS Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -234,7 +234,7 @@ void instruct_exec(int input) {
 						     
 
 					/////////////////////////////////////////////////
-					// Instrucciones de direccionamiento INDIRECTO //
+					//3-Instrucciones de direccionamiento INDIRECTO //
 					/////////////////////////////////////////////////
 					// case LDA_IND, STA_IND, ADD_IND, SUB_IND, AND_IND, ORA_IND, JMP_IND, JSR_IND:
 						    
@@ -320,7 +320,7 @@ void instruct_exec(int input) {
 						    break;						    
 
                 	/////////////////////////////////////////////////
-                	// Instrucciones de direccionamiento RELATIVO  //
+                	//4-Instrucciones de direccionamiento RELATIVO  //
                 	/////////////////////////////////////////////////
 
   						case BEQ_REL:
@@ -404,7 +404,7 @@ void instruct_exec(int input) {
 						    break;
 
                 	/////////////////////////////////////////////////
-                	// Instrucciones de direccionamiento IMPLICITO  //
+                	//5-Instrucciones de direccionamiento IMPLICITO  //
                 	/////////////////////////////////////////////////
 
   						case SEC_IMP:
@@ -437,15 +437,209 @@ void instruct_exec(int input) {
 						    // BC
 						    break;
 
-  						case SEI_IMP:
+  						case CLI_IMP:
 
-						    cout << "SEI IMP Instruc:" << endl;
+						    cout << "CLI IMP Instruc:" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
 						    // BZ
 						    // BC
 						    break;
+						    
+                    /////////////////////////////////////////////////
+                	//6-Instrucciones de direccionamiento ACUMULADOR  //
+                	/////////////////////////////////////////////////
+
+  						case CLA_ACU:
+
+						    cout << "CLA ACU Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case CPA_ACU:
+
+						    cout << "CPA ACU Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case INA_ACU:
+
+						    cout << "INA ACU Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case DCA_ACU:
+
+						    cout << "DCA ACU Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;						    
+
+  						case ROL_ACU:
+
+						    cout << "ROL ACU Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;							    
+
+  						case ROR_ACU:
+
+						    cout << "ROR ACU Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case PLA_ACU:
+
+						    cout << "ROR ACU Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case PHA_ACU:
+
+						    cout << "ROR ACU Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+                    /////////////////////////////////////////////////
+                	//7-Instrucciones de direccionamiento CONTROL  //
+                	/////////////////////////////////////////////////
+
+  						case TPA_CTR:
+
+						    cout << "TPA CTR Instruc:" << endl;
+						    // BN=CTRmA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case TAP_CTR:
+
+						    cout << "TAP CTR Instruc:" << endl;
+						    // BN=CTRmA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case RTI_CTR:
+
+						    cout << "RTI CTR Instruc:" << endl;
+						    // BN=CTRmA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case RTS_CTR:
+
+						    cout << "RTS CTR Instruc:" << endl;
+						    // BN=CTRmA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;						    
+
+  						case HLT_CTR:
+
+						    cout << "HLT CTR Instruc:" << endl;
+						    // BN=CTRmA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;							    
+
+  						case NOP_CTR:
+
+						    cout << "NOP CTR Instruc:" << endl;
+						    // BN=CTRmA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case PLS_CTR:
+
+						    cout << "ROR CTR Instruc:" << endl;
+						    // BN=CTRmA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case PHS_CTR:
+
+						    cout << "ROR CTR Instruc:" << endl;
+						    // BN=CTRmA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+						    
+                    ////////////////////////////////////////////////////////
+                	//7-Instrucciones de direccionamiento ENTRADA/SALIDA  //
+                	////////////////////////////////////////////////////////
+
+  						case INP_IO:
+
+						    cout << "INP IO Instruc:" << endl;
+						    // BN=IOmA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case OUT_IO:
+
+						    cout << "OUT IO Instruc:" << endl;
+						    // BN=IOmA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;						    
+						    
+						    
 
 
 				}

@@ -43,8 +43,9 @@
 #define TAP_CTR 14
 #define RTI_CTR 22
 #define RTS_CTR 30
-#define HTL_CTR 38
-#define ROR_ACU 45
+#define HLT_CTR 38
 #define NOP_CTR 46
+#define PLS_CTR 54
+#define PHS_CTR 62
 #define INP_IO 7
 #define OUT_IO 15
