@@ -144,12 +144,12 @@ void instruct_exec(int input) {
 							cout << "oper pb " << oper_val_pb << endl;						    
 
 						    Acum_A_dec = oper_val_pa_dec;
-						    
+
 							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
 
 							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
 						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
-						    cout << " PA: " << oper_val_pa_dec << endl;
+						    // cout << " PA: " << oper_val_pa_dec << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -175,7 +175,7 @@ void instruct_exec(int input) {
 
 							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
 						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
-						    cout << " PA: " << oper_val_pa_dec << endl;
+						    // cout << " PA: " << oper_val_pa_dec << endl;
 
 						    // BN=acumA[5];
 						    // BV
@@ -187,6 +187,25 @@ void instruct_exec(int input) {
 						case SUB_INM:
 						    
 						    cout << "SUB INM Instruc:" << endl;
+
+
+						    cout << "ADD INM Instruc:" << endl;
+
+							cout << "inst " << instr_val << endl;
+							cout <<"inst legth "<< i_length<< endl;
+                			cout << "opcode " << opcode_val << endl;
+                			cout << "oper word " << oper_val << endl;                			
+                			cout << "oper pa " << oper_val_pa << endl;						    
+							cout << "oper pb " << oper_val_pb << endl;
+
+						    Acum_A_dec = Acum_A_dec - oper_val_pa_dec;
+
+							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
+
+							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
+						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+						    // cout << " PA: " << oper_val_pa_dec << endl;
+
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -197,6 +216,20 @@ void instruct_exec(int input) {
 						case AND_INM:
 						    
 						    cout << "AND INM Instruc:" << endl;
+
+						    cout << "inst " << instr_val << endl;
+							cout <<"inst legth "<< i_length<< endl;
+                			cout << "opcode " << opcode_val << endl;
+                			cout << "oper word " << oper_val << endl;                			
+                			cout << "oper pa " << oper_val_pa << endl;						    
+							cout << "oper pb " << oper_val_pb << endl;
+
+						    Acum_A_dec = Acum_A_dec&oper_val_pa_dec;
+
+							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
+
+							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
+						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -207,6 +240,20 @@ void instruct_exec(int input) {
 						case ORA_INM:
 						    
 						    cout << "ORA INM Instruc:" << endl;
+
+						  	cout << "inst " << instr_val << endl;
+							cout <<"inst legth "<< i_length<< endl;
+                			cout << "opcode " << opcode_val << endl;
+                			cout << "oper word " << oper_val << endl;                			
+                			cout << "oper pa " << oper_val_pa << endl;						    
+							cout << "oper pb " << oper_val_pb << endl;
+
+						    Acum_A_dec = Acum_A_dec|oper_val_pa_dec;
+
+							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
+
+							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
+						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
