@@ -54,7 +54,12 @@ void instruct_exec(int input) {
 		string instr_val;
 		string opcode_val;
 		int opcode_val_dec, i_length, oper_val_pa_dec, oper_val_pb_dec, Acum_A_dec;
+		int BN, BV, BI, BZ, BC;
+		BN, BV, BI, BZ, BC = 0;
 		
+		bool BN_bin, BV_bin, BI_bin, BZ_bin, BC_bin;
+		BN_bin, BV_bin, BI_bin, BZ_bin, BC_bin = 0;
+
 		opcode_val_dec = 0;
 		i_length = 0;
 		oper_val_pa_dec = 0;	
@@ -82,10 +87,10 @@ void instruct_exec(int input) {
 		  	smatch pc_match;
 		  	// regex e1 ("\\d");  
 		  	regex pc_regex ("\\b(\\d)*\\s");   // matches words beginning by "sub"
-			cout << "ACUM A+> While: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
+			// cout << "ACUM A+> While: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
 	
 		  	if (regex_search (data_line, pc_match, pc_regex)){
- 				cout << "ACUM A+> if 1: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
+ 				// cout << "ACUM A+> if 1: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
  			    // 	for (auto x:pc_match) std::cout << x << " ";
                 // std::cout << std::endl;
 				// // cout << "Matched regex" << endl;		    
@@ -106,9 +111,9 @@ void instruct_exec(int input) {
 
 			    std::bitset<6>  oper_val_pa_bin(oper_val_pa);
 				oper_val_pa_dec = (int)(oper_val_pa_bin.to_ulong());
-				cout << "ACUM A+> before if 2: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
+				// cout << "ACUM A+> before if 2: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
 				if (oper_val_pb!="XXXXXX"){
-				cout << "ACUM A+> if 2: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
+				// cout << "ACUM A+> if 2: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
 				std::bitset<6>  oper_val_pb_bin(oper_val_pb);
 				oper_val_pb_dec = (int)(oper_val_pb_bin.to_ulong());
 				}
@@ -123,7 +128,7 @@ void instruct_exec(int input) {
     			// std::cout << opcode_val_bin << ":" << opcode_val_dec << std::endl;
 
 				// cout << "opcode int" << int(opcode_val_bin) << endl;
-				cout << "ACUM A+> before switch: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
+				// cout << "ACUM A+> before switch: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
 				
 				switch(opcode_val_dec) {
 
@@ -145,10 +150,15 @@ void instruct_exec(int input) {
 
 						    Acum_A_dec = oper_val_pa_dec;
 
+
 							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
 
 							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
 						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+						    BN = Acum_A_dec & 32; //0x20 = 0b00100000
+							BN_bin = BN >> 5;
+						    cout << "BN : |[" << BN_bin <<"]|" << endl;
+
 						    // cout << " PA: " << oper_val_pa_dec << endl;
 						    // BN=acumA[5];
 						    // BV
@@ -175,6 +185,12 @@ void instruct_exec(int input) {
 
 							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
 						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+
+							BN = Acum_A_dec & 32; //0x20 = 0b00100000
+							
+							BN_bin = BN >> 5;
+						    cout << "BN : |[" << BN_bin <<"]|" << endl;
+
 						    // cout << " PA: " << oper_val_pa_dec << endl;
 
 						    // BN=acumA[5];
@@ -187,9 +203,6 @@ void instruct_exec(int input) {
 						case SUB_INM:
 						    
 						    cout << "SUB INM Instruc:" << endl;
-
-
-						    cout << "ADD INM Instruc:" << endl;
 
 							cout << "inst " << instr_val << endl;
 							cout <<"inst legth "<< i_length<< endl;
@@ -204,6 +217,11 @@ void instruct_exec(int input) {
 
 							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
 						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+
+							BN = Acum_A_dec & 32; //0x20 = 0b00100000
+							BN_bin = BN >> 5;
+						    cout << "BN : |[" << BN_bin <<"]|" << endl;
+
 						    // cout << " PA: " << oper_val_pa_dec << endl;
 
 						    // BN=acumA[5];
@@ -230,6 +248,11 @@ void instruct_exec(int input) {
 
 							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
 						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+
+							BN = Acum_A_dec & 32; //0x20 = 0b00100000
+							BN_bin = BN >> 5;
+						    cout << "BN : |[" << BN_bin <<"]|" << endl;
+
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -254,6 +277,11 @@ void instruct_exec(int input) {
 
 							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
 						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+
+							BN = Acum_A_dec & 32; //0x20 = 0b00100000
+							BN_bin = BN >> 5;
+						    cout << "BN : |[" << BN_bin <<"]|" << endl;
+
 						    // BN=acumA[5];
 						    // BV
 						    // BI
