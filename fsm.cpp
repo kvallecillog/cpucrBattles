@@ -1,81 +1,22 @@
 
-// //Inmediate instructions
-// #define LDA_INM '000000'
-// #define STA_INM '001000'
-// #define ADD_INM '010000'
-// #define SUB_INM '011000'
-// #define AND_INM '100000'
-// #define ORA_INM '101000'
-// #define JMP_INM '110000'
-// #define JSR_INM '111000'
-
-// //Absolute instructions
-// #define LDA_ABS '000001'
-// #define STA_ABS '001001'
-// #define ADD_ABS '010001'
-// #define SUB_ABS '011001'
-// #define AND_ABS '100001'
-// #define ORA_ABS '101001'
-// #define JMP_ABS '110001'
-// #define JSR_ABS '111001'
-
-// //Relative instructions
-// #define BEQ_REL '000010'
-// #define BNE_REL '001010'
-// #define BCS_REL '010010'
-// #define BCC_REL '011010'
-// #define BMI_REL '100010'
-// #define BPL_REL '101010'
-// #define BVS_REL '110010'
-// #define BVC_REL '111010'
-
-// //Indirect instructions
-// #define LDA_IND '000011'
-// #define STA_IND '001011'
-// #define ADD_IND '010011'
-// #define SUB_IND '011011'
-// #define AND_IND '100011'
-// #define ORA_IND '101011'
-// #define JMP_IND '110011'
-// #define JSR_IND '111011'
-
-// //Implicit instructions
-// #define SEC_IMP '010100'
-// #define CLC_IMP '011100'
-// #define SEI_IMP '100100'
-// #define CLI_IMP '101100'
-
-// //Accumulator instructions
-// #define CLA_ACU '000101'
-// #define CPA_ACU '001101'
-// #define INA_ACU '010101'
-// #define DCA_ACU '011101'
-// #define ROL_ACU '100101'
-// #define ROR_ACU '101101'
-// #define PLA_ACU '110101'
-// #define PHA_ACU '111101'
-
-// //Control instructions
-// #define TPA_CTR '000110'
-// #define TAP_CTR '001110'
-// #define RTI_CTR '010110'
-// #define RTS_CTR '011110'
-// #define HTL_CTR '100110'
-// #define ROR_ACU '101101'
-// #define NOP_CTR '101110'
-
-// //In/Out instructions
-// #define INP_IO '000111'
-// #define OUT_IO '001111'
-
 // All systemc modules should include systemc.h header file
 #include <systemc.h>
+
+// regex_search example
+#include <iostream>
+
+#include <string>
+
+#include <boost/regex.hpp>
+
 
 #include <boost/algorithm/string.hpp>
 
 #include <boost/tuple/tuple.hpp>
 
 #include <bitset>
+
+#include "definitions_dec.cpp"
 
     using namespace std;
     
@@ -88,36 +29,437 @@ SC_CTOR (FSM) {
 }
 
 void instruct_exec(int input) {
-//Print "Hello World" to the console.
 
-cout << "\nInstruction executer!.\n";
 
-cout << "This is an input var: " << input << "\n";
+	cout << "\nInstruction executer!.\n";
 
- 	int line_cont;
+	cout << "This is an input var: " << input << "\n";
 
- 	line_cont=0;
-	
-	// Object file line.
-	string line;
+	 	int line_cont;
 
-	// Creating the ifstream object file.
-	ifstream  object_file ("file.obj");
-	
-	// Reading line by line of object file.
-	while(getline (object_file,line)){
+	 	line_cont=0;
+		
+		// Object file line.
+		string line;
+		string line_str;
+		string pc;
+		string pc_val;
+		string instr_val;
+		string opcode_val;
+		int opcode_val_dec;
+		string oper_val;
+		regex e1;
+		// pc_match;
 
-		line_cont ++;
-		cout << "Line number: " << line_cont << endl;
-		cout << "Line data: " << line << endl;
+		// Creating the ifstream object file.
+		ifstream  object_file ("file.obj");
+		
+		
+		// std::regex regex_pc ("\\d"); 
 
-		// Line decoder
+		// // Reading line by line of object file.
+		while(getline (object_file,line)){
+
+	  		string data_line = line ; //("this subject has a submarine as a subsequence");
+		  	smatch pc_match;
+		  	// regex e1 ("\\d");  
+		  	regex pc_regex ("\\b(\\d)*\\s");   // matches words beginning by "sub"
+
+		  	if (regex_search (data_line, pc_match, pc_regex)){
+ 			// 	for (auto x:pc_match) std::cout << x << " ";
+    // 			std::cout << std::endl;
+				// // cout << "Matched regex" << endl;		    
+		  		pc_val = pc_match.str();
+		  		instr_val = pc_match.suffix().str();
+		  		algorithm::erase_all(instr_val, " "); 
+		  		opcode_val = instr_val.substr(0,6);
+		  		oper_val = instr_val.substr(6,12);
+
+				// cout << pc_val<< endl;
+				// cout << instr_val<< endl;
+				// cout << opcode_val<< endl;
+				// cout << oper_val<< endl;
+
+			    std::bitset<6>  opcode_val_bin(opcode_val);
+
+
+				opcode_val_dec = (int)(opcode_val_bin.to_ulong());
+    			std::cout << opcode_val_bin << ":" << opcode_val_dec << std::endl;
+
+				// cout << "opcode int" << int(opcode_val_bin) << endl;
+
+				switch(opcode_val_dec) {
+
+					/////////////////////////////////////////////////
+					// Instrucciones de direccionamiento INDEDIATO //
+					/////////////////////////////////////////////////
+					// case LDA_IND, ADD_IND, SUB_IND, AND_IND, ORA_IND:
+
+						case LDA_IND:
+						    
+						    cout << "LDA IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+
+						case ADD_IND:
+						    
+						    cout << "ADD IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case SUB_IND:
+						    
+						    cout << "SUB IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+						
+						case AND_IND:
+						    
+						    cout << "AND IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case ORA_IND:
+						    
+						    cout << "ORA IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+					/////////////////////////////////////////////////
+					// Instrucciones de direccionamiento INDOLUTO //
+					/////////////////////////////////////////////////
+					// case LDA_IND, STA_IND, ADD_IND, SUB_IND, AND_IND, ORA_IND, JMP_IND, JSR_IND:
+
+						case LDA_IND:
+						    
+						    cout << "LDA IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case STA_IND:
+						    
+						    cout << "STA IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+
+						case ADD_IND:
+						    
+						    cout << "ADD IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case SUB_IND:
+						    
+						    cout << "SUB IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+						
+						case AND_IND:
+						    
+						    cout << "AND IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case ORA_IND:
+						    
+						    cout << "ORA IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case JMP_IND:
+						    
+						    cout << "JMP IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case JSR_IND:
+						    
+						    cout << "JSR IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+						     
+
+					/////////////////////////////////////////////////
+					// Instrucciones de direccionamiento INDIRECTO //
+					/////////////////////////////////////////////////
+					// case LDA_IND, STA_IND, ADD_IND, SUB_IND, AND_IND, ORA_IND, JMP_IND, JSR_IND:
+						    
+		                case LDA_IND:
+						    
+						    cout << "LDA IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case STA_IND:
+						    
+						    cout << "STA IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+
+						case ADD_IND:
+						    
+						    cout << "ADD IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case SUB_IND:
+						    
+						    cout << "SUB IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+						
+						case AND_IND:
+						    
+						    cout << "AND IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case ORA_IND:
+						    
+						    cout << "ORA IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case JMP_IND:
+						    
+						    cout << "JMP IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+						case JSR_IND:
+						    
+						    cout << "JSR IND Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;						    
+
+                	/////////////////////////////////////////////////
+                	// Instrucciones de direccionamiento RELATIVO  //
+                	/////////////////////////////////////////////////
+
+  						case BEQ_REL:
+
+						    cout << "BEQ REL Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case BNE_REL:
+
+						    cout << "BNE REL Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case BCS_REL:
+
+						    cout << "BCS REL Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case BCC_REL:
+
+						    cout << "BCC REL Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case BMI_REL:
+
+						    cout << "BMI REL Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case BPL_REL:
+
+						    cout << "BPL REL Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case BVS_REL:
+
+						    cout << "BVC REL Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case BVC_REL:
+
+						    cout << "BVC REL Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+                	/////////////////////////////////////////////////
+                	// Instrucciones de direccionamiento IMPLICITO  //
+                	/////////////////////////////////////////////////
+
+  						case SEC_IMP:
+
+						    cout << "SEC IMP Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case CLC_IMP:
+
+						    cout << "CLC IMP Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case SEI_IMP:
+
+						    cout << "SEI IMP Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+  						case SEI_IMP:
+
+						    cout << "SEI IMP Instruc:" << endl;
+						    // BN=acumA[5];
+						    // BV
+						    // BI
+						    // BZ
+						    // BC
+						    break;
+
+
+				}
+
+			}
+			
+			else{
+		
+				cout << "Error: Object file is invalid!" << endl;
+		
+			}
 
 		
-
-
-	
-	}
+		}
 
 
 }
@@ -150,11 +492,11 @@ return(0);
 // 	switch(intruct) {
 	
 // 		/////////////////////////////////////////////////
-// 		// Instrucciones de direccionamiento INMEDIATO //
+// 		// Instrucciones de direccionamiento INDEDIATO //
 // 		/////////////////////////////////////////////////
-// 		case 'LDA_INM', 'STA_INM', 'ADD_INM', 'SUB_INM', 'AND_INM', 'ORA_INM', 'JMP_INM', 'JSR_INM':
+// 		case "LDA_IND", "STA_IND", "ADD_IND", "SUB_IND", "AND_IND", "ORA_IND", "JMP_IND", "JSR_IND":
 
-// 			case 'LDA_INM':
+// 			case "LDA_IND":
 			    
 			    
 // 			    // BN=acumA[5];
@@ -170,7 +512,7 @@ return(0);
 // 			    // BZ
 // 			    // BC
 
-// 			case 'STA_INM':
+// 			case "STA_IND":
 			    
 			    
 // 			    // BN=acumA[5];
@@ -181,7 +523,7 @@ return(0);
 // 			    break;
 
 
-// 			case 'LDA_INM':
+// 			case "LDA_IND":
 			    
 			    
 // 			    // BN=acumA[5];
@@ -191,7 +533,7 @@ return(0);
 // 			    // BC
 // 			    break;
 
-// 			case 'STA_INM':
+// 			case "STA_IND":
 			    
 			    
 // 			    // BN=acumA[5];
@@ -206,34 +548,34 @@ return(0);
 
 
 // 	// 	/////////////////////////////////////////////////
-// 	// 	// Instrucciones de direccionamiento ABSOLUTO  //
+// 	// 	// Instrucciones de direccionamiento INDOLUTO  //
 // 	// 	/////////////////////////////////////////////////
 		
-// 	// 	case 'LDA_AB':
+// 	// 	case "LDA_AB":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'STA_AB':
+// 	// 	case "STA_AB":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'ADD_AB':
+// 	// 	case "ADD_AB":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'SUB_AB':
+// 	// 	case "SUB_AB":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'AND_AB':
+// 	// 	case "AND_AB":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'ORA_AB':
+// 	// 	case "ORA_AB":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'JMP_AB':
+// 	// 	case "JMP_AB":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'JSR_AB':
+// 	// 	case "JSR_AB":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
@@ -242,31 +584,31 @@ return(0);
 // 	// 	// Instrucciones de direccionamiento RELATIVO  //
 // 	// 	/////////////////////////////////////////////////
 
-// 	// 	case 'BEQ':
+// 	// 	case "BEQ":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'BNE':
+// 	// 	case "BNE":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'BCS':
+// 	// 	case "BCS":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'BCC':
+// 	// 	case "BCC":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'BMI':
+// 	// 	case "BMI":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'BPL':
+// 	// 	case "BPL":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'BVS':
+// 	// 	case "BVS":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'BVC':
+// 	// 	case "BVC":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
@@ -275,31 +617,31 @@ return(0);
 // 	// 	// Instrucciones con direccionamiento INDIRECTO //
 // 	// 	/////////////////////////////////////////////////
 
-// 	// 	case 'LDA_ID':
+// 	// 	case "LDA_ID":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'STA_ID':
+// 	// 	case "STA_ID":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'ADD_ID':
+// 	// 	case "ADD_ID":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'SUB_ID':
+// 	// 	case "SUB_ID":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'AND_ID':
+// 	// 	case "AND_ID":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'ORA_ID':
+// 	// 	case "ORA_ID":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'JMP_ID':
+// 	// 	case "JMP_ID":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'JSR_ID':
+// 	// 	case "JSR_ID":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.    
@@ -308,17 +650,17 @@ return(0);
 // 	// 	// Instrucciones con direccionamiento IMPLICITO //
 // 	// 	/////////////////////////////////////////////////
 		
-// 	// 	case 'SEC':
+// 	// 	case "SEC":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'CLC':
+// 	// 	case "CLC":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'SEI':
+// 	// 	case "SEI":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'CLI':
+// 	// 	case "CLI":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.    
@@ -327,31 +669,31 @@ return(0);
 // 	// 	// Instrucciones con direccionamiento ACUMULADOR //
 // 	// 	/////////////////////////////////////////////////
 
-// 	// 	case 'CLA':
+// 	// 	case "CLA":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'CPA':
+// 	// 	case "CPA":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'INA':
+// 	// 	case "INA":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'DCA':
+// 	// 	case "DCA":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.  
-// 	// 	case 'ROL':
+// 	// 	case "ROL":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'ROR':
+// 	// 	case "ROR":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'PLA':
+// 	// 	case "PLA":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'PHA':
+// 	// 	case "PHA":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.  
@@ -360,38 +702,38 @@ return(0);
 // 	// 	// Instrucciones para CONTROL DE LA CPUCR 		//
 // 	// 	/////////////////////////////////////////////////
 
-// 	// 	case 'TPA':
+// 	// 	case "TPA":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'TAP':
+// 	// 	case "TAP":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'RTI':
+// 	// 	case "RTI":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'RTS':
+// 	// 	case "RTS":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.  
-// 	// 	case 'HLT':
+// 	// 	case "HLT":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'NOP':
+// 	// 	case "NOP":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.
-// 	// 	case 'PLS':
+// 	// 	case "PLS":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'PHS':
+// 	// 	case "PHS":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.  
-// 	// 	case 'PLS':
+// 	// 	case "PLS":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'PHS':
+// 	// 	case "PHS":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.  
@@ -400,10 +742,10 @@ return(0);
 // 	// 	// Instrucciones para CONTROL DE LA CPUCR 		//
 // 	// 	/////////////////////////////////////////////////
 
-// 	// 	case 'INP':
+// 	// 	case "INP":
 // 	// 	    // your code goes here
 // 	// 	    break;
-// 	// 	case 'OUT':
+// 	// 	case "OUT":
 // 	// 	    // your code for next==2 goes here
 // 	// 	    break;
 // 	// 	// etc.  

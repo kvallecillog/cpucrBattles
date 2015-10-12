@@ -352,8 +352,8 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
     fi_list = []
 
     # Inicializacion el diccionario de constantes.
-    opcode_dic = dict(LDA_INM='000000', STA_INM='001000', ADD_INM='010000', SUB_INM='011000', AND_INM='100000',
-                      ORA_INM='101000', JMP_INM='110000', JSR_INM='111000',
+    opcode_dic = dict(LDA_INM='000000', ADD_INM='010000', SUB_INM='011000', AND_INM='100000',
+                      ORA_INM='101000',
 
                       LDA_ABS='000001', STA_ABS='001001', ADD_ABS='010001', SUB_ABS='011001', AND_ABS='100001',
                       ORA_ABS='101001', JMP_ABS='110001', JSR_ABS='111001',
@@ -718,7 +718,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             # print("FSM DICTIONARY:",fsm_dic)
 
                             opcode_acum = opcode_dic[inst_acum_key]
-                            oper_acum = ""
+                            oper_acum = "XXXXXXXXXXXX"
                             inst_acum_dic = dict(opcode=opcode_acum, oper=oper_acum)
                             fsm_dic[cont_mem_pos] = inst_acum_dic
 
@@ -740,12 +740,12 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             print("The opcode for this instruct is:", opcode_dic[inst_ctrl_key])
 
                             # opcode_ctrl = opcode_dic[inst_ctrl_key]
-                            # oper_ctrl = ""
+                            # oper_ctrl = "XXXXXXXXXXXX"
                             # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_ctrl, oper=oper_ctrl)
                             # print("FSM DICTIONARY:",fsm_dic)
 
                             opcode_ctrl = opcode_dic[inst_ctrl_key]
-                            oper_ctrl = ""
+                            oper_ctrl = "XXXXXXXXXXXX"
                             inst_ctrl_dic = dict(opcode=opcode_ctrl, oper=oper_ctrl)
                             fsm_dic[cont_mem_pos] = inst_ctrl_dic
 
@@ -766,12 +766,12 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             print("The opcode for this instruct is:", opcode_dic[inst_imp_key])
 
                             # opcode_imp = opcode_dic[inst_imp_key]
-                            # oper_ctrl = ""
+                            # oper_ctrl = "XXXXXXXXXXXX"
                             # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_imp, oper=oper_ctrl)
                             # print("FSM DICTIONARY:",fsm_dic)
 
                             opcode_imp = opcode_dic[inst_imp_key]
-                            oper_imp = ""
+                            oper_imp = "XXXXXXXXXXXX"
                             inst_imp_dic = dict(opcode=opcode_imp, oper=oper_imp)
                             fsm_dic[cont_mem_pos] = inst_imp_dic
 
@@ -870,6 +870,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
     # print("PC list:", pc_list)
     # print("Format instruction list:",fi_list)
     # print("FINAL FSM DICTIONARY:", fsm_dic)
+    #print("Error's detected:", error,"\n")
     #print("Error's detected:", error,"\n")
     return error, fi_list
 
