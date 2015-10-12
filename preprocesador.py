@@ -382,11 +382,11 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
     regex_macro = re.compile(r"\b^(MACRO|FINMAC)\b(\s)*.*", re.IGNORECASE)
 
-    regex_oper_dec = re.compile(r"^([0-7]{1,4})$", re.IGNORECASE)
+    regex_oper_dec = re.compile(r"^([0-9]+)$", re.IGNORECASE)
     regex_oper_oct = re.compile(r"^(\@)([0-7]{1,4})$", re.IGNORECASE)
     regex_oper_bin = re.compile(r"^(\%)([0-1]{1,6})$", re.IGNORECASE)
 
-    regex_res_word = re.compile(r"\b(AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
+    regex_res_word = re.compile(r"\b(ADD|AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
                      DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
                      RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
 
@@ -405,10 +405,10 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
         re.IGNORECASE)
 
     regex_label_inm_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-7]{1,2})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+)|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
     regex_inst_inm = re.compile(
-        r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-7]{1,2})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+)|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
 
     regex_label_io_inst = re.compile(
@@ -507,7 +507,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             oper_dec_match = re.match(regex_oper_dec, oper_abs)
                             if oper_dec_match:
                                 oper_dec = int(oper_dec_match.group(1))
-                                oper_dec_bin = format(oper_dec, '#014b')[2:]
+                                oper_dec_bin = format(oper_dec, '#014b')[-12:]
                                 print("Decimal Operand: ", oper_dec_match.group(1))
                                 print("Decimal to bin Operand: ", oper_dec_bin)
                                 oper_abs_12b = oper_dec_bin
@@ -515,7 +515,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             oper_oct_match = re.match(regex_oper_oct, oper_abs)
                             if oper_oct_match:
                                 oper_oct = int(oper_oct_match.group(2), 8)
-                                oper_oct_bin = format(oper_oct, '#014b')[2:]
+                                oper_oct_bin = format(oper_oct, '#014b')[-12:]
                                 print("Octal Operand: ", oper_oct)
                                 print("Octal to bin Operand: ", oper_oct_bin)
                                 oper_abs_12b = oper_oct_bin
@@ -523,7 +523,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             oper_bin_match = re.match(regex_oper_bin, oper_abs)
                             if oper_bin_match:
                                 oper_bin = int(oper_bin_match.group(2), 2)
-                                oper_bin_bin = format(oper_bin, '#014b')[2:]
+                                oper_bin_bin = format(oper_bin, '#014b')[-12:]
                                 print("Binary Operand: ", oper_bin_match.group(2))
                                 print("Bin 2 bin: ", oper_bin_bin)
                                 oper_abs_12b = oper_bin_bin
@@ -558,7 +558,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             oper_dec_match = re.match(regex_oper_dec, oper_ind)
                             if oper_dec_match:
                                 oper_dec = int(oper_dec_match.group(1))
-                                oper_dec_bin = format(oper_dec, '#014b')[2:]
+                                oper_dec_bin = format(oper_dec, '#014b')[-12:]
                                 print("Decimal Operand: ", oper_dec_match.group(1))
                                 print("Decimal to bin Operand: ", oper_dec_bin)
                                 oper_abs_12b = oper_dec_bin
@@ -566,7 +566,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             oper_oct_match = re.match(regex_oper_oct, oper_ind)
                             if oper_oct_match:
                                 oper_oct = int(oper_oct_match.group(2), 8)
-                                oper_oct_bin = format(oper_oct, '#014b')[2:]
+                                oper_oct_bin = format(oper_oct, '#014b')[-12:]
                                 print("Octal Operand: ", oper_oct)
                                 print("Octal to bin Operand: ", oper_oct_bin)
                                 oper_abs_12b = oper_oct_bin
@@ -574,7 +574,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             oper_bin_match = re.match(regex_oper_bin, oper_ind)
                             if oper_bin_match:
                                 oper_bin = int(oper_bin_match.group(2), 2)
-                                oper_bin_bin = format(oper_bin, '#014b')[2:]
+                                oper_bin_bin = format(oper_bin, '#014b')[-12:]
                                 print("Binary Operand: ", oper_bin_match.group(2))
                                 print("Bin 2 bin: ", oper_bin_bin)
                                 oper_abs_12b = oper_ooper_bin_binct_bin
@@ -614,26 +614,28 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             oper_dec_match = re.match(regex_oper_dec, oper_inm)
                             if oper_dec_match:
                                 oper_dec = int(oper_dec_match.group(1))
-                                oper_dec_bin = format(oper_dec, '#014b')[2:]
+                                oper_dec_bin = format(oper_dec, '#08b')[-6:]
                                 print("Decimal Operand: ", oper_dec_match.group(1))
                                 print("Decimal to bin Operand: ", oper_dec_bin)
-                                oper_abs_12b = oper_dec_bin
+                                oper_abs_12b = oper_dec_bin+"XXXXXX"
+
 
                             oper_oct_match = re.match(regex_oper_oct, oper_inm)
                             if oper_oct_match:
                                 oper_oct = int(oper_oct_match.group(2), 8)
-                                oper_oct_bin = format(oper_oct, '#014b')[2:]
+                                oper_oct_bin = format(oper_oct, '#08b')[-6:]
                                 print("Octal Operand: ", oper_oct)
                                 print("Octal to bin Operand: ", oper_oct_bin)
-                                oper_abs_12b = oper_oct_bin
+                                oper_abs_12b = oper_oct_bin+"XXXXXX"
+
 
                             oper_bin_match = re.match(regex_oper_bin, oper_inm)
                             if oper_bin_match:
                                 oper_bin = int(oper_bin_match.group(2), 2)
-                                oper_bin_bin = format(oper_bin, '#014b')[2:]
+                                oper_bin_bin = format(oper_bin, '#08b')[-6:]
                                 print("Binary Operand: ", oper_bin_match.group(2))
                                 print("Bin 2 bin: ", oper_bin_bin)
-                                oper_abs_12b = oper_bin_bin
+                                oper_abs_12b = oper_bin_bin+"XXXXXX"
 
                             inm_fi = str(cont_mem_pos) + " " + str(opcode_inm) + " " + str(oper_abs_12b)
                             fi_list.append(inm_fi)
@@ -660,10 +662,10 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             oper_oct_match = re.match(regex_oper_oct, oper_io)
                             if oper_oct_match:
                                 oper_oct = int(oper_oct_match.group(2), 8)
-                                oper_oct_bin = format(oper_oct, '#014b')[2:]
+                                oper_oct_bin = format(oper_oct, '#014b')[-6:]
                                 print("Octal Operand: ", oper_oct)
                                 print("Octal to bin Operand: ", oper_oct_bin)
-                                oper_abs_12b = oper_oct_bin
+                                oper_abs_12b = oper_oct_bin+"XXXXXX"
 
                             # inst_io_dic = dict(opcode=opcode_io, oper=oper_abs_12b)
                             # fsm_dic[cont_mem_pos] = inst_io_dic

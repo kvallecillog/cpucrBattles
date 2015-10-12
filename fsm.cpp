@@ -1,5 +1,9 @@
 
 // All systemc modules should include systemc.h header file
+
+// g++ -I. -I$SYSTEMC_HOME/include -L. -L$SYSTEMC_HOME/lib-linux64 -Wl,-rpath=$SYSTEMC_HOME/lib-linux64 -o fsm.sim fsm.cpp -lsystemc -lm -std=c++11 -lboost_regex
+
+
 #include <systemc.h>
 
 // regex_search example
@@ -33,7 +37,10 @@ void instruct_exec(int input) {
 
 	cout << "\nInstruction executer!.\n";
 
-	cout << "This is an input var: " << input << "\n";
+	// cout << "This is an input var: " << input << "\n";
+
+
+	 	string Acum_A_bin;
 
 	 	int line_cont;
 
@@ -46,9 +53,18 @@ void instruct_exec(int input) {
 		string pc_val;
 		string instr_val;
 		string opcode_val;
-		int opcode_val_dec;
-		string oper_val;
-		regex e1;
+		int opcode_val_dec, i_length, oper_val_pa_dec, oper_val_pb_dec, Acum_A_dec;
+		
+		opcode_val_dec = 0;
+		i_length = 0;
+		oper_val_pa_dec = 0;	
+		oper_val_pb_dec = 0;
+		Acum_A_dec = 0;
+
+
+
+		string oper_val, oper_val_pb , oper_val_pa;
+
 		// pc_match;
 
 		// Creating the ifstream object file.
@@ -60,34 +76,55 @@ void instruct_exec(int input) {
 		// // Reading line by line of object file.
 		while(getline (object_file,line)){
 
+			line_cont++;
+
 	  		string data_line = line ; //("this subject has a submarine as a subsequence");
 		  	smatch pc_match;
 		  	// regex e1 ("\\d");  
 		  	regex pc_regex ("\\b(\\d)*\\s");   // matches words beginning by "sub"
-
+			cout << "ACUM A+> While: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
+	
 		  	if (regex_search (data_line, pc_match, pc_regex)){
- 			// 	for (auto x:pc_match) std::cout << x << " ";
-    // 			std::cout << std::endl;
+ 				cout << "ACUM A+> if 1: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
+ 			    // 	for (auto x:pc_match) std::cout << x << " ";
+                // std::cout << std::endl;
 				// // cout << "Matched regex" << endl;		    
 		  		pc_val = pc_match.str();
 		  		instr_val = pc_match.suffix().str();
-		  		algorithm::erase_all(instr_val, " "); 
+		  		algorithm::erase_all(instr_val, " ");
+		  		i_length = instr_val.length();
+                // substr(first bit, number of bits)
+                // read from left to right
 		  		opcode_val = instr_val.substr(0,6);
 		  		oper_val = instr_val.substr(6,12);
+
+                oper_val_pa = oper_val.substr(0,6);
+				oper_val_pb = oper_val.substr(6,6);
+
+				// std::bitset<6>  Acum_A_bin(Acum_A);
+				// Acum_A_dec = (int)(Acum_A_bin.to_ulong());
+
+			    std::bitset<6>  oper_val_pa_bin(oper_val_pa);
+				oper_val_pa_dec = (int)(oper_val_pa_bin.to_ulong());
+				cout << "ACUM A+> before if 2: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
+				if (oper_val_pb!="XXXXXX"){
+				cout << "ACUM A+> if 2: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
+				std::bitset<6>  oper_val_pb_bin(oper_val_pb);
+				oper_val_pb_dec = (int)(oper_val_pb_bin.to_ulong());
+				}
 
 				// cout << pc_val<< endl;
 				// cout << instr_val<< endl;
 				// cout << opcode_val<< endl;
-				// cout << oper_val<< endl;
+
 
 			    std::bitset<6>  opcode_val_bin(opcode_val);
-
-
 				opcode_val_dec = (int)(opcode_val_bin.to_ulong());
-    			std::cout << opcode_val_bin << ":" << opcode_val_dec << std::endl;
+    			// std::cout << opcode_val_bin << ":" << opcode_val_dec << std::endl;
 
 				// cout << "opcode int" << int(opcode_val_bin) << endl;
-
+				cout << "ACUM A+> before switch: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
+				
 				switch(opcode_val_dec) {
 
 					/////////////////////////////////////////////////
@@ -98,6 +135,21 @@ void instruct_exec(int input) {
 						case LDA_INM:
 						    
 						    cout << "LDA INM Instruc:" << endl;
+							
+							cout << "inst " << instr_val << endl;
+							cout <<"inst legth "<< i_length<< endl;
+                			cout << "opcode " << opcode_val << endl;
+                			cout << "oper word " << oper_val << endl;                			
+                			cout << "oper pa " << oper_val_pa << endl;						    
+							cout << "oper pb " << oper_val_pb << endl;						    
+
+						    Acum_A_dec = oper_val_pa_dec;
+						    
+							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
+
+							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
+						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+						    cout << " PA: " << oper_val_pa_dec << endl;
 						    // BN=acumA[5];
 						    // BV
 						    // BI
@@ -107,8 +159,24 @@ void instruct_exec(int input) {
 
 
 						case ADD_INM:
-						    
+
 						    cout << "ADD INM Instruc:" << endl;
+
+							cout << "inst " << instr_val << endl;
+							cout <<"inst legth "<< i_length<< endl;
+                			cout << "opcode " << opcode_val << endl;
+                			cout << "oper word " << oper_val << endl;                			
+                			cout << "oper pa " << oper_val_pa << endl;						    
+							cout << "oper pb " << oper_val_pb << endl;
+
+						    Acum_A_dec = Acum_A_dec + oper_val_pa_dec;
+
+							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
+
+							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
+						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+						    cout << " PA: " << oper_val_pa_dec << endl;
+
 						    // BN=acumA[5];
 						    // BV
 						    // BI
