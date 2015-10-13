@@ -3,80 +3,63 @@
 
 // g++ -I. -I$SYSTEMC_HOME/include -L. -L$SYSTEMC_HOME/lib-linux64 -Wl,-rpath=$SYSTEMC_HOME/lib-linux64 -o fsm.sim fsm.cpp -lsystemc -lm -std=c++11 -lboost_regex
 
-
+// System C library.
 #include <systemc.h>
 
-// regex_search example
+// Basic library c++ set.
 #include <iostream>
-
 #include <string>
-
-#include <boost/regex.hpp>
-
-
-#include <boost/algorithm/string.hpp>
-
-#include <boost/tuple/tuple.hpp>
-
 #include <bitset>
 
+// Boost c++ library.
+#include <boost/regex.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/tuple/tuple.hpp>
+
+// Instruction case definitions.
 #include "definitions_dec.cpp"
 
-    using namespace std;
-    
-    using namespace boost;
+// To call basic c++ methods.
+using namespace std;
+// To call boost methods.    
+using namespace boost;
 
 // FSM is module name
 SC_MODULE (FSM) {
-SC_CTOR (FSM) {
-// Nothing in constructor
-}
 
-void instruct_exec(int input) {
+	SC_CTOR (FSM) {
+	
+		// Nothing in constructor	
+	
+	}
 
-
-	cout << "\nInstruction executer!.\n";
-
-	// cout << "This is an input var: " << input << "\n";
+	void instruct_exec(int input) {
 
 
-	 	string Acum_A_bin;
+		cout << "\nInstruction executer!.\n";
 
-	 	int line_cont;
+		string Acum_A_bin;
+	 	sc_bv<6> Acum_A_sc;
 
-	 	line_cont=0;
+	 	int line_cont = 0;
 		
-		// Object file line.
-		string line;
-		string line_str;
-		string pc;
-		string pc_val;
-		string instr_val;
-		string opcode_val;
-		int opcode_val_dec, i_length, oper_val_pa_dec, oper_val_pb_dec, Acum_A_dec;
-		int BN, BV, BI, BZ, BC;
-		BN, BV, BI, BZ, BC = 0;
+		string line, line_str, pc, pc_val, instr_val, opcode_val, oper_val, oper_val_pb , oper_val_pa;
+
+		int opcode_val_dec, i_length, oper_val_pa_dec, oper_val_pb_dec, Acum_A_dec = 0;
+		// opcode_val_dec, i_length, oper_val_pa_dec, oper_val_pb_dec, Acum_A_dec = 0;
 		
-		bool BN_bin, BV_bin, BI_bin, BZ_bin, BC_bin;
+		int BN, BV, BI, BZ, BC = 0;
+		// BN, BV, BI, BZ, BC = 0;
+		
+		sc_bit BN_bin, BV_bin, BI_bin, BZ_bin, BC_bin;
 		BN_bin, BV_bin, BI_bin, BZ_bin, BC_bin = 0;
 
-		opcode_val_dec = 0;
-		i_length = 0;
-		oper_val_pa_dec = 0;	
-		oper_val_pb_dec = 0;
-		Acum_A_dec = 0;
-
-
-
-		string oper_val, oper_val_pb , oper_val_pa;
-
-		// pc_match;
+		string dont_care;
+		dont_care = "XXXXXX";
 
 		// Creating the ifstream object file.
 		ifstream  object_file ("file.obj");
-		
-		
-		// std::regex regex_pc ("\\d"); 
+
 
 		// // Reading line by line of object file.
 		while(getline (object_file,line)){
@@ -88,22 +71,22 @@ void instruct_exec(int input) {
 		  	// regex e1 ("\\d");  
 		  	regex pc_regex ("\\b(\\d)*\\s");   // matches words beginning by "sub"
 			// cout << "ACUM A+> While: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
-	
+
 		  	if (regex_search (data_line, pc_match, pc_regex)){
- 				// cout << "ACUM A+> if 1: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
- 			    // 	for (auto x:pc_match) std::cout << x << " ";
-                // std::cout << std::endl;
+					// cout << "ACUM A+> if 1: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
+				    // 	for (auto x:pc_match) std::cout << x << " ";
+	            // std::cout << std::endl;
 				// // cout << "Matched regex" << endl;		    
 		  		pc_val = pc_match.str();
 		  		instr_val = pc_match.suffix().str();
 		  		algorithm::erase_all(instr_val, " ");
 		  		i_length = instr_val.length();
-                // substr(first bit, number of bits)
-                // read from left to right
+	            // substr(first bit, number of bits)
+	            // read from left to right
 		  		opcode_val = instr_val.substr(0,6);
 		  		oper_val = instr_val.substr(6,12);
 
-                oper_val_pa = oper_val.substr(0,6);
+	            oper_val_pa = oper_val.substr(0,6);
 				oper_val_pb = oper_val.substr(6,6);
 
 				// std::bitset<6>  Acum_A_bin(Acum_A);
@@ -112,7 +95,7 @@ void instruct_exec(int input) {
 			    std::bitset<6>  oper_val_pa_bin(oper_val_pa);
 				oper_val_pa_dec = (int)(oper_val_pa_bin.to_ulong());
 				// cout << "ACUM A+> before if 2: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
-				if (oper_val_pb!="XXXXXX"){
+				if (oper_val_pb!=dont_care){
 				// cout << "ACUM A+> if 2: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
 				std::bitset<6>  oper_val_pb_bin(oper_val_pb);
 				oper_val_pb_dec = (int)(oper_val_pb_bin.to_ulong());
@@ -125,7 +108,7 @@ void instruct_exec(int input) {
 
 			    std::bitset<6>  opcode_val_bin(opcode_val);
 				opcode_val_dec = (int)(opcode_val_bin.to_ulong());
-    			// std::cout << opcode_val_bin << ":" << opcode_val_dec << std::endl;
+				// std::cout << opcode_val_bin << ":" << opcode_val_dec << std::endl;
 
 				// cout << "opcode int" << int(opcode_val_bin) << endl;
 				// cout << "ACUM A+> before switch: |[" << Acum_A_dec <<"]|" <<" iter: "<< line_cont << endl;
@@ -143,24 +126,41 @@ void instruct_exec(int input) {
 							
 							cout << "inst " << instr_val << endl;
 							cout <<"inst legth "<< i_length<< endl;
-                			cout << "opcode " << opcode_val << endl;
-                			cout << "oper word " << oper_val << endl;                			
-                			cout << "oper pa " << oper_val_pa << endl;						    
-							cout << "oper pb " << oper_val_pb << endl;						    
+	            			cout << "opcode " << opcode_val << endl;
+	            			cout << "oper word " << oper_val << endl;
+	            			cout << "oper pa " << oper_val_pa << endl;
+							cout << "oper pb " << oper_val_pb << endl;
 
 						    Acum_A_dec = oper_val_pa_dec;
 
 
-							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
+							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string();
 
 							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
 						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+
 						    BN = Acum_A_dec & 32; //0x20 = 0b00100000
 							BN_bin = BN >> 5;
 						    cout << "BN : |[" << BN_bin <<"]|" << endl;
 
-						    // cout << " PA: " << oper_val_pa_dec << endl;
-						    // BN=acumA[5];
+						    // Calculating BZ flag.
+
+						    if (Acum_A_dec ==0){
+
+						    	// If accumulator A is zero, up BZ flag to 1.
+						    	BZ_bin = true;
+						    }
+
+						    else{
+
+								// If accumulator A is not zero, down BZ flag to 0.
+						    	BZ_bin = false;
+						    }
+						    cout << "BZ: |[" << BZ_bin <<"]|" << endl;
+
+//						    Acum_A_sc = oper_val_pa;
+
+						    cout << "Acum_A_sc: |[" << Acum_A_sc <<"]|" << endl;
 						    // BV
 						    // BI
 						    // BZ
@@ -174,613 +174,671 @@ void instruct_exec(int input) {
 
 							cout << "inst " << instr_val << endl;
 							cout <<"inst legth "<< i_length<< endl;
-                			cout << "opcode " << opcode_val << endl;
-                			cout << "oper word " << oper_val << endl;                			
-                			cout << "oper pa " << oper_val_pa << endl;						    
+	            			cout << "opcode " << opcode_val << endl;
+	            			cout << "oper word " << oper_val << endl;
+	            			cout << "oper pa " << oper_val_pa << endl;
 							cout << "oper pb " << oper_val_pb << endl;
 
 						    Acum_A_dec = Acum_A_dec + oper_val_pa_dec;
 
-							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
+							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string();
 
 							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
 						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
 
 							BN = Acum_A_dec & 32; //0x20 = 0b00100000
-							
+
 							BN_bin = BN >> 5;
 						    cout << "BN : |[" << BN_bin <<"]|" << endl;
 
-						    // cout << " PA: " << oper_val_pa_dec << endl;
+						    // Calculating BZ flag.
 
-						    // BN=acumA[5];
+						    if (Acum_A_dec ==0){
+
+						    	// If accumulator A is zero, up BZ flag to 1.
+						    	BZ_bin = true;
+						    }
+
+						    else{
+
+								// If accumulator A is not zero, down BZ flag to 0.
+						    	BZ_bin = false;
+						    }
+						    cout << "BZ: |[" << BZ_bin <<"]|" << endl;
+
 						    // BV
 						    // BI
-						    // BZ
 						    // BC
+
 						    break;
 
-						case SUB_INM:
+					// 	case SUB_INM:
 						    
-						    cout << "SUB INM Instruc:" << endl;
+					// 	    cout << "SUB INM Instruc:" << endl;
 
-							cout << "inst " << instr_val << endl;
-							cout <<"inst legth "<< i_length<< endl;
-                			cout << "opcode " << opcode_val << endl;
-                			cout << "oper word " << oper_val << endl;                			
-                			cout << "oper pa " << oper_val_pa << endl;						    
-							cout << "oper pb " << oper_val_pb << endl;
+					// 		cout << "inst " << instr_val << endl;
+					// 		cout <<"inst legth "<< i_length<< endl;
+	    //         			cout << "opcode " << opcode_val << endl;
+	    //         			cout << "oper word " << oper_val << endl;                			
+	    //         			cout << "oper pa " << oper_val_pa << endl;						    
+					// 		cout << "oper pb " << oper_val_pb << endl;
 
-						    Acum_A_dec = Acum_A_dec - oper_val_pa_dec;
+					// 	    Acum_A_dec = Acum_A_dec - oper_val_pa_dec;
 
-							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
+					// 		Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
 
-							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
-						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+					// 		cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
+					// 	    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
 
-							BN = Acum_A_dec & 32; //0x20 = 0b00100000
-							BN_bin = BN >> 5;
-						    cout << "BN : |[" << BN_bin <<"]|" << endl;
+					// 		BN = Acum_A_dec & 32; //0x20 = 0b00100000
+					// 		BN_bin = BN >> 5;
+					// 	    cout << "BN : |[" << BN_bin <<"]|" << endl;
 
-						    // cout << " PA: " << oper_val_pa_dec << endl;
+					// 	    // Calculating BZ flag.
 
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    if (Acum_A_dec ==0){
+
+					// 	    	// If accumulator A is zero, up BZ flag to 1.
+					// 	    	BZ_bin = true;
+					// 	    }
+
+					// 	    else{
+
+					// 			// If accumulator A is not zero, down BZ flag to 0.
+					// 	    	BZ_bin = false;
+					// 	    }
+					// 	    cout << "BZ: |[" << BZ_bin <<"]|" << endl;						    
+
+					// 	    // cout << " PA: " << oper_val_pa_dec << endl;
+
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 						
-						case AND_INM:
+					// 	case AND_INM:
 						    
-						    cout << "AND INM Instruc:" << endl;
+					// 	    cout << "AND INM Instruc:" << endl;
 
-						    cout << "inst " << instr_val << endl;
-							cout <<"inst legth "<< i_length<< endl;
-                			cout << "opcode " << opcode_val << endl;
-                			cout << "oper word " << oper_val << endl;                			
-                			cout << "oper pa " << oper_val_pa << endl;						    
-							cout << "oper pb " << oper_val_pb << endl;
+					// 	    cout << "inst " << instr_val << endl;
+					// 		cout <<"inst legth "<< i_length<< endl;
+	    //         			cout << "opcode " << opcode_val << endl;
+	    //         			cout << "oper word " << oper_val << endl;                			
+	    //         			cout << "oper pa " << oper_val_pa << endl;						    
+					// 		cout << "oper pb " << oper_val_pb << endl;
 
-						    Acum_A_dec = Acum_A_dec&oper_val_pa_dec;
+					// 	    Acum_A_dec = Acum_A_dec&oper_val_pa_dec;
 
-							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
+					// 		Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
 
-							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
-						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+					// 		cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
+					// 	    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
 
-							BN = Acum_A_dec & 32; //0x20 = 0b00100000
-							BN_bin = BN >> 5;
-						    cout << "BN : |[" << BN_bin <<"]|" << endl;
+					// 		BN = Acum_A_dec & 32; //0x20 = 0b00100000
+					// 		BN_bin = BN >> 5;
+					// 	    cout << "BN : |[" << BN_bin <<"]|" << endl;
 
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    // Calculating BZ flag.
 
-						case ORA_INM:
+					// 	    if (Acum_A_dec ==0){
+
+					// 	    	// If accumulator A is zero, up BZ flag to 1.
+					// 	    	BZ_bin = true;
+					// 	    }
+
+					// 	    else{
+
+					// 			// If accumulator A is not zero, down BZ flag to 0.
+					// 	    	BZ_bin = false;
+					// 	    }
+					// 	    cout << "BZ: |[" << BZ_bin <<"]|" << endl;
+
+
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
+
+					// 	case ORA_INM:
 						    
-						    cout << "ORA INM Instruc:" << endl;
+					// 	    cout << "ORA INM Instruc:" << endl;
 
-						  	cout << "inst " << instr_val << endl;
-							cout <<"inst legth "<< i_length<< endl;
-                			cout << "opcode " << opcode_val << endl;
-                			cout << "oper word " << oper_val << endl;                			
-                			cout << "oper pa " << oper_val_pa << endl;						    
-							cout << "oper pb " << oper_val_pb << endl;
+					// 	  	cout << "inst " << instr_val << endl;
+					// 		cout <<"inst legth "<< i_length<< endl;
+	    //         			cout << "opcode " << opcode_val << endl;
+	    //         			cout << "oper word " << oper_val << endl;                			
+	    //         			cout << "oper pa " << oper_val_pa << endl;						    
+					// 		cout << "oper pb " << oper_val_pb << endl;
 
-						    Acum_A_dec = Acum_A_dec|oper_val_pa_dec;
+					// 	    Acum_A_dec = Acum_A_dec|oper_val_pa_dec;
 
-							Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
+					// 		Acum_A_bin = bitset< 6 >( Acum_A_dec ).to_string(); 
 
-							cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
-						    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
+					// 		cout << "ACUM A dec: |[" << Acum_A_dec <<"]|" << endl;
+					// 	    cout << "ACUM A bin: |[" << Acum_A_bin <<"]|" << endl;
 
-							BN = Acum_A_dec & 32; //0x20 = 0b00100000
-							BN_bin = BN >> 5;
-						    cout << "BN : |[" << BN_bin <<"]|" << endl;
+					// 		BN = Acum_A_dec & 32; //0x20 = 0b00100000
+					// 		BN_bin = BN >> 5;
+					// 	    cout << "BN : |[" << BN_bin <<"]|" << endl;
 
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    // Calculating BZ flag.
 
-					/////////////////////////////////////////////////
-					// 2-Instrucciones de direccionamiento ABSOLUTO //
-					/////////////////////////////////////////////////
-					// case LDA_ABS, STA_ABS, ADD_ABS, SUB_ABS, AND_ABS, ORA_ABS, JMP_ABS, JSR_ABS:
+					// 	    if (Acum_A_dec ==0){
 
-						case LDA_ABS:
+					// 	    	// If accumulator A is zero, up BZ flag to 1.
+					// 	    	BZ_bin = true;
+					// 	    }
+
+					// 	    else{
+
+					// 			// If accumulator A is not zero, down BZ flag to 0.
+					// 	    	BZ_bin = false;
+					// 	    }
+					// 	    cout << "BZ: |[" << BZ_bin <<"]|" << endl;
+
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
+
+					// 	/////////////////////////////////////////////////
+					// 	// 2-Instrucciones de direccionamiento ABSOLUTO //
+					// 	/////////////////////////////////////////////////
+					// 	// case LDA_ABS, STA_ABS, ADD_ABS, SUB_ABS, AND_ABS, ORA_ABS, JMP_ABS, JSR_ABS:
+
+					// 	case LDA_ABS:
 						    
-						    cout << "LDA ABS Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "LDA ABS Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-						case STA_ABS:
+					// 	case STA_ABS:
 						    
-						    cout << "STA ABS Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "STA ABS Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
 
-						case ADD_ABS:
+					// 	case ADD_ABS:
 						    
-						    cout << "ADD ABS Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "ADD ABS Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-						case SUB_ABS:
+					// 	case SUB_ABS:
 						    
-						    cout << "SUB ABS Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "SUB ABS Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 						
-						case AND_ABS:
+					// 	case AND_ABS:
 						    
-						    cout << "AND ABS Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "AND ABS Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-						case ORA_ABS:
+					// 	case ORA_ABS:
 						    
-						    cout << "ORA ABS Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "ORA ABS Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-						case JMP_ABS:
+					// 	case JMP_ABS:
 						    
-						    cout << "JMP ABS Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "JMP ABS Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-						case JSR_ABS:
+					// 	case JSR_ABS:
 						    
-						    cout << "JSR ABS Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "JSR ABS Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 						     
 
-					/////////////////////////////////////////////////
-					//3-Instrucciones de direccionamiento INDIRECTO //
-					/////////////////////////////////////////////////
-					// case LDA_IND, STA_IND, ADD_IND, SUB_IND, AND_IND, ORA_IND, JMP_IND, JSR_IND:
+					// /////////////////////////////////////////////////
+					// //3-Instrucciones de direccionamiento INDIRECTO //
+					// /////////////////////////////////////////////////
+					// // case LDA_IND, STA_IND, ADD_IND, SUB_IND, AND_IND, ORA_IND, JMP_IND, JSR_IND:
 						    
-		                case LDA_IND:
+		   //              case LDA_IND:
 						    
-						    cout << "LDA IND Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "LDA IND Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-						case STA_IND:
+					// 	case STA_IND:
 						    
-						    cout << "STA IND Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "STA IND Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
 
-						case ADD_IND:
+					// 	case ADD_IND:
 						    
-						    cout << "ADD IND Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "ADD IND Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-						case SUB_IND:
+					// 	case SUB_IND:
 						    
-						    cout << "SUB IND Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "SUB IND Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 						
-						case AND_IND:
+					// 	case AND_IND:
 						    
-						    cout << "AND IND Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "AND IND Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-						case ORA_IND:
+					// 	case ORA_IND:
 						    
-						    cout << "ORA IND Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "ORA IND Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-						case JMP_IND:
+					// 	case JMP_IND:
 						    
-						    cout << "JMP IND Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "JMP IND Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-						case JSR_IND:
+					// 	case JSR_IND:
 						    
-						    cout << "JSR IND Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;						    
+					// 	    cout << "JSR IND Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;						    
 
-                	/////////////////////////////////////////////////
-                	//4-Instrucciones de direccionamiento RELATIVO  //
-                	/////////////////////////////////////////////////
+	    //         	/////////////////////////////////////////////////
+	    //         	//4-Instrucciones de direccionamiento RELATIVO  //
+	    //         	/////////////////////////////////////////////////
 
-  						case BEQ_REL:
+					// 		case BEQ_REL:
 
-						    cout << "BEQ REL Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "BEQ REL Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case BNE_REL:
+					// 		case BNE_REL:
 
-						    cout << "BNE REL Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "BNE REL Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case BCS_REL:
+					// 		case BCS_REL:
 
-						    cout << "BCS REL Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "BCS REL Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case BCC_REL:
+					// 		case BCC_REL:
 
-						    cout << "BCC REL Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "BCC REL Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case BMI_REL:
+					// 		case BMI_REL:
 
-						    cout << "BMI REL Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "BMI REL Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case BPL_REL:
+					// 		case BPL_REL:
 
-						    cout << "BPL REL Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "BPL REL Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case BVS_REL:
+					// 		case BVS_REL:
 
-						    cout << "BVC REL Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "BVC REL Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case BVC_REL:
+					// 		case BVC_REL:
 
-						    cout << "BVC REL Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "BVC REL Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-                	/////////////////////////////////////////////////
-                	//5-Instrucciones de direccionamiento IMPLICITO  //
-                	/////////////////////////////////////////////////
+	    //         	/////////////////////////////////////////////////
+	    //         	//5-Instrucciones de direccionamiento IMPLICITO  //
+	    //         	/////////////////////////////////////////////////
 
-  						case SEC_IMP:
+					// 		case SEC_IMP:
 
-						    cout << "SEC IMP Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "SEC IMP Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case CLC_IMP:
+					// 		case CLC_IMP:
 
-						    cout << "CLC IMP Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "CLC IMP Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case SEI_IMP:
+					// 		case SEI_IMP:
 
-						    cout << "SEI IMP Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "SEI IMP Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case CLI_IMP:
+					// 		case CLI_IMP:
 
-						    cout << "CLI IMP Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "CLI IMP Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 						    
-                    /////////////////////////////////////////////////
-                	//6-Instrucciones de direccionamiento ACUMULADOR  //
-                	/////////////////////////////////////////////////
+	    //             /////////////////////////////////////////////////
+	    //         	//6-Instrucciones de direccionamiento ACUMULADOR  //
+	    //         	/////////////////////////////////////////////////
 
-  						case CLA_ACU:
+					// 		case CLA_ACU:
 
-						    cout << "CLA ACU Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "CLA ACU Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case CPA_ACU:
+					// 		case CPA_ACU:
 
-						    cout << "CPA ACU Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "CPA ACU Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case INA_ACU:
+					// 		case INA_ACU:
 
-						    cout << "INA ACU Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "INA ACU Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case DCA_ACU:
+					// 		case DCA_ACU:
 
-						    cout << "DCA ACU Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;						    
+					// 	    cout << "DCA ACU Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;						    
 
-  						case ROL_ACU:
+					// 		case ROL_ACU:
 
-						    cout << "ROL ACU Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;							    
+					// 	    cout << "ROL ACU Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;							    
 
-  						case ROR_ACU:
+					// 		case ROR_ACU:
 
-						    cout << "ROR ACU Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "ROR ACU Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case PLA_ACU:
+					// 		case PLA_ACU:
 
-						    cout << "ROR ACU Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "ROR ACU Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case PHA_ACU:
+					// 		case PHA_ACU:
 
-						    cout << "ROR ACU Instruc:" << endl;
-						    // BN=acumA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "ROR ACU Instruc:" << endl;
+					// 	    // BN=acumA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-                    /////////////////////////////////////////////////
-                	//7-Instrucciones de direccionamiento CONTROL  //
-                	/////////////////////////////////////////////////
+	    //             /////////////////////////////////////////////////
+	    //         	//7-Instrucciones de direccionamiento CONTROL  //
+	    //         	/////////////////////////////////////////////////
 
-  						case TPA_CTR:
+					// 		case TPA_CTR:
 
-						    cout << "TPA CTR Instruc:" << endl;
-						    // BN=CTRmA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "TPA CTR Instruc:" << endl;
+					// 	    // BN=CTRmA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case TAP_CTR:
+					// 		case TAP_CTR:
 
-						    cout << "TAP CTR Instruc:" << endl;
-						    // BN=CTRmA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "TAP CTR Instruc:" << endl;
+					// 	    // BN=CTRmA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case RTI_CTR:
+					// 		case RTI_CTR:
 
-						    cout << "RTI CTR Instruc:" << endl;
-						    // BN=CTRmA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "RTI CTR Instruc:" << endl;
+					// 	    // BN=CTRmA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case RTS_CTR:
+					// 		case RTS_CTR:
 
-						    cout << "RTS CTR Instruc:" << endl;
-						    // BN=CTRmA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;						    
+					// 	    cout << "RTS CTR Instruc:" << endl;
+					// 	    // BN=CTRmA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;						    
 
-  						case HLT_CTR:
+					// 		case HLT_CTR:
 
-						    cout << "HLT CTR Instruc:" << endl;
-						    // BN=CTRmA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;							    
+					// 	    cout << "HLT CTR Instruc:" << endl;
+					// 	    // BN=CTRmA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;							    
 
-  						case NOP_CTR:
+					// 		case NOP_CTR:
 
-						    cout << "NOP CTR Instruc:" << endl;
-						    // BN=CTRmA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "NOP CTR Instruc:" << endl;
+					// 	    // BN=CTRmA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case PLS_CTR:
+					// 		case PLS_CTR:
 
-						    cout << "ROR CTR Instruc:" << endl;
-						    // BN=CTRmA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "ROR CTR Instruc:" << endl;
+					// 	    // BN=CTRmA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case PHS_CTR:
+					// 		case PHS_CTR:
 
-						    cout << "ROR CTR Instruc:" << endl;
-						    // BN=CTRmA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "ROR CTR Instruc:" << endl;
+					// 	    // BN=CTRmA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 						    
-                    ////////////////////////////////////////////////////////
-                	//7-Instrucciones de direccionamiento ENTRADA/SALIDA  //
-                	////////////////////////////////////////////////////////
+	    //             ////////////////////////////////////////////////////////
+	    //         	//7-Instrucciones de direccionamiento ENTRADA/SALIDA  //
+	    //         	////////////////////////////////////////////////////////
 
-  						case INP_IO:
+					// 		case INP_IO:
 
-						    cout << "INP IO Instruc:" << endl;
-						    // BN=IOmA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;
+					// 	    cout << "INP IO Instruc:" << endl;
+					// 	    // BN=IOmA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;
 
-  						case OUT_IO:
+					// 		case OUT_IO:
 
-						    cout << "OUT IO Instruc:" << endl;
-						    // BN=IOmA[5];
-						    // BV
-						    // BI
-						    // BZ
-						    // BC
-						    break;						    
+					// 	    cout << "OUT IO Instruc:" << endl;
+					// 	    // BN=IOmA[5];
+					// 	    // BV
+					// 	    // BI
+					// 	    // BZ
+					// 	    // BC
+					// 	    break;						    
 						    
 						    
 
@@ -794,297 +852,21 @@ void instruct_exec(int input) {
 				cout << "Error: Object file is invalid!" << endl;
 		
 			}
-
-		
+	
 		}
 
+	}
 
-}
 };
 
 // sc_main in top level function like in C++ main
 int sc_main(int argc, char* argv[]) {
-FSM instruct("Hello");
-// Print the hello world
-instruct.instruct_exec(1);
-return(0);
+	
+	FSM instruct("Hello");
+
+	// Execute instruction from memory
+	instruct.instruct_exec(1);
+	
+	return(0);
 }
 
-
-
-
-// int instruct_exec() {
-
-// // bool BN;
-// // bool BV;
-// // bool BI; 
-// // bool BZ;
-// // bool BC;
-
-
-// // bool reg_state={BN,BV,BI,BZ,BC};
-// // bool acumA [6]; 
-
-// 	// Case statement 
-// 	switch(intruct) {
-	
-// 		/////////////////////////////////////////////////
-// 		// Instrucciones de direccionamiento INDEDIATO //
-// 		/////////////////////////////////////////////////
-// 		case "LDA_IND", "STA_IND", "ADD_IND", "SUB_IND", "AND_IND", "ORA_IND", "JMP_IND", "JSR_IND":
-
-// 			case "LDA_IND":
-			    
-			    
-// 			    // BN=acumA[5];
-// 			    // BV
-// 			    // BI
-// 			    // BZ
-// 			    // BC
-// 			    break;
-
-// 			    // BN=acumA[5];
-// 			    // BV
-// 			    // BI
-// 			    // BZ
-// 			    // BC
-
-// 			case "STA_IND":
-			    
-			    
-// 			    // BN=acumA[5];
-// 			    // BV
-// 			    // BI
-// 			    // BZ
-// 			    // BC
-// 			    break;
-
-
-// 			case "LDA_IND":
-			    
-			    
-// 			    // BN=acumA[5];
-// 			    // BV
-// 			    // BI
-// 			    // BZ
-// 			    // BC
-// 			    break;
-
-// 			case "STA_IND":
-			    
-			    
-// 			    // BN=acumA[5];
-// 			    // BV
-// 			    // BI
-// 			    // BZ
-// 			    // BC
-// 			    break;
-// 			}
-// }
-
-
-
-// 	// 	/////////////////////////////////////////////////
-// 	// 	// Instrucciones de direccionamiento INDOLUTO  //
-// 	// 	/////////////////////////////////////////////////
-		
-// 	// 	case "LDA_AB":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "STA_AB":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "ADD_AB":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "SUB_AB":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "AND_AB":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "ORA_AB":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "JMP_AB":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "JSR_AB":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-
-// 	// 	/////////////////////////////////////////////////
-// 	// 	// Instrucciones de direccionamiento RELATIVO  //
-// 	// 	/////////////////////////////////////////////////
-
-// 	// 	case "BEQ":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "BNE":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "BCS":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "BCC":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "BMI":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "BPL":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "BVS":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "BVC":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-
-// 	// 	/////////////////////////////////////////////////
-// 	// 	// Instrucciones con direccionamiento INDIRECTO //
-// 	// 	/////////////////////////////////////////////////
-
-// 	// 	case "LDA_ID":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "STA_ID":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "ADD_ID":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "SUB_ID":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "AND_ID":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "ORA_ID":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "JMP_ID":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "JSR_ID":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.    
-
-// 	// 	/////////////////////////////////////////////////
-// 	// 	// Instrucciones con direccionamiento IMPLICITO //
-// 	// 	/////////////////////////////////////////////////
-		
-// 	// 	case "SEC":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "CLC":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "SEI":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "CLI":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.    
-	
-// 	// 	/////////////////////////////////////////////////
-// 	// 	// Instrucciones con direccionamiento ACUMULADOR //
-// 	// 	/////////////////////////////////////////////////
-
-// 	// 	case "CLA":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "CPA":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "INA":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "DCA":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.  
-// 	// 	case "ROL":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "ROR":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "PLA":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "PHA":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.  
-
-// 	// 	/////////////////////////////////////////////////
-// 	// 	// Instrucciones para CONTROL DE LA CPUCR 		//
-// 	// 	/////////////////////////////////////////////////
-
-// 	// 	case "TPA":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "TAP":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "RTI":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "RTS":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.  
-// 	// 	case "HLT":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "NOP":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.
-// 	// 	case "PLS":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "PHS":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.  
-// 	// 	case "PLS":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "PHS":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.  
-
-// 	// 	/////////////////////////////////////////////////
-// 	// 	// Instrucciones para CONTROL DE LA CPUCR 		//
-// 	// 	/////////////////////////////////////////////////
-
-// 	// 	case "INP":
-// 	// 	    // your code goes here
-// 	// 	    break;
-// 	// 	case "OUT":
-// 	// 	    // your code for next==2 goes here
-// 	// 	    break;
-// 	// 	// etc.  
-
-// 	// }
