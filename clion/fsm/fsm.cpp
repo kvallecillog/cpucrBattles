@@ -48,12 +48,12 @@ SC_MODULE (FSM) {
 		
 		string line, line_str, pc, pc_val, instr_val, opcode_val, oper_val, oper_val_pb , oper_val_pa;
 
-		int opcode_val_dec, i_length, oper_val_pa_dec, oper_val_pb_dec, Acum_A_dec = 0;
+		int opcode_val_dec, i_length, oper_val_pa_dec, oper_val_pb_dec = 0;
 
-		int BN, BV, BI, BZ, BC = 0;
+//		int BN, BV, BI, BZ, BC = 0;
 
-		sc_bit BN_bin, BV_bin, BI_bin, BZ_bin, BC_bin;
-		BN_bin, BV_bin, BI_bin, BZ_bin, BC_bin = 0;
+//		sc_bit BN_bin, BV_bin, BI_bin, BZ_bin, BC_bin;
+//		BN_bin, BV_bin, BI_bin, BZ_bin, BC_bin = 0;
 
         // Dont care operand for instruction with not pb.
 		string dont_care;

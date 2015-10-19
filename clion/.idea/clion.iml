@@ -5,7 +5,6 @@
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main_mem.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/module_mem.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/module_mem.h" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

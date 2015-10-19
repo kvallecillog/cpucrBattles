@@ -1,15 +1,28 @@
+#include <iostream>
 using namespace std;
- 
+ // System C library.
+#include </usr/local/systemc-2.3.1/include/systemc>
+
+// memory definitions.
+#include "module_mem.h"
+
+// To call basic c++ methods.
+using namespace std;
+// To call boost methods.    
+using namespace sc_core;
+
+using namespace sc_dt;
+
 void memory::entry()
 {
     if(enable.read() == 1) {
-        std::cout << "@ " << sc_time_stamp() << std::endl;
+        cout << "@ " << sc_time_stamp() << endl;
         if(rw.read() == 1) {            //write
             ramdata[address.read().to_int()].write( data.read() );
-            std::cout << "writing data " << data.read() << " at " << address.read() << std::endl;
+            cout << "writing data " << data.read() << " at " << address.read() << endl;
         } else {                        //read
             data.write(ramdata[address.read().to_int()].read());
-            std::cout << "reading data " << data.read() << " at " << address.read() << std::endl;
+            cout << "reading data " << data.read() << " at " << address.read() << endl;
         }
     } else {
         data.write("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
