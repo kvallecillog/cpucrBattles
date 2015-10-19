@@ -494,7 +494,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento absoluto cuenta con 3 palabras.
-                            cont_mem_pos += 3
+
                             pc_list.append(cont_mem_pos)
 
                             inst_abs_key = inst_abs_match.group(1) + "_ABS"
@@ -532,6 +532,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             # fsm_dic[cont_mem_pos] = inst_abs_dic
 
                             abs_fi = str(cont_mem_pos) + " " + str(opcode_abs) + " " + str(oper_abs_12b)
+                            cont_mem_pos += 3
                             fi_list.append(abs_fi)
 
                             # fsm_dic[PC, opcode, oper] = cont_mem_pos,opcode_abs,oper_abs
@@ -544,7 +545,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento indirecto cuenta con 3 palabras.
-                            cont_mem_pos += 3
+
                             pc_list.append(cont_mem_pos)
 
                             inst_ind_key = inst_ind_match.group(1) + "_IND"
@@ -580,6 +581,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                                 oper_abs_12b = oper_ooper_bin_binct_bin
 
                             ind_fi = str(cont_mem_pos) + " " + str(opcode_ind) + " " + str(oper_abs_12b)
+                            cont_mem_pos += 3
                             fi_list.append(ind_fi)
 
 
@@ -596,7 +598,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento inmediato cuenta con 2 palabras.
-                            cont_mem_pos += 2
+
                             pc_list.append(cont_mem_pos)
 
                             inst_inm_key = inst_inm_match.group(1) + "_INM"
@@ -638,6 +640,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                                 oper_abs_12b = oper_bin_bin+"XXXXXX"
 
                             inm_fi = str(cont_mem_pos) + " " + str(opcode_inm) + " " + str(oper_abs_12b)
+                            cont_mem_pos += 2
                             fi_list.append(inm_fi)
 
                             # print("FSM DICTIONARY:",fsm_dic)
@@ -650,7 +653,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento IO cuenta con 2 palabras.
-                            cont_mem_pos += 2
+
                             pc_list.append(cont_mem_pos)
 
                             inst_io_key = inst_io_match.group(1) + "_IO"
@@ -671,6 +674,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             # fsm_dic[cont_mem_pos] = inst_io_dic
 
                             io_fi = str(cont_mem_pos) + " " + str(opcode_io) + " " + str(oper_abs_12b)
+                            cont_mem_pos += 2
                             fi_list.append(io_fi)
 
 
@@ -681,7 +685,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                         if inst_rel_match:
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento relativo cuenta con 2 palabras.
-                            cont_mem_pos += 2
+
                             pc_list.append(cont_mem_pos)
 
                             inst_rel_key = inst_rel_match.group(1) + "_REL"
@@ -699,6 +703,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             fsm_dic[cont_mem_pos] = inst_rel_dic
 
                             rel_fi = str(cont_mem_pos) + " " + str(opcode_rel) + " " + str(oper_rel)
+                            cont_mem_pos += 2
                             fi_list.append(rel_fi)
 
                             # print("Operand!:",inst_abs_match.group(3))
@@ -708,7 +713,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                         if inst_acum_match:
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento acumulador cuenta con 1 palabra.
-                            cont_mem_pos += 1
+
                             pc_list.append(cont_mem_pos)
 
                             inst_acum_key = inst_acum_match.group(1) + "_ACU"
@@ -725,6 +730,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             fsm_dic[cont_mem_pos] = inst_acum_dic
 
                             acum_fi = str(cont_mem_pos) + " " + str(opcode_acum) + " " + str(oper_acum)
+                            cont_mem_pos += 1
                             fi_list.append(acum_fi)
 
 
@@ -735,7 +741,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                         if inst_ctrl_match:
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento control cuenta con 1 palabra.
-                            cont_mem_pos += 1
+
                             pc_list.append(cont_mem_pos)
 
                             inst_ctrl_key = inst_ctrl_match.group(1) + "_CTR"
@@ -752,6 +758,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             fsm_dic[cont_mem_pos] = inst_ctrl_dic
 
                             ctrl_fi = str(cont_mem_pos) + " " + str(opcode_ctrl) + " " + str(oper_ctrl)
+                            cont_mem_pos += 1
                             fi_list.append(ctrl_fi)
 
                             # print("Operand!:",inst_abs_match.group(2))
@@ -761,7 +768,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                         if inst_imp_match:
                             # Actualizacion del contador de posicion de memoria.
                             # El direccionamiento implicito cuenta con 1 palabra.
-                            cont_mem_pos += 1
+
                             pc_list.append(cont_mem_pos)
 
                             inst_imp_key = inst_imp_match.group(1) + "_IMP"
@@ -778,6 +785,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             fsm_dic[cont_mem_pos] = inst_imp_dic
 
                             imp_fi = str(cont_mem_pos) + " " + str(opcode_imp) + " " + str(oper_imp)
+                            cont_mem_pos += 1
                             fi_list.append(imp_fi)
 
                             # print("Operand!:",inst_abs_match.group(1))

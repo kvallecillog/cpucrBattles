@@ -1,5 +1,5 @@
 $date
-     Oct 18, 2015       19:28:50
+     Oct 18, 2015       19:44:47
 $end
 
 $version
@@ -51,13 +51,102 @@ b100 aaaac
 b111 aaaad
 
 #25
-b110 aaaac
+b101 aaaac
 b10000 aaaad
 
 #30
-b111 aaaac
+b110 aaaac
 b1 aaaad
 
 #35
+b111 aaaac
+b11000 aaaad
+
+#40
+b1000 aaaac
+b111100 aaaad
+
+#45
+b1001 aaaac
+b0 aaaad
+
+#50
+b1010 aaaac
+b101010 aaaad
+
+#55
+b1011 aaaac
+b101000 aaaad
+
+#60
+b1100 aaaac
+b10101 aaaad
+
+#65
+b1101 aaaac
+b1 aaaad
+
+#70
+b1110 aaaac
+b1001 aaaad
+
+#75
+b1111 aaaac
+
+#80
+b10000 aaaac
+b0 aaaad
+
+#85
+b10001 aaaac
+b101010 aaaad
+
+#90
+b10010 aaaac
+b100000 aaaad
+
+#95
+b10011 aaaac
+b10101 aaaad
+
+#100
+b10100 aaaac
+b0 aaaad
+
+#105
+b10101 aaaac
+b111111 aaaad
+
+#110
+b10110 aaaac
+b1 aaaad
+
+#115
+b10111 aaaac
+b0 aaaad
+
+#120
+b11000 aaaac
+
+#125
+b11001 aaaac
+
+#130
+b11010 aaaac
+b111111 aaaad
+
+#135
+b11011 aaaac
+b1 aaaad
+
+#140
+b11100 aaaac
+b1000 aaaad
+
+#145
+b11101 aaaac
+b0 aaaad
+
+#150
 0aaaab
 
