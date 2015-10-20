@@ -18,11 +18,12 @@ void memory::entry()
     if(enable.read() == 1) {
         cout << "@ " << sc_time_stamp() << endl;
         if(rw.read() == 1) {            //write
-            ramdata[address.read().to_int()].write( data.read() );
-            cout << "writing data " << data.read() << " at " << address.read() << endl;
+//            write_count++;
+            ramdata[address.read().to_uint()].write( data.read() );
+            cout << "writing data " <<"|[" <<data.read().to_uint() << "]|" << " at " << "|["<< address.read().to_uint() << "]|" << endl;
         } else {                        //read
-            data.write(ramdata[address.read().to_int()].read());
-            cout << "reading data " << data.read() << " at " << address.read() << endl;
+            data.write(ramdata[address.read().to_uint()].read());
+            cout << "reading data " <<"|["<< data.read().to_uint()<< "]|" << " at " <<"|["<< address.read().to_uint() << "]|" << endl;
         }
     } else {
         data.write("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");

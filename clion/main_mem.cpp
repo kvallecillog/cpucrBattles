@@ -34,7 +34,7 @@ int sc_main(int argc, char* argv[]) {
     sc_signal < sc_lv<1> > rw;
     sc_signal < sc_lv <6> > data;
     sc_signal < sc_lv <12> > address;
-
+    int write_count;
 
     string line ;
     vector<string> p_object_vec;
@@ -44,13 +44,13 @@ int sc_main(int argc, char* argv[]) {
     mem.data(data);
     mem.address(address);
     mem.enable(enable);
-
+//    mem.write_count(write_count);
 
     enable  = 0;
     data    = 0;
     address = 0;
     rw      = 0;
-
+    write_count = 0;
 
     ifstream  object_file ("../pycharm/file.obj");
     // // Reading line by line of object file.
@@ -60,14 +60,14 @@ int sc_main(int argc, char* argv[]) {
         system("pause");
         return -1;
     }
-//    int i = 0 ;
+    int i = 0 ;
     while(getline(object_file,line)){
 //        cout<< " Read line: " << line << endl;
         p_object_vec.push_back(line);
 //        cout << " My vec data: " << p_object_vec[i] << endl;
-//        i++;
+        i++;
     }
-
+    cout << "lines: " << i << endl;
 
 //    int ps_clk = 0;
     string data_vec;
@@ -77,12 +77,14 @@ int sc_main(int argc, char* argv[]) {
     string opcode_vec;
     string dont_care = "XXXXXX";
     vector<string> tokens;
+    vector<int> pcs;
     int ps_clk = 0;
     string address_vec;
     int address_int = 0;
     int opcode_int = 0;
     int operand_pb_int, operand_pa_int = 0;
 
+    // Loading the object file (aka the program) to memory
     for (unsigned int i = 0 ; i < p_object_vec.size(); i++ ) {
 
         data_vec=p_object_vec[i];
@@ -93,6 +95,7 @@ int sc_main(int argc, char* argv[]) {
 
         address_vec = tokens[1];
         address_int = stoi(tokens[0]);
+        pcs.push_back(address_int);
         stringstream address_sstream;
         address_sstream << "0x" << hex << address_int;
         string adress_hex = address_sstream.str();
@@ -104,19 +107,19 @@ int sc_main(int argc, char* argv[]) {
         operand_pa_vec=tokens[2].substr(0,6);
 
 
-        cout << "data_vec: " << data_vec << endl;
+//        cout << "data_vec: " << data_vec << endl;
+//
+//        cout << "address_vec: " << address_int << endl;
+//        cout << "address_int: " << address_int << endl;
+//
+//        cout << "address_hex: " << adress_hex << endl;
+//
+//        cout << "opcode_vec: " << opcode_vec << endl;
+//        cout <<"opcode_int: "<< opcode_int << endl;
 
-        cout << "address_vec: " << address_int << endl;
-        cout << "address_int: " << address_int << endl;
 
-        cout << "address_hex: " << adress_hex << endl;
-
-        cout << "opcode_vec: " << opcode_vec << endl;
-        cout <<"opcode_int: "<< opcode_int << endl;
-
-
-        cout << "operand_vec pa : " << operand_pa_vec << endl;
-        cout << "operand_vec pb : " << operand_pb_vec << endl;
+//        cout << "operand_vec pa : " << operand_pa_vec << endl;
+//        cout << "operand_vec pb : " << operand_pb_vec << endl;
 
 
         if (operand_pb_vec!=dont_care){
@@ -125,8 +128,8 @@ int sc_main(int argc, char* argv[]) {
             operand_pa_int=stoi(operand_pa_vec, nullptr, 2);
             operand_pb_int=stoi(operand_pb_vec, nullptr, 2);
 
-            cout << "operand_pa_int 1: " <<  operand_pa_int << endl;
-            cout << "operand_pb_int 1: " <<  operand_pb_int << endl;
+//            cout << "operand_pa_int 1: " <<  operand_pa_int << endl;
+//            cout << "operand_pb_int 1: " <<  operand_pb_int << endl;
 
 
             stringstream operand_pa_sstream;
@@ -137,15 +140,20 @@ int sc_main(int argc, char* argv[]) {
             string operand_pb_hex = operand_pb_sstream.str();
 
 
-            cout << "operand_pa_hex 1: " <<  operand_pa_hex << endl;
-            cout << "operand_pb_hex 1: " <<  operand_pb_hex << endl;
+//            cout << "operand_pa_hex 1: " <<  operand_pa_hex << endl;
+//            cout << "operand_pb_hex 1: " <<  operand_pb_hex << endl;
+
+
+
 
             sc_start(ps_clk, SC_PS);
             rw = 1;
             enable = 1;
+
             address.write(address_int);
             data.write(opcode_int);
 
+            write_count++;
 
 
             ps_clk=5;
@@ -156,6 +164,7 @@ int sc_main(int argc, char* argv[]) {
             address.write(address_int);
             data.write(operand_pa_int);
 
+            write_count++;
 
 
             ps_clk=5;
@@ -167,14 +176,14 @@ int sc_main(int argc, char* argv[]) {
             data.write(operand_pb_int);
 
             ps_clk=5;
-
+            write_count++;
 
         }
         if (operand_pb_vec==dont_care){
 
             operand_pa_int=stoi(operand_pa_vec, nullptr, 2);
 
-            cout << "operand_pa_int 2: " <<  operand_pa_int << endl;
+//            cout << "operand_pa_int 2: " <<  operand_pa_int << endl;
 
             stringstream operand_pa_sstream;
 
@@ -182,7 +191,7 @@ int sc_main(int argc, char* argv[]) {
             string operand_pa_hex = operand_pa_sstream.str();
 
 
-            cout << "operand_pa_hex 2: " <<  operand_pa_hex << endl;
+//            cout << "operand_pa_hex 2: " <<  operand_pa_hex << endl;
 
             sc_start(ps_clk, SC_PS);
             rw = 1;
@@ -190,7 +199,7 @@ int sc_main(int argc, char* argv[]) {
             address.write(address_int);
             data.write(opcode_int);
 
-
+            write_count++;
 
             ps_clk=5;
             address_int++;
@@ -201,11 +210,36 @@ int sc_main(int argc, char* argv[]) {
             data.write(operand_pa_int);
             ps_clk=5;
 
+            write_count++;
 
         }
 
-
     }
+
+
+    // Here is the vector with the allowed instruction addresses
+    for ( int k = pcs[0]; k < write_count; ++k) {
+        cout << "pcs: " << pcs[k] << endl;
+
+        ps_clk=5;
+        sc_start(ps_clk, SC_PS);
+        rw      = 0;
+        address=k;
+
+        cout << "k: " << k << endl;
+//        ps_clk=5;
+//        sc_start(ps_clk, SC_PS);
+//            sc_start(5, SC_PS);
+//    enable  = 0;
+//  sc_start(5, SC_PS);
+    }
+    sc_start(5, SC_PS);
+    enable  = 0;
+    sc_start(5, SC_PS);
+    //    Program execution
+
+
+
 
 //    sc_start(5, SC_PS);
 //    enable  = 0;
@@ -220,36 +254,39 @@ int sc_main(int argc, char* argv[]) {
 //    address.write(0x8);
 //    data.write(0x3F);
 //    sc_start(5, SC_PS);
-    ps_clk=5;
-    sc_start(ps_clk, SC_PS);
-    rw      = 0;
-    address_int++;
-    ps_clk=5;
-    sc_start(ps_clk, SC_PS);
-    rw      = 0;
-    ps_clk=5;
-    address_int++;
-    sc_start(ps_clk, SC_PS);
-    rw      = 0;
-    ps_clk=5;
-    address_int++;
-    sc_start(ps_clk, SC_PS);
-    rw      = 0;
-    ps_clk=5;
-    address_int++;
-    sc_start(ps_clk, SC_PS);
-    rw      = 0;
-    ps_clk=5;
-    address_int++;
-    sc_start(ps_clk, SC_PS);
-    rw      = 0;
-    ps_clk=5;
-    address_int++;
-    sc_start(ps_clk, SC_PS);
-    rw      = 0;
-    ps_clk=5;
-    address_int++;
-    sc_start(ps_clk, SC_PS);
+//    ps_clk=5;
+//    sc_start(ps_clk, SC_PS);
+//    rw      = 0;
+//    address=address_int++;
+//    ps_clk=5;
+//    sc_start(ps_clk, SC_PS);
+//    rw      = 0;
+//    ps_clk=5;
+//    address=address_int++;
+//    sc_start(ps_clk, SC_PS);
+//    rw      = 0;
+//    ps_clk=5;
+//    address=address_int++;
+//    sc_start(ps_clk, SC_PS);
+//    rw      = 0;
+//    ps_clk=5;
+//    address=address_int++;
+//    sc_start(ps_clk, SC_PS);
+//    rw      = 0;
+//    ps_clk=5;
+//    address=address_int++;
+//    sc_start(ps_clk, SC_PS);
+//    rw      = 0;
+//    ps_clk=5;
+//    address=address_int++;
+//    sc_start(ps_clk, SC_PS);
+//    rw      = 0;
+//    ps_clk=5;
+//    address=address_int++;
+//    sc_start(ps_clk, SC_PS);
+
+
+
 
 //
 //    rw      = 0;

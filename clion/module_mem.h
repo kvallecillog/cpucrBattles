@@ -48,7 +48,7 @@ SC_MODULE(memory)
         }
         int size=0;
         int mem_word;
-        for (size = 0; size < 255; size++) {
+        for (size = 0; size < MEMORY_H_-1; size++) {
             ramdata[size].write(0x0);
         }
         size = 0;
