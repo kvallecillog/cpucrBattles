@@ -248,10 +248,15 @@ int sc_main(int argc, char* argv[]) {
     int operand;
 
 
-    while (opcode_mem<=38){
+    while(opcode_mem!=38){
 
-        sc_start(ps_clk, SC_PS);
-        rw = 0;
+
+                ps_clk=5;
+                sc_start(ps_clk, SC_PS);
+                rw      = 0;
+//        sc_start(ps_clk, SC_PS);
+//        rw = 0;
+//        enable = 1;
         address=cont_mem;
         cont_mem++;
 
@@ -268,11 +273,8 @@ int sc_main(int argc, char* argv[]) {
             operand = mem_data_dec;
             cout << "operand: " << operand << endl;
         }
-//        for (unsigned int k = 0; k < pc_inst.size(); ++k) {
-//
-//        }
 
-            }
+    }
 
 
 
