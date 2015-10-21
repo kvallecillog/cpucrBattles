@@ -9,6 +9,7 @@
 #include </usr/local/systemc-2.3.1/include/systemc>
 
 #include "module_mem.h"
+#include "definitions_dec.cpp"
 //#include "module_mem.cpp"
 
 // To call basic c++ methods.
@@ -240,40 +241,65 @@ int sc_main(int argc, char* argv[]) {
 
     // Here is the vector with the allowed instruction addresses
 
-    int cont_mem = pcs[0];
-    int cont_oper = 0;
+    int mem_cont = pcs[0];
+    int pc_cont = pcs[0];
+
+    int word_cont = 0;
     int opcode_mem = 0;
+
+    string operand;
+    string mem_data_str;
+
+
     ps_clk=5;
-    int cont_pc = pcs[0];
-    int operand;
+    cout << "YYYYYYYYYYYYYYYY: PCS" << pcs[1] << endl;
+
+    while(mem_cont<=HLT_CTR){
 
 
-    while(opcode_mem!=38){
-
-
-                ps_clk=5;
-                sc_start(ps_clk, SC_PS);
-                rw      = 0;
-//        sc_start(ps_clk, SC_PS);
-//        rw = 0;
-//        enable = 1;
-        address=cont_mem;
-        cont_mem++;
+        sc_start(ps_clk, SC_PS);
+        rw = 0;
+        enable = 1;
+        address=mem_cont;
 
         mem_data_dec = data.read().to_uint();
+        mem_data_str = to_string(mem_data_dec);
 
 
-        if (cont_mem==cont_pc){
-            cont_oper=cont_pc+1;
+        if (mem_cont==pc_cont){
+
             opcode_mem=mem_data_dec;
-            cout << "opcode_mem: " << opcode_mem << endl;
-        }
-        if (cont_mem==cont_oper){
 
-            operand = mem_data_dec;
-            cout << "operand: " << operand << endl;
-        }
+            cout << "opcode_mem XXXXXXXXXXXXXX: " << opcode_mem << endl;
 
+            switch(opcode_mem) {
+
+                /////////////////////////////////////////////////
+                // 1-Instrucciones de direccionamiento INDEDIATO //
+                /////////////////////////////////////////////////
+                // case LDA_INM, ADD_INM, SUB_INM, AND_INM, ORA_INM:
+
+                case LDA_INM:
+                    cout << "LDA_INM opcode: " << opcode_mem << endl;
+                    word_cont = 1;
+                    break;
+
+                case ADD_INM:
+                    cout << "ADD_INM opcode: " << opcode_mem << endl;
+                    word_cont = 1;
+                    break;
+
+            }
+        }
+        else{
+
+            while((word_cont>0) && (word_cont<=2)) {
+                word_cont--;
+                operand += mem_data_str;
+                cout << "operand: " << operand << endl;
+            }
+        }
+        mem_cont++;
     }
 
 
