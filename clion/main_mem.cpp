@@ -107,6 +107,7 @@ int sc_main(int argc, char* argv[]) {
         address_vec = tokens[1];
         address_int = stoi(tokens[0]);
         pcs.push_back(address_int);
+        cout << "PCS" << pcs[0] << endl;
         stringstream address_sstream;
         address_sstream << "0x" << hex << address_int;
         string adress_hex = address_sstream.str();
@@ -154,9 +155,6 @@ int sc_main(int argc, char* argv[]) {
 //            cout << "operand_pa_hex 1: " <<  operand_pa_hex << endl;
 //            cout << "operand_pb_hex 1: " <<  operand_pb_hex << endl;
 
-
-
-
             sc_start(ps_clk, SC_PS);
             rw = 1;
             enable = 1;
@@ -190,18 +188,20 @@ int sc_main(int argc, char* argv[]) {
             write_count++;
 
         }
-        if ((operand_pa_vec==dont_care) || (operand_pb_vec==dont_care)) {
+        else if ((operand_pa_vec==dont_care) && (operand_pb_vec==dont_care)) {
 
-            ps_clk = 5;
-            sc_start(ps_clk, SC_PS);
+
+
             rw = 1;
             enable = 1;
             address.write(address_int);
             data.write(opcode_int);
+            sc_start(ps_clk, SC_PS);
+
 
             write_count++;
         }
-        if ((operand_pa_vec!=dont_care) && (operand_pb_vec == dont_care)) {
+        else if ((operand_pa_vec!=dont_care) && (operand_pb_vec == dont_care)) {
 
             operand_pa_int = stoi(operand_pa_vec, nullptr, 2);
 
@@ -252,19 +252,21 @@ int sc_main(int argc, char* argv[]) {
 
 
     ps_clk=5;
-    cout << "YYYYYYYYYYYYYYYY: PCS" << pcs[1] << endl;
+    cout << "YYYYYYYYYYYYYYYY: PCS: " << pcs[0] << endl; // check why the vector components are failing
+    bool stop = false;
+    while(stop == false){
 
-    while(mem_cont<=HLT_CTR){
-
-
-        sc_start(ps_clk, SC_PS);
         rw = 0;
         enable = 1;
         address=mem_cont;
+        sc_start(ps_clk, SC_PS);
 
+
+        cout << "mem_cont: "<< mem_cont << endl;
         mem_data_dec = data.read().to_uint();
         mem_data_str = to_string(mem_data_dec);
-
+        cout << "mem_data_str: "<< mem_data_str << endl;
+        cout << "pc_cont: " << pc_cont << endl;
 
         if (mem_cont==pc_cont){
 
@@ -280,25 +282,38 @@ int sc_main(int argc, char* argv[]) {
                 // case LDA_INM, ADD_INM, SUB_INM, AND_INM, ORA_INM:
 
                 case LDA_INM:
+
                     cout << "LDA_INM opcode: " << opcode_mem << endl;
                     word_cont = 1;
+                    pc_cont+=2;
                     break;
 
                 case ADD_INM:
+
                     cout << "ADD_INM opcode: " << opcode_mem << endl;
                     word_cont = 1;
+                    pc_cont+=2;
                     break;
+
+                case HLT_CTR:
+                    stop=true;
+                    cout << "HLT_CTR" << opcode_mem << endl;
+                    pc_cont = pc_cont;
 
             }
         }
+
         else{
 
             while((word_cont>0) && (word_cont<=2)) {
                 word_cont--;
                 operand += mem_data_str;
                 cout << "operand: " << operand << endl;
+
             }
+
         }
+
         mem_cont++;
     }
 

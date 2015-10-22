@@ -1,5 +1,5 @@
 $date
-     Oct 21, 2015       13:08:11
+     Oct 21, 2015       21:19:32
 $end
 
 $version
@@ -32,273 +32,42 @@ $end
 #0
 1aaaaa
 1aaaab
-b1 aaaad
+b0 aaaad
 
 #5
 b1 aaaac
-b1000 aaaad
+b111 aaaad
 
 #10
 b10 aaaac
-b1 aaaad
+b10000 aaaad
 
 #15
-b11 aaaac
+b100 aaaac
+b100110 aaaad
+
+#20
+0aaaab
+b0 aaaac
 b0 aaaad
 
 #25
-b100 aaaac
+b1 aaaac
 b111 aaaad
 
 #30
-b101 aaaac
+b10 aaaac
 b10000 aaaad
 
-#40
-b110 aaaac
-b1 aaaad
-
-#45
-b111 aaaac
-b11000 aaaad
-
-#55
-b1000 aaaac
-b111100 aaaad
-
-#60
-b1001 aaaac
-b0 aaaad
-
-#70
-b1010 aaaac
-b101010 aaaad
-
-#75
-b1011 aaaac
-b101000 aaaad
-
-#85
-b1100 aaaac
-b10101 aaaad
-
-#90
-b1101 aaaac
-b1 aaaad
-
-#95
-b1110 aaaac
-b1001 aaaad
-
-#100
-b1111 aaaac
-
-#105
-b10000 aaaac
-b0 aaaad
-
-#115
-b10001 aaaac
-b101010 aaaad
-
-#120
-b10010 aaaac
-b100000 aaaad
-
-#130
-b10011 aaaac
-b10101 aaaad
-
-#135
-b10100 aaaac
-b0 aaaad
-
-#145
-b10101 aaaac
-b111111 aaaad
-
-#150
-b10110 aaaac
-b1 aaaad
-
-#155
-b10111 aaaac
-b0 aaaad
-
-#160
-b11000 aaaac
-
-#165
-b11001 aaaac
-
-#175
-b11010 aaaac
-b111111 aaaad
-
-#180
-b11011 aaaac
-b1 aaaad
-
-#185
-b11100 aaaac
-b1000 aaaad
-
-#190
-b11101 aaaac
-b0 aaaad
-
-#195
-b11110 aaaac
-b100110 aaaad
-
-#200
-0aaaab
-b0 aaaac
-b1 aaaad
-
-#205
-b1 aaaac
-b1000 aaaad
-
-#210
-b10 aaaac
-b1 aaaad
-
-#215
+#35
 b11 aaaac
 b0 aaaad
 
-#220
+#40
 b100 aaaac
-b111 aaaad
-
-#225
-b101 aaaac
-b10000 aaaad
-
-#230
-b110 aaaac
-b1 aaaad
-
-#235
-b111 aaaac
-b11000 aaaad
-
-#240
-b1000 aaaac
-b111100 aaaad
-
-#245
-b1001 aaaac
-b0 aaaad
-
-#250
-b1010 aaaac
-b101010 aaaad
-
-#255
-b1011 aaaac
-b101000 aaaad
-
-#260
-b1100 aaaac
-b10101 aaaad
-
-#265
-b1101 aaaac
-b1 aaaad
-
-#270
-b1110 aaaac
-b1001 aaaad
-
-#275
-b1111 aaaac
-
-#280
-b10000 aaaac
-b0 aaaad
-
-#285
-b10001 aaaac
-b101010 aaaad
-
-#290
-b10010 aaaac
-b100000 aaaad
-
-#295
-b10011 aaaac
-b10101 aaaad
-
-#300
-b10100 aaaac
-b0 aaaad
-
-#305
-b10101 aaaac
-b111111 aaaad
-
-#310
-b10110 aaaac
-b1 aaaad
-
-#315
-b10111 aaaac
-b0 aaaad
-
-#320
-b11000 aaaac
-
-#325
-b11001 aaaac
-
-#330
-b11010 aaaac
-b111111 aaaad
-
-#335
-b11011 aaaac
-b1 aaaad
-
-#340
-b11100 aaaac
-b1000 aaaad
-
-#345
-b11101 aaaac
-b0 aaaad
-
-#350
-b11110 aaaac
 b100110 aaaad
 
-#355
-b11111 aaaac
-b0 aaaad
-
-#360
-b100000 aaaac
-
-#365
-b100001 aaaac
-
-#370
-b100010 aaaac
-
-#375
-b100011 aaaac
-
-#380
-b100100 aaaac
-
-#385
-b100101 aaaac
-
-#390
-b100110 aaaac
-
-#395
+#50
 0aaaaa
 bZZZZZZ aaaad
 
