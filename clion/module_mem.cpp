@@ -16,14 +16,14 @@ using namespace sc_dt;
 void memory::entry()
 {
     if(enable.read() == 1) {
-        cout << "@ " << sc_time_stamp() << endl;
+//        cout << "@ " << sc_time_stamp() << endl;
         if(rw.read() == 1) {            //write
 //            write_count++;
             ramdata[address.read().to_uint()].write( data.read() );
-            cout << "writing data " <<"|[" <<data.read().to_uint() << "]|" << " at " << "|["<< address.read().to_uint() << "]|" << endl;
+            cout << "@ |[" << sc_time_stamp()  << "]| Escritura de datos " <<"|[" <<data.read().to_uint() << "]|" << " en direccion " << "|["<< address.read().to_uint() << "]|" << endl;
         } else {                        //read
             data.write(ramdata[address.read().to_uint()].read());
-            cout << "reading data " <<"|["<< data.read().to_uint()<< "]|" << " at " <<"|["<< address.read().to_uint() << "]|" << endl;
+            cout << "@ |[" << sc_time_stamp()  << "]| Lectura de datos " <<"|["<< data.read().to_uint()<< "]|" << " en direccion " <<"|["<< address.read().to_uint() << "]|" << endl;
         }
     } else {
         data.write("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");

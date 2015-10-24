@@ -26,6 +26,7 @@ int sc_main(int argc, char* argv[]) {
     sc_set_time_resolution(1, SC_PS);
 
     sc_trace_file *wf = sc_create_vcd_trace_file("memory");
+//    wf->set_time_unit(1, SC_NS);
     sc_trace(wf, mem.address, "address");
     sc_trace(wf, mem.data, "data");
     sc_trace(wf, mem.enable, "enable");
@@ -46,14 +47,16 @@ int sc_main(int argc, char* argv[]) {
     mem.address(address);
     mem.enable(enable);
 //    mem.write_count(write_count);
-
     enable  = 0;
     data    = 0;
     address = 0;
     rw      = 0;
+    sc_start(0, SC_PS);
     write_count = 0;
 
-    ifstream  object_file ("../pycharm/file.obj");
+    string file_path;
+    file_path = "../pycharm/file.obj";
+    ifstream  object_file (file_path);
     // // Reading line by line of object file.
     if(!object_file) //Always test the file open.
     {
@@ -61,18 +64,20 @@ int sc_main(int argc, char* argv[]) {
         system("pause");
         return -1;
     }
+
+    cout << "\nPath del archivo del codigo objeto: " << file_path << endl;
+    cout << "\nContenido del archivo del codigo objeto: " << file_path << endl;
     int i = 0 ;
     while(getline(object_file,line)){
-//        cout<< " Read line: " << line << endl;
-        p_object_vec.push_back(line);
-//        cout << " My vec data: " << p_object_vec[i] << endl;
-        i++;
-    }
-    cout << "lines: " << i << endl;
 
-//    int ps_clk = 0;
-    unsigned int mem_data_dec ;
-    mem_data_dec = 0;
+        p_object_vec.push_back(line);
+        i++;
+        cout << line << endl;
+    }
+
+    cout << "Cantidad de instrucciones cargadas: # " << i << endl;
+
+
     string data_vec;
     string data_str;
     string operand_pb_vec;
@@ -80,34 +85,25 @@ int sc_main(int argc, char* argv[]) {
     string opcode_vec;
     string dont_care = "XXXXXX";
     vector<string> tokens;
-//    vector<string> first_line_vec;
+
     vector<int> pcs;
     int ps_clk = 0;
     string address_vec;
     unsigned int address_int = 0;
     int opcode_int = 0;
     int operand_pb_int, operand_pa_int = 0;
-//    string first_line;
-//    int pc_init_int = 0;
-    unsigned int pc_init_uint = 0;
+
+
     // Loading the object file (aka the program) to memory
     for (unsigned int i = 0 ; i < p_object_vec.size(); i++ ) {
 
         data_vec=p_object_vec[i];
-
-//        first_line =p_object_vec[0];
-//        split(first_line_vec, first_line, is_any_of(" "));
-//        pc_init_uint = stoi(first_line_vec[0]);
-
-//        pc_init_uint=pc_init_int.to_uint();
-        cout << "pc_init_uint: " << pc_init_uint << endl;
 
         split(tokens, data_vec, is_any_of(" "));
 
         address_vec = tokens[1];
         address_int = stoi(tokens[0]);
         pcs.push_back(address_int);
-        cout << "PCS" << pcs[0] << endl;
         stringstream address_sstream;
         address_sstream << "0x" << hex << address_int;
         string adress_hex = address_sstream.str();
@@ -119,284 +115,325 @@ int sc_main(int argc, char* argv[]) {
         operand_pa_vec=tokens[2].substr(0,6);
 
 
-//        cout << "data_vec: " << data_vec << endl;
-//
-//        cout << "address_vec: " << address_int << endl;
-//        cout << "address_int: " << address_int << endl;
-//
-//        cout << "address_hex: " << adress_hex << endl;
-//
-//        cout << "opcode_vec: " << opcode_vec << endl;
-//        cout <<"opcode_int: "<< opcode_int << endl;
-
-
-//        cout << "operand_vec pa : " << operand_pa_vec << endl;
-//        cout << "operand_vec pb : " << operand_pb_vec << endl;
-
-
         if ((operand_pa_vec!=dont_care) && (operand_pb_vec!=dont_care)){
 
 
             operand_pa_int=stoi(operand_pa_vec, nullptr, 2);
             operand_pb_int=stoi(operand_pb_vec, nullptr, 2);
 
-//            cout << "operand_pa_int 1: " <<  operand_pa_int << endl;
-//            cout << "operand_pb_int 1: " <<  operand_pb_int << endl;
-
-
-            stringstream operand_pa_sstream;
-            stringstream operand_pb_sstream;
-            operand_pa_sstream << "0x" << hex << operand_pa_int;
-            string operand_pa_hex = operand_pa_sstream.str();
-            operand_pb_sstream << "0x" << hex << operand_pb_int;
-            string operand_pb_hex = operand_pb_sstream.str();
-
-
-//            cout << "operand_pa_hex 1: " <<  operand_pa_hex << endl;
-//            cout << "operand_pb_hex 1: " <<  operand_pb_hex << endl;
-
-            sc_start(ps_clk, SC_PS);
             rw = 1;
             enable = 1;
-
             address.write(address_int);
             data.write(opcode_int);
 
+            sc_start(ps_clk, SC_PS);
             write_count++;
-
-
             ps_clk=5;
             address_int++;
-            sc_start(ps_clk, SC_PS);
+
             rw = 1;
             enable = 1;
             address.write(address_int);
             data.write(operand_pa_int);
 
+            sc_start(ps_clk, SC_PS);
             write_count++;
 
 
             ps_clk=5;
             address_int++;
-            sc_start(ps_clk, SC_PS);
             rw = 1;
             enable = 1;
             address.write(address_int);
             data.write(operand_pb_int);
 
+            sc_start(ps_clk, SC_PS);
             ps_clk=5;
             write_count++;
 
         }
         else if ((operand_pa_vec==dont_care) && (operand_pb_vec==dont_care)) {
 
-
-
+            ps_clk=5;
             rw = 1;
             enable = 1;
             address.write(address_int);
             data.write(opcode_int);
             sc_start(ps_clk, SC_PS);
-
-
+            address_int++;
             write_count++;
+
         }
         else if ((operand_pa_vec!=dont_care) && (operand_pb_vec == dont_care)) {
 
             operand_pa_int = stoi(operand_pa_vec, nullptr, 2);
 
-            //            cout << "operand_pa_int 2: " <<  operand_pa_int << endl;
+            ps_clk=5;
 
-            stringstream operand_pa_sstream;
-
-            operand_pa_sstream << "0x" << hex << operand_pa_int;
-            string operand_pa_hex = operand_pa_sstream.str();
-
-
-            //            cout << "operand_pa_hex 2: " <<  operand_pa_hex << endl;
-
-            sc_start(ps_clk, SC_PS);
             rw = 1;
             enable = 1;
             address.write(address_int);
             data.write(opcode_int);
+            sc_start(ps_clk, SC_PS);
 
             write_count++;
-
-            ps_clk = 5;
             address_int++;
-            sc_start(ps_clk, SC_PS);
+
             rw = 1;
             enable = 1;
             address.write(address_int);
             data.write(operand_pa_int);
-            ps_clk = 5;
+            sc_start(ps_clk, SC_PS);
 
+
+            address_int++;
             write_count++;
 
             }
 
     }
 
+//
+//    unsigned int mem_data_dec ;
+//    mem_data_dec = 0;
+//    // Here is the vector with the allowed instruction addresses
+//
+//    int mem_cont = pcs[0];
+////    int pc_cont = pcs[0];
+//
+//    int word_cont = 0;
+//    int opcode_mem = 0;
+//
+//    string operand;
+//    string mem_data_str;
+//    int A = 0;
+//    int word_1 = 0;
+//    int word_2 = 0;
+//    int oper_cont = 0;
+//
+//    ps_clk=5;
+//
+//    bool stop = false;
+//    bool decode = false;
+////    bool fetch = true;
+//    bool fetched = false;
+//    bool execute = false;
+//
+//    while(stop == false) {
+//
+//        rw = 0;
+//        enable = 1;
+//        address = mem_cont;
+//        sc_start(ps_clk, SC_PS);
+//
+//
+//        mem_data_dec = data.read().to_uint();
+//        mem_data_str = to_string(mem_data_dec);
+//
+//        // Opcode fetch
+//
+////        if (mem_cont == pc_cont){
+////
+////        opcode_mem = mem_data_dec;
+////        mem_cont++;
+////        operand = "";
+////        word_cont = 0;
+////        fetch = true;
+////    }
+//
+//        if(fetched == false){
+//
+//            opcode_mem = mem_data_dec;
+//            fetched = true;
+//
+//        }
+//
+//        if (fetched == true) {
+//
+//
+//            //Decodificador de instrucciones
+//
+//            switch (opcode_mem) {
+//
+//
+//                case LDA_ABS:
+//
+//                    cout << "LDA_ABS decoded: " << opcode_mem << endl;
+//
+//                    word_cont = 3;
+//
+//                    decode = true;
+//
+//                    break;
+//
+//                case LDA_INM:
+//
+//                    cout << "LDA_INM decoded: " << opcode_mem << endl;
+//
+//                    word_cont = 2;
+//
+//                    decode = true;
+//
+//                    break;
+//
+//                case HLT_CTR:
+//
+//                    cout << "HLT_CTR decoded: " << opcode_mem << endl;
+//
+//                    word_cont = 1;
+//
+//                    decode = true;
+//
+//                    break;
+//
+//                default:
+//
+//                    cout << "Error en la decodificacion de instruccion" << endl;
+//
+//                    break;
+//            }
+//        }
+//
+//        // decoding words.
+//
+//        if (fetched == true && decode == true) {
+//
+//            switch (word_cont) {
+//
+//
+//                case 1:
+//
+//                    cout << "1 word instruction: " << opcode_mem << endl;
+//                    mem_cont++;
+//                    execute = true;
+//
+//                    break;
+//
+//
+//                case 2:
+//
+//                    cout << "2 word instruction: " << opcode_mem << endl;
+//
+//                    mem_cont++;
+//
+//                    if(oper_cont == 0){
+//
+//                        oper_cont++;
+//
+//                        fetched = true;
+//
+//                        decode = true;
+//
+//                        execute = false;
+//
+//                    }
+//                    else{
+//
+//                        word_1 = mem_data_dec;
+//
+//                        oper_cont = 0;
+//
+////                        fetched = false;
+//
+//                        decode = false;
+//
+//                        execute = true;
+//                    }
+//
+//                    break;
+//
+//
+////                case 3:
+////
+////                    cout << "2 word instruction: " << opcode_mem << endl;
+////
+////                    if(oper_cont == 0){
+////
+////                        oper_cont++;
+////
+////                        execute = false;
+////
+////                    }
+////                    else if(oper_cont == 1){
+////
+////                        word_1 = mem_data_dec;
+////
+////                        oper_cont++;
+////
+////                        fetch = true;
+////
+////                        decode = true;
+////
+////                        execute = false;
+////
+////                    }
+////                    else if(oper_cont == 2){
+////
+////                        word_2 = mem_data_dec;
+////
+////                        oper_cont = 0;
+////
+////                        fetch = false;
+////
+////                        decode = false;
+////
+////                        execute = true;
+////
+////                    }
+////
+////                    break;
+//            }
+//        }
+//        if (execute == true){
+//
+//            fetched == false;
+//
+//            switch (opcode_mem) {
+//
+//
+//                case LDA_ABS:
+//
+//                    A = word_1 + word_2;
+//                    cout << "A: " << A << endl;
+//                    cout << "LDA_ABS executed: " << opcode_mem << endl;
+//
+//                    break;
+//
+//                case LDA_INM:
+//
+//                    A = word_1;
+//                    cout << "A: " << A << endl;
+//                    cout << "LDA_INM executed: " << opcode_mem << endl;
+//
+//                    break;
+//
+//                case HLT_CTR:
+//
+//                    stop = true;
+//
+//                    cout << "HLT_CTR executed: " << opcode_mem << endl;
+//
+//                    break;
+//
+//                default:
+//
+//                    cout << "Error en la ejecucion de instruccion" << endl;
+//
+//                    break;
+//            }
+//
+//
+//        }
+//
+//
+//
+//
+//    }
+//
+//
 
-    // Here is the vector with the allowed instruction addresses
-
-    int mem_cont = pcs[0];
-    int pc_cont = pcs[0];
-
-    int word_cont = 0;
-    int opcode_mem = 0;
-
-    string operand;
-    string mem_data_str;
-
-
-    ps_clk=5;
-    cout << "YYYYYYYYYYYYYYYY: PCS: " << pcs[0] << endl; // check why the vector components are failing
-    bool stop = false;
-    while(stop == false){
-
-        rw = 0;
-        enable = 1;
-        address=mem_cont;
-        sc_start(ps_clk, SC_PS);
-
-
-        cout << "mem_cont: "<< mem_cont << endl;
-        mem_data_dec = data.read().to_uint();
-        mem_data_str = to_string(mem_data_dec);
-        cout << "mem_data_str: "<< mem_data_str << endl;
-        cout << "pc_cont: " << pc_cont << endl;
-
-        if (mem_cont==pc_cont){
-
-            opcode_mem=mem_data_dec;
-
-            cout << "opcode_mem XXXXXXXXXXXXXX: " << opcode_mem << endl;
-
-            switch(opcode_mem) {
-
-                /////////////////////////////////////////////////
-                // 1-Instrucciones de direccionamiento INDEDIATO //
-                /////////////////////////////////////////////////
-                // case LDA_INM, ADD_INM, SUB_INM, AND_INM, ORA_INM:
-
-                case LDA_INM:
-
-                    cout << "LDA_INM opcode: " << opcode_mem << endl;
-                    word_cont = 1;
-                    pc_cont+=2;
-                    break;
-
-                case ADD_INM:
-
-                    cout << "ADD_INM opcode: " << opcode_mem << endl;
-                    word_cont = 1;
-                    pc_cont+=2;
-                    break;
-
-                case HLT_CTR:
-                    stop=true;
-                    cout << "HLT_CTR" << opcode_mem << endl;
-                    pc_cont = pc_cont;
-
-            }
-        }
-
-        else{
-
-            while((word_cont>0) && (word_cont<=2)) {
-                word_cont--;
-                operand += mem_data_str;
-                cout << "operand: " << operand << endl;
-
-            }
-
-        }
-
-        mem_cont++;
-    }
-
-
-
-
-
-    sc_start(5, SC_PS);
     enable  = 0;
-    sc_start(5, SC_PS);
-    //    Program execution
-
-
-
-
-//    sc_start(5, SC_PS);
-//    enable  = 0;
-//    sc_start(5, SC_PS);
-//
-//    address.write(0x12);
-//    data.write(0x3F);
-//
-//    enable  = 1;
-//    sc_start(5, SC_PS);
-//
-//    address.write(0x8);
-//    data.write(0x3F);
-//    sc_start(5, SC_PS);
-//    ps_clk=5;
-//    sc_start(ps_clk, SC_PS);
-//    rw      = 0;
-//    address=address_int++;
-//    ps_clk=5;
-//    sc_start(ps_clk, SC_PS);
-//    rw      = 0;
-//    ps_clk=5;
-//    address=address_int++;
-//    sc_start(ps_clk, SC_PS);
-//    rw      = 0;
-//    ps_clk=5;
-//    address=address_int++;
-//    sc_start(ps_clk, SC_PS);
-//    rw      = 0;
-//    ps_clk=5;
-//    address=address_int++;
-//    sc_start(ps_clk, SC_PS);
-//    rw      = 0;
-//    ps_clk=5;
-//    address=address_int++;
-//    sc_start(ps_clk, SC_PS);
-//    rw      = 0;
-//    ps_clk=5;
-//    address=address_int++;
-//    sc_start(ps_clk, SC_PS);
-//    rw      = 0;
-//    ps_clk=5;
-//    address=address_int++;
-//    sc_start(ps_clk, SC_PS);
-
-
-
-
-//
-//    rw      = 0;
-//    address = 0x11;
-//    sc_start(5, SC_PS);
-//
-//    rw      = 0;
-//    address = 0x11;
-//    sc_start(5, SC_PS);
-//
-//    rw      = 0;
-//    address = 0x12;
-//    sc_start(5, SC_PS);
-//
-//    address = 0x1;
-//    sc_start(5, SC_PS);
-//
-//    address = 0x3;
-//    sc_start(5, SC_PS);
-//
-//    enable  = 0;
-//    sc_start(1, SC_PS);
+   sc_start(ps_clk, SC_PS);
 
     mem.memdump();
     sc_close_vcd_trace_file(wf);
