@@ -114,7 +114,7 @@ int sc_main(int argc, char* argv[]) {
         operand_pb_vec=tokens[2].substr(6,6);
         operand_pa_vec=tokens[2].substr(0,6);
 
-
+        // Escritura en memoria de instrucciones con 3 palabras.
         if ((operand_pa_vec!=dont_care) && (operand_pb_vec!=dont_care)){
 
 
@@ -125,33 +125,32 @@ int sc_main(int argc, char* argv[]) {
             enable = 1;
             address.write(address_int);
             data.write(opcode_int);
-
             sc_start(ps_clk, SC_PS);
             write_count++;
-            ps_clk=5;
             address_int++;
 
+            ps_clk=5;
             rw = 1;
             enable = 1;
             address.write(address_int);
             data.write(operand_pa_int);
-
             sc_start(ps_clk, SC_PS);
             write_count++;
-
+            address_int++;
 
             ps_clk=5;
-            address_int++;
             rw = 1;
             enable = 1;
             address.write(address_int);
             data.write(operand_pb_int);
-
             sc_start(ps_clk, SC_PS);
-            ps_clk=5;
             write_count++;
+            address_int++;
 
         }
+
+
+            // Escritura en memoria de instrucciones de 1 palabra.
         else if ((operand_pa_vec==dont_care) && (operand_pb_vec==dont_care)) {
 
             ps_clk=5;
@@ -164,6 +163,7 @@ int sc_main(int argc, char* argv[]) {
             write_count++;
 
         }
+            // Escritura en memoria de instrucciones de 2 palabras.
         else if ((operand_pa_vec!=dont_care) && (operand_pb_vec == dont_care)) {
 
             operand_pa_int = stoi(operand_pa_vec, nullptr, 2);

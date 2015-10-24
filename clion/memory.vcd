@@ -1,5 +1,5 @@
 $date
-     Oct 23, 2015       21:54:24
+     Oct 24, 2015       10:06:41
 $end
 
 $version
@@ -41,63 +41,21 @@ b0 aaaad
 
 #10
 b11 aaaac
-b111 aaaad
+b111111 aaaad
 
 #15
 b100 aaaac
-b0 aaaad
+b1 aaaad
 
 #20
 b101 aaaac
-b111 aaaad
+b1000 aaaad
 
 #25
 b110 aaaac
-b0 aaaad
+b1 aaaad
 
 #30
-b111 aaaac
-b111 aaaad
-
-#35
-b1000 aaaac
-b100110 aaaad
-
-#40
-b1001 aaaac
-
-#45
-b1010 aaaac
-
-#50
-b1011 aaaac
-b0 aaaad
-
-#55
-b1100 aaaac
-b111 aaaad
-
-#60
-b1101 aaaac
-b0 aaaad
-
-#65
-b1110 aaaac
-b111 aaaad
-
-#70
-b1111 aaaac
-b0 aaaad
-
-#75
-b10000 aaaac
-b111 aaaad
-
-#80
-b10001 aaaac
-b100110 aaaad
-
-#85
 0aaaaa
 bZZZZZZ aaaad
 
