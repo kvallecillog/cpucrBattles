@@ -20,6 +20,8 @@ SC_MODULE(memory)
     sc_in < sc_lv <12> >  address;
     sc_in < sc_lv<1> > rw;
     sc_in < sc_lv<1> > enable;
+//    sc_in < sc_lv<6> > asysc;
+
  
     sc_signal< sc_uint<6> > ramdata[MEMORY_H_-1];
  
@@ -29,9 +31,19 @@ SC_MODULE(memory)
     {
         FILE *fp = fopen("memdump","w");
         int size;
+        fprintf(fp, "--------------\n");
+        fprintf(fp, "|Address|Data|\n");
+        fprintf(fp, "--------------\n");
         for (size = 0; size < MEMORY_H_-1; size++) {
-            fprintf(fp, "0x%d", ramdata[size].read().to_int());
+
+            int data_int = ramdata[size].read().to_int();
+//            stringstream data_int_sstream;
+//            stringstream size_int_sstream;
+//            data_int_sstream <<  oct << data_int;
+//            string data_ = data_int_sstream.str();
+            fprintf(fp, "|@%.4o|::|@%.2o|\n", size, data_int);
         }
+        fprintf(fp, "--------------\n");
     }
  
     SC_CTOR(memory)

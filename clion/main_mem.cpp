@@ -36,6 +36,21 @@ int sc_main(int argc, char* argv[]) {
     sc_signal < sc_lv<1> > rw;
     sc_signal < sc_lv <6> > data;
     sc_signal < sc_lv <12> > address;
+
+    sc_signal < sc_lv <6> > asysc;
+    sc_signal < sc_lv <6> > mem_data_SysC;
+    sc_signal < sc_lv <6> > word_1_SysC;
+    sc_signal < sc_lv <6> > word_2_SysC;
+    int A = 0;
+    int word_1 = 0;
+    int word_2 = 0;
+
+    sc_trace(wf, A, "A");
+    sc_trace(wf, word_1, "word_1");
+    sc_trace(wf, word_1, "word_1");
+    sc_trace(wf, asysc, "asysc");
+    sc_trace(wf, word_1_SysC, "word_1_SysC");
+    sc_trace(wf, word_2_SysC, "word_2_SysC");
     int write_count;
 
     string line ;
@@ -46,11 +61,18 @@ int sc_main(int argc, char* argv[]) {
     mem.data(data);
     mem.address(address);
     mem.enable(enable);
-//    mem.write_count(write_count);
+//    mem.asysc(asysc);
+
+
     enable  = 0;
     data    = 0;
     address = 0;
     rw      = 0;
+
+    asysc = 0;
+    word_1_SysC = 0;
+    word_2_SysC = 0;
+
     sc_start(0, SC_PS);
     write_count = 0;
 
@@ -104,9 +126,6 @@ int sc_main(int argc, char* argv[]) {
         address_vec = tokens[1];
         address_int = stoi(tokens[0]);
         pcs.push_back(address_int);
-        stringstream address_sstream;
-        address_sstream << "0x" << hex << address_int;
-        string adress_hex = address_sstream.str();
 
         opcode_vec = tokens[1];
         opcode_int = stoi(tokens[1], nullptr, 2);
@@ -121,6 +140,7 @@ int sc_main(int argc, char* argv[]) {
             operand_pa_int=stoi(operand_pa_vec, nullptr, 2);
             operand_pb_int=stoi(operand_pb_vec, nullptr, 2);
 
+            ps_clk=5;
             rw = 1;
             enable = 1;
             address.write(address_int);
@@ -129,7 +149,6 @@ int sc_main(int argc, char* argv[]) {
             write_count++;
             address_int++;
 
-            ps_clk=5;
             rw = 1;
             enable = 1;
             address.write(address_int);
@@ -138,7 +157,6 @@ int sc_main(int argc, char* argv[]) {
             write_count++;
             address_int++;
 
-            ps_clk=5;
             rw = 1;
             enable = 1;
             address.write(address_int);
@@ -169,13 +187,11 @@ int sc_main(int argc, char* argv[]) {
             operand_pa_int = stoi(operand_pa_vec, nullptr, 2);
 
             ps_clk=5;
-
             rw = 1;
             enable = 1;
             address.write(address_int);
             data.write(opcode_int);
             sc_start(ps_clk, SC_PS);
-
             write_count++;
             address_int++;
 
@@ -184,8 +200,6 @@ int sc_main(int argc, char* argv[]) {
             address.write(address_int);
             data.write(operand_pa_int);
             sc_start(ps_clk, SC_PS);
-
-
             address_int++;
             write_count++;
 
@@ -193,244 +207,308 @@ int sc_main(int argc, char* argv[]) {
 
     }
 
-//
-//    unsigned int mem_data_dec ;
-//    mem_data_dec = 0;
-//    // Here is the vector with the allowed instruction addresses
-//
-//    int mem_cont = pcs[0];
-////    int pc_cont = pcs[0];
-//
-//    int word_cont = 0;
-//    int opcode_mem = 0;
-//
-//    string operand;
-//    string mem_data_str;
-//    int A = 0;
-//    int word_1 = 0;
-//    int word_2 = 0;
-//    int oper_cont = 0;
-//
-//    ps_clk=5;
-//
-//    bool stop = false;
-//    bool decode = false;
-////    bool fetch = true;
-//    bool fetched = false;
-//    bool execute = false;
-//
-//    while(stop == false) {
-//
-//        rw = 0;
-//        enable = 1;
-//        address = mem_cont;
-//        sc_start(ps_clk, SC_PS);
-//
-//
-//        mem_data_dec = data.read().to_uint();
-//        mem_data_str = to_string(mem_data_dec);
-//
-//        // Opcode fetch
-//
-////        if (mem_cont == pc_cont){
-////
-////        opcode_mem = mem_data_dec;
-////        mem_cont++;
-////        operand = "";
-////        word_cont = 0;
-////        fetch = true;
-////    }
-//
-//        if(fetched == false){
-//
-//            opcode_mem = mem_data_dec;
-//            fetched = true;
-//
-//        }
-//
-//        if (fetched == true) {
-//
-//
-//            //Decodificador de instrucciones
-//
-//            switch (opcode_mem) {
-//
-//
-//                case LDA_ABS:
-//
-//                    cout << "LDA_ABS decoded: " << opcode_mem << endl;
-//
-//                    word_cont = 3;
-//
-//                    decode = true;
-//
-//                    break;
-//
-//                case LDA_INM:
-//
-//                    cout << "LDA_INM decoded: " << opcode_mem << endl;
-//
-//                    word_cont = 2;
-//
-//                    decode = true;
-//
-//                    break;
-//
-//                case HLT_CTR:
-//
-//                    cout << "HLT_CTR decoded: " << opcode_mem << endl;
-//
-//                    word_cont = 1;
-//
-//                    decode = true;
-//
-//                    break;
-//
-//                default:
-//
-//                    cout << "Error en la decodificacion de instruccion" << endl;
-//
-//                    break;
-//            }
-//        }
-//
-//        // decoding words.
-//
-//        if (fetched == true && decode == true) {
-//
-//            switch (word_cont) {
-//
-//
-//                case 1:
-//
-//                    cout << "1 word instruction: " << opcode_mem << endl;
-//                    mem_cont++;
-//                    execute = true;
-//
-//                    break;
-//
-//
-//                case 2:
-//
-//                    cout << "2 word instruction: " << opcode_mem << endl;
-//
-//                    mem_cont++;
-//
-//                    if(oper_cont == 0){
-//
-//                        oper_cont++;
-//
-//                        fetched = true;
-//
-//                        decode = true;
-//
-//                        execute = false;
-//
-//                    }
-//                    else{
-//
-//                        word_1 = mem_data_dec;
-//
-//                        oper_cont = 0;
-//
-////                        fetched = false;
-//
-//                        decode = false;
-//
-//                        execute = true;
-//                    }
-//
-//                    break;
-//
-//
-////                case 3:
-////
-////                    cout << "2 word instruction: " << opcode_mem << endl;
-////
-////                    if(oper_cont == 0){
-////
-////                        oper_cont++;
-////
-////                        execute = false;
-////
-////                    }
-////                    else if(oper_cont == 1){
-////
-////                        word_1 = mem_data_dec;
-////
-////                        oper_cont++;
-////
-////                        fetch = true;
-////
-////                        decode = true;
-////
-////                        execute = false;
-////
-////                    }
-////                    else if(oper_cont == 2){
-////
-////                        word_2 = mem_data_dec;
-////
-////                        oper_cont = 0;
-////
-////                        fetch = false;
-////
-////                        decode = false;
-////
-////                        execute = true;
-////
-////                    }
-////
-////                    break;
-//            }
-//        }
-//        if (execute == true){
-//
-//            fetched == false;
-//
-//            switch (opcode_mem) {
-//
-//
-//                case LDA_ABS:
-//
-//                    A = word_1 + word_2;
-//                    cout << "A: " << A << endl;
-//                    cout << "LDA_ABS executed: " << opcode_mem << endl;
-//
-//                    break;
-//
-//                case LDA_INM:
-//
-//                    A = word_1;
-//                    cout << "A: " << A << endl;
-//                    cout << "LDA_INM executed: " << opcode_mem << endl;
-//
-//                    break;
-//
-//                case HLT_CTR:
-//
-//                    stop = true;
-//
-//                    cout << "HLT_CTR executed: " << opcode_mem << endl;
-//
-//                    break;
-//
-//                default:
-//
-//                    cout << "Error en la ejecucion de instruccion" << endl;
-//
-//                    break;
-//            }
-//
-//
-//        }
-//
-//
-//
-//
+
+    unsigned int mem_data_dec ;
+    mem_data_dec = 0;
+    // Here is the vector with the allowed instruction addresses
+
+    int mem_cont = pcs[0];
+//    int pc_cont = pcs[0];
+
+    int word_cont = 0;
+    int opcode_mem = 0;
+
+    string operand;
+    string mem_data_str;
+
+
+    int oper_cont = 0;
+
+    ps_clk=5;
+
+    bool stop = false;
+    bool decode = false;
+    bool fetched = false;
+    bool execute = false;
+
+    while(stop == false) {
+
+        // Leer de memoria.
+        rw = 0;
+        // Habilitar memoria.
+        enable = 1;
+        // Direccion a leer.
+        address = mem_cont;
+        // Ciclo de memoria.
+        sc_start(ps_clk, SC_PS);
+
+        // Datos extraidos, unsigned int.
+        mem_data_dec = data.read().to_uint();
+        mem_data_str = to_string(mem_data_dec);
+
+        // Opcode fetch
+
+//        if (mem_cont == pc_cont){
+//
+//        opcode_mem = mem_data_dec;
+//        mem_cont++;
+//        operand = "";
+//        word_cont = 0;
+//        fetch = true;
 //    }
-//
-//
+
+        if(fetched == false){
+
+            opcode_mem = mem_data_dec;
+            fetched = true;
+
+        }
+
+        if (fetched == true && decode == false) {
+
+
+            //Decodificador de instrucciones
+
+            switch (opcode_mem) {
+
+
+                case LDA_ABS:
+
+                    cout << "LDA_ABS decoded: " << opcode_mem << endl;
+
+                    word_cont = 3;
+
+                    decode = true;
+
+                    break;
+
+                case LDA_INM:
+
+                    cout << "LDA_INM decoded: " << opcode_mem << endl;
+
+                    word_cont = 2;
+
+                    decode = true;
+
+                    break;
+
+                case ADD_INM:
+
+                    cout << "ADD_INM decoded: " << opcode_mem << endl;
+
+                    word_cont = 2;
+
+                    decode = true;
+
+                    break;
+
+                case HLT_CTR:
+
+                    cout << "HLT_CTR decoded: " << opcode_mem << endl;
+
+                    word_cont = 1;
+
+                    decode = true;
+
+                    break;
+
+                default:
+
+                    cout << "Error en la decodificacion de instruccion" << endl;
+
+                    break;
+            }
+        }
+
+        // decoding words.
+
+        if (decode == true) {
+
+            switch (word_cont) {
+
+
+                case 1:
+
+                    cout << "1 word instruction: " << opcode_mem << endl;
+
+                    mem_cont++;
+
+                    execute = true;
+
+                    break;
+
+
+                case 2:
+
+                    cout << "2 word instruction: " << opcode_mem << endl;
+
+                    mem_cont++;
+
+                    if(oper_cont == 0){
+
+                        oper_cont++;
+
+                        decode = true;
+
+                        execute = false;
+
+                    }
+                    else{
+
+                        word_1 = mem_data_dec;
+
+                        word_1_SysC = word_1;
+
+                        cout << "word_1: " << word_1 << endl;
+                        cout << "word_1_SysC: " << word_1_SysC << endl;
+
+                        oper_cont = 0;
+
+                        decode = false;
+
+                        execute = true;
+                    }
+
+                    break;
+
+
+                case 3:
+
+                    cout << "3 word instruction: " << opcode_mem << endl;
+
+                    mem_cont++;
+
+                    if(oper_cont == 0){
+
+                        oper_cont++;
+
+                        decode = true;
+
+                        execute = false;
+
+                    }
+                    else if(oper_cont == 1){
+
+                        word_1 = mem_data_dec;
+                        word_1_SysC = word_1;
+                        oper_cont++;
+
+                        decode = true;
+
+                        execute = false;
+
+                    }
+                    else if(oper_cont == 2){
+
+                        word_2 = mem_data_dec;
+                        word_2_SysC = word_2;
+                        oper_cont = 0;
+
+                        decode = true;
+
+                        execute = true;
+
+                    }
+
+                    break;
+            }
+        }
+        if (execute == true){
+
+//            asysc = 0;
+//            word_1_SysC = 0;
+//            word_2_SysC = 0;
+
+            switch (opcode_mem) {
+
+
+                case LDA_ABS:
+
+                    cout << "LDA_ABS executed: " << opcode_mem << endl;
+                    A = word_1 + word_2;
+                    //asysc = word_1_SysC;
+                    cout << "word_1: " << word_1 << endl;
+
+                    cout << "word_2: " << word_2 << endl;
+
+                    cout << "A: " << A << endl;
+
+                    fetched = false;
+
+                    decode = false;
+
+                    break;
+
+                case LDA_INM:
+
+                    cout << "LDA_INM executed: " << opcode_mem << endl;
+                    A = word_1;
+                    word_1_SysC = word_1;
+                    asysc =word_1;
+                    //asysc = word_1_SysC;
+                    cout << "asysc: " << asysc << endl;
+
+                    asysc = A;
+                    cout << "asysc=A: " << asysc << endl;
+
+                    cout << "word_1_SysC: " << word_1_SysC << endl;
+                    cout << "A: " << A << endl;
+
+                    fetched = false;
+
+                    decode = false;
+
+                    break;
+
+                case ADD_INM:
+
+                    cout << "ADD_INM executed: " << opcode_mem << endl;
+                    A += word_1;
+                    word_1_SysC = word_1;
+                    asysc =word_1;
+                    cout << "asysc: " << asysc << endl;
+
+                    asysc = A;
+                    cout << "asysc=A: " << asysc << endl;
+                    cout << "word_1_SysC: " << word_1_SysC << endl;
+                    cout << "A: " << A << endl;
+
+                    fetched = false;
+
+                    decode = false;
+
+                    break;
+
+                case HLT_CTR:
+
+                    cout << "HLT_CTR executed: " << opcode_mem << endl;
+
+                    stop = true;
+
+                    cout << "stop: " << stop << endl;
+
+                    fetched = false;
+
+                    decode = false;
+
+                    break;
+
+                default:
+
+                    cout << "Error en la ejecucion de instruccion" << endl;
+
+                    break;
+            }
+
+
+        }
+
+
+
+
+    }
+
+
 
     enable  = 0;
    sc_start(ps_clk, SC_PS);

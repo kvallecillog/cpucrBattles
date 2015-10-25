@@ -1,5 +1,5 @@
 $date
-     Oct 24, 2015       10:06:41
+     Oct 24, 2015       21:52:49
 $end
 
 $version
@@ -11,10 +11,16 @@ $timescale
 $end
 
 $scope module SystemC $end
-$var wire    1  aaaaa  enable       $end
-$var wire    1  aaaab  rw       $end
-$var wire   12  aaaac  address [11:0]  $end
-$var wire    6  aaaad  data [5:0]  $end
+$var wire   32  aaaaa  A [31:0]  $end
+$var wire   32  aaaab  word_1 [31:0]  $end
+$var wire   32  aaaac  word_1 [31:0]  $end
+$var wire    6  aaaad  asysc [5:0]  $end
+$var wire    6  aaaae  word_1_SysC [5:0]  $end
+$var wire    6  aaaaf  word_2_SysC [5:0]  $end
+$var wire    1  aaaag  enable       $end
+$var wire    1  aaaah  rw       $end
+$var wire   12  aaaai  address [11:0]  $end
+$var wire    6  aaaaj  data [5:0]  $end
 $upscope $end
 $enddefinitions  $end
 
@@ -23,39 +29,71 @@ All initial values are dumped below at time 0 sec = 0 timescale units.
 $end
 
 $dumpvars
-0aaaaa
-0aaaab
+b0 aaaaa
+b0 aaaab
 b0 aaaac
-bZZZZZZ aaaad
+b0 aaaad
+b0 aaaae
+b0 aaaaf
+0aaaag
+0aaaah
+b0 aaaai
+bZZZZZZ aaaaj
 $end
 
 #0
-1aaaaa
-1aaaab
-b1 aaaac
-b100110 aaaad
+1aaaag
+1aaaah
+b0 aaaaj
 
 #5
-b10 aaaac
-b0 aaaad
+b1 aaaai
+b1 aaaaj
 
 #10
-b11 aaaac
-b111111 aaaad
+b10 aaaai
+b10000 aaaaj
 
 #15
-b100 aaaac
-b1 aaaad
+b11 aaaai
+b10 aaaaj
 
 #20
-b101 aaaac
-b1000 aaaad
+b100 aaaai
+b100110 aaaaj
 
 #25
-b110 aaaac
-b1 aaaad
+0aaaah
+b0 aaaai
+b0 aaaaj
 
 #30
-0aaaaa
-bZZZZZZ aaaad
+b1 aaaai
+b1 aaaaj
+
+#35
+b1 aaaaa
+b1 aaaab
+b1 aaaac
+b1 aaaad
+b1 aaaae
+b10 aaaai
+b10000 aaaaj
+
+#40
+b11 aaaai
+b10 aaaaj
+
+#45
+b11 aaaaa
+b10 aaaab
+b10 aaaac
+b11 aaaad
+b10 aaaae
+b100 aaaai
+b100110 aaaaj
+
+#50
+0aaaag
+bZZZZZZ aaaaj
 
