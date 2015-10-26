@@ -14,21 +14,19 @@ using namespace sc_core;
 
 using namespace sc_dt;
 
-SC_MODULE(memory)
-{
+SC_MODULE(memory){
+
     sc_inout < sc_lv <6> > data;
     sc_in < sc_lv <12> >  address;
     sc_in < sc_lv<1> > rw;
     sc_in < sc_lv<1> > enable;
-//    sc_in < sc_lv<6> > asysc;
+    sc_in <bool> clk;
 
- 
     sc_signal< sc_uint<6> > ramdata[MEMORY_H_-1];
  
     void entry();
- 
-    void memdump()
-    {
+
+    void memdump(){
         FILE *fp = fopen("memdump","w");
         int size;
         fprintf(fp, "--------------\n");
@@ -37,22 +35,21 @@ SC_MODULE(memory)
         for (size = 0; size < MEMORY_H_-1; size++) {
 
             int data_int = ramdata[size].read().to_int();
-//            stringstream data_int_sstream;
-//            stringstream size_int_sstream;
-//            data_int_sstream <<  oct << data_int;
-//            string data_ = data_int_sstream.str();
+
             fprintf(fp, "|@%.4o|::|@%.2o|\n", size, data_int);
+            fprintf(fp, "--------------\n");
         }
-        fprintf(fp, "--------------\n");
+//        fprintf(fp, "--------------\n");
     }
- 
-    SC_CTOR(memory)
-    {
+
+    SC_CTOR(memory){
+
         SC_METHOD(entry);
-        sensitive << enable << rw << address ;
-        
+
+//        sensitive << enable << rw << address ;
+        sensitive << clk << enable << rw << address ;
         FILE *fp ;
-        
+
         fp = fopen("ram_init.txt","r");
         if(!fp)
         {
@@ -61,6 +58,7 @@ SC_MODULE(memory)
         int size=0;
         int mem_word;
         for (size = 0; size < MEMORY_H_-1; size++) {
+            // Cambiar a numero randomw
             ramdata[size].write(0x0);
         }
         size = 0;
