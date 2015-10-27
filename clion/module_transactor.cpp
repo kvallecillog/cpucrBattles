@@ -43,7 +43,7 @@ vector <string> transactor::get_obj_file() {
     {
         cout << "Error opening output file" << endl;
         system("pause");
-//        return -1;
+    //        return -1;
     }
 
     cout << "\nPath del archivo del codigo objeto: " << file_path << endl;
@@ -64,33 +64,31 @@ vector <string> transactor::get_obj_file() {
 
 /**
 *load_obj_file(): Descompone la instruccion en opcode y argumento, luego carga cada palabra de instruccion la posicion
- * de memoria asignada por el PC..
+ * de memoria asignada por el PC.
 */
 void transactor::load_obj_file() {
 
+
     vector <string> p_object_vec = get_obj_file();
 
-//    mem.rw(rw);
-//    mem.data(data);
-//    mem.address(address);
-//    mem.enable(enable);
+    //vector <string> p_object_vec = "0 000000 000001XXXXXX";
+
+    vector <string> tokens;
+    vector <int> pcs;
 
     string data_vec;
-    string data_str;
     string operand_pb_vec;
     string operand_pa_vec;
     string opcode_vec;
     string dont_care = "XXXXXX";
-    vector <string> tokens;
-    //vector <string> p_object_vec;
-    int write_count = 0;
-    vector<int> pcs;
-    int ns_clk = 0;
     string address_vec;
-    unsigned int address_int = 0;
+
     int opcode_int = 0;
     int operand_pb_int, operand_pa_int = 0;
-    sc_start(0, SC_NS);
+    int write_count = 0;
+    int ns_clk = 0;
+    unsigned int address_int = 0;
+
     // Cargando el programa objeto a memoria.
 
     for (unsigned int i = 0; i < p_object_vec.size(); i++) {
@@ -118,33 +116,29 @@ void transactor::load_obj_file() {
 
             ns_clk = 20;
 
-//            word_load(ns_clk);
-//            rw = 1;
-//            enable = 1;
-//            address.write(address_int);
-//            data.write(opcode_int);
-//            sc_start(ns_clk, SC_NS);
-//            //wait(1,SC_NS);
-//            write_count++;
-//            address_int++;
+            rw_trans.write(1);
+            enable_trans.write(1);
+            address_trans.write(address_int);
+            data_trans.write(opcode_int);
+            sc_start(ns_clk, SC_NS);
+            write_count++;
+            address_int++;
 
-//            word_load(ns_clk);
-//            rw = 1;
-//            enable = 1;
-//            address.write(address_int);
-//            data.write(operand_pa_int);
-//            sc_start(ns_clk, SC_NS);
-//            write_count++;
-//            address_int++;
+            rw_trans.write(1);
+            enable_trans.write(1);
+            address_trans.write(address_int);
+            data_trans.write(operand_pa_int);
+            sc_start(ns_clk, SC_NS);
+            write_count++;
+            address_int++;
 
-//            word_load(ns_clk);
-//            rw = 1;
-//            enable = 1;
-//            address.write(address_int);
-//            data.write(operand_pb_int);
-//            sc_start(ns_clk, SC_NS);
-//            write_count++;
-//            address_int++;
+            rw_trans.write(1);
+            enable_trans.write(1);
+            address_trans.write(address_int);
+            data_trans.write(operand_pb_int);
+            sc_start(ns_clk, SC_NS);
+            write_count++;
+            address_int++;
 
         }
 
@@ -153,11 +147,11 @@ void transactor::load_obj_file() {
         else if ((operand_pa_vec == dont_care) && (operand_pb_vec == dont_care)) {
             cout << "LOADING" <<endl;
             ns_clk = 20;
-//            word_load(ns_clk);
-            rw = 1;
-            enable = 1;
-            address.write(address_int);
-            data.write(opcode_int);
+
+            rw_trans.write(1);
+            enable_trans.write(1);
+            address_trans.write(address_int);
+            data_trans.write(opcode_int);
             sc_start(ns_clk, SC_NS);
             address_int++;
             write_count++;
@@ -170,29 +164,26 @@ void transactor::load_obj_file() {
 
             ns_clk = 20;
 
-//            word_load(ns_clk);
-//            rw = 1;
-//            enable = 1;
-//            address.write(address_int);
-//            data.write(opcode_int);
-//            sc_start(ns_clk, SC_NS);
-//            write_count++;
-//            address_int++;
 
+            rw_trans.write(1);
+            enable_trans.write(1);
+            address_trans.write(address_int);
+            data_trans.write(opcode_int);
+            sc_start(ns_clk, SC_NS);
+            write_count++;
+            address_int++;
 
-//            word_load(ns_clk);
-//            rw = 1;
-//            enable = 1;
-//            address.write(address_int);
-//            data.write(operand_pa_int);
-//            sc_start(ns_clk, SC_NS);
-//            address_int++;
-//            write_count++;
+            rw_trans.write(1);
+            enable_trans.write(1);
+            address_trans.write(address_int);
+            data_trans.write(operand_pa_int);
+            sc_start(ns_clk, SC_NS);
+            address_int++;
+            write_count++;
 
         }
 
     }
-    sc_stop();
 
 }
 //
@@ -217,9 +208,9 @@ void transactor::load_obj_file() {
 //}
 //
 
-void transactor::inst_exec() {
-
-    cout << "Ejecutor" << endl;
+//void transactor::inst_exec() {
+//
+//    cout << "Ejecutor" << endl;
 //    unsigned int mem_data_dec;
 //    mem_data_dec = 0;
 //
@@ -528,4 +519,4 @@ void transactor::inst_exec() {
 //
 //
 //    }
-}
+//}

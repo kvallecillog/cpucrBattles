@@ -16,30 +16,33 @@ using namespace sc_dt;
 
 SC_MODULE(transactor){
 
-
-        sc_out < sc_lv <6> > data;
-        sc_out < sc_lv <12> > address;
-        sc_out < sc_lv<1> > rw;
-        sc_out < sc_lv<1> > enable;
-        sc_in <bool> clk;
-
+        // Port declarations
+        sc_inout < sc_lv <6> > data_trans;
+        sc_out < sc_lv <12> > address_trans;
+        sc_out < sc_lv<1> > rw_trans;
+        sc_out < sc_lv<1> > enable_trans;
+        sc_in_clk  clk_trans;
 
         vector <string> get_obj_file();
         void load_obj_file();
-        void inst_exec();
+        //void inst_exec();
 
 //        void word_load(int );
 
         SC_CTOR(transactor){
 
+
         //   SC_METHOD(get_obj_file);
+            //
             SC_METHOD(load_obj_file);
+            // Lista de sensitivad del proceso load_obj_file.
+            sensitive << clk_trans;
 //            SC_METHOD(word_load);
 //            SC_METHOD(inst_exec);
 
 
-        sensitive << clk ;
-
+//        sensitive << address << data_out << rw << enable ;
+        //sensitive << clk_trans;
         }
 };
 
