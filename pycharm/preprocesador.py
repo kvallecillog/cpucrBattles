@@ -890,7 +890,7 @@ def instruction_checker(fi_list, lines_raw_list):
 
     object_file_name = 'file.obj'
     object_file = open(object_file_name, 'w+')
-    base = 16
+    base = 10
 
     cont_pos = 0
     dont_care = "XXXXXX"
@@ -965,6 +965,12 @@ def int_2_base(number, base):
         # print(number_oct)
         return number_oct
 
+    elif base == 10:
+
+        number_dec = int(number,2)
+        # print(number_hex)
+        return number_dec
+
     elif base == 16:
 
         number_hex = hex(int(number,2))
@@ -985,6 +991,12 @@ def address_2_base(number, base):
         number_oct = oct(int(number))
         # print(number_oct)
         return number_oct
+
+    elif base == 10:
+
+        number_dec = int(number)
+        # print(number_hex)
+        return number_dec
 
     elif base == 16:
 

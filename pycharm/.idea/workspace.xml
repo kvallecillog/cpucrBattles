@@ -11,21 +11,7 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e884eca-5d13-4def-8528-72d310f45b6b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/cpucr_battles.x" afterPath="$PROJECT_DIR$/../clion/cpucr_battles.x" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/main_mem.o" afterPath="$PROJECT_DIR$/../clion/main_mem.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_cpucr.o" afterPath="$PROJECT_DIR$/../clion/module_cpucr.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_mem.o" afterPath="$PROJECT_DIR$/../clion/module_mem.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.o" afterPath="$PROJECT_DIR$/../clion/module_transactor.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/main_mem.cpp" afterPath="$PROJECT_DIR$/../clion/main_mem.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_cpucr.cpp" afterPath="$PROJECT_DIR$/../clion/module_cpucr.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_cpucr.h" afterPath="$PROJECT_DIR$/../clion/module_cpucr.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_mem.cpp" afterPath="$PROJECT_DIR$/../clion/module_mem.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_mem.h" afterPath="$PROJECT_DIR$/../clion/module_mem.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.cpp" afterPath="$PROJECT_DIR$/../clion/module_transactor.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.h" afterPath="$PROJECT_DIR$/../clion/module_transactor.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" />
-    </list>
+    <list default="true" id="5e884eca-5d13-4def-8528-72d310f45b6b" name="Default" comment="" />
     <ignored path="cpucrBattles.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,8 +44,8 @@
       <file leaf-file-name="preprocesador.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/preprocesador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="16.23844">
-              <caret line="923" column="69" selection-start-line="923" selection-start-column="69" selection-end-line="923" selection-end-column="69" />
+            <state vertical-scroll-proportion="0.33236995">
+              <caret line="996" column="31" selection-start-line="996" selection-start-column="31" selection-end-line="996" selection-end-column="31" />
               <folding>
                 <element signature="e#406#415#0" expanded="true" />
               </folding>
@@ -454,7 +440,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15783842" sideWeight="0.33489463" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39891207" sideWeight="0.49598715" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3173164" sideWeight="0.8287854" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3173164" sideWeight="0.8287854" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31939164" sideWeight="0.6651054" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3173164" sideWeight="0.17121455" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884902" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -901,8 +887,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/preprocesador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="16.23844">
-          <caret line="923" column="69" selection-start-line="923" selection-start-column="69" selection-end-line="923" selection-end-column="69" />
+        <state vertical-scroll-proportion="0.33236995">
+          <caret line="996" column="31" selection-start-line="996" selection-start-column="31" selection-end-line="996" selection-end-column="31" />
           <folding>
             <element signature="e#406#415#0" expanded="true" />
           </folding>
