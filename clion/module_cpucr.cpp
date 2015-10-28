@@ -1,16 +1,11 @@
-#include <iostream>
-using namespace std;
-// System C library.
+
+
 #include </usr/local/systemc-2.3.1/include/systemc>
-
-// memory definitions.
 #include "module_cpucr.h"
+#include <iostream>
 
-// To call basic c++ methods.
 using namespace std;
-// To call boost methods.    
 using namespace sc_core;
-
 using namespace sc_dt;
 
 void cpucr::monitor()

@@ -1,17 +1,28 @@
+//
+// Created by kenneth on 25/10/15.
+//
+
 #include <iostream>
-using namespace std;
+#include <bitset>
+#include <vector>
+#include <boost/algorithm/string.hpp>
+#include <string>
+
  // System C library.
 #include </usr/local/systemc-2.3.1/include/systemc>
 
-// memory definitions.
 #include "module_mem.h"
 
-using namespace std;
-using namespace sc_core;
-using namespace sc_dt;
 
-void memory::entry()
-{
+// To call basic c++ methods.
+using namespace std;
+// To call boost methods.
+using namespace sc_core;
+using namespace boost;
+using namespace sc_dt;
+using namespace boost::algorithm;
+
+void memory::entry(){
     if(enable_mem.read() == 1) {
 
         if(rw_mem.read() == 1) {            //write

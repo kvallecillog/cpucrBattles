@@ -887,110 +887,15 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
 def instruction_checker(fi_list, lines_raw_list):
     # print(fi_list)
-
     object_file_name = 'file.obj'
     object_file = open(object_file_name, 'w+')
-    base = 16
 
-    cont_pos = 0
     dont_care = "XXXXXX"
-    # address_int, write_count, opcode_int, operand_pb_int, operand_pa_int = 0
+    address_int, write_count, opcode_int, operand_pb_int, operand_pa_int = 0
 
     for fi in fi_list:
-
-        tokens = fi.split()
-        address = int(tokens[0])
-        opcode = int_2_base(tokens[1],base)
-        # print("Addres, opcode:", address, opcode)
-        operand = tokens[2]
-        operand_pa = operand[0:6]
-        operand_pb = operand[6:12]
-        # print("Operand,pa,pb", operand, operand_pa, operand_pb)
-        address_pos = address
-
-        if operand_pa != dont_care and operand_pb != dont_care:
-
-            # operand_pa_int = int(operand_pa,2)
-            # operand_pb_int = int(operand_pb,2)
-
-            operand_pa_int = int_2_base(operand_pa,base)
-            operand_pb_int = int_2_base(operand_pb,base)
-
-            mem_data_vec = str(opcode), str(operand_pa_int), str(operand_pb_int)
-
-            for mem_data in mem_data_vec:
-                # print("Address: ", address_pos)
-                mem_address_pos = address_2_base(address_pos, base)
-                obj_line = str(mem_address_pos) + " " + mem_data+"\n"
-                print("Obj line: ", obj_line)
-                object_file.writelines(obj_line)
-                address_pos += 1
-
-        if operand_pa != dont_care and operand_pb == dont_care:
-
-            operand_pa_int = int_2_base(operand_pa, base)
-            mem_data_vec = str(opcode), str(operand_pa_int)
-            address_pos = address
-
-            for mem_data in mem_data_vec:
-                # print("Address: ", address_pos)
-                mem_address_pos = address_2_base(address_pos, base)
-                obj_line = str(mem_address_pos) + " " + mem_data +"\n"
-                print("Obj line: ", obj_line)
-                object_file.writelines(obj_line)
-                address_pos += 1
-
-        if operand_pa == dont_care and operand_pb == dont_care:
-
-            mem_data = str(opcode)
-            mem_address_pos = address_2_base(address_pos, base)
-            obj_line = str(mem_address_pos) + " " + mem_data +"\n"
-            print("Obj line: ", obj_line)
-            object_file.writelines(obj_line)
-            address_pos += 1
-
-
-def int_2_base(number, base):
-
-    if base == 2:
-
-        number_bin = format(int(number, 2), '#08b')[-6:]
-
-        # print(number_bin)
-        return number_bin
-
-    elif base == 8:
-
-        number_oct = oct(int(number,2))
-        # print(number_oct)
-        return number_oct
-
-    elif base == 16:
-
-        number_hex = hex(int(number,2))
-        # print(number_hex)
-        return number_hex
-
-def address_2_base(number, base):
-
-    if base == 2:
-
-        number_bin = format(int(number, 2), '#08b')[-6:]
-
-        # print(number_bin)
-        return number_bin
-
-    elif base == 8:
-
-        number_oct = oct(int(number))
-        # print(number_oct)
-        return number_oct
-
-    elif base == 16:
-
-        number_hex = hex(int(number))
-        # print(number_hex)
-        return number_hex
+        print(fi)
+        print (fi.split(" ", 1))
 
 
 

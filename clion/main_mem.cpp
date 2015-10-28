@@ -1,33 +1,23 @@
-// Basic library c++ set.
 #include <iostream>
 #include <bitset>
 #include <vector>
 #include <boost/algorithm/string.hpp>
 #include <string>
 
-// System C library.
 #include </usr/local/systemc-2.3.1/include/systemc>
 
-#include "module_mem.h"
-#include "module_transactor.h"
 
 #include "module_cpucr.h"
 
 //#include "module_mem.cpp"
 
-// To call basic c++ methods.
 using namespace std;
-// To call boost methods.
 using namespace sc_core;
 using namespace boost;
 using namespace sc_dt;
 using namespace boost::algorithm;
 
 int sc_main(int argc, char* argv[]) {
-
-
-//    executer exec("exec");
-//    accumulator acum("acum");
 
     // Create channels
     sc_signal < sc_lv <1> > enable_ch;
@@ -40,11 +30,11 @@ int sc_main(int argc, char* argv[]) {
     sc_clock clk ("clk", 10 ,  SC_NS, 0.5, 5,SC_NS,false);
 
     // Module instantiations.
-    memory mem("memory");
-    transactor trans("trans");
-
+    cpucr cpucr1("cpucr");
+//    transactor trans("trans");
+//    memory mem("mem");
     // Trace vcd.
-    sc_trace_file *wf = sc_create_vcd_trace_file("CPUCR");
+//    sc_trace_file *wf = sc_create_vcd_trace_file("CPUCR");
 //    sc_trace(wf, address, "address");
 //    sc_trace(wf, data, "data");
 //    sc_trace(wf, enable, "enable");
@@ -60,12 +50,12 @@ int sc_main(int argc, char* argv[]) {
 //    trans.enable_trans(mem.enable_mem);
 //    trans.clk(clk);
 
-    mem.data_mem(trans.data_trans);
-    mem.address_mem(trans.address_trans);
-    mem.rw_mem(trans.rw_trans);
-    mem.enable_mem(trans.enable_trans);
-    mem.clk_mem(clk);
-    trans.clk_trans(clk);
+//    mem.data_mem(trans.data_trans);
+//    mem.address_mem(trans.address_trans);
+//    mem.rw_mem(trans.rw_trans);
+//    mem.enable_mem(trans.enable_trans);
+//    mem.clk_mem(clk);
+//    trans.clk_trans(clk);
 
 //    sc_inout < sc_lv <6> > data_mem;
 //    sc_in < sc_lv <12> >  address_mem;
@@ -83,10 +73,10 @@ int sc_main(int argc, char* argv[]) {
 //    sc_trace(wf, acum.word_2_SysC, "word_2_SysC");
 
 
-    sc_start(100, SC_NS);
+//    sc_start(100, SC_NS);
 //    mem.mem_init();
-    trans.load_obj_file();
-    sc_stop();
+//    trans.load_obj_file();
+//    sc_stop();
 
 //    exec.rw(rw);
 //    exec.data(data);
@@ -103,7 +93,7 @@ int sc_main(int argc, char* argv[]) {
 
     //load.load_obj_file();
 //    mem.memdump();
-    sc_close_vcd_trace_file(wf);
+//    sc_close_vcd_trace_file(wf);
 
     return(0);
 }

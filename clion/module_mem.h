@@ -40,12 +40,12 @@ SC_MODULE(memory){
 ////        fprintf(fp, "--------------\n");
 //    }
 
-    SC_CTOR(memory){
+        SC_CTOR(memory){
 
-        SC_METHOD(entry);
-        sensitive << clk_mem;
+            SC_METHOD(entry);
+            sensitive << clk_mem;
 
-    }
+        }
 };
 
 //        sensitive << enable << rw << address ;

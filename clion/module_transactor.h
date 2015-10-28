@@ -2,9 +2,6 @@
 // Created by kenneth on 25/10/15.
 //
 
-#ifndef CPUCRBATTLES_MODULE_LOADER_H
-#define CPUCRBATTLES_MODULE_LOADER_H
-
 // SystemC library.
 #include </usr/local/systemc-2.3.1/include/systemc>
 // IO c library.
@@ -46,4 +43,4 @@ SC_MODULE(transactor){
         }
 };
 
-#endif //CPUCRBATTLES_MODULE_LOADER_H
+

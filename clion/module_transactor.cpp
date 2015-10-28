@@ -7,16 +7,11 @@
 #include <vector>
 #include <boost/algorithm/string.hpp>
 #include <string>
-
-// System C library.
 #include </usr/local/systemc-2.3.1/include/systemc>
-
 #include "module_transactor.h"
-#include "module_mem.h"
 
-// To call basic c++ methods.
+
 using namespace std;
-// To call boost methods.
 using namespace sc_core;
 using namespace boost;
 using namespace sc_dt;
@@ -69,8 +64,8 @@ vector <string> transactor::get_obj_file() {
 void transactor::load_obj_file() {
 
 
-    vector <string> p_object_vec = get_obj_file();
-
+//    vector <string> p_object_vec = get_obj_file();
+    vector <string> p_object_vec ;
     //vector <string> p_object_vec = "0 000000 000001XXXXXX";
 
     vector <string> tokens;
