@@ -20,10 +20,9 @@ SC_MODULE(transactor){
         sc_out < sc_lv<1> > enable_trans;
         sc_in_clk  clk_trans;
 
-        vector <string> get_obj_file();
-        void load_obj_file();
+//        void load_obj_file();
         //void inst_exec();
-
+        void inst_exec();
 //        void word_load(int );
 
         SC_CTOR(transactor){
@@ -31,7 +30,7 @@ SC_MODULE(transactor){
 
         //   SC_METHOD(get_obj_file);
             //
-            SC_METHOD(load_obj_file);
+            SC_METHOD(inst_exec);
             // Lista de sensitivad del proceso load_obj_file.
             sensitive << clk_trans;
 //            SC_METHOD(word_load);

@@ -22,165 +22,165 @@ using namespace boost::algorithm;
 *get_obj_file(): Se encarga obtener cada linea del archivo objeto e ingresarla en una posición del vector p_object_vec tipo
 *string. Al concluir la ejecución se retorna el p_object_vec con todas instrucciones ensambladas por el preprocesador.
 */
-
-vector <string> transactor::get_obj_file() {
-
-    vector <string> p_object_vec;
-    string line;
-
-    string file_path;
-    file_path = "../pycharm/file.obj";
-    ifstream object_file(file_path);
-
-    // // Lectura linea a linea del archivo objet
-
-    if (!object_file)
-    {
-        cout << "Error opening output file" << endl;
-        system("pause");
-    //        return -1;
-    }
-
-    cout << "\nPath del archivo del codigo objeto: " << file_path << endl;
-    cout << "\nContenido del archivo del codigo objeto: " << file_path << endl;
-
-    int i = 0;
-    while (getline(object_file, line)) {
-
-        p_object_vec.push_back(line);
-        i++;
-        cout << line << endl;
-    }
-
-    cout << "Cantidad de instrucciones cargadas: # " << i << endl;
-
-    return p_object_vec;
-}
+//
+//vector <string> transactor::get_obj_file() {
+//
+//    vector <string> p_object_vec;
+//    string line;
+//
+//    string file_path;
+//    file_path = "../pycharm/file.obj";
+//    ifstream object_file(file_path);
+//
+//    // // Lectura linea a linea del archivo objet
+//
+//    if (!object_file)
+//    {
+//        cout << "Error opening output file" << endl;
+//        system("pause");
+//    //        return -1;
+//    }
+//
+//    cout << "\nPath del archivo del codigo objeto: " << file_path << endl;
+//    cout << "\nContenido del archivo del codigo objeto: " << file_path << endl;
+//
+//    int i = 0;
+//    while (getline(object_file, line)) {
+//
+//        p_object_vec.push_back(line);
+//        i++;
+//        cout << line << endl;
+//    }
+//
+//    cout << "Cantidad de instrucciones cargadas: # " << i << endl;
+//
+//    return p_object_vec;
+//}
 
 /**
 *load_obj_file(): Descompone la instruccion en opcode y argumento, luego carga cada palabra de instruccion la posicion
  * de memoria asignada por el PC.
 */
-void transactor::load_obj_file() {
-
-
-//    vector <string> p_object_vec = get_obj_file();
-    vector <string> p_object_vec ;
-    //vector <string> p_object_vec = "0 000000 000001XXXXXX";
-
-    vector <string> tokens;
-    vector <int> pcs;
-
-    string data_vec;
-    string operand_pb_vec;
-    string operand_pa_vec;
-    string opcode_vec;
-    string dont_care = "XXXXXX";
-    string address_vec;
-
-    int opcode_int = 0;
-    int operand_pb_int, operand_pa_int = 0;
-    int write_count = 0;
-    int ns_clk = 0;
-    unsigned int address_int = 0;
-
-    // Cargando el programa objeto a memoria.
-
-    for (unsigned int i = 0; i < p_object_vec.size(); i++) {
-
-        data_vec = p_object_vec[i];
-
-        split(tokens, data_vec, is_any_of(" "));
-
-        address_vec = tokens[1];
-        address_int = stoi(tokens[0]);
-        pcs.push_back(address_int);
-
-        opcode_vec = tokens[1];
-        opcode_int = stoi(tokens[1], nullptr, 2);
-
-        operand_pb_vec = tokens[2].substr(6, 6);
-        operand_pa_vec = tokens[2].substr(0, 6);
-
-        // Escritura en memoria de instrucciones con 3 palabras.
-        if ((operand_pa_vec != dont_care) && (operand_pb_vec != dont_care)) {
-
-
-            operand_pa_int = stoi(operand_pa_vec, nullptr, 2);
-            operand_pb_int = stoi(operand_pb_vec, nullptr, 2);
-
-            ns_clk = 20;
-
-            rw_trans.write(1);
-            enable_trans.write(1);
-            address_trans.write(address_int);
-            data_trans.write(opcode_int);
-            sc_start(ns_clk, SC_NS);
-            write_count++;
-            address_int++;
-
-            rw_trans.write(1);
-            enable_trans.write(1);
-            address_trans.write(address_int);
-            data_trans.write(operand_pa_int);
-            sc_start(ns_clk, SC_NS);
-            write_count++;
-            address_int++;
-
-            rw_trans.write(1);
-            enable_trans.write(1);
-            address_trans.write(address_int);
-            data_trans.write(operand_pb_int);
-            sc_start(ns_clk, SC_NS);
-            write_count++;
-            address_int++;
-
-        }
-
-
-            // Escritura en memoria de instrucciones de 1 palabra.
-        else if ((operand_pa_vec == dont_care) && (operand_pb_vec == dont_care)) {
-            cout << "LOADING" <<endl;
-            ns_clk = 20;
-
-            rw_trans.write(1);
-            enable_trans.write(1);
-            address_trans.write(address_int);
-            data_trans.write(opcode_int);
-            sc_start(ns_clk, SC_NS);
-            address_int++;
-            write_count++;
-
-        }
-            // Escritura en memoria de instrucciones de 2 palabras.
-        else if ((operand_pa_vec != dont_care) && (operand_pb_vec == dont_care)) {
-
-            operand_pa_int = stoi(operand_pa_vec, nullptr, 2);
-
-            ns_clk = 20;
-
-
-            rw_trans.write(1);
-            enable_trans.write(1);
-            address_trans.write(address_int);
-            data_trans.write(opcode_int);
-            sc_start(ns_clk, SC_NS);
-            write_count++;
-            address_int++;
-
-            rw_trans.write(1);
-            enable_trans.write(1);
-            address_trans.write(address_int);
-            data_trans.write(operand_pa_int);
-            sc_start(ns_clk, SC_NS);
-            address_int++;
-            write_count++;
-
-        }
-
-    }
-
-}
+//void transactor::load_obj_file() {
+//
+//
+////    vector <string> p_object_vec = get_obj_file();
+//    vector <string> p_object_vec ;
+//    //vector <string> p_object_vec = "0 000000 000001XXXXXX";
+//
+//    vector <string> tokens;
+//    vector <int> pcs;
+//
+//    string data_vec;
+//    string operand_pb_vec;
+//    string operand_pa_vec;
+//    string opcode_vec;
+//    string dont_care = "XXXXXX";
+//    string address_vec;
+//
+//    int opcode_int = 0;
+//    int operand_pb_int, operand_pa_int = 0;
+//    int write_count = 0;
+//    int ns_clk = 0;
+//    unsigned int address_int = 0;
+//
+//    // Cargando el programa objeto a memoria.
+//
+//    for (unsigned int i = 0; i < p_object_vec.size(); i++) {
+//
+//        data_vec = p_object_vec[i];
+//
+//        split(tokens, data_vec, is_any_of(" "));
+//
+//        address_vec = tokens[1];
+//        address_int = stoi(tokens[0]);
+//        pcs.push_back(address_int);
+//
+//        opcode_vec = tokens[1];
+//        opcode_int = stoi(tokens[1], nullptr, 2);
+//
+//        operand_pb_vec = tokens[2].substr(6, 6);
+//        operand_pa_vec = tokens[2].substr(0, 6);
+//
+//        // Escritura en memoria de instrucciones con 3 palabras.
+//        if ((operand_pa_vec != dont_care) && (operand_pb_vec != dont_care)) {
+//
+//
+//            operand_pa_int = stoi(operand_pa_vec, nullptr, 2);
+//            operand_pb_int = stoi(operand_pb_vec, nullptr, 2);
+//
+//            ns_clk = 20;
+//
+//            rw_trans.write(1);
+//            enable_trans.write(1);
+//            address_trans.write(address_int);
+//            data_trans.write(opcode_int);
+//            sc_start(ns_clk, SC_NS);
+//            write_count++;
+//            address_int++;
+//
+//            rw_trans.write(1);
+//            enable_trans.write(1);
+//            address_trans.write(address_int);
+//            data_trans.write(operand_pa_int);
+//            sc_start(ns_clk, SC_NS);
+//            write_count++;
+//            address_int++;
+//
+//            rw_trans.write(1);
+//            enable_trans.write(1);
+//            address_trans.write(address_int);
+//            data_trans.write(operand_pb_int);
+//            sc_start(ns_clk, SC_NS);
+//            write_count++;
+//            address_int++;
+//
+//        }
+//
+//
+//            // Escritura en memoria de instrucciones de 1 palabra.
+//        else if ((operand_pa_vec == dont_care) && (operand_pb_vec == dont_care)) {
+//            cout << "LOADING" <<endl;
+//            ns_clk = 20;
+//
+//            rw_trans.write(1);
+//            enable_trans.write(1);
+//            address_trans.write(address_int);
+//            data_trans.write(opcode_int);
+//            sc_start(ns_clk, SC_NS);
+//            address_int++;
+//            write_count++;
+//
+//        }
+//            // Escritura en memoria de instrucciones de 2 palabras.
+//        else if ((operand_pa_vec != dont_care) && (operand_pb_vec == dont_care)) {
+//
+//            operand_pa_int = stoi(operand_pa_vec, nullptr, 2);
+//
+//            ns_clk = 20;
+//
+//
+//            rw_trans.write(1);
+//            enable_trans.write(1);
+//            address_trans.write(address_int);
+//            data_trans.write(opcode_int);
+//            sc_start(ns_clk, SC_NS);
+//            write_count++;
+//            address_int++;
+//
+//            rw_trans.write(1);
+//            enable_trans.write(1);
+//            address_trans.write(address_int);
+//            data_trans.write(operand_pa_int);
+//            sc_start(ns_clk, SC_NS);
+//            address_int++;
+//            write_count++;
+//
+//        }
+//
+//    }
+//
+//}
 //
 //void loader::word_load(int address_int, int opcode_int, int ns_clk,int write_count ) {
 //
@@ -203,9 +203,9 @@ void transactor::load_obj_file() {
 //}
 //
 
-//void transactor::inst_exec() {
+void transactor::inst_exec() {
 //
-//    cout << "Ejecutor" << endl;
+    cout << "Ejecutor" << endl;
 //    unsigned int mem_data_dec;
 //    mem_data_dec = 0;
 //
@@ -514,4 +514,4 @@ void transactor::load_obj_file() {
 //
 //
 //    }
-//}
+}

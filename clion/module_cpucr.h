@@ -7,7 +7,7 @@ using namespace std;
 using namespace sc_core;
 using namespace sc_dt;
 
-#include ./d
+#include "module_mem.h"
 #include "module_transactor.h"
 
 SC_MODULE(cpucr){
