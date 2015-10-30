@@ -12,17 +12,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e884eca-5d13-4def-8528-72d310f45b6b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../clion/CPUCR.vcd" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/cpucr_battles.x" afterPath="$PROJECT_DIR$/../clion/cpucr_battles.x" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../clion/cpucr_battles.x" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../clion/module_transactor.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../pgm" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/main_mem.o" afterPath="$PROJECT_DIR$/../clion/main_mem.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_cpucr.o" afterPath="$PROJECT_DIR$/../clion/module_cpucr.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_mem.o" afterPath="$PROJECT_DIR$/../clion/module_mem.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/cpucr.vcd" afterPath="$PROJECT_DIR$/../clion/cpucr.vcd" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/main_mem.cpp" afterPath="$PROJECT_DIR$/../clion/main_mem.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/memdump" afterPath="$PROJECT_DIR$/../clion/memdump" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_cpucr.h" afterPath="$PROJECT_DIR$/../clion/module_cpucr.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_mem.h" afterPath="$PROJECT_DIR$/../clion/module_mem.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.cpp" afterPath="$PROJECT_DIR$/../clion/module_transactor.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.h" afterPath="$PROJECT_DIR$/../clion/module_transactor.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/ram_init_v2.txt" afterPath="$PROJECT_DIR$/../clion/ram_init_v2.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" />
     </list>
     <ignored path="cpucrBattles.iws" />

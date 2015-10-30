@@ -18,16 +18,28 @@ SC_MODULE(memory){
     sc_in < sc_lv<1> > rw_mem;
     sc_in < sc_lv<1> > enable_mem;
     sc_in_clk  clk_mem;
+
     // Signals declarations.
     sc_signal< sc_uint<6> > ramdata[MEMORY_H_];
+
     void entry();
 
     void memdump()
     {
         FILE *fp = fopen("memdump","w");
         int size;
-        for (size = 0; size < 4096; size++) {
-            fprintf(fp, "0x%x\n", ramdata[size].read().to_int());
+        fprintf(fp, "--------------\n");
+        fprintf(fp, "|Address|Data|\n");
+        fprintf(fp, "--------------\n");
+        int  data_int = 0;
+
+
+        for (size = 0; size < MEMORY_H_-1; size++) {
+
+            data_int = ramdata[size].read().to_int();
+
+            fprintf(fp, "|@%.4o|::|@%.2o|\n", size, data_int);
+            fprintf(fp, "--------------\n");
         }
     }
 
@@ -65,7 +77,7 @@ SC_MODULE(memory){
             perror("error. cannot find ram_init.");
         }
         int size=0;
-        int mem_word;
+        unsigned int mem_word;
         // for (size = 0; size < 255; size++) {
         //     ramdata[size].write(0x0);
         // }

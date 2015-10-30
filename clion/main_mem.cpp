@@ -141,7 +141,7 @@ int sc_main(int argc, char* argv[]) {
 //    enable = 0;
 
     sc_start(1, SC_US);
-
+    cpucr1.transactor1.inst_exec();
     cpucr1.memory1.memdump();
 //    sc_start(1, SC_PS);
 //
