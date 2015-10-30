@@ -30,11 +30,12 @@ SC_MODULE(transactor){
 
         //   SC_METHOD(get_obj_file);
             //
+            //
             SC_METHOD(inst_exec);
             // Lista de sensitivad del proceso load_obj_file.
             sensitive << clk_trans;
 //            SC_METHOD(word_load);
-//            SC_METHOD(inst_exec);
+            SC_METHOD(inst_exec);
 
 
 //        sensitive << address << data_out << rw << enable ;

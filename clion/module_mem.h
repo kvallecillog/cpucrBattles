@@ -19,10 +19,18 @@ SC_MODULE(memory){
     sc_in < sc_lv<1> > enable_mem;
     sc_in_clk  clk_mem;
     // Signals declarations.
-    sc_signal< sc_uint<6> > ramdata[MEMORY_H_-1];
-    string ramdata_2[MEMORY_H_-1];
-//    void mem_init();
+    sc_signal< sc_uint<6> > ramdata[MEMORY_H_];
     void entry();
+
+    void memdump()
+    {
+        FILE *fp = fopen("memdump","w");
+        int size;
+        for (size = 0; size < 4096; size++) {
+            fprintf(fp, "0x%x\n", ramdata[size].read().to_int());
+        }
+    }
+
 
 //    void memdump(){
 //        FILE *fp = fopen("memdump","w");
@@ -30,44 +38,129 @@ SC_MODULE(memory){
 //        fprintf(fp, "--------------\n");
 //        fprintf(fp, "|Address|Data|\n");
 //        fprintf(fp, "--------------\n");
+//        int  data_int = 0;
+//
+//
 //        for (size = 0; size < MEMORY_H_-1; size++) {
 //
-//            int data_int = ramdata[size].read().to_int();
+//            data_int = ramdata[size].read().to_int();
 //
 //            fprintf(fp, "|@%.4o|::|@%.2o|\n", size, data_int);
 //            fprintf(fp, "--------------\n");
 //        }
-////        fprintf(fp, "--------------\n");
 //    }
 
         SC_CTOR(memory){
 
             SC_METHOD(entry);
-            sensitive << clk_mem;
+         sensitive << clk_mem;
+//        sensitive << enable_mem << rw_mem << address_mem;
 
-            FILE *fp ;
 
-            fp = fopen("ram_init_v2.txt","r");
-            if(!fp)
-            {
-                perror("Error. cannot find ram_init.");
-            }
-            int size=0;
-            int mem_word;
-//            for (size = 0; size < MEMORY_H_-1; size++) {
-//                // Cambiar a numero randomw
-//                ramdata[size].write(0x0);
+        FILE *fp ;
+
+        fp = fopen("ram_init.txt","r");
+        if(!fp)
+        {
+            perror("error. cannot find ram_init.");
+        }
+        int size=0;
+        int mem_word;
+        // for (size = 0; size < 255; size++) {
+        //     ramdata[size].write(0x0);
+        // }
+        size = 0;
+        while (fscanf(fp,"%xn", &mem_word) != EOF) {
+            ramdata[size].write( mem_word );
+            cout << ramdata[size].read() << endl;
+            size++;
+        }
+
+//        FILE *fp ;
+//
+//        fp = fopen("ram_init.txt","r");
+//        if(!fp)
+//        {
+//            perror("error. cannot find ram_init.");
+//        }
+//        int size=0;
+//        unsigned int mem_word;
+//        // for (size = 0; size < 255; size++) {
+//        //     ramdata[size].write(0x0);
+//        // }
+//        size = 0;
+//        while (fscanf(fp,"%xn", &mem_word) != EOF) {
+//            ramdata[size].write( mem_word );
+//            cout << mem_word << endl;
+//            size++;
+//        }
+//        string line;
+//
+//        string file_path;
+//        file_path = "ram_init_v2.txt";
+//        ifstream object_file(file_path);
+//
+//        // // Lectura linea a linea del archivo objet
+//
+//        if (!object_file)
+//        {
+//            cout << "Error opening output file" << endl;
+//            system("pause");
+//            //        return -1;
+//        }
+//
+//        cout << "\nPath del archivo del codigo objeto: " << file_path << endl;
+//        cout << "\nContenido del archivo del codigo objeto: " << file_path << endl;
+//
+//        int i = 0;
+//        int line_input = 0;
+//        while (getline(object_file, line)) {
+//
+////            p_object_vec.push_back(line);
+//            line_input = stoi(line);
+//            ramdata[i].write(line_input);
+////            cout << line << endl;
+////            cout << ramdata[i].read() << endl;
+//            cout << "Address: "<< i << " Data: " << ramdata[i].read() << endl;
+//            i++;
+//
+//        }
+//
+//        cout << "Cantidad de instrucciones cargadas: # " << i << endl;
+
+
+
+//            FILE *fp ;
+//
+//            fp = fopen("ram_init_v2.txt","r");
+//            if(!fp)
+//            {
+//                perror("Error. cannot find ram_init.");
 //            }
-            size = 0;
-            while (fscanf(fp,"%d", &mem_word) != EOF) {
-                ramdata[size].write( mem_word );
-                cout << "size: " << size << " mem_word: " << mem_word << endl;
-//                ramdata_2[size]=mem_word;
-                size++;
-            }
-            for (int i = 0; i <MEMORY_H_-1; i++){
-            cout <<"Address: "<<  i <<" Data: " << ramdata[i].read() << endl;
-            }
+//            int size=0;
+//            string mem_word;
+////            for (size = 0; size < MEMORY_H_-1; size++) {
+////                // Cambiar a numero randomw
+////                ramdata[size].write(0x0);
+////            }
+//            size = 0;
+//
+//            while (fscanf(fp,"%s", &mem_word) != EOF) {
+////                ramdata[size].write(mem_word);
+//
+////                ramdata_2[size]=mem_word;
+//                cout << mem_word << endl;
+////                cout << "size: " << size << " mem_word: " <<  ramdata_2[size] << endl;
+////                cout << "size: " << size << " mem_word: " <<  ramdata[size].read()<< endl;
+//                size++;
+//            }
+//
+//            unsigned int  data_int2 = 0;
+//            for (int i = 0; i <MEMORY_H_-1; i++){
+//
+//                data_int2 = ramdata[i].read().to_uint();
+//            cout <<"Address: "<<  i <<" Data: " << data_int2 << endl;
+//            }
 
         }
 };

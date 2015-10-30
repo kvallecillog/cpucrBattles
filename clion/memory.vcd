@@ -1,0 +1,31 @@
+$date
+     Oct 29, 2015       19:51:56
+$end
+
+$version
+ SystemC 2.3.1-Accellera --- Aug 26 2015 20:42:51
+$end
+
+$timescale
+     1 ps
+$end
+
+$scope module SystemC $end
+$var wire    1  aaaaa  enable       $end
+$var wire    1  aaaab  rw       $end
+$var wire   12  aaaac  address [11:0]  $end
+$var wire    6  aaaad  data [5:0]  $end
+$upscope $end
+$enddefinitions  $end
+
+$comment
+All initial values are dumped below at time 0 sec = 0 timescale units.
+$end
+
+$dumpvars
+Xaaaaa
+Xaaaab
+bXXXXXXXXXXXX aaaac
+bZZZZZZ aaaad
+$end
+

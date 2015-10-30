@@ -888,10 +888,18 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
 def instruction_checker(fi_list, lines_raw_list):
     # print(fi_list)
 
+    ram_init_file_name = '../clion/ram_init_v2.txt'
+    ram_init_file = open(ram_init_file_name, 'w+')
+
     object_file_name = 'file.obj'
     object_file = open(object_file_name, 'w+')
-    base = 10
-
+    pc_file_name = 'asm.info'
+    pc_file = open(pc_file_name, 'w+')
+    pc_x = ""
+    base = 16
+    cero = "0"
+    base_address = 10
+    obj_line_dic = {}
     cont_pos = 0
     dont_care = "XXXXXX"
     # address_int, write_count, opcode_int, operand_pb_int, operand_pa_int = 0
@@ -899,7 +907,12 @@ def instruction_checker(fi_list, lines_raw_list):
     for fi in fi_list:
 
         tokens = fi.split()
+
         address = int(tokens[0])
+        if cont_pos == 0:
+            pc_x = str(address)
+            pc_file.writelines(pc_x)
+
         opcode = int_2_base(tokens[1],base)
         # print("Addres, opcode:", address, opcode)
         operand = tokens[2]
@@ -920,8 +933,11 @@ def instruction_checker(fi_list, lines_raw_list):
 
             for mem_data in mem_data_vec:
                 # print("Address: ", address_pos)
-                mem_address_pos = address_2_base(address_pos, base)
+                mem_address_pos = address_2_base(address_pos, base_address)
                 obj_line = str(mem_address_pos) + " " + mem_data+"\n"
+                # obj_line_dic[mem_address_pos].append(mem_data)
+                # obj_line_dic = {mem_address_pos:mem_data}
+                obj_line_dic[mem_address_pos] = mem_data
                 print("Obj line: ", obj_line)
                 object_file.writelines(obj_line)
                 address_pos += 1
@@ -934,8 +950,11 @@ def instruction_checker(fi_list, lines_raw_list):
 
             for mem_data in mem_data_vec:
                 # print("Address: ", address_pos)
-                mem_address_pos = address_2_base(address_pos, base)
+                mem_address_pos = address_2_base(address_pos, base_address)
                 obj_line = str(mem_address_pos) + " " + mem_data +"\n"
+                # obj_line_dic = {mem_address_pos:mem_data}
+                # obj_line_dic[mem_address_pos].append(mem_data)
+                obj_line_dic[mem_address_pos] = mem_data
                 print("Obj line: ", obj_line)
                 object_file.writelines(obj_line)
                 address_pos += 1
@@ -943,11 +962,24 @@ def instruction_checker(fi_list, lines_raw_list):
         if operand_pa == dont_care and operand_pb == dont_care:
 
             mem_data = str(opcode)
-            mem_address_pos = address_2_base(address_pos, base)
+            mem_address_pos = address_2_base(address_pos, base_address)
             obj_line = str(mem_address_pos) + " " + mem_data +"\n"
+            # obj_line_dic = {mem_address_pos:mem_data}
+            # obj_line_dic[mem_address_pos].append(mem_data)
+            obj_line_dic[mem_address_pos] = mem_data
             print("Obj line: ", obj_line)
             object_file.writelines(obj_line)
             address_pos += 1
+        cont_pos += 1
+
+
+    for i in range(0, 4096):
+
+        if i in obj_line_dic:
+            ram_init_file.writelines(obj_line_dic[i]+"\n")
+            print("obj dic", obj_line_dic[i])
+        else:
+            ram_init_file.writelines(cero+"\n")
 
 
 def int_2_base(number, base):
@@ -973,7 +1005,8 @@ def int_2_base(number, base):
 
     elif base == 16:
 
-        number_hex = hex(int(number,2))
+
+        number_hex = format(int(number,2), 'x') # hex(int(number,2))[-6:]
         # print(number_hex)
         return number_hex
 

@@ -11,7 +11,20 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e884eca-5d13-4def-8528-72d310f45b6b" name="Default" comment="" />
+    <list default="true" id="5e884eca-5d13-4def-8528-72d310f45b6b" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../clion/CPUCR.vcd" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/cpucr_battles.x" afterPath="$PROJECT_DIR$/../clion/cpucr_battles.x" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/main_mem.o" afterPath="$PROJECT_DIR$/../clion/main_mem.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_cpucr.o" afterPath="$PROJECT_DIR$/../clion/module_cpucr.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_mem.o" afterPath="$PROJECT_DIR$/../clion/module_mem.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/main_mem.cpp" afterPath="$PROJECT_DIR$/../clion/main_mem.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/memdump" afterPath="$PROJECT_DIR$/../clion/memdump" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_cpucr.h" afterPath="$PROJECT_DIR$/../clion/module_cpucr.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_mem.h" afterPath="$PROJECT_DIR$/../clion/module_mem.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.h" afterPath="$PROJECT_DIR$/../clion/module_transactor.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/ram_init_v2.txt" afterPath="$PROJECT_DIR$/../clion/ram_init_v2.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" />
+    </list>
     <ignored path="cpucrBattles.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,8 +57,8 @@
       <file leaf-file-name="preprocesador.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/preprocesador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33236995">
-              <caret line="996" column="31" selection-start-line="996" selection-start-column="31" selection-end-line="996" selection-end-column="31" />
+            <state vertical-scroll-proportion="1.9608696">
+              <caret line="914" column="0" selection-start-line="914" selection-start-column="0" selection-end-line="914" selection-end-column="0" />
               <folding>
                 <element signature="e#406#415#0" expanded="true" />
               </folding>
@@ -57,7 +70,7 @@
         <entry file="file://$PROJECT_DIR$/deleted_spaces_file.ASM">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+              <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -67,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/raw_file.ASM">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -77,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/file.obj">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -112,6 +125,7 @@
         <option value="$PROJECT_DIR$/definitions.cpp" />
         <option value="$PROJECT_DIR$/fsm.cpp" />
         <option value="$PROJECT_DIR$/pgm" />
+        <option value="$PROJECT_DIR$/file.obj" />
         <option value="$PROJECT_DIR$/raw_file.ASM" />
         <option value="$PROJECT_DIR$/preprocesador.py" />
       </list>
@@ -125,10 +139,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1417" />
+    <option name="x" value="51" />
     <option name="y" value="24" />
-    <option name="width" value="1869" />
-    <option name="height" value="1176" />
+    <option name="width" value="1315" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -156,6 +170,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -176,8 +192,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -430,29 +444,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1417" y="24" width="1869" height="1176" extended-state="6" />
-    <editor active="true" />
+    <frame x="51" y="24" width="1315" height="744" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22652757" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884902" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24942966" sideWeight="0.4947839" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15783842" sideWeight="0.33489463" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2243346" sideWeight="0.33489463" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39891207" sideWeight="0.49598715" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3173164" sideWeight="0.8287854" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.52160954" sideWeight="0.8243346" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31939164" sideWeight="0.6651054" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3173164" sideWeight="0.17121455" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.52160954" sideWeight="0.1756654" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884902" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -864,15 +878,7 @@
     <entry file="file://$PROJECT_DIR$/deleted_spaces_file.ASM">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/raw_file.ASM">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -880,15 +886,23 @@
     <entry file="file://$PROJECT_DIR$/file.obj">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/raw_file.ASM">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/preprocesador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33236995">
-          <caret line="996" column="31" selection-start-line="996" selection-start-column="31" selection-end-line="996" selection-end-column="31" />
+        <state vertical-scroll-proportion="1.9608696">
+          <caret line="914" column="0" selection-start-line="914" selection-start-column="0" selection-end-line="914" selection-end-column="0" />
           <folding>
             <element signature="e#406#415#0" expanded="true" />
           </folding>
