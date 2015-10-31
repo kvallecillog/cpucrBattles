@@ -85,7 +85,7 @@ SC_MODULE(memory){
         size = 0;
         while (fscanf(fp,"%xn", &mem_word) != EOF) {
             ramdata[size].write( mem_word );
-            cout << ramdata[size].read() << endl;
+            cout << mem_word << endl;
             size++;
         }
 

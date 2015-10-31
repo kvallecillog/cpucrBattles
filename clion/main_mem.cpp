@@ -26,7 +26,7 @@ int sc_main(int argc, char* argv[]) {
     sc_signal<sc_lv<12> > address_ch;
 
     // Create clock
-    sc_set_time_resolution(1, SC_PS);
+    sc_set_time_resolution(1, SC_NS);
     sc_clock clk("clk", 10, SC_NS, 0.5, 5, SC_NS, false);
 
     // Module instantiations.
@@ -43,6 +43,12 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, enable, "enable");
     sc_trace(wf, rw, "rw");
     sc_trace(wf, clk, "clk");
+
+    sc_trace(wf, cpucr1.addr_c_o, "addr_c_o");
+    sc_trace(wf, cpucr1.dat_c_o, "dat_c_o");
+    sc_trace(wf, cpucr1.en_c_o, "en_c_o");
+    sc_trace(wf, cpucr1.rw_c_o, "rw_c_o");
+
     sc_trace(wf, cpucr1.memory1.addr_m_i, "addr_m_i");
     sc_trace(wf, cpucr1.memory1.dat_m_i, "dat_m_i");
     sc_trace(wf, cpucr1.memory1.dat_m_o, "dat_m_o");
@@ -61,11 +67,14 @@ int sc_main(int argc, char* argv[]) {
     cpucr1.en_c_o(enable);
     cpucr1.clk_c_i(clk);
 
-    sc_start(1, SC_US);
+    sc_start(10, SC_US);
+    cpucr1.monitor();
     cpucr1.transactor1.inst_exec();
     cpucr1.memory1.memdump();
+    sc_stop();
 
-   sc_close_vcd_trace_file(wf);
+
+    sc_close_vcd_trace_file(wf);
 
     return (0);
 }

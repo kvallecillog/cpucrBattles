@@ -24,74 +24,48 @@ void transactor::inst_exec() {
 //
     cout << "-------------------------------------------Ejecutor-------------------------------------------" << endl;
 
-    unsigned int mem_data_dec;
-    mem_data_dec = 0;
 
-//    int mem_cont = pcs[0];
-    int mem_cont = 0;
-    
-    int A = 0;
-    int word_1 = 0;
-    int word_2 = 0;
+    cout << "------------------------------------------mem_cont:------------------------------------------ "<< mem_cont << endl;
 
-//    asysc = 0;
-//    word_1_SysC = 0;
-//    word_2_SysC = 0;
+////    sc_start(10, SC_NS);
+//
+//    rw_t_o.write(0);
+//// Habilitar memoria.
+//    en_t_o.write(1);
+//// Direccion a leer.
+//    addr_t_o.write(mem_cont);
+//
+//// Datos extraidos, unsigned int.
+//    mem_data_dec = dat_t_i.read().to_uint();
+//
+//    mem_data_str = to_string(mem_data_dec);
 
-    int word_cont = 0;
-    int opcode_mem = 0;
 
-    string operand;
-    string mem_data_str;
-    int address_ind_int = 0;
-    string address_ind_str;
-    string pa_address_ind;
-    string pb_address_ind;
 
-    stringstream address_ind_ss;
-    stringstream pa_address_ind_ss;
-    stringstream pb_address_ind_ss;
-
-    int oper_cont = 0;
-
-    int ns_clk = 20;
-
-    bool stop = false;
-    bool decode = false;
-    bool fetched = false;
-    bool execute = false;
-    en_t_o.write(0);
-
-    while (stop == false) {
+    if (stop == false) {
 
 // Leer de memoria.
         rw_t_o.write(0);
+        cout << "rw_t_o: "<< rw_t_o << endl;
 // Habilitar memoria.
         en_t_o.write(1);
+        cout << "en_t_o: "<< en_t_o << endl;
 // Direccion a leer.
         addr_t_o.write(mem_cont);
+        cout << "addr_t_o: "<< addr_t_o << endl;
 // Ciclo de memoria.
-        sc_start(ns_clk, SC_NS);
-//wait(1,SC_NS);
-// Datos extraidos, unsigned int.
+
         mem_data_dec = dat_t_i.read().to_uint();
 
         mem_data_str = to_string(mem_data_dec);
 
-// Opcode fetch
+        cout << "!!!!!Mem pos data:!!!!! " << mem_data_dec << endl;
 
-//        if (mem_cont == pc_cont){
-//
-//        opcode_mem = mem_data_dec;
-//        mem_cont++;
-//        operand = "";
-//        word_cont = 0;
-//        fetch = true;
-//    }
 
         if (fetched == false) {
 
             opcode_mem = mem_data_dec;
+
             fetched = true;
 
         }
@@ -162,8 +136,6 @@ void transactor::inst_exec() {
                 case 1:
 
                     cout << "1 word instruction: " << opcode_mem << endl;
-
-                    mem_cont++;
 
                     execute = true;
 
@@ -354,4 +326,10 @@ void transactor::inst_exec() {
 
 
     }
+    else{
+
+        cout << " Halt process " << endl;
+
+    }
+
 }

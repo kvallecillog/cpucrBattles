@@ -34,7 +34,7 @@ SC_MODULE(cpucr){
     SC_CTOR(cpucr):memory1("memory 1"), transactor1("transactor 1"){
 
         memory1.dat_m_i(transactor1.dat_t_o);
-        memory1.dat_m_o(transactor1.dat_t_o);
+        memory1.dat_m_o(dat_c_o);
         memory1.addr_m_i(transactor1.addr_t_o);
         memory1.rw_m_i(transactor1.rw_t_o);
         memory1.en_m_i(transactor1.en_t_o);
@@ -50,6 +50,11 @@ SC_MODULE(cpucr){
         SC_METHOD(monitor);
 
         sensitive << clk_c_i ;
+
+//        // Habilitar memoria.
+//        transactor1.en_t_o.write(1);
+//        // Direccion a leer.
+//        transactor1.addr_t_o.write(0);
 
     }
 
