@@ -10,7 +10,6 @@ using namespace sc_dt;
 
 void cpucr::monitor()
 {
-    cout << "@" << sc_time_stamp() << " data_cpucr :" << data_cpucr << " address_cpucr :" << address_cpucr
-    << " rw_cpucr :" << rw_cpucr << " enable_cpucr :" << enable_cpucr << " clk_cpucr: " << clk_cpucr << endl;
+    cout << "@" << sc_time_stamp() << " data_cpucr :" << dat_c_o << " address_cpucr :" << addr_c_o
+    << " rw_cpucr :" << rw_c_o << " enable_cpucr :" << en_c_o << " clk_cpucr: " << clk_c_i << endl;
 }
-

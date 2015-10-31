@@ -22,19 +22,27 @@ using namespace boost;
 using namespace sc_dt;
 using namespace boost::algorithm;
 
+
 void memory::entry(){
-    if(enable_mem.read() == 1) {
+    if(en_m_i.read() == 1) {
 
-        if(rw_mem.read() == 1) {            //write
+        if(rw_m_i.read() == 1) {
 
-            ramdata[address_mem.read().to_uint()].write( data_mem.read() );
-            cout << "@ |[" << sc_time_stamp()  << "]| Escritura de datos " <<"|[" <<data_mem.read().to_uint() << "]|" << " en direccion " << "|["<< address_mem.read().to_uint() << "]|" << endl;
-        } else {                        //read
-            data_mem.write(ramdata[address_mem.read().to_uint()].read());
-            cout << "@ |[" << sc_time_stamp()  << "]| Lectura de datos " <<"|["<< data_mem.read().to_uint()<< "]|" << " en direccion " <<"|["<< address_mem.read().to_uint() << "]|" << endl;
+            //write
+            ramdata[addr_m_i.read().to_uint()].write( dat_m_i.read() );
+            cout << "@ |[" << sc_time_stamp()  << "]| Escritura de datos " <<"|[" <<dat_m_i.read().to_uint() << "]|" << " en direccion " << "|["<< addr_m_i.read().to_uint() << "]|" << endl;
+
         }
-    } else {
-        data_mem.write("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+        else {
+
+            //read
+            dat_m_o.write(ramdata[addr_m_i.read().to_uint()].read());
+            cout << "@ |[" << sc_time_stamp()  << "]| Lectura de datos " <<"|["<< dat_m_o.read().to_uint()<< "]|" << " en direccion " <<"|["<< addr_m_i.read().to_uint() << "]|" << endl;
+
+        }
+    }
+    else {
+        dat_m_o.write("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
     }
 }
 

@@ -13,11 +13,12 @@ using namespace sc_dt;
 SC_MODULE(memory){
 
     // Port declarations
-    sc_inout < sc_lv <6> > data_mem;
-    sc_in < sc_lv <12> >  address_mem;
-    sc_in < sc_lv<1> > rw_mem;
-    sc_in < sc_lv<1> > enable_mem;
-    sc_in_clk  clk_mem;
+    sc_in < sc_lv <6> > dat_m_i;
+    sc_out < sc_lv <6> > dat_m_o;
+    sc_in < sc_lv <12> >  addr_m_i;
+    sc_in < sc_lv<1> > rw_m_i;
+    sc_in < sc_lv<1> > en_m_i;
+    sc_in_clk  clk_m_i;
 
     // Signals declarations.
     sc_signal< sc_uint<6> > ramdata[MEMORY_H_];
@@ -65,7 +66,7 @@ SC_MODULE(memory){
         SC_CTOR(memory){
 
             SC_METHOD(entry);
-         sensitive << clk_mem;
+         sensitive << clk_m_i;
 //        sensitive << enable_mem << rw_mem << address_mem;
 
 

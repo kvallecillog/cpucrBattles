@@ -9,7 +9,7 @@
 #include <string>
 #include </usr/local/systemc-2.3.1/include/systemc>
 
-#include "module_cpucr.h"
+#include "module_transactor.h"
 #include "definitions_dec.cpp"
 
 
@@ -43,7 +43,14 @@ void transactor::inst_exec() {
 
     string operand;
     string mem_data_str;
+    int address_ind_int = 0;
+    string address_ind_str;
+    string pa_address_ind;
+    string pb_address_ind;
 
+    stringstream address_ind_ss;
+    stringstream pa_address_ind_ss;
+    stringstream pb_address_ind_ss;
 
     int oper_cont = 0;
 
@@ -53,22 +60,21 @@ void transactor::inst_exec() {
     bool decode = false;
     bool fetched = false;
     bool execute = false;
-    enable_trans = 0;
+    en_t_o.write(0);
 
     while (stop == false) {
 
 // Leer de memoria.
-        rw_trans = 0;
-        
+        rw_t_o.write(0);
 // Habilitar memoria.
-        enable_trans = 1;
+        en_t_o.write(1);
 // Direccion a leer.
-        address_trans = mem_cont;
+        addr_t_o.write(mem_cont);
 // Ciclo de memoria.
         sc_start(ns_clk, SC_NS);
 //wait(1,SC_NS);
 // Datos extraidos, unsigned int.
-        mem_data_dec = memory1.data_mem.read().to_uint();
+        mem_data_dec = dat_t_i.read().to_uint();
 
         mem_data_str = to_string(mem_data_dec);
 
@@ -102,7 +108,7 @@ void transactor::inst_exec() {
 
                     cout << "LDA_ABS decoded: " << opcode_mem << endl;
 
-                    word_cont = 3;
+                    word_cont = 4;
 
                     decode = true;
 
@@ -168,8 +174,6 @@ void transactor::inst_exec() {
 
                     cout << "2 word instruction: " << opcode_mem << endl;
 
-                    mem_cont++;
-
                     if (oper_cont == 0) {
 
                         oper_cont++;
@@ -183,11 +187,6 @@ void transactor::inst_exec() {
 
                         word_1 = mem_data_dec;
 
-//                        word_1_SysC = word_1;
-//
-//                        cout << "word_1: " << word_1 << endl;
-//                        cout << "word_1_SysC: " << word_1_SysC << endl;
-
                         oper_cont = 0;
 
                         decode = false;
@@ -198,11 +197,9 @@ void transactor::inst_exec() {
                     break;
 
 
-                case 3:
+                case 4:
 
                     cout << "3 word instruction: " << opcode_mem << endl;
-
-                    mem_cont++;
 
                     if (oper_cont == 0) {
 
@@ -212,22 +209,53 @@ void transactor::inst_exec() {
 
                         execute = false;
 
+                        mem_cont++;
+
+
                     }
                     else if (oper_cont == 1) {
 
                         word_1 = mem_data_dec;
-//                        word_1_SysC = word_1;
+
+                        pa_address_ind_ss << hex << word_1; // int decimal_value
+
+                        pa_address_ind = pa_address_ind_ss.str();
+
                         oper_cont++;
 
                         decode = true;
 
                         execute = false;
 
+                        mem_cont++;
+
                     }
                     else if (oper_cont == 2) {
 
                         word_2 = mem_data_dec;
-//                        word_2_SysC = word_2;
+
+
+                        pb_address_ind_ss << hex << word_2; // int decimal_value
+
+                        pb_address_ind = pb_address_ind_ss.str();
+
+                        address_ind_str = pa_address_ind + pb_address_ind;
+
+                        address_ind_ss << address_ind_str;
+
+                        address_ind_ss >> hex >> address_ind_int; // int decimal_value
+
+                        mem_cont = address_ind_int;
+
+                        oper_cont++;
+
+                        decode = true;
+
+                        execute = false;
+                    }
+
+                    else if(oper_cont == 3){
+
                         oper_cont = 0;
 
                         decode = true;
@@ -237,13 +265,11 @@ void transactor::inst_exec() {
                     }
 
                     break;
+
             }
         }
         if (execute == true) {
 
-//            asysc = 0;
-//            word_1_SysC = 0;
-//            word_2_SysC = 0;
 
             switch (opcode_mem) {
 
@@ -251,9 +277,9 @@ void transactor::inst_exec() {
                 case LDA_ABS:
 
                     cout << "LDA_ABS executed: " << opcode_mem << endl;
-                    A = word_1 + word_2;
-//asysc = word_1_SysC;
-//                    asysc.write(A);
+
+                    A = mem_data_dec;
+
                     cout << "word_1: " << word_1 << endl;
 
                     cout << "word_2: " << word_2 << endl;
@@ -264,48 +290,39 @@ void transactor::inst_exec() {
 
                     decode = false;
 
+                    mem_cont++;
+
                     break;
 
                 case LDA_INM:
 
                     cout << "LDA_INM executed: " << opcode_mem << endl;
+
                     A = word_1;
-//
-//                    word_1_SysC = word_1;
-//                    asysc =word_1;
-//asysc = word_1_SysC;
-//                    asysc.write(A);
-//
-////asysc = A;
-//                    cout << "asysc=A: " << asysc.read().to_uint() << endl;
-//
-//                    cout << "word_1_SysC: " << word_1_SysC << endl;
+
                     cout << "A: " << A << endl;
 
                     fetched = false;
 
                     decode = false;
+
+                    mem_cont++;
 
                     break;
 
                 case ADD_INM:
 
                     cout << "ADD_INM executed: " << opcode_mem << endl;
-                    A += word_1;
-//                    word_1_SysC = word_1;
-//                    asysc.write(A);
-//
-////asysc = A;
-//                    cout << "asysc=A: " << asysc.read().to_uint() << endl;
 
-//                    asysc = A;
-//                    cout << "asysc=A: " << asysc << endl;
-//                    cout << "word_1_SysC: " << word_1_SysC << endl;
+                    A += word_1;
+
                     cout << "A: " << A << endl;
 
                     fetched = false;
 
                     decode = false;
+
+                    mem_cont++;
 
                     break;
 
@@ -320,6 +337,8 @@ void transactor::inst_exec() {
                     fetched = false;
 
                     decode = false;
+
+                    mem_cont++;
 
                     break;
 
