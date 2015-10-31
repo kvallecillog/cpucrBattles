@@ -43,6 +43,17 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, enable, "enable");
     sc_trace(wf, rw, "rw");
     sc_trace(wf, clk, "clk");
+    sc_trace(wf, cpucr1.memory1.addr_m_i, "addr_m_i");
+    sc_trace(wf, cpucr1.memory1.dat_m_i, "dat_m_i");
+    sc_trace(wf, cpucr1.memory1.dat_m_o, "dat_m_o");
+    sc_trace(wf, cpucr1.memory1.en_m_i, "en_m_i");
+    sc_trace(wf, cpucr1.memory1.rw_m_i, "rw_m_i");
+    
+    sc_trace(wf, cpucr1.transactor1.addr_t_o, "addr_t_o");
+    sc_trace(wf, cpucr1.transactor1.dat_t_i, "dat_t_i");
+    sc_trace(wf, cpucr1.transactor1.dat_t_o, "dat_t_o");
+    sc_trace(wf, cpucr1.transactor1.en_t_o, "en_t_i");
+    sc_trace(wf, cpucr1.transactor1.rw_t_o, "rw_t_i");
 
     cpucr1.dat_c_o(data);
     cpucr1.addr_c_o(address);

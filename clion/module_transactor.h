@@ -28,7 +28,6 @@ SC_MODULE(transactor){
 
             sensitive << clk_t_i;
 
-            SC_METHOD(inst_exec);
 
         }
 
