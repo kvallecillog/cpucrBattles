@@ -12,14 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e884eca-5d13-4def-8528-72d310f45b6b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/cpucr_battles.x" afterPath="$PROJECT_DIR$/../clion/cpucr_battles.x" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/main_mem.o" afterPath="$PROJECT_DIR$/../clion/main_mem.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_cpucr.o" afterPath="$PROJECT_DIR$/../clion/module_cpucr.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.o" afterPath="$PROJECT_DIR$/../clion/module_transactor.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/cpucr.vcd" afterPath="$PROJECT_DIR$/../clion/cpucr.vcd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/main_mem.cpp" afterPath="$PROJECT_DIR$/../clion/main_mem.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_cpucr.cpp" afterPath="$PROJECT_DIR$/../clion/module_cpucr.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.cpp" afterPath="$PROJECT_DIR$/../clion/module_transactor.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.h" afterPath="$PROJECT_DIR$/../clion/module_transactor.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" />
     </list>
     <ignored path="cpucrBattles.iws" />
@@ -51,10 +46,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="preprocesador.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="preprocesador.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/preprocesador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.15463917">
+            <state vertical-scroll-proportion="0.0">
               <caret line="890" column="46" selection-start-line="890" selection-start-column="35" selection-end-line="890" selection-end-column="46" />
               <folding>
                 <element signature="e#406#415#0" expanded="true" />
@@ -73,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="raw_file.ASM" pinned="false" current-in-tab="false">
+      <file leaf-file-name="raw_file.ASM" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/raw_file.ASM">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.48453608">
+              <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -888,21 +883,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/raw_file.ASM">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/preprocesador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15463917">
+        <state vertical-scroll-proportion="0.0">
           <caret line="890" column="46" selection-start-line="890" selection-start-column="35" selection-end-line="890" selection-end-column="46" />
           <folding>
             <element signature="e#406#415#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/raw_file.ASM">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48453608">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>

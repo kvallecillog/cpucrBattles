@@ -19,7 +19,7 @@ SC_MODULE(transactor){
         sc_out < sc_lv<1> > en_t_o;
         sc_in_clk  clk_t_i;
 
-        int mem_cont, A, word_1, word_2, word_cont, opcode_mem, address_ind_int, oper_cont;
+        int cnt_m_c, mem_cont, A, word_1, word_2, word_cont, opcode_mem, address_ind_int, oper_cont;
 
         unsigned int mem_data_dec;
 
@@ -29,7 +29,6 @@ SC_MODULE(transactor){
 
         bool stop, decode, fetched, execute;
 
-//    en_t_o.write(0);
     void inst_exec();
 
         SC_CTOR(transactor){
@@ -37,8 +36,9 @@ SC_MODULE(transactor){
             SC_METHOD(inst_exec);
 
             sensitive << clk_t_i;
-            
-            mem_cont= A= word_1= word_2= word_cont= opcode_mem= address_ind_int= oper_cont = 0;
+//            sensitive << clk_t_i << dat_t_o << addr_t_o << rw_t_o << en_t_o;
+
+            cnt_m_c= mem_cont= A= word_1= word_2= word_cont= opcode_mem= address_ind_int= oper_cont = 0;
 
             mem_data_dec = 0;
 
@@ -50,15 +50,13 @@ SC_MODULE(transactor){
             
             execute = false;
 
-            dat_t_i.initialize(0);
-            addr_t_o.initialize(0);
-            rw_t_o.initialize(0);
-            en_t_o.initialize(0);
-//            dat_t_o = 0;
-//            addr_t_o = 0;
-//            rw_t_o = 0;
-//            en_t_o = 0;
+            dat_t_o.initialize(0x0);
 
+            addr_t_o.initialize(0x0);
+
+            rw_t_o.initialize(0);
+
+            en_t_o.initialize(1);
 
         }
 

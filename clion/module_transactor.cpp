@@ -39,8 +39,7 @@ void transactor::inst_exec() {
 //    mem_data_dec = dat_t_i.read().to_uint();
 //
 //    mem_data_str = to_string(mem_data_dec);
-
-
+    cout << "cnt_m_c: " << cnt_m_c << endl;
 
     if (stop == false) {
 
@@ -149,7 +148,7 @@ void transactor::inst_exec() {
                     if (oper_cont == 0) {
 
                         oper_cont++;
-
+                        mem_cont++;
                         decode = true;
 
                         execute = false;
@@ -169,75 +168,75 @@ void transactor::inst_exec() {
                     break;
 
 
-                case 4:
-
-                    cout << "3 word instruction: " << opcode_mem << endl;
-
-                    if (oper_cont == 0) {
-
-                        oper_cont++;
-
-                        decode = true;
-
-                        execute = false;
-
-                        mem_cont++;
-
-
-                    }
-                    else if (oper_cont == 1) {
-
-                        word_1 = mem_data_dec;
-
-                        pa_address_ind_ss << hex << word_1; // int decimal_value
-
-                        pa_address_ind = pa_address_ind_ss.str();
-
-                        oper_cont++;
-
-                        decode = true;
-
-                        execute = false;
-
-                        mem_cont++;
-
-                    }
-                    else if (oper_cont == 2) {
-
-                        word_2 = mem_data_dec;
-
-
-                        pb_address_ind_ss << hex << word_2; // int decimal_value
-
-                        pb_address_ind = pb_address_ind_ss.str();
-
-                        address_ind_str = pa_address_ind + pb_address_ind;
-
-                        address_ind_ss << address_ind_str;
-
-                        address_ind_ss >> hex >> address_ind_int; // int decimal_value
-
-                        mem_cont = address_ind_int;
-
-                        oper_cont++;
-
-                        decode = true;
-
-                        execute = false;
-                    }
-
-                    else if(oper_cont == 3){
-
-                        oper_cont = 0;
-
-                        decode = true;
-
-                        execute = true;
-
-                    }
-
-                    break;
-
+//                case 4:
+//
+//                    cout << "3 word instruction: " << opcode_mem << endl;
+//
+//                    if (oper_cont == 0) {
+//
+//                        oper_cont++;
+//
+//                        decode = true;
+//
+//                        execute = false;
+//
+//                        mem_cont++;
+//
+//
+//                    }
+//                    else if (oper_cont == 1) {
+//
+//                        word_1 = mem_data_dec;
+//
+//                        pa_address_ind_ss << hex << word_1; // int decimal_value
+//
+//                        pa_address_ind = pa_address_ind_ss.str();
+//
+//                        oper_cont++;
+//
+//                        decode = true;
+//
+//                        execute = false;
+//
+//                        mem_cont++;
+//
+//                    }
+//                    else if (oper_cont == 2) {
+//
+//                        word_2 = mem_data_dec;
+//
+//
+//                        pb_address_ind_ss << hex << word_2; // int decimal_value
+//
+//                        pb_address_ind = pb_address_ind_ss.str();
+//
+//                        address_ind_str = pa_address_ind + pb_address_ind;
+//
+//                        address_ind_ss << address_ind_str;
+//
+//                        address_ind_ss >> hex >> address_ind_int; // int decimal_value
+//
+//                        mem_cont = address_ind_int;
+//
+//                        oper_cont++;
+//
+//                        decode = true;
+//
+//                        execute = false;
+//                    }
+//
+//                    else if(oper_cont == 3){
+//
+//                        oper_cont = 0;
+//
+//                        decode = true;
+//
+//                        execute = true;
+//
+//                    }
+//
+//                    break;
+//
             }
         }
         if (execute == true) {
@@ -310,6 +309,8 @@ void transactor::inst_exec() {
 
                     decode = false;
 
+                    sc_stop();
+
                     mem_cont++;
 
                     break;
@@ -329,7 +330,10 @@ void transactor::inst_exec() {
     else{
 
         cout << " Halt process " << endl;
+        sc_stop();
 
     }
+
+    cnt_m_c++;
 
 }
