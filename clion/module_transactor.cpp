@@ -27,33 +27,27 @@ void transactor::inst_exec() {
 
     cout << "------------------------------------------mem_cont:------------------------------------------ "<< mem_cont << endl;
 
-////    sc_start(10, SC_NS);
-//
-//    rw_t_o.write(0);
-//// Habilitar memoria.
-//    en_t_o.write(1);
-//// Direccion a leer.
-//    addr_t_o.write(mem_cont);
-//
-//// Datos extraidos, unsigned int.
-//    mem_data_dec = dat_t_i.read().to_uint();
-//
-//    mem_data_str = to_string(mem_data_dec);
+
     cout << "cnt_m_c: " << cnt_m_c << endl;
 
     if (stop == false) {
 
-// Leer de memoria.
+        // Leer de memoria.
         rw_t_o.write(0);
-        cout << "rw_t_o: "<< rw_t_o << endl;
-// Habilitar memoria.
-        en_t_o.write(1);
-        cout << "en_t_o: "<< en_t_o << endl;
-// Direccion a leer.
-        addr_t_o.write(mem_cont);
-        cout << "addr_t_o: "<< addr_t_o << endl;
-// Ciclo de memoria.
 
+        cout << "rw_t_o: "<< rw_t_o << endl;
+
+        // Habilitar memoria.
+        en_t_o.write(1);
+
+        cout << "en_t_o: "<< en_t_o << endl;
+
+        // Direccion a leer.
+        addr_t_o.write(mem_cont);
+
+        cout << "addr_t_o: "<< addr_t_o << endl;
+
+        // Ciclo de memoria.
         mem_data_dec = dat_t_i.read().to_uint();
 
         mem_data_str = to_string(mem_data_dec);
@@ -119,7 +113,7 @@ void transactor::inst_exec() {
 
                 default:
 
-                    cout << "Error en la decodificacion de instruccion" << endl;
+                    cout << "Error en la decodificacion de instruccion, direccionamiento no valido" << endl;
 
                     break;
             }
@@ -337,3 +331,18 @@ void transactor::inst_exec() {
     cnt_m_c++;
 
 }
+
+
+
+////    sc_start(10, SC_NS);
+//
+//    rw_t_o.write(0);
+//// Habilitar memoria.
+//    en_t_o.write(1);
+//// Direccion a leer.
+//    addr_t_o.write(mem_cont);
+//
+//// Datos extraidos, unsigned int.
+//    mem_data_dec = dat_t_i.read().to_uint();
+//
+//    mem_data_str = to_string(mem_data_dec);

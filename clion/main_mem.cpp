@@ -6,10 +6,7 @@
 
 #include </usr/local/systemc-2.3.1/include/systemc>
 
-
 #include "module_cpucr.h"
-
-//#include "module_mem.cpp"
 
 using namespace std;
 using namespace sc_core;

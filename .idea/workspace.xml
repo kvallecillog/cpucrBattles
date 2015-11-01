@@ -10,9 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42719d69-4724-47df-ad71-029cddd923a3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/cpucr.vcd" afterPath="$PROJECT_DIR$/clion/cpucr.vcd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/main_mem.cpp" afterPath="$PROJECT_DIR$/clion/main_mem.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/module_transactor.cpp" afterPath="$PROJECT_DIR$/clion/module_transactor.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/module_transactor.h" afterPath="$PROJECT_DIR$/clion/module_transactor.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/.idea/workspace.xml" afterPath="$PROJECT_DIR$/pycharm/.idea/workspace.xml" />
     </list>
@@ -34,14 +33,78 @@
     <favorites_list name="cpucrBattles" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.9">
+    <splitter split-orientation="horizontal" split-proportion="0.8510479">
       <split-first>
         <leaf>
+          <file leaf-file-name="main_mem.cpp" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/clion/main_mem.cpp">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="module_cpucr.h" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/clion/module_cpucr.h">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#179#202#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="module_transactor.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/clion/module_transactor.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="1.3101124">
-                  <caret line="125" column="9" selection-start-line="125" selection-start-column="9" selection-end-line="125" selection-end-column="9" />
+                <state vertical-scroll-proportion="0.30769232">
+                  <caret line="211" column="2" selection-start-line="211" selection-start-column="2" selection-end-line="211" selection-end-column="2" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="module_mem.cpp" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/clion/module_mem.cpp">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#177#228#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="module_cpucr.cpp" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/clion/module_cpucr.cpp">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="module_mem.h" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/clion/module_mem.h">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="78" column="9" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="memdump" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/clion/memdump">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -54,8 +117,28 @@
           <file leaf-file-name="module_transactor.h" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/clion/module_transactor.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.5685393">
-                  <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
+                <state vertical-scroll-proportion="-0.08391608">
+                  <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="definitions.cpp" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/clion/definitions.cpp">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="definitions_dec.cpp" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/clion/definitions_dec.cpp">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
                   <folding />
                 </state>
               </provider>
@@ -83,9 +166,9 @@
         <option value="$PROJECT_DIR$/clion/module_mem.cpp" />
         <option value="$PROJECT_DIR$/clion/module_cpucr.cpp" />
         <option value="$PROJECT_DIR$/clion/module_mem.h" />
+        <option value="$PROJECT_DIR$/clion/module_transactor.h" />
         <option value="$PROJECT_DIR$/clion/main_mem.cpp" />
         <option value="$PROJECT_DIR$/clion/module_cpucr.h" />
-        <option value="$PROJECT_DIR$/clion/module_transactor.h" />
         <option value="$PROJECT_DIR$/clion/module_transactor.cpp" />
       </list>
     </option>
@@ -249,14 +332,14 @@
     <frame x="0" y="24" width="1366" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.0" sideWeight="0.48" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0" sideWeight="0.48" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18672839" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.379694" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.07098766" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16331269" sideWeight="0.52" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -635,13 +718,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clion/definitions_dec.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/systemc-2.3.1/include/sysc/datatypes/bit/sc_lv.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -659,24 +735,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clion/module_mem.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62608695">
+        <state vertical-scroll-proportion="0.0">
           <caret line="78" column="9" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clion/definitions.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clion/definitions_dec.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/clion/main_mem.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3606558">
-          <caret line="73" column="14" selection-start-line="73" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/clion/module_mem.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8405797">
-          <caret line="31" column="19" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
             <element signature="e#177#228#0" expanded="true" />
           </folding>
@@ -685,7 +777,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clion/module_cpucr.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31304348">
+        <state vertical-scroll-proportion="0.0">
           <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
           <folding />
         </state>
@@ -694,7 +786,7 @@
     <entry file="file://$PROJECT_DIR$/clion/module_cpucr.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="e#179#202#0" expanded="true" />
           </folding>
@@ -703,16 +795,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clion/module_transactor.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5685393">
-          <caret line="37" column="33" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
+        <state vertical-scroll-proportion="-0.08391608">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/clion/module_transactor.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3101124">
-          <caret line="125" column="9" selection-start-line="125" selection-start-column="9" selection-end-line="125" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.30769232">
+          <caret line="211" column="2" selection-start-line="211" selection-start-column="2" selection-end-line="211" selection-end-column="2" />
           <folding />
         </state>
       </provider>
