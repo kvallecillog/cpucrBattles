@@ -21,11 +21,13 @@ SC_MODULE(transactor){
 
         int cnt_m_c, mem_cont, A, word_1, word_2, word_cont, opcode_mem, address_ind_int, oper_cont;
 
-        unsigned int mem_data_dec;
+        unsigned int mem_data_dec, addr_mod_int;
 
-        string mem_data_str, operand, address_ind_str, pa_address_ind, pb_address_ind;
+        string addr_mod_str, mem_data_str, operand, address_ind_str, pa_address_ind, pb_address_ind;
 
         stringstream address_ind_ss, pa_address_ind_ss, pb_address_ind_ss;
+
+        stringstream addr_mod_ss;
 
         bool stop, decode, fetched, execute;
 

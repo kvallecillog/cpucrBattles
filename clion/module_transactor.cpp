@@ -52,12 +52,23 @@ void transactor::inst_exec() {
 
         mem_data_str = to_string(mem_data_dec);
 
+
         cout << "!!!!!Mem pos data:!!!!! " << mem_data_dec << endl;
 
 
         if (fetched == false) {
 
             opcode_mem = mem_data_dec;
+
+            addr_mod_str = bitset<6>(opcode_mem).to_string();
+
+            cout << "opcode_mem_bin: " << addr_mod_str << endl;
+
+            addr_mod_str = addr_mod_str.substr(3,3);
+
+            addr_mod_int = stoi(addr_mod_str, nullptr, 2 );
+
+            cout << "addr_mod_bin: " << addr_mod_str  << " addr_mod_int: " << addr_mod_int <<  endl;
 
             fetched = true;
 
@@ -68,28 +79,28 @@ void transactor::inst_exec() {
 
 //Decodificador de instrucciones
 
-            switch (opcode_mem) {
+            switch (addr_mod_int) {
 
 
-                case LDA_ABS:
+                case ABS:
 
                     cout << "LDA_ABS decoded: " << opcode_mem << endl;
 
-                    word_cont = 4;
+//                    word_cont = 4;
 
                     decode = true;
 
                     break;
 
-                case LDA_INM:
+                case INM:
 
                     cout << "LDA_INM decoded: " << opcode_mem << endl;
 
-                    word_cont = 2;
+//                    word_cont = 2;
 //
 //                    decode = true;
 
-                    cout << "2 word instruction: " << opcode_mem << endl;
+//                    cout << "2 word instruction: " << opcode_mem << endl;
 
                     if (oper_cont == 0) {
 
@@ -113,25 +124,13 @@ void transactor::inst_exec() {
 
                     break;
 
-                case ADD_INM:
-
-                    cout << "ADD_INM decoded: " << opcode_mem << endl;
-
-                    word_cont = 2;
-
-                    decode = true;
-
-
-
-                    break;
-
-                case HLT_CTR:
+                case CTR:
 
                     cout << "HLT_CTR decoded: " << opcode_mem << endl;
 
-                    word_cont = 1;
+//                    word_cont = 1;
 
-                    cout << "1 word instruction: " << opcode_mem << endl;
+//                    cout << "1 word instruction: " << opcode_mem << endl;
 
                     execute = true;
 

@@ -65,3 +65,20 @@
 //In/Out instructions
 #define INP_IO 000111
 #define OUT_IO 001111
+
+//Inmediate instructions
+#define INM 000000
+//Absolute instructions
+#define ABS 000001
+//Relative instructions
+#define REL 000010
+//Indirect instructions
+#define IND 000011
+//Implicit instructions
+#define IMP 010100
+//Accumulator instructions
+#define ACU 000101
+//Control instructions
+#define CTR 000110
+//In/Out instructions
+#define IO 000111

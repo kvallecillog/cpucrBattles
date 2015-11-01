@@ -49,3 +49,20 @@
 #define PHS_CTR 62
 #define INP_IO 7
 #define OUT_IO 15
+
+//Inmediate instructions
+#define INM 0
+//Absolute instructions
+#define ABS 1
+//Relative instructions
+#define REL 2
+//Indirect instructions
+#define IND 3
+//Implicit instructions
+#define IMP 4
+//Accumulator instructions
+#define ACU 5
+//Control instructions
+#define CTR 6
+//In/Out instructions
+#define IO 7
