@@ -20,6 +20,12 @@ SC_MODULE(cpucr){
     sc_out < sc_lv<1> > en_c_o;
     sc_in_clk  clk_c_i;
 
+    sc_out < sc_lv <6> > acum_c_o;
+    sc_out < sc_lv <6> > s_c_o;
+    sc_in < sc_lv <6> > ports_c_i;
+    sc_out < sc_lv <6> > ports_c_o;
+    sc_out < sc_lv<1> > rps_c_o;
+    sc_out < sc_lv<12> > pc_c_o;
     // Signals declarations.
 
     sc_signal < sc_uint<6> > ramdata[MEMORY_H_-1];
@@ -45,7 +51,16 @@ SC_MODULE(cpucr){
         transactor1.addr_t_o(addr_c_o);
         transactor1.rw_t_o(rw_c_o);
         transactor1.en_t_o(en_c_o);
+
+        transactor1.acum_t_o(acum_c_o);
+        transactor1.s_t_o(s_c_o);
+        transactor1.ports_t_i(ports_c_i);
+        transactor1.ports_t_o(ports_c_o);
+        transactor1.rps_t_i(rps_c_o);
+        transactor1.pc_t_o(pc_c_o);
         transactor1.clk_t_i(clk_c_i);
+
+
 
         SC_METHOD(monitor);
 
