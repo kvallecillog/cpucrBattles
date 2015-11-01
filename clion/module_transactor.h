@@ -35,7 +35,7 @@ SC_MODULE(transactor){
 
             SC_METHOD(inst_exec);
 
-            sensitive << clk_t_i;
+            sensitive_neg << clk_t_i;
 //            sensitive << clk_t_i << dat_t_o << addr_t_o << rw_t_o << en_t_o;
 
             cnt_m_c= mem_cont= A= word_1= word_2= word_cont= opcode_mem= address_ind_int= oper_cont = 0;

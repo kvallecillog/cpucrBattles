@@ -86,8 +86,30 @@ void transactor::inst_exec() {
                     cout << "LDA_INM decoded: " << opcode_mem << endl;
 
                     word_cont = 2;
+//
+//                    decode = true;
 
-                    decode = true;
+                    cout << "2 word instruction: " << opcode_mem << endl;
+
+                    if (oper_cont == 0) {
+
+                        oper_cont++;
+                        mem_cont++;
+                        decode = false;
+
+                        execute = false;
+
+                    }
+                    else {
+
+                        word_1 = mem_data_dec;
+
+                        oper_cont = 0;
+
+                        decode = true;
+
+                        execute = true;
+                    }
 
                     break;
 
@@ -99,6 +121,8 @@ void transactor::inst_exec() {
 
                     decode = true;
 
+
+
                     break;
 
                 case HLT_CTR:
@@ -106,6 +130,10 @@ void transactor::inst_exec() {
                     cout << "HLT_CTR decoded: " << opcode_mem << endl;
 
                     word_cont = 1;
+
+                    cout << "1 word instruction: " << opcode_mem << endl;
+
+                    execute = true;
 
                     decode = true;
 
@@ -121,118 +149,118 @@ void transactor::inst_exec() {
 
 // decoding words.
 
-        if (decode == true) {
-
-            switch (word_cont) {
-
-
-                case 1:
-
-                    cout << "1 word instruction: " << opcode_mem << endl;
-
-                    execute = true;
-
-                    break;
-
-
-                case 2:
-
-                    cout << "2 word instruction: " << opcode_mem << endl;
-
-                    if (oper_cont == 0) {
-
-                        oper_cont++;
-                        mem_cont++;
-                        decode = true;
-
-                        execute = false;
-
-                    }
-                    else {
-
-                        word_1 = mem_data_dec;
-
-                        oper_cont = 0;
-
-                        decode = false;
-
-                        execute = true;
-                    }
-
-                    break;
-
-
-//                case 4:
+//        if (decode == true) {
 //
-//                    cout << "3 word instruction: " << opcode_mem << endl;
+//            switch (word_cont) {
+//
+//
+//                case 1:
+//
+//                    cout << "1 word instruction: " << opcode_mem << endl;
+//
+//                    execute = true;
+
+//                    break;
+//
+//
+//                case 2:
+//
+//                    cout << "2 word instruction: " << opcode_mem << endl;
 //
 //                    if (oper_cont == 0) {
 //
 //                        oper_cont++;
-//
+//                        mem_cont++;
 //                        decode = true;
 //
 //                        execute = false;
 //
-//                        mem_cont++;
-//
-//
 //                    }
-//                    else if (oper_cont == 1) {
+//                    else {
 //
 //                        word_1 = mem_data_dec;
 //
-//                        pa_address_ind_ss << hex << word_1; // int decimal_value
-//
-//                        pa_address_ind = pa_address_ind_ss.str();
-//
-//                        oper_cont++;
-//
-//                        decode = true;
-//
-//                        execute = false;
-//
-//                        mem_cont++;
-//
-//                    }
-//                    else if (oper_cont == 2) {
-//
-//                        word_2 = mem_data_dec;
-//
-//
-//                        pb_address_ind_ss << hex << word_2; // int decimal_value
-//
-//                        pb_address_ind = pb_address_ind_ss.str();
-//
-//                        address_ind_str = pa_address_ind + pb_address_ind;
-//
-//                        address_ind_ss << address_ind_str;
-//
-//                        address_ind_ss >> hex >> address_ind_int; // int decimal_value
-//
-//                        mem_cont = address_ind_int;
-//
-//                        oper_cont++;
-//
-//                        decode = true;
-//
-//                        execute = false;
-//                    }
-//
-//                    else if(oper_cont == 3){
-//
 //                        oper_cont = 0;
 //
-//                        decode = true;
+//                        decode = false;
 //
 //                        execute = true;
-//
 //                    }
 //
 //                    break;
 //
-            }
-        }
+//
+////                case 4:
+////
+////                    cout << "3 word instruction: " << opcode_mem << endl;
+////
+////                    if (oper_cont == 0) {
+////
+////                        oper_cont++;
+////
+////                        decode = true;
+////
+////                        execute = false;
+////
+////                        mem_cont++;
+////
+////
+////                    }
+////                    else if (oper_cont == 1) {
+////
+////                        word_1 = mem_data_dec;
+////
+////                        pa_address_ind_ss << hex << word_1; // int decimal_value
+////
+////                        pa_address_ind = pa_address_ind_ss.str();
+////
+////                        oper_cont++;
+////
+////                        decode = true;
+////
+////                        execute = false;
+////
+////                        mem_cont++;
+////
+////                    }
+////                    else if (oper_cont == 2) {
+////
+////                        word_2 = mem_data_dec;
+////
+////
+////                        pb_address_ind_ss << hex << word_2; // int decimal_value
+////
+////                        pb_address_ind = pb_address_ind_ss.str();
+////
+////                        address_ind_str = pa_address_ind + pb_address_ind;
+////
+////                        address_ind_ss << address_ind_str;
+////
+////                        address_ind_ss >> hex >> address_ind_int; // int decimal_value
+////
+////                        mem_cont = address_ind_int;
+////
+////                        oper_cont++;
+////
+////                        decode = true;
+////
+////                        execute = false;
+////                    }
+////
+////                    else if(oper_cont == 3){
+////
+////                        oper_cont = 0;
+////
+////                        decode = true;
+////
+////                        execute = true;
+////
+////                    }
+////
+////                    break;
+////
+//            }
+//        }
         if (execute == true) {
 
 

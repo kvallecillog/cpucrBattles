@@ -1,5 +1,5 @@
 $date
-     Oct 31, 2015       18:13:56
+     Oct 31, 2015       19:30:10
 $end
 
 $version
@@ -38,38 +38,34 @@ All initial values are dumped below at time 0 sec = 0 timescale units.
 $end
 
 $dumpvars
-b0 aaaaa
+b1 aaaaa
 b0 aaaab
 1aaaac
 0aaaad
-1aaaae
+0aaaae
 1aaaaf
 0aaaag
-b0 aaaah
+b1 aaaah
 b0 aaaai
 b0 aaaaj
 1aaaak
 0aaaal
-b0 aaaam
+b1 aaaam
 b0 aaaan
 b0 aaaao
 1aaaap
 0aaaaq
-b0 aaaar
+b1 aaaar
 b0 aaaas
 $end
 
 #5
-b1 aaaaa
-0aaaae
-b1 aaaah
-b1 aaaam
-b1 aaaar
+1aaaae
 
 #10
 b10 aaaaa
 b1 aaaab
-1aaaae
+0aaaae
 b10 aaaah
 b1 aaaai
 b1 aaaaj
@@ -80,6 +76,9 @@ b10 aaaar
 b1 aaaas
 
 #15
+1aaaae
+
+#20
 b11 aaaaa
 b100110 aaaab
 0aaaae
@@ -92,10 +91,13 @@ b100110 aaaao
 b11 aaaar
 b100110 aaaas
 
-#20
+#25
+1aaaae
+
+#30
 b100 aaaaa
 b0 aaaab
-1aaaae
+0aaaae
 b100 aaaah
 b0 aaaai
 b0 aaaaj

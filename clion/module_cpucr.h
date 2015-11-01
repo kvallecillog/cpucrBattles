@@ -49,7 +49,7 @@ SC_MODULE(cpucr){
 
         SC_METHOD(monitor);
 
-        sensitive << clk_c_i ;
+        sensitive_neg << clk_c_i ;
 
 //        // Habilitar memoria.
 //        transactor1.en_t_o.write(1);

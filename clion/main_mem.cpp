@@ -24,7 +24,7 @@ int sc_main(int argc, char* argv[]) {
 
     // Create clock
     sc_set_time_resolution(1, SC_NS);
-    sc_clock clk("clk", 10, SC_NS, 0.5, 5, SC_NS, false);
+    sc_clock clk("clk", 10, SC_NS, 0.5, 0, SC_NS, false);
 
     // Module instantiations.
     cpucr cpucr1("cpucr");

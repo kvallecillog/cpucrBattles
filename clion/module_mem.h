@@ -66,7 +66,7 @@ SC_MODULE(memory){
         SC_CTOR(memory){
 
             SC_METHOD(entry);
-         sensitive << clk_m_i;
+        sensitive_neg << clk_m_i;
 //        sensitive << enable_mem << rw_mem << address_mem;
 
 
