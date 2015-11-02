@@ -9,7 +9,9 @@
 #include <string>
 
  // System C library.
-#include </usr/local/systemc-2.3.1/include/systemc>
+//#include </usr/local/systemc-2.3.1/include/systemc>
+#include <systemc>
+
 
 #include "module_mem.h"
 

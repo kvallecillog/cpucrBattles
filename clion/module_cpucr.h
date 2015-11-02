@@ -24,7 +24,7 @@ SC_MODULE(cpucr){
     sc_out < sc_lv <6> > s_c_o;
     sc_in < sc_lv <6> > ports_c_i;
     sc_out < sc_lv <6> > ports_c_o;
-    sc_out < sc_lv<1> > rps_c_o;
+    sc_in < bool > rps_c_i;
     sc_out < sc_lv<12> > pc_c_o;
     // Signals declarations.
 
@@ -56,7 +56,7 @@ SC_MODULE(cpucr){
         transactor1.s_t_o(s_c_o);
         transactor1.ports_t_i(ports_c_i);
         transactor1.ports_t_o(ports_c_o);
-        transactor1.rps_t_i(rps_c_o);
+        transactor1.rps_t_i(rps_c_i);
         transactor1.pc_t_o(pc_c_o);
         transactor1.clk_t_i(clk_c_i);
 
@@ -64,7 +64,8 @@ SC_MODULE(cpucr){
 
         SC_METHOD(monitor);
 
-        sensitive_neg << clk_c_i ;
+            sensitive<< rps_c_i.pos() << clk_c_i.neg();
+//           sensitive_pos << rps_c_i;
 
 //        // Habilitar memoria.
 //        transactor1.en_t_o.write(1);

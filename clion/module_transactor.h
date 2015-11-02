@@ -3,7 +3,10 @@
 //
 
 // SystemC library.
-#include </usr/local/systemc-2.3.1/include/systemc>
+//#include </usr/local/systemc-2.3.1/include/systemc>
+
+#include <systemc>
+
 
 using namespace std;
 using namespace sc_core;
@@ -21,7 +24,7 @@ SC_MODULE(transactor){
         sc_out < sc_lv <6> > s_t_o;
         sc_in < sc_lv <6> > ports_t_i;
         sc_out < sc_lv <6> > ports_t_o;
-        sc_in < sc_lv<1> > rps_t_i;
+        sc_in < bool > rps_t_i;
         sc_in_clk  clk_t_i;
 
         sc_out < sc_lv<12> > pc_t_o;
@@ -48,35 +51,50 @@ SC_MODULE(transactor){
 
         bool stop, decode, fetched, execute;
 
-    void inst_exec();
+    void init_cpucr();
+//    void inst_exec();
 
-        SC_CTOR(transactor){
 
-            SC_METHOD(inst_exec);
+    SC_CTOR(transactor){
 
-            sensitive_neg << clk_t_i ;
+            SC_METHOD(init_cpucr);
+
+            sensitive << rps_t_i.pos();
+
+            dat_t_o.initialize("xxxxxx");
+
+            addr_t_o.initialize("xxxxxxxxxx");
+
+            rw_t_o.initialize("x");
+
+            en_t_o.initialize("x");
+
+            pc_t_o.initialize("xxxxxxxxxxxx");
+//            SC_METHOD(inst_exec);
+//
+//            sensitive_neg << clk_t_i ;
 //            sensitive << acum_t_o ;
 //            sensitive << clk_t_i << dat_t_o << addr_t_o << rw_t_o << en_t_o;
 
-            cnt_m_c= mem_cont= A= word_1= word_2= word_cont= ri_mem= address_ind_int= oper_cont = 0;
-
-//            mem_data_dec = 0;
-
-            stop = false;
-            
-            decode = false;
-            
-            fetched = false;
-            
-            execute = false;
+//            cnt_m_c= mem_cont= A= word_1= word_2= word_cont= ri_mem= address_ind_int= oper_cont = 0;
+//
+//           mem_data_dec = 0;
+//
+//            stop = false;
+//
+//            decode = false;
+//
+//            fetched = false;
+//
+//            execute = false;
 
 //            dat_t_o.initialize("zzzzzz");
 //
-//            addr_t_o.initialize("0");
+//            addr_t_o.initialize("5");
 //
-            rw_t_o.initialize("0");
-
-            en_t_o.initialize("1");
+//            rw_t_o.initialize("0");
+//
+//            en_t_o.initialize("1");
 
 
             FILE *fp ;
@@ -101,10 +119,10 @@ SC_MODULE(transactor){
                 cout << pc_init << endl;
                 size++;
             }
-
-            pc_t_o.initialize(pc_t_s);
-            mem_cont = pc_init;
-            addr_t_o.initialize(pc_init);
+//            cout << "pc_init" << pc_init << endl;
+//            pc_t_o.initialize(pc_t_s);
+//            mem_cont = pc_init;
+//            addr_t_o.initialize(pc_init);
         }
 
 };

@@ -1,5 +1,5 @@
 $date
-     Nov 01, 2015       16:19:53
+     Nov 01, 2015       21:26:38
 $end
 
 $version
@@ -22,27 +22,28 @@ $var wire    6  aaaah  ports_i [5:0]  $end
 $var wire    6  aaaai  ports_o [5:0]  $end
 $var wire    1  aaaaj  rps       $end
 $var wire   12  aaaak  pc [11:0]  $end
-$var wire    6  aaaal  ports_t_o [5:0]  $end
-$var wire    6  aaaam  ports_t_i [5:0]  $end
-$var wire    6  aaaan  s_t_o [5:0]  $end
-$var wire    6  aaaao  acum_t_o [5:0]  $end
-$var wire    1  aaaap  en_t_i       $end
-$var wire    1  aaaaq  rw_t_i       $end
-$var wire   12  aaaar  addr_t_o [11:0]  $end
-$var wire    6  aaaas  dat_t_o [5:0]  $end
-$var wire    6  aaaat  dat_t_i [5:0]  $end
-$var wire    1  aaaau  en_m_i       $end
-$var wire    1  aaaav  rw_m_i       $end
-$var wire   12  aaaaw  addr_m_i [11:0]  $end
-$var wire    6  aaaax  dat_m_o [5:0]  $end
-$var wire    6  aaaay  dat_m_i [5:0]  $end
-$var wire   12  aaaaz  pc_c_o [11:0]  $end
-$var wire    1  aaaba  rps_c_i       $end
-$var wire    6  aaabb  s_c_o [5:0]  $end
-$var wire    1  aaabc  en_c_o       $end
-$var wire    1  aaabd  rw_c_o       $end
-$var wire   12  aaabe  addr_c_o [11:0]  $end
-$var wire    6  aaabf  dat_c_o [5:0]  $end
+$var wire    1  aaaal  rps_stim_o       $end
+$var wire    6  aaaam  ports_t_o [5:0]  $end
+$var wire    6  aaaan  ports_t_i [5:0]  $end
+$var wire    6  aaaao  s_t_o [5:0]  $end
+$var wire    6  aaaap  acum_t_o [5:0]  $end
+$var wire    1  aaaaq  en_t_i       $end
+$var wire    1  aaaar  rw_t_i       $end
+$var wire   12  aaaas  addr_t_o [11:0]  $end
+$var wire    6  aaaat  dat_t_o [5:0]  $end
+$var wire    6  aaaau  dat_t_i [5:0]  $end
+$var wire    1  aaaav  en_m_i       $end
+$var wire    1  aaaaw  rw_m_i       $end
+$var wire   12  aaaax  addr_m_i [11:0]  $end
+$var wire    6  aaaay  dat_m_o [5:0]  $end
+$var wire    6  aaaaz  dat_m_i [5:0]  $end
+$var wire   12  aaaba  pc_c_o [11:0]  $end
+$var wire    1  aaabb  rps_c_i       $end
+$var wire    6  aaabc  s_c_o [5:0]  $end
+$var wire    1  aaabd  en_c_o       $end
+$var wire    1  aaabe  rw_c_o       $end
+$var wire   12  aaabf  addr_c_o [11:0]  $end
+$var wire    6  aaabg  dat_c_o [5:0]  $end
 $upscope $end
 $enddefinitions  $end
 
@@ -52,36 +53,157 @@ $end
 
 $dumpvars
 b0 aaaaa
-b0 aaaab
-1aaaac
+bZZZZZZ aaaab
+0aaaac
 0aaaad
 0aaaae
 bXXXXXX aaaaf
 bXXXXXX aaaag
 bXXXXXX aaaah
 bXXXXXX aaaai
-1aaaaj
+0aaaaj
 b0 aaaak
-bXXXXXX aaaal
+0aaaal
 bXXXXXX aaaam
 bXXXXXX aaaan
 bXXXXXX aaaao
-1aaaap
+bXXXXXX aaaap
 0aaaaq
-b0 aaaar
+0aaaar
 b0 aaaas
-b0 aaaat
-1aaaau
+bZZZZZZ aaaat
+bZZZZZZ aaaau
 0aaaav
-b0 aaaaw
+0aaaaw
 b0 aaaax
-b0 aaaay
-b0 aaaaz
-1aaaba
-bXXXXXX aaabb
-1aaabc
+bZZZZZZ aaaay
+bZZZZZZ aaaaz
+b0 aaaba
+0aaabb
+bXXXXXX aaabc
 0aaabd
-b0 aaabe
+0aaabe
 b0 aaabf
+bZZZZZZ aaabg
 $end
+
+#250
+1aaaae
+
+#500
+0aaaae
+
+#750
+1aaaae
+
+#1000
+0aaaae
+1aaaaj
+1aaaal
+1aaabb
+
+#1250
+1aaaae
+
+#1500
+0aaaae
+
+#1750
+1aaaae
+
+#2000
+0aaaae
+
+#2250
+1aaaae
+
+#2500
+0aaaae
+
+#2750
+1aaaae
+
+#3000
+0aaaae
+
+#3250
+1aaaae
+
+#3500
+0aaaae
+
+#3750
+1aaaae
+
+#4000
+0aaaae
+
+#4250
+1aaaae
+
+#4500
+0aaaae
+
+#4750
+1aaaae
+
+#5000
+0aaaae
+
+#5250
+1aaaae
+
+#5500
+0aaaae
+
+#5750
+1aaaae
+
+#6000
+0aaaae
+
+#6250
+1aaaae
+
+#6500
+0aaaae
+
+#6750
+1aaaae
+
+#7000
+0aaaae
+
+#7250
+1aaaae
+
+#7500
+0aaaae
+
+#7750
+1aaaae
+
+#8000
+0aaaae
+
+#8250
+1aaaae
+
+#8500
+0aaaae
+
+#8750
+1aaaae
+
+#9000
+0aaaae
+
+#9250
+1aaaae
+
+#9500
+0aaaae
+
+#9750
+1aaaae
 

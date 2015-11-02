@@ -2,7 +2,9 @@
 #define MEMORY_H_ 4096
 
  // SystemC library.
-#include </usr/local/systemc-2.3.1/include/systemc>
+//#include </usr/local/systemc-2.3.1/include/systemc>
+#include <systemc>
+
 // IO c library.
 #include "stdio.h"
 
@@ -44,29 +46,12 @@ SC_MODULE(memory){
         }
     }
 
-
-//    void memdump(){
-//        FILE *fp = fopen("memdump","w");
-//        int size;
-//        fprintf(fp, "--------------\n");
-//        fprintf(fp, "|Address|Data|\n");
-//        fprintf(fp, "--------------\n");
-//        int  data_int = 0;
-//
-//
-//        for (size = 0; size < MEMORY_H_-1; size++) {
-//
-//            data_int = ramdata[size].read().to_int();
-//
-//            fprintf(fp, "|@%.4o|::|@%.2o|\n", size, data_int);
-//            fprintf(fp, "--------------\n");
-//        }
-//    }
-
         SC_CTOR(memory){
 
+
         SC_METHOD(entry);
-        sensitive_neg << clk_m_i;
+
+//        sensitive_neg << clk_m_i;
 
         FILE *fp ;
 
@@ -87,7 +72,7 @@ SC_MODULE(memory){
         size = 0;
         while (fscanf(fp,"%xn", &mem_word) != EOF) {
             ramdata[size].write( mem_word );
-            cout << mem_word << endl;
+//            cout << mem_word << endl;
             size++;
         }
 

@@ -3,10 +3,15 @@
 #include <vector>
 #include <boost/algorithm/string.hpp>
 #include <string>
+//
+//#include </usr/local/systemc-2.3.1/include/systemc>
+#include </usr/local/systemc-2.3.1/include/sysc/kernel/sc_wait.h>
 
-#include </usr/local/systemc-2.3.1/include/systemc>
+#include <systemc>
 
 #include "module_cpucr.h"
+#include "module_cpucr_stim.h"
+
 
 using namespace std;
 using namespace sc_core;
@@ -16,19 +21,15 @@ using namespace boost::algorithm;
 
 int sc_main(int argc, char* argv[]) {
 
-    // Create channels
-    sc_signal<sc_lv<1> > enable_ch;
-    sc_signal<sc_lv<1> > rw_ch;
-    sc_signal<sc_lv<6> > data_ch;
-    sc_signal<sc_lv<12> > address_ch;
-
     // Create clock
     sc_set_time_resolution(1, SC_NS);
     sc_clock clk("clk", 500, SC_NS, 0.5, 0, SC_NS, false);
 
     // Module instantiations.
     cpucr cpucr1("cpucr");
+    cpucr_stim test_bench ("test_bench");
 
+    // Create channels
     sc_signal<sc_lv<1> > enable;
     sc_signal<sc_lv<1> > rw;
     sc_signal<sc_lv<6> > data;
@@ -37,10 +38,9 @@ int sc_main(int argc, char* argv[]) {
     sc_signal < sc_lv <6> > s;
     sc_signal < sc_lv <6> > ports_i;
     sc_signal < sc_lv <6> > ports_o;
-    sc_signal < sc_lv <1> > rps;
+    sc_signal < bool > rps;
     sc_signal < sc_lv <12> > pc;
 
-    cpucr1.rps_c_o.initialize("1");
 
     sc_trace_file *wf = sc_create_vcd_trace_file("cpucr");
 
@@ -61,10 +61,11 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.dat_c_o, "dat_c_o");
     sc_trace(wf, cpucr1.en_c_o, "en_c_o");
     sc_trace(wf, cpucr1.rw_c_o, "rw_c_o");
-    sc_trace(wf, cpucr1.rps_c_o, "rps_c_i");
+    sc_trace(wf, cpucr1.rps_c_i, "rps_c_i");
     sc_trace(wf, cpucr1.pc_c_o, "pc_c_o");
     sc_trace(wf, cpucr1.s_c_o, "s_c_o");
 
+    sc_trace(wf, test_bench.rps_stim_o, "rps_stim_o");
 
 
     sc_trace(wf, cpucr1.memory1.addr_m_i, "addr_m_i");
@@ -84,6 +85,10 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.transactor1.ports_t_i, "ports_t_i");
     sc_trace(wf, cpucr1.transactor1.ports_t_o, "ports_t_o");
 
+
+    test_bench.clk_stim_i(clk);
+    test_bench.rps_stim_o(rps);
+
     cpucr1.dat_c_o(data);
     cpucr1.addr_c_o(address);
     cpucr1.rw_c_o(rw);
@@ -94,13 +99,16 @@ int sc_main(int argc, char* argv[]) {
     cpucr1.s_c_o(s);
     cpucr1.ports_c_i(ports_i);
     cpucr1.ports_c_o(ports_o);
-    cpucr1.rps_c_o(rps);
+    cpucr1.rps_c_i(rps);
     cpucr1.pc_c_o(pc);
 
     sc_start(10, SC_US);
+    test_bench.stimgen();
     cpucr1.monitor();
-    cpucr1.transactor1.inst_exec();
+    cpucr1.transactor1.init_cpucr();
+//    cpucr1.transactor1.inst_exec();
     cpucr1.memory1.memdump();
+
     sc_stop();
 
 
