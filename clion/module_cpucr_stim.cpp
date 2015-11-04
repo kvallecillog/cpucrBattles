@@ -15,9 +15,9 @@ void cpucr_stim::stimgen() {
     while (true) {
 
 
-        sc_core::wait(1, SC_US);
+        sc_core::wait(500, SC_NS);
 
-        rps_stim_o.write("1");
+        rps_stim_o.write(1);
 
 
     }

@@ -26,6 +26,7 @@ using namespace boost::algorithm;
 
 
 void memory::entry(){
+
     if(en_m_i.read() == 1) {
 
         if(rw_m_i.read() == 1) {
@@ -43,30 +44,16 @@ void memory::entry(){
 
         }
     }
-    else {
+    else if(en_m_i.read() == 0) {
+        
         dat_m_o.write("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+    
     }
-}
+    
+    else{
 
-//void memory::mem_init()
-//{
-//        FILE *fp ;
-//
-//        fp = fopen("ram_init.txt","r");
-//        if(!fp)
-//        {
-//            perror("error. cannot find ram_init.");
-//        }
-//        int size=0;
-//        int mem_word;
-//        for (size = 0; size < MEMORY_H_-1; size++) {
-//            // Cambiar a numero randomw
-//            ramdata[size].write(0x0);
-//        }
-//        size = 0;
-//        while (fscanf(fp,"%d", &mem_word) != EOF) {
-//            ramdata[size].write( mem_word );
-//            size++;
-//        }
-//
-//}
+        cout << "Inicializacion de la CPUCR" << endl;
+
+    }
+
+}

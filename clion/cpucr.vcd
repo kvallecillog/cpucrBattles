@@ -1,5 +1,5 @@
 $date
-     Nov 01, 2015       21:26:38
+     Nov 03, 2015       21:02:08
 $end
 
 $version
@@ -23,27 +23,30 @@ $var wire    6  aaaai  ports_o [5:0]  $end
 $var wire    1  aaaaj  rps       $end
 $var wire   12  aaaak  pc [11:0]  $end
 $var wire    1  aaaal  rps_stim_o       $end
-$var wire    6  aaaam  ports_t_o [5:0]  $end
-$var wire    6  aaaan  ports_t_i [5:0]  $end
-$var wire    6  aaaao  s_t_o [5:0]  $end
-$var wire    6  aaaap  acum_t_o [5:0]  $end
-$var wire    1  aaaaq  en_t_i       $end
-$var wire    1  aaaar  rw_t_i       $end
-$var wire   12  aaaas  addr_t_o [11:0]  $end
-$var wire    6  aaaat  dat_t_o [5:0]  $end
-$var wire    6  aaaau  dat_t_i [5:0]  $end
-$var wire    1  aaaav  en_m_i       $end
-$var wire    1  aaaaw  rw_m_i       $end
-$var wire   12  aaaax  addr_m_i [11:0]  $end
-$var wire    6  aaaay  dat_m_o [5:0]  $end
-$var wire    6  aaaaz  dat_m_i [5:0]  $end
-$var wire   12  aaaba  pc_c_o [11:0]  $end
-$var wire    1  aaabb  rps_c_i       $end
-$var wire    6  aaabc  s_c_o [5:0]  $end
-$var wire    1  aaabd  en_c_o       $end
-$var wire    1  aaabe  rw_c_o       $end
-$var wire   12  aaabf  addr_c_o [11:0]  $end
-$var wire    6  aaabg  dat_c_o [5:0]  $end
+$var wire    1  aaaam  init_t_o       $end
+$var wire    1  aaaan  rps_t_i       $end
+$var wire    6  aaaao  ports_t_o [5:0]  $end
+$var wire    6  aaaap  ports_t_i [5:0]  $end
+$var wire    6  aaaaq  s_t_o [5:0]  $end
+$var wire    6  aaaar  acum_t_o [5:0]  $end
+$var wire    1  aaaas  en_t_i       $end
+$var wire    1  aaaat  rw_t_i       $end
+$var wire   12  aaaau  addr_t_o [11:0]  $end
+$var wire    6  aaaav  dat_t_o [5:0]  $end
+$var wire    6  aaaaw  dat_t_i [5:0]  $end
+$var wire    1  aaaax  en_m_i       $end
+$var wire    1  aaaay  rw_m_i       $end
+$var wire   12  aaaaz  addr_m_i [11:0]  $end
+$var wire    6  aaaba  dat_m_o [5:0]  $end
+$var wire    6  aaabb  dat_m_i [5:0]  $end
+$var wire    1  aaabc  init_c_o       $end
+$var wire   12  aaabd  pc_c_o [11:0]  $end
+$var wire    1  aaabe  rps_c_i       $end
+$var wire    6  aaabf  s_c_o [5:0]  $end
+$var wire    1  aaabg  en_c_o       $end
+$var wire    1  aaabh  rw_c_o       $end
+$var wire   12  aaabi  addr_c_o [11:0]  $end
+$var wire    6  aaabj  dat_c_o [5:0]  $end
 $upscope $end
 $enddefinitions  $end
 
@@ -52,39 +55,42 @@ All initial values are dumped below at time 0 sec = 0 timescale units.
 $end
 
 $dumpvars
-b0 aaaaa
-bZZZZZZ aaaab
-0aaaac
-0aaaad
+bXXXXXXXXXXXX aaaaa
+bXXXXXX aaaab
+Xaaaac
+Xaaaad
 0aaaae
 bXXXXXX aaaaf
 bXXXXXX aaaag
 bXXXXXX aaaah
 bXXXXXX aaaai
 0aaaaj
-b0 aaaak
+bXXXXXXXXXXXX aaaak
 0aaaal
-bXXXXXX aaaam
-bXXXXXX aaaan
+0aaaam
+0aaaan
 bXXXXXX aaaao
 bXXXXXX aaaap
-0aaaaq
-0aaaar
-b0 aaaas
-bZZZZZZ aaaat
-bZZZZZZ aaaau
-0aaaav
-0aaaaw
-b0 aaaax
-bZZZZZZ aaaay
-bZZZZZZ aaaaz
-b0 aaaba
-0aaabb
-bXXXXXX aaabc
-0aaabd
+bXXXXXX aaaaq
+bXXXXXX aaaar
+Xaaaas
+Xaaaat
+bXXXXXXXXXXXX aaaau
+bXXXXXX aaaav
+bXXXXXX aaaaw
+Xaaaax
+Xaaaay
+bXXXXXXXXXXXX aaaaz
+bXXXXXX aaaba
+bXXXXXX aaabb
+0aaabc
+bXXXXXXXXXXXX aaabd
 0aaabe
-b0 aaabf
-bZZZZZZ aaabg
+bXXXXXX aaabf
+Xaaabg
+Xaaabh
+bXXXXXXXXXXXX aaabi
+bXXXXXX aaabj
 $end
 
 #250
@@ -92,15 +98,16 @@ $end
 
 #500
 0aaaae
+1aaaaj
+1aaaal
+1aaaan
+1aaabe
 
 #750
 1aaaae
 
 #1000
 0aaaae
-1aaaaj
-1aaaal
-1aaabb
 
 #1250
 1aaaae

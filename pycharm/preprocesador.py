@@ -888,12 +888,12 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
 def instruction_checker(fi_list, lines_raw_list):
     # print(fi_list)
 
-    ram_init_file_name = '../clion/ram_init_v2.txt'
+    ram_init_file_name = '../clion/ram_init.txt'
     ram_init_file = open(ram_init_file_name, 'w+')
 
     object_file_name = 'file.obj'
     object_file = open(object_file_name, 'w+')
-    pc_file_name = 'asm.info'
+    pc_file_name = '../clion/pc_init.txt'
     pc_file = open(pc_file_name, 'w+')
     pc_x = ""
     base = 16
@@ -981,6 +981,8 @@ def instruction_checker(fi_list, lines_raw_list):
         else:
             ram_init_file.writelines(cero+"\n")
 
+    print("\nram_init_file_name:", ram_init_file_name)
+    print("\npc_file_name:", pc_file_name)
 
 def int_2_base(number, base):
 

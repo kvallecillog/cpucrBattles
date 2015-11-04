@@ -21,9 +21,11 @@ SC_MODULE(cpucr_stim) {
 
         SC_CTOR(cpucr_stim){
 
-            SC_THREAD(stimgen);
-            sensitive_neg << clk_stim_i;
 
+
+            SC_THREAD(stimgen);
+            sensitive << clk_stim_i.neg();
+            rps_stim_o.initialize(0);
 
         }
 };

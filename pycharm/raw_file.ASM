@@ -8,7 +8,7 @@ LALA = @0000
 ;PUNT2 = * + 20
 * = @0000
 
-LDA #1
+LDA #0
 HLT
 
 
