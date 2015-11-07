@@ -6,13 +6,22 @@ LALA = @0001
 ;* = * + 1
 ;PUNT1 = *
 ;PUNT2 = * + 20
-* = $3fff
-* = @0002
-* = 4096
-* = %000011110000
-LDA #$A
-INP $FF
-HLT
+;* = $3fff
+;* = @0002
+;* = 4096
+;* = %000000000000
+LDA = @0000
+LABEL LDA #07
+BNE LALA
+LALA LDA #01
+;LDA #$A
+;LDA #LABEL
+;LABEL LDA #@07
+;LABEL1 LDA #@07
+;BNE LABEL1
+;INP $FF
+;OUT %100
+;HLT
 
 
 ;LDA #7
