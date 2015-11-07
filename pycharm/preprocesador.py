@@ -190,7 +190,7 @@ def init_checker(data_list, lines_raw_list,error):
     # Regex para identificar el contador de posicion de memoria.
     # Un ejemplo de declaracion de contador de posicion de memoria:
     # * = @7777; Notese que debe declararse con espacios blancos.
-    regex_pos_def = re.compile(r"^(\*)(\s)(\=)(\s)((\@)([0-7]{1,4}))$", re.IGNORECASE)
+    regex_pos_def = re.compile(r"^(\*)(\s)(\=)(\s)(((\@)([0-7]{1,4}))|((\$)([0-9A-Fa-f]{1,4}))|(\d*)|((\%)([0-1]{1,12})))$", re.IGNORECASE)
 
     # Regex para identificar declaraciones de constantes.
     # Un ejemplo de declaracion de constantes:
@@ -254,14 +254,62 @@ def init_checker(data_list, lines_raw_list,error):
                 # * = @0000
                 if pos_def_match:
 
-                    pos_cont_oct = pos_def_match.group(7)
-                    pos_cont_dec = int(pos_cont_oct, 8)
-                    print("Position counter declaration:", pos_cont_oct)
+                    print("Catching pcs")
+                    print(pos_def_match.group(13))
+                    # Octal pc
+                    if pos_def_match.group(6):
 
-                    # print("Value:", pos_def_match.group(7))
-                    pos_cont = True
-                    print("Position counter line:")
-                    print(num_line_int, "|", non_num_line)
+                        print("Position counter hex declaration:", pos_def_match.group(6))
+                        pos_cont_oct = pos_def_match.group(5)[1:]
+                        pos_cont_dec = int(pos_cont_oct, 8)
+                        print("Position counter oct declaration:", pos_cont_oct)
+                        print("Position counter dec declaration:", pos_cont_dec)
+
+                        # print("Value:", pos_def_match.group(7))
+                        pos_cont = True
+                        print("Position counter line:")
+                        print(num_line_int, "|", non_num_line)
+
+                    # Hexadecimal pc
+                    elif pos_def_match.group(9):
+
+                        print("Position counter hex declaration:", pos_def_match.group(9))
+                        pos_cont_hex = pos_def_match.group(9)[1:]
+                        pos_cont_dec = int(pos_cont_hex, 16)
+                        print("Position counter hex declaration:", pos_cont_hex)
+                        print("Position counter dec declaration:", pos_cont_dec)
+
+                        # print("Value:", pos_def_match.group(7))
+                        pos_cont = True
+                        print("Position counter line:")
+                        print(num_line_int, "|", non_num_line)
+
+
+
+                    elif pos_def_match.group(12):
+
+                        print("Position counter dec declaration:", pos_def_match.group(12))
+                        pos_cont_dec_str = pos_def_match.group(12)
+                        pos_cont_dec_int = int(pos_cont_dec_str)
+                        print("Position counter dec declaration:", pos_cont_dec_int)
+
+                        # print("Value:", pos_def_match.group(7))
+                        pos_cont = True
+                        print("Position counter line:")
+                        print(num_line_int, "|", non_num_line)
+
+                    elif pos_def_match.group(13):
+
+                        print("Position counter dec declaration:", pos_def_match.group(13))
+                        pos_cont_bin = pos_def_match.group(13)[1:]
+                        pos_cont_dec = int(pos_cont_bin,2)
+                        print("Position counter dec declaration:", pos_cont_dec)
+
+                        # print("Value:", pos_def_match.group(7))
+                        pos_cont = True
+                        print("Position counter line:")
+                        print(num_line_int, "|", non_num_line)
+
 
                 # CONST = *
                 elif pos_assign_match:
@@ -385,6 +433,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
     regex_oper_dec = re.compile(r"^([0-9]+)$", re.IGNORECASE)
     regex_oper_oct = re.compile(r"^(\@)([0-7]{1,4})$", re.IGNORECASE)
     regex_oper_bin = re.compile(r"^(\%)([0-1]{1,6})$", re.IGNORECASE)
+    regex_oper_hex = re.compile(r"^(\$)([0-9A-Fa-f]{1,4})$", re.IGNORECASE)
 
     regex_res_word = re.compile(r"\b(ADD|AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
                      DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
@@ -404,16 +453,18 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
         r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
         re.IGNORECASE)
 
+
+    # Cambios para aceptar operandos hexadecimales.
     regex_label_inm_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+)|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
     regex_inst_inm = re.compile(
-        r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+)|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
 
     regex_label_io_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s(INP|OUT)\b(\s)((\@)[0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
-    regex_inst_io = re.compile(r'\b^(INP|OUT)\b(\s)(((\@)[0-7]{1,2})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+        r'^([a-zA-Z](\w{1,7})?)\s(INP|OUT)\b(\s)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+    regex_inst_io = re.compile(r'\b^(INP|OUT)\b(\s)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
 
     regex_label_rel_inst = re.compile(
         r'^([a-zA-Z](\w{1,7})?)\s\b(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b\s([a-zA-Z](\w{1,7})?)$', re.IGNORECASE)
@@ -528,6 +579,15 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                                 print("Bin 2 bin: ", oper_bin_bin)
                                 oper_abs_12b = oper_bin_bin
 
+                            oper_hex_match = re.match(regex_oper_hex, oper_abs)
+                            if oper_hex_match:
+                                oper_hex = int(oper_hex_match.group(2), 16)
+                                oper_hex_hex = format(oper_hex, '#08b')[-6:]
+                                print("hexa Operand: ", oper_hex_match.group(2))
+                                print("hex 2 hex: ", oper_hex_hex)
+                                oper_abs_12b = oper_hex_hex
+
+
                             # inst_abs_dic = dict(opcode=opcode_abs, oper=oper_abs_12b)
                             # fsm_dic[cont_mem_pos] = inst_abs_dic
 
@@ -578,7 +638,15 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                                 oper_bin_bin = format(oper_bin, '#014b')[-12:]
                                 print("Binary Operand: ", oper_bin_match.group(2))
                                 print("Bin 2 bin: ", oper_bin_bin)
-                                oper_abs_12b = oper_ooper_bin_binct_bin
+                                oper_abs_12b = oper_bin_bin
+
+                            oper_hex_match = re.match(regex_oper_hex, oper_ind)
+                            if oper_hex_match:
+                                oper_hex = int(oper_hex_match.group(2), 16)
+                                oper_hex_hex = format(oper_hex, '#08b')[-6:]
+                                print("hexa Operand: ", oper_hex_match.group(2))
+                                print("hex 2 hex: ", oper_hex_hex)
+                                oper_abs_12b = oper_hex_hex
 
                             ind_fi = str(cont_mem_pos) + " " + str(opcode_ind) + " " + str(oper_abs_12b)
                             cont_mem_pos += 3
@@ -638,6 +706,15 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                                 print("Binary Operand: ", oper_bin_match.group(2))
                                 print("Bin 2 bin: ", oper_bin_bin)
                                 oper_abs_12b = oper_bin_bin+"XXXXXX"
+                                
+                            oper_hex_match = re.match(regex_oper_hex, oper_inm)
+                            if oper_hex_match:
+                                oper_hex = int(oper_hex_match.group(2), 16)
+                                oper_hex_hex = format(oper_hex, '#08b')[-6:]
+                                print("hexa Operand: ", oper_hex_match.group(2))
+                                print("hex 2 hex: ", oper_hex_hex)
+                                oper_abs_12b = oper_hex_hex+"XXXXXX"
+                                
 
                             inm_fi = str(cont_mem_pos) + " " + str(opcode_inm) + " " + str(oper_abs_12b)
                             cont_mem_pos += 2
@@ -662,13 +739,48 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec):
                             opcode_io = opcode_dic[inst_io_key]
                             oper_io = inst_io_match.group(4)
 
+                            # oper_oct_match = re.match(regex_oper_oct, oper_io)
+                            # if oper_oct_match:
+                            #     oper_oct = int(oper_oct_match.group(2), 8)
+                            #     oper_oct_bin = format(oper_oct, '#014b')[-6:]
+                            #     print("Octal Operand: ", oper_oct)
+                            #     print("Octal to bin Operand: ", oper_oct_bin)
+                            #     oper_abs_12b = oper_oct_bin+"XXXXXX"
+                            #
+
+                            oper_dec_match = re.match(regex_oper_dec, oper_io)
+                            if oper_dec_match:
+                                oper_dec = int(oper_dec_match.group(1))
+                                oper_dec_bin = format(oper_dec, '#08b')[-6:]
+                                print("Decimal Operand: ", oper_dec_match.group(1))
+                                print("Decimal to bin Operand: ", oper_dec_bin)
+                                oper_abs_12b = oper_dec_bin+"XXXXXX"
+
+
                             oper_oct_match = re.match(regex_oper_oct, oper_io)
                             if oper_oct_match:
                                 oper_oct = int(oper_oct_match.group(2), 8)
-                                oper_oct_bin = format(oper_oct, '#014b')[-6:]
+                                oper_oct_bin = format(oper_oct, '#08b')[-6:]
                                 print("Octal Operand: ", oper_oct)
                                 print("Octal to bin Operand: ", oper_oct_bin)
                                 oper_abs_12b = oper_oct_bin+"XXXXXX"
+
+
+                            oper_bin_match = re.match(regex_oper_bin, oper_io)
+                            if oper_bin_match:
+                                oper_bin = int(oper_bin_match.group(2), 2)
+                                oper_bin_bin = format(oper_bin, '#08b')[-6:]
+                                print("Binary Operand: ", oper_bin_match.group(2))
+                                print("Bin 2 bin: ", oper_bin_bin)
+                                oper_abs_12b = oper_bin_bin+"XXXXXX"
+
+                            oper_hex_match = re.match(regex_oper_hex, oper_io)
+                            if oper_hex_match:
+                                oper_hex = int(oper_hex_match.group(2), 16)
+                                oper_hex_hex = format(oper_hex, '#08b')[-6:]
+                                print("hexa Operand: ", oper_hex_match.group(2))
+                                print("hex 2 hex: ", oper_hex_hex)
+                                oper_abs_12b = oper_hex_hex+"XXXXXX"
 
                             # inst_io_dic = dict(opcode=opcode_io, oper=oper_abs_12b)
                             # fsm_dic[cont_mem_pos] = inst_io_dic
@@ -896,7 +1008,7 @@ def instruction_checker(fi_list, lines_raw_list):
     pc_file_name = '../clion/pc_init.txt'
     pc_file = open(pc_file_name, 'w+')
     pc_x = ""
-    base = 16
+    base = 10
     cero = "0"
     base_address = 10
     obj_line_dic = {}

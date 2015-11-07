@@ -41,6 +41,7 @@ SC_MODULE(transactor){
 
         sc_out < bool > init_t_o;
 
+
         int cnt_m_c , word_cont, ri_mem, address_ind_int, oper_cont;
 
         unsigned int mem_cont, mem_data_dec, addr_mod_int, A, word_1, word_2;
@@ -84,7 +85,6 @@ SC_MODULE(transactor){
             dont_initialize();
 
 
-             if (rps_t_i){
 
                 sensitive << clk_t_i.neg();
 
@@ -101,8 +101,6 @@ SC_MODULE(transactor){
 
 
 
-             }
-            
 //            sensitive_pos << rps_t_i;
 
 //            SC_METHOD(inst_exec);

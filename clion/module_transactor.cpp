@@ -62,378 +62,388 @@ void transactor::inst_exec() {
 
 
    cout << "------------------------------------------mem_cont:------------------------------------------\n"<< mem_cont << endl;
-	string addrx = addr_t_o.read().to_string();
-	string dont_carex = "XXXXXXXXXXXX";
 
-   if (stop == false && addrx != dont_carex) {
 
-       // Leer de memoria.
-       rw_t_o.write(0);
+    if (rps_t_i) {
+        string addrx = addr_t_o.read().to_string();
+        string dont_carex = "XXXXXXXXXXXX";
 
-       cout << "rw_t_o: " << rw_t_o << endl;
+        if (stop == false && addrx != dont_carex) {
 
-       // Habilitar memoria.
-       en_t_o.write(1);
+            // Leer de memoria.
+            rw_t_o.write(0);
 
-       cout << "en_t_o: " << en_t_o << endl;
+            cout << "rw_t_o: " << rw_t_o << endl;
 
-       // Direccion a leer.
+            // Habilitar memoria.
+            en_t_o.write(1);
 
-       cout << "mem_cont: " << mem_cont << endl;
+            cout << "en_t_o: " << en_t_o << endl;
 
-       addr_t_o.write(mem_cont);
+            // Direccion a leer.
 
-       cout << "addr_t_o: " << addr_t_o << endl;
+            cout << "mem_cont: " << mem_cont << endl;
 
-       // Ciclo de memoria.
-       mem_data_dec = dat_t_i.read().to_uint();
+            addr_t_o.write(mem_cont);
 
-       mem_data_str = to_string(mem_data_dec);
+            cout << "addr_t_o: " << addr_t_o << endl;
 
+            // Ciclo de memoria.
+            mem_data_dec = dat_t_i.read().to_uint();
 
-       cout << "!!!!!Mem pos data:!!!!! " << mem_data_dec << endl;
+            mem_data_str = to_string(mem_data_dec);
 
 
-       if (fetched == false) {
+            cout << "!!!!!Mem pos data:!!!!! " << mem_data_dec << endl;
 
 
-           ri_mem = mem_data_dec;
+            if (fetched == false) {
 
-           addr_mod_str = bitset<6>(ri_mem).to_string();
 
-           cout << "Fetched opcode: " << addr_mod_str << endl;
+                ri_mem = mem_data_dec;
 
-           //            cout << "ri_mem_bin: " << addr_mod_str << endl;
+                addr_mod_str = bitset<6>(ri_mem).to_string();
 
-           addr_mod_str = addr_mod_str.substr(3, 3);
+                cout << "Fetched opcode: " << addr_mod_str << endl;
 
-           addr_mod_int = stoi(addr_mod_str, nullptr, 2);
+                //            cout << "ri_mem_bin: " << addr_mod_str << endl;
 
-           cout << "addr_mod_bin: " << addr_mod_str << " addr_mod_int: " << addr_mod_int << endl;
+                addr_mod_str = addr_mod_str.substr(3, 3);
 
-           fetched = true;
+                addr_mod_int = stoi(addr_mod_str, nullptr, 2);
 
-       }
+                cout << "addr_mod_bin: " << addr_mod_str << " addr_mod_int: " << addr_mod_int << endl;
 
-       if (fetched == true && decode == false) {
+                fetched = true;
 
+            }
 
-           //Decodificador de instrucciones
+            if (fetched == true && decode == false) {
 
-           switch (addr_mod_int) {
 
+                //Decodificador de instrucciones
 
-               case ABS:
+                switch (addr_mod_int) {
 
-                   cout << "LDA_ABS decoded: " << ri_mem << endl;
 
-                   //                    word_cont = 4;
+                    case ABS:
 
-                   decode = true;
+                        cout << "LDA_ABS decoded: " << ri_mem << endl;
 
-                   break;
+                        //                    word_cont = 4;
 
-               case INM:
+                        decode = true;
 
-                   cout << "LDA_INM decoded: " << ri_mem << endl;
+                        break;
 
-                   //                    word_cont = 2;
-                   //
-                   //                    decode = true;
+                    case INM:
 
-                   //                    cout << "2 word instruction: " << ri_mem << endl;
+                        cout << "LDA_INM decoded: " << ri_mem << endl;
 
-                   if (oper_cont == 0) {
+                        //                    word_cont = 2;
+                        //
+                        //                    decode = true;
 
-                       oper_cont++;
-                       mem_cont++;
-                       decode = false;
+                        //                    cout << "2 word instruction: " << ri_mem << endl;
 
-                       execute = false;
+                        if (oper_cont == 0) {
 
-                   }
-                   else {
+                            oper_cont++;
+                            mem_cont++;
+                            decode = false;
 
-                       word_1 = mem_data_dec;
+                            execute = false;
 
-                       oper_cont = 0;
+                        }
+                        else {
 
-                       decode = true;
+                            word_1 = mem_data_dec;
 
-                       execute = true;
-                   }
+                            oper_cont = 0;
 
-                   break;
-
-               case CTR:
-
-                   cout << "HLT_CTR decoded: " << ri_mem << endl;
-
-                   //                    word_cont = 1;
-
-                   //                    cout << "1 word instruction: " << ri_mem << endl;
-
-                   execute = true;
-
-                   decode = true;
-
-                   break;
-
-               default:
-
-                   cout << "Error en la decodificacion de instruccion, direccionamiento no valido" << endl;
-                   // cout << "Deteniendo el proceso " << endl;
-                   // addr_t_o.write(mem_cont);
-                   // sc_stop();
-
-                   break;
-           }
-       }
-
-       // decoding words.
-
-       //        if (decode == true) {
-       //
-       //            switch (word_cont) {
-       //
-       //
-       //                case 1:
-       //
-       //                    cout << "1 word instruction: " << ri_mem << endl;
-       //
-       //                    execute = true;
-
-       //                    break;
-       //
-       //
-       //                case 2:
-       //
-       //                    cout << "2 word instruction: " << ri_mem << endl;
-       //
-       //                    if (oper_cont == 0) {
-       //
-       //                        oper_cont++;
-       //                        mem_cont++;
-       //                        decode = true;
-       //
-       //                        execute = false;
-       //
-       //                    }
-       //                    else {
-       //
-       //                        word_1 = mem_data_dec;
-       //
-       //                        oper_cont = 0;
-       //
-       //                        decode = false;
-       //
-       //                        execute = true;
-       //                    }
-       //
-       //                    break;
-       //
-       //
-       ////                case 4:
-       ////
-       ////                    cout << "3 word instruction: " << ri_mem << endl;
-       ////
-       ////                    if (oper_cont == 0) {
-       ////
-       ////                        oper_cont++;
-       ////
-       ////                        decode = true;
-       ////
-       ////                        execute = false;
-       ////
-       ////                        mem_cont++;
-       ////
-       ////
-       ////                    }
-       ////                    else if (oper_cont == 1) {
-       ////
-       ////                        word_1 = mem_data_dec;
-       ////
-       ////                        pa_address_ind_ss << hex << word_1; // int decimal_value
-       ////
-       ////                        pa_address_ind = pa_address_ind_ss.str();
-       ////
-       ////                        oper_cont++;
-       ////
-       ////                        decode = true;
-       ////
-       ////                        execute = false;
-       ////
-       ////                        mem_cont++;
-       ////
-       ////                    }
-       ////                    else if (oper_cont == 2) {
-       ////
-       ////                        word_2 = mem_data_dec;
-       ////
-       ////
-       ////                        pb_address_ind_ss << hex << word_2; // int decimal_value
-       ////
-       ////                        pb_address_ind = pb_address_ind_ss.str();
-       ////
-       ////                        address_ind_str = pa_address_ind + pb_address_ind;
-       ////
-       ////                        address_ind_ss << address_ind_str;
-       ////
-       ////                        address_ind_ss >> hex >> address_ind_int; // int decimal_value
-       ////
-       ////                        mem_cont = address_ind_int;
-       ////
-       ////                        oper_cont++;
-       ////
-       ////                        decode = true;
-       ////
-       ////                        execute = false;
-       ////                    }
-       ////
-       ////                    else if(oper_cont == 3){
-       ////
-       ////                        oper_cont = 0;
-       ////
-       ////                        decode = true;
-       ////
-       ////                        execute = true;
-       ////
-       ////                    }
-       ////
-       ////                    break;
-       ////
-       //            }
-       //        }
-       if (execute == true) {
+                            decode = true;
 
+                            execute = true;
+                        }
+
+                        break;
+
+                    case CTR:
+
+                        cout << "HLT_CTR decoded: " << ri_mem << endl;
+
+                        //                    word_cont = 1;
+
+                        //                    cout << "1 word instruction: " << ri_mem << endl;
+
+                        execute = true;
+
+                        decode = true;
+
+                        break;
+
+                    default:
+
+                        cout << "Error en la decodificacion de instruccion, direccionamiento no valido" << endl;
+                        // cout << "Deteniendo el proceso " << endl;
+                        // addr_t_o.write(mem_cont);
+                        // sc_stop();
+
+                        break;
+                }
+            }
+
+            // decoding words.
+
+            //        if (decode == true) {
+            //
+            //            switch (word_cont) {
+            //
+            //
+            //                case 1:
+            //
+            //                    cout << "1 word instruction: " << ri_mem << endl;
+            //
+            //                    execute = true;
+
+            //                    break;
+            //
+            //
+            //                case 2:
+            //
+            //                    cout << "2 word instruction: " << ri_mem << endl;
+            //
+            //                    if (oper_cont == 0) {
+            //
+            //                        oper_cont++;
+            //                        mem_cont++;
+            //                        decode = true;
+            //
+            //                        execute = false;
+            //
+            //                    }
+            //                    else {
+            //
+            //                        word_1 = mem_data_dec;
+            //
+            //                        oper_cont = 0;
+            //
+            //                        decode = false;
+            //
+            //                        execute = true;
+            //                    }
+            //
+            //                    break;
+            //
+            //
+            ////                case 4:
+            ////
+            ////                    cout << "3 word instruction: " << ri_mem << endl;
+            ////
+            ////                    if (oper_cont == 0) {
+            ////
+            ////                        oper_cont++;
+            ////
+            ////                        decode = true;
+            ////
+            ////                        execute = false;
+            ////
+            ////                        mem_cont++;
+            ////
+            ////
+            ////                    }
+            ////                    else if (oper_cont == 1) {
+            ////
+            ////                        word_1 = mem_data_dec;
+            ////
+            ////                        pa_address_ind_ss << hex << word_1; // int decimal_value
+            ////
+            ////                        pa_address_ind = pa_address_ind_ss.str();
+            ////
+            ////                        oper_cont++;
+            ////
+            ////                        decode = true;
+            ////
+            ////                        execute = false;
+            ////
+            ////                        mem_cont++;
+            ////
+            ////                    }
+            ////                    else if (oper_cont == 2) {
+            ////
+            ////                        word_2 = mem_data_dec;
+            ////
+            ////
+            ////                        pb_address_ind_ss << hex << word_2; // int decimal_value
+            ////
+            ////                        pb_address_ind = pb_address_ind_ss.str();
+            ////
+            ////                        address_ind_str = pa_address_ind + pb_address_ind;
+            ////
+            ////                        address_ind_ss << address_ind_str;
+            ////
+            ////                        address_ind_ss >> hex >> address_ind_int; // int decimal_value
+            ////
+            ////                        mem_cont = address_ind_int;
+            ////
+            ////                        oper_cont++;
+            ////
+            ////                        decode = true;
+            ////
+            ////                        execute = false;
+            ////                    }
+            ////
+            ////                    else if(oper_cont == 3){
+            ////
+            ////                        oper_cont = 0;
+            ////
+            ////                        decode = true;
+            ////
+            ////                        execute = true;
+            ////
+            ////                    }
+            ////
+            ////                    break;
+            ////
+            //            }
+            //        }
+            if (execute == true) {
 
-           switch (ri_mem) {
 
+                switch (ri_mem) {
 
-               case LDA_ABS:
 
-                   cout << "LDA_ABS executed: " << ri_mem << endl;
+                    case LDA_ABS:
 
-                   A = mem_data_dec;
+                        cout << "LDA_ABS executed: " << ri_mem << endl;
 
-                   cout << "word_1: " << word_1 << endl;
+                        A = mem_data_dec;
 
-                   cout << "word_2: " << word_2 << endl;
+                        cout << "word_1: " << word_1 << endl;
 
-                   cout << "A: " << A << endl;
+                        cout << "word_2: " << word_2 << endl;
 
-                   fetched = false;
+                        cout << "A: " << A << endl;
 
-                   decode = false;
+                        fetched = false;
 
-                   mem_cont++;
+                        decode = false;
 
-                   break;
+                        mem_cont++;
 
-               case LDA_INM:
+                        break;
 
-                   cout << "LDA_INM executed: " << ri_mem << endl;
+                    case LDA_INM:
 
-                   A = word_1;
+                        cout << "LDA_INM executed: " << ri_mem << endl;
 
+                        A = word_1;
 
-                   acum_t_o.write(word_1);
 
-                   a_t_s = word_1;
+                        acum_t_o.write(word_1);
 
-                   bz_t_s = ~(a_t_s|a_t_s);
+                        a_t_s = word_1;
 
-                   s_t_s = (a_t_s[5], "X", s_t_s[3], s_t_s[2], bz_t_s, s_t_s[0]);
+                        bz_t_s = ~(a_t_s | a_t_s);
 
-                   s_t_o.write(s_t_s);
+                        s_t_s = (a_t_s[5], "X", s_t_s[3], s_t_s[2], bz_t_s, s_t_s[0]);
 
-                   cout << "a_t_s: " << a_t_s << " s_t_s: " << s_t_s << endl;
+                        s_t_o.write(s_t_s);
 
-                   cout << "A: " << A << endl;
+                        cout << "a_t_s: " << a_t_s << " s_t_s: " << s_t_s << endl;
 
-                   fetched = false;
+                        cout << "A: " << A << endl;
 
-                   decode = false;
+                        fetched = false;
 
-                   mem_cont++;
+                        decode = false;
 
-                   break;
+                        mem_cont++;
 
-               case ADD_INM:
+                        break;
 
-                   cout << "ADD_INM executed: " << ri_mem << endl;
+                    case ADD_INM:
 
-                   a_t_s = A;
-					
-				   bv_t_s = a_t_s[5];
+                        cout << "ADD_INM executed: " << ri_mem << endl;
 
-                   A += word_1;
+                        a_t_s = A;
 
-				   (bc_t_s,a_t_s) = A ;
+                        bv_t_s = a_t_s[5];
 
-                   acum_t_o.write(a_t_s);
-                 
+                        A += word_1;
 
-                   bv_t_s = bv_t_s^a_t_s[5]? bv_t_s^a_t_s[5]:0;
+                        (bc_t_s, a_t_s) = A;
 
-                   bz_t_s = ~(a_t_s|a_t_s);
+                        acum_t_o.write(a_t_s);
 
-                   s_t_s = (a_t_s[5], "X", bv_t_s, s_t_s[2], bz_t_s, bc_t_s);
 
-                   s_t_o.write(s_t_s);
+                        bv_t_s = bv_t_s ^ a_t_s[5] ? bv_t_s ^ a_t_s[5] : 0;
 
-                   cout << "a_t_s: " << a_t_s << " s_t_s: " << s_t_s << endl;
+                        bz_t_s = ~(a_t_s | a_t_s);
 
-                   cout << "A: " << A << endl;
+                        s_t_s = (a_t_s[5], "X", bv_t_s, s_t_s[2], bz_t_s, bc_t_s);
 
-                   fetched = false;
+                        s_t_o.write(s_t_s);
 
-                   decode = false;
+                        cout << "a_t_s: " << a_t_s << " s_t_s: " << s_t_s << endl;
 
-                   mem_cont++;
+                        cout << "A: " << A << endl;
 
-                   break;
+                        fetched = false;
 
-               case HLT_CTR:
+                        decode = false;
 
-                   cout << "HLT_CTR executed: " << ri_mem << endl;
+                        mem_cont++;
 
-                   stop = true;
+                        break;
 
-                   cout << "stop: " << stop << endl;
+                    case HLT_CTR:
 
-                   fetched = false;
+                        cout << "HLT_CTR executed: " << ri_mem << endl;
 
-                   decode = false;
+                        stop = true;
 
-                   sc_stop();
+                        cout << "stop: " << stop << endl;
 
-                   mem_cont++;
+                        fetched = false;
 
-                   break;
+                        decode = false;
 
-               default:
+                        sc_stop();
 
-                   cout << "Error en la ejecucion de instruccion" << endl;
+                        mem_cont++;
 
-                   break;
-           }
+                        break;
 
+                    default:
 
-       }
+                        cout << "Error en la ejecucion de instruccion" << endl;
 
+                        break;
+                }
 
-   }
-   else {
 
-   		addr_t_o.write(mem_cont);
+            }
 
-       cout << " Inicializacion de address process " << endl;
-       // sc_stop();
 
-   }
+        }
+        else {
 
-   cnt_m_c++;
+            addr_t_o.write(mem_cont);
+            // Leer de memoria.
+            rw_t_o.write(0);
+
+            cout << "rw_t_o: " << rw_t_o << endl;
+
+            // Habilitar memoria.
+            en_t_o.write(1);
+            cout << " Inicializacion de address process " << endl;
+            // sc_stop();
+
+        }
+
+        cnt_m_c++;
+    }
 
 }
 

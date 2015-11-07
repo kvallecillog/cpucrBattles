@@ -1,14 +1,17 @@
 DBWRD @0000
 WRD @0000
-LALA = @0000
+LALA = @0001
 
 ;* = @000A DOESNT WORK
 ;* = * + 1
 ;PUNT1 = *
 ;PUNT2 = * + 20
-* = @0000
-
-LDA #0
+* = $3fff
+* = @0002
+* = 4096
+* = %000011110000
+LDA #$A
+INP $FF
 HLT
 
 

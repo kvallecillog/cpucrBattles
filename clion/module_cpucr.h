@@ -26,6 +26,7 @@ SC_MODULE(cpucr){
     sc_out < sc_lv <6> > ports_c_o;
     sc_in < bool > rps_c_i;
     sc_out < sc_lv<12> > pc_c_o;
+
     sc_out <bool> init_c_o;
     
     // Signals declarations.
@@ -51,17 +52,30 @@ SC_MODULE(cpucr){
 
 
 //        memory1.dat_m_i(transactor1.dat_t_o);
-        memory1.dat_m_i(dat_c_i_s);
-        memory1.dat_m_o(dat_c_o_s);
-        memory1.addr_m_i(addr_c_s);
-        memory1.rw_m_i(rw_c_s);
-        memory1.en_m_i(en_c_s);
+//        memory1.dat_m_i(dat_c_i_s);
+//        memory1.dat_m_o(dat_c_o_s);
+//        memory1.addr_m_i(addr_c_s);
+//        memory1.rw_m_i(rw_c_s);
+//        memory1.en_m_i(en_c_s);
+//
+//        transactor1.dat_t_i(dat_c_o_s);
+//        transactor1.dat_t_o(dat_c_i_s);
+//        transactor1.addr_t_o(addr_c_s);
+//        transactor1.rw_t_o(rw_c_s);
+//        transactor1.en_t_o(en_c_s);
 
-        transactor1.dat_t_i(dat_c_o_s);
-        transactor1.dat_t_o(dat_c_i_s);
-        transactor1.addr_t_o(addr_c_s);
-        transactor1.rw_t_o(rw_c_s);
-        transactor1.en_t_o(en_c_s);
+        memory1.dat_m_i(transactor1.dat_t_o);
+        memory1.dat_m_o(dat_c_o);
+        memory1.addr_m_i(transactor1.addr_t_o);
+        memory1.rw_m_i(rw_c_o);
+        memory1.en_m_i(en_c_o);
+
+        transactor1.dat_t_i(memory1.dat_m_o);
+        transactor1.dat_t_o(dat_c_o);
+        transactor1.addr_t_o(addr_c_o);
+        transactor1.rw_t_o(rw_c_o);
+        transactor1.en_t_o(en_c_o);
+
 
         transactor1.acum_t_o(acum_c_o);
         transactor1.s_t_o(s_c_o);
@@ -71,6 +85,7 @@ SC_MODULE(cpucr){
         transactor1.pc_t_o(pc_c_o);
         transactor1.clk_t_i(clk_c_i);
         transactor1.init_t_o(init_c_o);
+
 
             SC_METHOD(monitor);
             
