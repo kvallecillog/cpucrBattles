@@ -44,22 +44,22 @@ def main():
     if error_init == 0:
 
         print("Init without error's:", error_init, "\n")
-        error_label, label_list, error_flow_list = preprocesador.label_checker(deleted_init_list, lines_raw_list, error, pos_cont_dec, const_dic)
+        error_label, label_list, error_flow_list, num_op_inst_list = preprocesador.label_checker(deleted_init_list, lines_raw_list, error, pos_cont_dec, const_dic)
 
         if error_label == 0:
 
             print("\nExecuter")
-            # error_inst, fi_list = preprocesador.inst_checker(label_list, lines_raw_list, error_label, pos_cont_dec)
-            #
-            # if error_inst == 0:
-            #
-            #     print("Main program without error's:", error_inst, "\n")
-            #     obj_list = preprocesador.obj_creator(fi_list, lines_raw_list)
+            error_inst, fi_list = preprocesador.inst_checker(num_op_inst_list, lines_raw_list, error_label, pos_cont_dec)
 
-            # else:
-            #
-            #     print("Error detected at main flow: ASM cannot be assembled!")
-            #     print("List of errors:")
+            if error_inst == 0:
+
+                print("Main program without error's:", error_inst, "\n")
+                obj_list = preprocesador.obj_creator(fi_list, lines_raw_list)
+
+            else:
+
+                print("Error detected at main flow: ASM cannot be assembled!")
+                print("List of errors:")
 
         else:
 

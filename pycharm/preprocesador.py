@@ -470,19 +470,20 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                      DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
                      RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
 
+        # regex_label_ind_inst = re.compile(
+    #     r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
+    #     re.IGNORECASE)
+    # regex_inst_ind = re.compile(
+    #     r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
+    #     re.IGNORECASE)
+
+
     regex_label_abs_inst = re.compile(
         r'\b^([a-zA-Z](\w{1,7})?)\b(\s)\b(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
     regex_inst_abs = re.compile(
         r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
-
-    # regex_label_ind_inst = re.compile(
-    #     r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
-    #     re.IGNORECASE)
-    # regex_inst_ind = re.compile(
-    #     r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
-    #     re.IGNORECASE)
 
     regex_label_ind_inst = re.compile(
         r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
@@ -491,7 +492,6 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
         r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
         re.IGNORECASE)
 
-    # Cambios para aceptar operandos hexadecimales.
     regex_label_inm_inst = re.compile(
         r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
@@ -556,8 +556,8 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                             print("Error!:" + str(cont_res_word_int - 1) + " Error multiples palabras reservadas")
                             print(num_line_int, "|", non_num_line)
 
-                    elif cont_res_word_int == 1:
-
+                    # elif: cont_res_word_int == 1:
+                    else:
                         print("OK!: Labels and instrucions are valid")
 
                         label_inst_abs_match = re.match(regex_label_abs_inst, non_num_line)
@@ -759,9 +759,11 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                 print("Linea con CONST actualizada:", data_list, end='' )
                                                 cont_mem_pos += 2
                                             else:
-                                                error_cont_id = "Error, identificador"+label_inm+" no definido"
+                                                error_cont_id = "Error, constante: "+const_inm+", no fue definida dentro del ASM."
+                                                error_list.append(error_cont_id)
+                                                error += 1
                                         else:
-                                            print("Horror")
+                                            print("Argumento numerico")
                                 else:
 
                                     print("label_inst_inm_match iter: ", i)
@@ -870,18 +872,23 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     print(num_line_int, "|", data_source_line_n)
                                     print("Bne iter", i)
                                     print("BNE data_list[x]: ", data_list[x])
-                                    label_rel = label_inst_rel_match.group(4)
-                                    print("Label_rel", label_rel)
+                                    const_rel = label_inst_rel_match.group(5)
+                                    print("const_rel", const_rel)
 
-                                    if label_rel in label_dic:
-                                        oper_rel = "#"+str(label_dic[label_rel])
+                                    if const_rel in label_dic:
+                                        oper_rel = "#"+str(label_dic[const_rel])
                                         print("oper_rel", oper_rel)
                                         # oper_rel = format(oper_rel, '#08b')[-6:]
-                                        label_regex = re.compile(r'\b'+re.escape(label_rel)+r'\b', re.IGNORECASE)
+                                        label_regex = re.compile(r'\b'+re.escape(const_rel)+r'\b', re.IGNORECASE)
                                         data_list_x = re.sub(label_regex, oper_rel, data_list_x)
                                         print("data_list_x: ", data_list_x)
                                         data_list[x] = data_list_x
                                         print("data_list", data_list)
+                                    else:
+                                        error_cont_id = "Error, identificador: "+const_rel+", no definido dentro del ASM."
+                                        error_list.append(error_cont_id)
+                                        error += 1
+                                        break
                                     
                                     print("label_inst_rel_match iter: ", i)
                                     label_rel = label_inst_rel_match.group(1)+" "
@@ -1170,18 +1177,27 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     print(num_line_int, "|", data_source_line_n)
                                     print("Bne iter", i)
                                     print("BNE data_list[x]: ", data_list[x])
-                                    label_rel = inst_rel_match.group(4)
-                                    print("Label_rel", label_rel)
+                                    const_rel = inst_rel_match.group(3)
+                                    print("const_rel", const_rel)
 
-                                    if label_rel in label_dic:
-                                        oper_rel = "#"+str(label_dic[label_rel])
-                                        print("oper_rel", oper_rel)
+                                    if const_rel in label_dic:
+                                        # oper_rel = "#"+str(label_dic[const_rel])
+                                        # print("oper_rel", oper_rel)
+                                        const_rel_dec = int(label_dic[const_rel])
+                                        const_rel_oct = format(const_rel_dec, '#06o')[-4:]
+                                        oper_rel = "@"+const_rel_oct
                                         # oper_rel = format(oper_rel, '#08b')[-6:]
-                                        label_regex = re.compile(r'\b'+re.escape(label_rel)+r'\b', re.IGNORECASE)
+                                        label_regex = re.compile(r'\b'+re.escape(const_rel)+r'\b', re.IGNORECASE)
                                         data_list_x = re.sub(label_regex, oper_rel, data_list_x)
                                         print("data_list_x: ", data_list_x)
                                         data_list[x] = data_list_x
                                         print("data_list", data_list)
+                                    else:
+                                        error_id_nodef = "Error, identificador: "+const_rel+", no definido dentro del ASM.\n"
+
+                                        error += 1
+                                        error_list.append(error_id_nodef)
+
 
 
                             # EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
@@ -1210,8 +1226,10 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
 
                         else:
                             error += 1
-                            print("Error!: No valid argument in line")
-                            print(num_line_int, "|", data_source_line_n)
+                            error_no_valid = "Error!: Argumento invalido en linea: "+ str(num_line_int) +" | " + data_source_line_n
+                            error_list.append(error_no_valid)
+                            print(error_no_valid)
+
                 else:
                     error += 1
                     error_macro = "Error!: Macro is not supported: "+str(num_line_int)+ " | " + non_num_line
@@ -1219,12 +1237,13 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                     print(error_macro)
 
             else:
-                # print("Error, identificador duplicado",error_list)
+
+                # print("Error, no se logro ensamblar, revise el codigo ASM.")
                 break
 
     print("Diccionario de instrucciones:", data_list)
     print("Diccionario de identificadores:", label_dic)
-    return error, fi_list, error_list
+    return error, fi_list, error_list, data_list
 
 
 def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
@@ -1270,7 +1289,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
     # Se identifica si se esta utilizando como etiqueta una palabra reservada.
 
-    regex_macro = re.compile(r"\b^(MACRO|FINMAC)\b(\s)*.*", re.IGNORECASE)
+    # regex_macro = re.compile(r"\b^(MACRO|FINMAC)\b(\s)*.*", re.IGNORECASE)
 
     regex_oper_dec = re.compile(r"^([0-9]+)$", re.IGNORECASE)
     regex_oper_oct = re.compile(r"^(\@)([0-7]{1,4})$", re.IGNORECASE)
@@ -1281,46 +1300,84 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                      DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
                      RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
 
-    regex_label_abs_inst = re.compile(
-        r'\b^([a-zA-Z](\w{1,7})?)\b(\s)\b(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
-        re.IGNORECASE)
+    # regex_label_abs_inst = re.compile(
+    #     r'\b^([a-zA-Z](\w{1,7})?)\b(\s)\b(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+    #     re.IGNORECASE)
+    # regex_inst_abs = re.compile(
+    #     r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)([0-7]{1,4}))|([a-zA-Z](\w{1,7})?)(\+?)(\d*))$',
+    #     re.IGNORECASE)
+    #
+    # regex_label_ind_inst = re.compile(
+    #     r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
+    #     re.IGNORECASE)
+    # regex_inst_ind = re.compile(
+    #     r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
+    #     re.IGNORECASE)
+    #
+    # # Cambios para aceptar operandos hexadecimales.
+    # regex_label_inm_inst = re.compile(
+    #     r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+    #     re.IGNORECASE)
+    # regex_inst_inm = re.compile(
+    #     r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+    #     re.IGNORECASE)
+    #
+    # regex_label_io_inst = re.compile(
+    #     r'^([a-zA-Z](\w{1,7})?)\s(INP|OUT)\b(\s)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+    # regex_inst_io = re.compile(r'\b^(INP|OUT)\b(\s)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+    #
+    # regex_label_rel_inst = re.compile(
+    #     r'^([a-zA-Z](\w{1,7})?)\s\b(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b\s([a-zA-Z](\w{1,7})?)$', re.IGNORECASE)
+    # regex_inst_rel = re.compile(
+    #     r'\b^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b(\s)([0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+    #
+    # regex_label_acum_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
+    # regex_inst_acum = re.compile(r'\b^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)\b$', re.IGNORECASE)
+    #
+    # regex_label_ctrl_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(TPA|TAP|RTI|RTS|HLT|NOP|PLS|PHS)$', re.IGNORECASE)
+    # regex_inst_ctrl = re.compile(r'\b^(TPA|TAP|RTI|RTS|HLT|NOP|PLS|PHS)\b$', re.IGNORECASE)
+    #
+    # regex_label_imp_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(SEC|CLC|SEI|CLI)$', re.IGNORECASE)
+    # regex_inst_imp = re.compile(r'\b^(SEC|CLC|SEI|CLI)\b$', re.IGNORECASE)
+
+    # regex_label_abs_inst = re.compile(
+    #     r'\b^([a-zA-Z](\w{1,7})?)\b(\s)\b(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+    #     re.IGNORECASE)
     regex_inst_abs = re.compile(
-        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)([0-7]{1,4}))|([a-zA-Z](\w{1,7})?)(\+?)(\d*))$',
+        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
 
-    regex_label_ind_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
-        re.IGNORECASE)
+    # regex_label_ind_inst = re.compile(
+    #     r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
+    #     re.IGNORECASE)
     regex_inst_ind = re.compile(
-        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
+        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
         re.IGNORECASE)
 
-    # Cambios para aceptar operandos hexadecimales.
-    regex_label_inm_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
-        re.IGNORECASE)
+    # regex_label_inm_inst = re.compile(
+    #     r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+    #     re.IGNORECASE)
     regex_inst_inm = re.compile(
-        r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
 
-    regex_label_io_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s(INP|OUT)\b(\s)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
-    regex_inst_io = re.compile(r'\b^(INP|OUT)\b(\s)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+    # regex_label_io_inst = re.compile(
+    #     r'^([a-zA-Z](\w{1,7})?)\s(INP|OUT)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+    regex_inst_io = re.compile(r'\b^(INP|OUT)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
 
-    regex_label_rel_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s\b(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b\s([a-zA-Z](\w{1,7})?)$', re.IGNORECASE)
+    # regex_label_rel_inst = re.compile(
+    #     r'^([a-zA-Z](\w{1,7})?)\s\b(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
     regex_inst_rel = re.compile(
-        r'\b^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b(\s)([0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+        r'\b^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
 
-    regex_label_acum_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
+    # regex_label_acum_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
     regex_inst_acum = re.compile(r'\b^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)\b$', re.IGNORECASE)
 
-    regex_label_ctrl_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(TPA|TAP|RTI|RTS|HLT|NOP|PLS|PHS)$', re.IGNORECASE)
+    # regex_label_ctrl_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(TPA|TAP|RTI|RTS|HLT|NOP|PLS|PHS)$', re.IGNORECASE)
     regex_inst_ctrl = re.compile(r'\b^(TPA|TAP|RTI|RTS|HLT|NOP|PLS|PHS)\b$', re.IGNORECASE)
 
-    regex_label_imp_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(SEC|CLC|SEI|CLI)$', re.IGNORECASE)
+    # regex_label_imp_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(SEC|CLC|SEI|CLI)$', re.IGNORECASE)
     regex_inst_imp = re.compile(r'\b^(SEC|CLC|SEI|CLI)\b$', re.IGNORECASE)
-
 
     for x in range(0, len(data_list)):
 
@@ -1334,522 +1391,530 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
         data_source_line_list = data_source_line.split(" ")
         data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
 
-        macro_match = re.match(regex_macro, non_num_line)
+        # macro_match = re.match(regex_macro, non_num_line)
 
-        if not macro_match:
+        # if not macro_match:
 
-            cont_res_word_dic = Counter(w.lower() for w in re.findall(regex_res_word, non_num_line))
-            cont_res_word_int = sum(cont_res_word_dic.values())
+        # cont_res_word_dic = Counter(w.lower() for w in re.findall(regex_res_word, non_num_line))
+        # cont_res_word_int = sum(cont_res_word_dic.values())
+        #
+        # if cont_res_word_int > 1:
+        #
+        #     # raise Exception('Error: Reserved word as label')
+        #     error += 1
+        #     print("Error!:" + str(cont_res_word_int - 1) + " Reserved words as a label")
+        #     print(num_line_int, "|", non_num_line)
+        #
+        # elif cont_res_word_int == 1:
+        #     print("OK!: Labels and instrucions are valid")
 
-            if cont_res_word_int > 1:
+        # label_inst_abs_match = re.match(regex_label_abs_inst, non_num_line)
+        inst_abs_match = re.match(regex_inst_abs, non_num_line)
 
-                # raise Exception('Error: Reserved word as label')
-                error += 1
-                print("Error!:" + str(cont_res_word_int - 1) + " Reserved words as a label")
-                print(num_line_int, "|", non_num_line)
+        # label_inst_ind_match = re.match(regex_label_ind_inst, non_num_line)
+        inst_ind_match = re.match(regex_inst_ind, non_num_line)
 
-            elif cont_res_word_int == 1:
-                print("OK!: Labels and instrucions are valid")
+        # label_inst_inm_match = re.match(regex_label_inm_inst, non_num_line)
+        inst_inm_match = re.match(regex_inst_inm, non_num_line)
 
-                label_inst_abs_match = re.match(regex_label_abs_inst, non_num_line)
-                inst_abs_match = re.match(regex_inst_abs, non_num_line)
+        # label_inst_io_match = re.match(regex_label_io_inst, non_num_line)
+        inst_io_match = re.match(regex_inst_io, non_num_line)
 
-                label_inst_ind_match = re.match(regex_label_ind_inst, non_num_line)
-                inst_ind_match = re.match(regex_inst_ind, non_num_line)
+        # label_inst_rel_match = re.match(regex_label_rel_inst, non_num_line)
+        inst_rel_match = re.match(regex_inst_rel, non_num_line)
 
-                label_inst_inm_match = re.match(regex_label_inm_inst, non_num_line)
-                inst_inm_match = re.match(regex_inst_inm, non_num_line)
+        # label_inst_acum_match = re.match(regex_label_acum_inst, non_num_line)
+        inst_acum_match = re.match(regex_inst_acum, non_num_line)
 
-                label_inst_io_match = re.match(regex_label_io_inst, non_num_line)
-                inst_io_match = re.match(regex_inst_io, non_num_line)
+        # label_inst_ctrl_match = re.match(regex_label_ctrl_inst, non_num_line)
+        inst_ctrl_match = re.match(regex_inst_ctrl, non_num_line)
 
-                label_inst_rel_match = re.match(regex_label_rel_inst, non_num_line)
-                inst_rel_match = re.match(regex_inst_rel, non_num_line)
+        # label_inst_imp_match = re.match(regex_label_imp_inst, non_num_line)
+        inst_imp_match = re.match(regex_inst_imp, non_num_line)
 
-                label_inst_acum_match = re.match(regex_label_acum_inst, non_num_line)
-                inst_acum_match = re.match(regex_inst_acum, non_num_line)
+        if inst_abs_match or inst_ind_match or inst_inm_match or inst_io_match \
+                or inst_rel_match or inst_acum_match or inst_ctrl_match or inst_imp_match:
 
-                label_inst_ctrl_match = re.match(regex_label_ctrl_inst, non_num_line)
-                inst_ctrl_match = re.match(regex_inst_ctrl, non_num_line)
+            print("This is an Instruction+Argument entry")
 
-                label_inst_imp_match = re.match(regex_label_imp_inst, non_num_line)
-                inst_imp_match = re.match(regex_inst_imp, non_num_line)
+            if inst_abs_match:
 
-                if inst_abs_match or inst_ind_match or inst_inm_match or inst_io_match \
-                        or inst_rel_match or inst_acum_match or inst_ctrl_match or inst_imp_match:
+                # Actualizacion del contador de posicion de memoria.
+                # El direccionamiento absoluto cuenta con 3 palabras.
 
-                    print("This is an Instruction+Argument entry")
+                pc_list.append(cont_mem_pos)
 
-                    if inst_abs_match:
+                inst_abs_key = inst_abs_match.group(1) + "_ABS"
 
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento absoluto cuenta con 3 palabras.
+                print("The opcode for this instruct is:", opcode_dic[inst_abs_key])
+                opcode_abs = opcode_dic[inst_abs_key]
+                print("La lista de instrucciones es:", data_list)
 
-                        pc_list.append(cont_mem_pos)
 
-                        inst_abs_key = inst_abs_match.group(1) + "_ABS"
+                oper_abs = inst_abs_match.group(4)
 
-                        print("The opcode for this instruct is:", opcode_dic[inst_abs_key])
-                        opcode_abs = opcode_dic[inst_abs_key]
+                oper_dec_match = re.match(regex_oper_dec, oper_abs)
+                if oper_dec_match:
+                    oper_dec = int(oper_dec_match.group(1))
+                    oper_dec_bin = format(oper_dec, '#014b')[-12:]
+                    print("Decimal Operand: ", oper_dec_match.group(1))
+                    print("Decimal to bin Operand: ", oper_dec_bin)
+                    oper_abs_12b = oper_dec_bin
 
-                        oper_abs = inst_abs_match.group(4)
+                oper_oct_match = re.match(regex_oper_oct, oper_abs)
+                if oper_oct_match:
+                    oper_oct = int(oper_oct_match.group(2), 8)
+                    oper_oct_bin = format(oper_oct, '#014b')[-12:]
+                    print("Octal Operand: ", oper_oct)
+                    print("Octal to bin Operand: ", oper_oct_bin)
+                    oper_abs_12b = oper_oct_bin
 
-                        oper_dec_match = re.match(regex_oper_dec, oper_abs)
-                        if oper_dec_match:
-                            oper_dec = int(oper_dec_match.group(1))
-                            oper_dec_bin = format(oper_dec, '#014b')[-12:]
-                            print("Decimal Operand: ", oper_dec_match.group(1))
-                            print("Decimal to bin Operand: ", oper_dec_bin)
-                            oper_abs_12b = oper_dec_bin
+                oper_bin_match = re.match(regex_oper_bin, oper_abs)
+                if oper_bin_match:
+                    oper_bin = int(oper_bin_match.group(2), 2)
+                    oper_bin_bin = format(oper_bin, '#014b')[-12:]
+                    print("Binary Operand: ", oper_bin_match.group(2))
+                    print("Bin 2 bin: ", oper_bin_bin)
+                    oper_abs_12b = oper_bin_bin
 
-                        oper_oct_match = re.match(regex_oper_oct, oper_abs)
-                        if oper_oct_match:
-                            oper_oct = int(oper_oct_match.group(2), 8)
-                            oper_oct_bin = format(oper_oct, '#014b')[-12:]
-                            print("Octal Operand: ", oper_oct)
-                            print("Octal to bin Operand: ", oper_oct_bin)
-                            oper_abs_12b = oper_oct_bin
+                oper_hex_match = re.match(regex_oper_hex, oper_abs)
+                if oper_hex_match:
+                    oper_hex = int(oper_hex_match.group(2), 16)
+                    oper_hex_hex = format(oper_hex, '#08b')[-6:]
+                    print("hexa Operand: ", oper_hex_match.group(2))
+                    print("hex 2 hex: ", oper_hex_hex)
+                    oper_abs_12b = oper_hex_hex
 
-                        oper_bin_match = re.match(regex_oper_bin, oper_abs)
-                        if oper_bin_match:
-                            oper_bin = int(oper_bin_match.group(2), 2)
-                            oper_bin_bin = format(oper_bin, '#014b')[-12:]
-                            print("Binary Operand: ", oper_bin_match.group(2))
-                            print("Bin 2 bin: ", oper_bin_bin)
-                            oper_abs_12b = oper_bin_bin
 
-                        oper_hex_match = re.match(regex_oper_hex, oper_abs)
-                        if oper_hex_match:
-                            oper_hex = int(oper_hex_match.group(2), 16)
-                            oper_hex_hex = format(oper_hex, '#08b')[-6:]
-                            print("hexa Operand: ", oper_hex_match.group(2))
-                            print("hex 2 hex: ", oper_hex_hex)
-                            oper_abs_12b = oper_hex_hex
+                # inst_abs_dic = dict(opcode=opcode_abs, oper=oper_abs_12b)
+                # fsm_dic[cont_mem_pos] = inst_abs_dic
 
-
-                        # inst_abs_dic = dict(opcode=opcode_abs, oper=oper_abs_12b)
-                        # fsm_dic[cont_mem_pos] = inst_abs_dic
-
-                        abs_fi = str(cont_mem_pos) + " " + str(opcode_abs) + " " + str(oper_abs_12b)
-                        cont_mem_pos += 3
-                        fi_list.append(abs_fi)
-
-                        # fsm_dic[PC, opcode, oper] = cont_mem_pos,opcode_abs,oper_abs
-                        # print("FSM DICTIONARY:",fsm_dic)
-                        # print("Operand!:", inst_abs_match.group(3))
-                        print("This is an absolute instruction+argument:")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if inst_ind_match:
-
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento indirecto cuenta con 3 palabras.
-
-                        pc_list.append(cont_mem_pos)
-
-                        inst_ind_key = inst_ind_match.group(1) + "_IND"
-                        print("The opcode for this instruct is:", opcode_dic[inst_ind_key])
-
-                        opcode_ind = opcode_dic[inst_ind_key]
-                        oper_ind = inst_ind_match.group(4)
-                        inst_ind_dic = dict(opcode=opcode_ind, oper=oper_ind)
-                        fsm_dic[cont_mem_pos] = inst_ind_dic
-
-                        oper_dec_match = re.match(regex_oper_dec, oper_ind)
-                        if oper_dec_match:
-                            oper_dec = int(oper_dec_match.group(1))
-                            oper_dec_bin = format(oper_dec, '#014b')[-12:]
-                            print("Decimal Operand: ", oper_dec_match.group(1))
-                            print("Decimal to bin Operand: ", oper_dec_bin)
-                            oper_abs_12b = oper_dec_bin
-
-                        oper_oct_match = re.match(regex_oper_oct, oper_ind)
-                        if oper_oct_match:
-                            oper_oct = int(oper_oct_match.group(2), 8)
-                            oper_oct_bin = format(oper_oct, '#014b')[-12:]
-                            print("Octal Operand: ", oper_oct)
-                            print("Octal to bin Operand: ", oper_oct_bin)
-                            oper_abs_12b = oper_oct_bin
-
-                        oper_bin_match = re.match(regex_oper_bin, oper_ind)
-                        if oper_bin_match:
-                            oper_bin = int(oper_bin_match.group(2), 2)
-                            oper_bin_bin = format(oper_bin, '#014b')[-12:]
-                            print("Binary Operand: ", oper_bin_match.group(2))
-                            print("Bin 2 bin: ", oper_bin_bin)
-                            oper_abs_12b = oper_bin_bin
-
-                        oper_hex_match = re.match(regex_oper_hex, oper_ind)
-                        if oper_hex_match:
-                            oper_hex = int(oper_hex_match.group(2), 16)
-                            oper_hex_hex = format(oper_hex, '#08b')[-6:]
-                            print("hexa Operand: ", oper_hex_match.group(2))
-                            print("hex 2 hex: ", oper_hex_hex)
-                            oper_abs_12b = oper_hex_hex
-
-                        ind_fi = str(cont_mem_pos) + " " + str(opcode_ind) + " " + str(oper_abs_12b)
-                        cont_mem_pos += 3
-                        fi_list.append(ind_fi)
-
-
-                        # fsm_dic.update(cont_mem_pos=inst_ind_dic)
-                        # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_ind, oper=oper_ind)
-
-                        # print("FSM DICTIONARY:",fsm_dic)
-
-                        # print("Operand!:",inst_abs_match.group(3))
-                        print("This is an indirect instruction+argument:")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if inst_inm_match:
-
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento inmediato cuenta con 2 palabras.
-
-                        pc_list.append(cont_mem_pos)
-
-                        inst_inm_key = inst_inm_match.group(1) + "_INM"
-                        print("The opcode for this instruct is:", opcode_dic[inst_inm_key])
-
-                        # opcode_inm = opcode_dic[inst_inm_key]
-                        # oper_inm = inst_inm_match.group(4)
-                        # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_inm, oper=oper_inm)
-
-                        opcode_inm = opcode_dic[inst_inm_key]
-                        oper_inm = inst_inm_match.group(4)
-                        inst_inm_dic = dict(opcode=opcode_inm, oper=oper_inm)
-                        fsm_dic[cont_mem_pos] = inst_inm_dic
-
-                        oper_dec_match = re.match(regex_oper_dec, oper_inm)
-                        if oper_dec_match:
-                            oper_dec = int(oper_dec_match.group(1))
-                            oper_dec_bin = format(oper_dec, '#08b')[-6:]
-                            print("Decimal Operand: ", oper_dec_match.group(1))
-                            print("Decimal to bin Operand: ", oper_dec_bin)
-                            oper_abs_12b = oper_dec_bin+"XXXXXX"
-
-
-                        oper_oct_match = re.match(regex_oper_oct, oper_inm)
-                        if oper_oct_match:
-                            oper_oct = int(oper_oct_match.group(2), 8)
-                            oper_oct_bin = format(oper_oct, '#08b')[-6:]
-                            print("Octal Operand: ", oper_oct)
-                            print("Octal to bin Operand: ", oper_oct_bin)
-                            oper_abs_12b = oper_oct_bin+"XXXXXX"
-
-
-                        oper_bin_match = re.match(regex_oper_bin, oper_inm)
-                        if oper_bin_match:
-                            oper_bin = int(oper_bin_match.group(2), 2)
-                            oper_bin_bin = format(oper_bin, '#08b')[-6:]
-                            print("Binary Operand: ", oper_bin_match.group(2))
-                            print("Bin 2 bin: ", oper_bin_bin)
-                            oper_abs_12b = oper_bin_bin+"XXXXXX"
-
-                        oper_hex_match = re.match(regex_oper_hex, oper_inm)
-                        if oper_hex_match:
-                            oper_hex = int(oper_hex_match.group(2), 16)
-                            oper_hex_hex = format(oper_hex, '#08b')[-6:]
-                            print("hexa Operand: ", oper_hex_match.group(2))
-                            print("hex 2 hex: ", oper_hex_hex)
-                            oper_abs_12b = oper_hex_hex+"XXXXXX"
-
-
-                        inm_fi = str(cont_mem_pos) + " " + str(opcode_inm) + " " + str(oper_abs_12b)
-                        cont_mem_pos += 2
-                        fi_list.append(inm_fi)
-
-                        # print("FSM DICTIONARY:",fsm_dic)
-
-                        # print("Operand!:",inst_abs_match.group(3))
-                        print("This is an inmediate instruction+argument:")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if inst_io_match:
-
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento IO cuenta con 2 palabras.
-
-                        pc_list.append(cont_mem_pos)
-
-                        inst_io_key = inst_io_match.group(1) + "_IO"
-                        print("The opcode for this instruct is:", opcode_dic[inst_io_key])
-
-                        opcode_io = opcode_dic[inst_io_key]
-                        oper_io = inst_io_match.group(4)
-
-                        # oper_oct_match = re.match(regex_oper_oct, oper_io)
-                        # if oper_oct_match:
-                        #     oper_oct = int(oper_oct_match.group(2), 8)
-                        #     oper_oct_bin = format(oper_oct, '#014b')[-6:]
-                        #     print("Octal Operand: ", oper_oct)
-                        #     print("Octal to bin Operand: ", oper_oct_bin)
-                        #     oper_abs_12b = oper_oct_bin+"XXXXXX"
-                        #
-
-                        oper_dec_match = re.match(regex_oper_dec, oper_io)
-                        if oper_dec_match:
-                            oper_dec = int(oper_dec_match.group(1))
-                            oper_dec_bin = format(oper_dec, '#08b')[-6:]
-                            print("Decimal Operand: ", oper_dec_match.group(1))
-                            print("Decimal to bin Operand: ", oper_dec_bin)
-                            oper_abs_12b = oper_dec_bin+"XXXXXX"
-
-
-                        oper_oct_match = re.match(regex_oper_oct, oper_io)
-                        if oper_oct_match:
-                            oper_oct = int(oper_oct_match.group(2), 8)
-                            oper_oct_bin = format(oper_oct, '#08b')[-6:]
-                            print("Octal Operand: ", oper_oct)
-                            print("Octal to bin Operand: ", oper_oct_bin)
-                            oper_abs_12b = oper_oct_bin+"XXXXXX"
-
-
-                        oper_bin_match = re.match(regex_oper_bin, oper_io)
-                        if oper_bin_match:
-                            oper_bin = int(oper_bin_match.group(2), 2)
-                            oper_bin_bin = format(oper_bin, '#08b')[-6:]
-                            print("Binary Operand: ", oper_bin_match.group(2))
-                            print("Bin 2 bin: ", oper_bin_bin)
-                            oper_abs_12b = oper_bin_bin+"XXXXXX"
-
-                        oper_hex_match = re.match(regex_oper_hex, oper_io)
-                        if oper_hex_match:
-                            oper_hex = int(oper_hex_match.group(2), 16)
-                            oper_hex_hex = format(oper_hex, '#08b')[-6:]
-                            print("hexa Operand: ", oper_hex_match.group(2))
-                            print("hex 2 hex: ", oper_hex_hex)
-                            oper_abs_12b = oper_hex_hex+"XXXXXX"
-
-                        # inst_io_dic = dict(opcode=opcode_io, oper=oper_abs_12b)
-                        # fsm_dic[cont_mem_pos] = inst_io_dic
-
-                        io_fi = str(cont_mem_pos) + " " + str(opcode_io) + " " + str(oper_abs_12b)
-                        cont_mem_pos += 2
-                        fi_list.append(io_fi)
-
-
-                        # print("Operand!:",inst_abs_match.group(3))
-                        print("This is an IO instruction+argument:")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if inst_rel_match:
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento relativo cuenta con 2 palabras.
-
-                        pc_list.append(cont_mem_pos)
-
-                        label_rel = inst_rel_match.group(4)
-                        print("Label_rel", label_rel)
-
-                        if label_rel in label_dic:
-                            oper_rel = label_dic[label_rel]
-                            print("oper_rel", oper_rel)
-                            oper_rel = format(oper_rel, '#08b')[-6:]
-
-                        inst_rel_key = inst_rel_match.group(1) + "_REL"
-                        print("The opcode for this instruct is:", opcode_dic[inst_rel_key])
-
-                        # opcode_rel = opcode_dic[inst_rel_key]
-                        # # cont_mem_pos += VALOR DE ETIQUETA
-                        # oper_rel = inst_rel_match.group(4)
-                        # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_rel, oper=oper_rel)
-                        # print("FSM DICTIONARY:",fsm_dic)
-
-                        opcode_rel = opcode_dic[inst_rel_key]
-                        # oper_rel = inst_rel_match.group(4)
-                        inst_rel_dic = dict(opcode=opcode_rel, oper=oper_rel)
-                        fsm_dic[cont_mem_pos] = inst_rel_dic
-
-                        rel_fi = str(cont_mem_pos) + " " + str(opcode_rel) + " " + str(oper_rel)
-                        cont_mem_pos += 2
-                        fi_list.append(rel_fi)
-
-                        # print("Operand!:",inst_abs_match.group(3))
-                        print("This is a relative instruction+argument:")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if inst_acum_match:
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento acumulador cuenta con 1 palabra.
-
-                        pc_list.append(cont_mem_pos)
-
-                        inst_acum_key = inst_acum_match.group(1) + "_ACU"
-                        print("The opcode for this instruct is:", opcode_dic[inst_acum_key])
-
-                        # opcode_acum = opcode_dic[inst_acum_key]
-                        # oper_acum = ""
-                        # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_acum, oper=oper_acum)
-                        # print("FSM DICTIONARY:",fsm_dic)
-
-                        opcode_acum = opcode_dic[inst_acum_key]
-                        oper_acum = "XXXXXXXXXXXX"
-                        inst_acum_dic = dict(opcode=opcode_acum, oper=oper_acum)
-                        fsm_dic[cont_mem_pos] = inst_acum_dic
-
-                        acum_fi = str(cont_mem_pos) + " " + str(opcode_acum) + " " + str(oper_acum)
-                        cont_mem_pos += 1
-                        fi_list.append(acum_fi)
-
-
-                        # print("Operand!:",inst_abs_match.group(1))
-                        print("This is an accumulator instruction+argument:")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if inst_ctrl_match:
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento control cuenta con 1 palabra.
-
-                        pc_list.append(cont_mem_pos)
-
-                        inst_ctrl_key = inst_ctrl_match.group(1) + "_CTR"
-                        print("The opcode for this instruct is:", opcode_dic[inst_ctrl_key])
-
-                        # opcode_ctrl = opcode_dic[inst_ctrl_key]
-                        # oper_ctrl = "XXXXXXXXXXXX"
-                        # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_ctrl, oper=oper_ctrl)
-                        # print("FSM DICTIONARY:",fsm_dic)
-
-                        opcode_ctrl = opcode_dic[inst_ctrl_key]
-                        oper_ctrl = "XXXXXXXXXXXX"
-                        inst_ctrl_dic = dict(opcode=opcode_ctrl, oper=oper_ctrl)
-                        fsm_dic[cont_mem_pos] = inst_ctrl_dic
-
-                        ctrl_fi = str(cont_mem_pos) + " " + str(opcode_ctrl) + " " + str(oper_ctrl)
-                        cont_mem_pos += 1
-                        fi_list.append(ctrl_fi)
-
-                        # print("Operand!:",inst_abs_match.group(2))
-                        print("This is an control instruction+argument:")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if inst_imp_match:
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento implicito cuenta con 1 palabra.
-
-                        pc_list.append(cont_mem_pos)
-
-                        inst_imp_key = inst_imp_match.group(1) + "_IMP"
-                        print("The opcode for this instruct is:", opcode_dic[inst_imp_key])
-
-                        # opcode_imp = opcode_dic[inst_imp_key]
-                        # oper_ctrl = "XXXXXXXXXXXX"
-                        # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_imp, oper=oper_ctrl)
-                        # print("FSM DICTIONARY:",fsm_dic)
-
-                        opcode_imp = opcode_dic[inst_imp_key]
-                        oper_imp = "XXXXXXXXXXXX"
-                        inst_imp_dic = dict(opcode=opcode_imp, oper=oper_imp)
-                        fsm_dic[cont_mem_pos] = inst_imp_dic
-
-                        imp_fi = str(cont_mem_pos) + " " + str(opcode_imp) + " " + str(oper_imp)
-                        cont_mem_pos += 1
-                        fi_list.append(imp_fi)
-
-                        # print("Operand!:",inst_abs_match.group(1))
-                        print("This is an implicit instruction+argument:")
-                        print(num_line_int, "|", data_source_line_n)
-
-                elif label_inst_abs_match or label_inst_ind_match or \
-                        label_inst_inm_match or label_inst_io_match \
-                        or label_inst_rel_match or label_inst_acum_match \
-                        or label_inst_ctrl_match or label_inst_imp_match:
-                    print("Cumple con la condicion de etiqueta de 8 caracteres + instruccion")
-
-                    if label_inst_abs_match:
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento absoluto cuenta con 3 palabras.
-                        cont_mem_pos += 3
-
-                        print("Operand!:", label_inst_abs_match.group(6))
-                        print("Es una instruccion de direccionamiento absoluto")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if label_inst_ind_match:
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento absoluto cuenta con 3 palabras.
-                        cont_mem_pos += 3
-
-                        print("Es una instruccion de direccionamiento indirecto")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if label_inst_inm_match:
-
-                        label_inm = label_inst_inm_match.group(1)
-
-                        if label_inm in label_dic:
-
-                            print("Error, se esta utilizando la etiqueta: "+label_inm+", en 2 ocasiones.\n")
-                            error += 1
-
-                        else:
-                            cont_mem_pos += 2
-                            label_dic[label_inm] = cont_mem_pos
-                            print("Es una instruccion de direccionamiento inmediato")
-                            print("Etiqueta:", label_inm)
-                            print(num_line_int, "|", data_source_line_n)
-
-
-                            # Actualizacion del contador de posicion de memoria.
-                            # El direccionamiento absoluto cuenta con 3 palabras.
-
-
-
-
-                    if label_inst_io_match:
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento absoluto cuenta con 3 palabras.
-                        cont_mem_pos += 2
-
-                        print("Es una instruccion de direccionamiento entrada/salida")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if label_inst_rel_match:
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento absoluto cuenta con 3 palabras.
-                        cont_mem_pos += 2
-
-                        print("Es una instruccion de direccionamiento relativo")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if label_inst_acum_match:
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento acumulador cuenta con 1 palabra.
-                        cont_mem_pos += 1
-
-                        print("Es una instruccion de direccionamiento acumulador")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if label_inst_ctrl_match:
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento control cuenta con 1 palabra.
-                        cont_mem_pos += 1
-
-                        print("Es una instruccion de direccionamiento control")
-                        print(num_line_int, "|", data_source_line_n)
-
-                    if label_inst_imp_match:
-                        # Actualizacion del contador de posicion de memoria.
-                        # El direccionamiento implicito cuenta con 1 palabra.
-                        cont_mem_pos += 1
-
-                        print("Es una instruccion de direccionamiento implicito")
-                        print(num_line_int, "|", data_source_line_n)
-
-                else:
-                    error += 1
-                    print("Error!: No valid instruction format.")
-                    print(num_line_int, "|", data_source_line_n)
-
-            else:
-                error += 1
-                print("Error!: No valid argument in line")
+                abs_fi = str(cont_mem_pos) + " " + str(opcode_abs) + " " + str(oper_abs_12b)
+                cont_mem_pos += 3
+                fi_list.append(abs_fi)
+
+                # fsm_dic[PC, opcode, oper] = cont_mem_pos,opcode_abs,oper_abs
+                # print("FSM DICTIONARY:",fsm_dic)
+                # print("Operand!:", inst_abs_match.group(3))
+                print("This is an absolute instruction+argument:")
+                print("fi_list: ", fi_list)
                 print(num_line_int, "|", data_source_line_n)
+
+            if inst_ind_match:
+
+                # Actualizacion del contador de posicion de memoria.
+                # El direccionamiento indirecto cuenta con 3 palabras.
+
+                pc_list.append(cont_mem_pos)
+
+                inst_ind_key = inst_ind_match.group(1) + "_IND"
+                print("The opcode for this instruct is:", opcode_dic[inst_ind_key])
+
+                opcode_ind = opcode_dic[inst_ind_key]
+                oper_ind = inst_ind_match.group(4)
+                inst_ind_dic = dict(opcode=opcode_ind, oper=oper_ind)
+                fsm_dic[cont_mem_pos] = inst_ind_dic
+
+                oper_dec_match = re.match(regex_oper_dec, oper_ind)
+                if oper_dec_match:
+                    oper_dec = int(oper_dec_match.group(1))
+                    oper_dec_bin = format(oper_dec, '#014b')[-12:]
+                    print("Decimal Operand: ", oper_dec_match.group(1))
+                    print("Decimal to bin Operand: ", oper_dec_bin)
+                    oper_abs_12b = oper_dec_bin
+
+                oper_oct_match = re.match(regex_oper_oct, oper_ind)
+                if oper_oct_match:
+                    oper_oct = int(oper_oct_match.group(2), 8)
+                    oper_oct_bin = format(oper_oct, '#014b')[-12:]
+                    print("Octal Operand: ", oper_oct)
+                    print("Octal to bin Operand: ", oper_oct_bin)
+                    oper_abs_12b = oper_oct_bin
+
+                oper_bin_match = re.match(regex_oper_bin, oper_ind)
+                if oper_bin_match:
+                    oper_bin = int(oper_bin_match.group(2), 2)
+                    oper_bin_bin = format(oper_bin, '#014b')[-12:]
+                    print("Binary Operand: ", oper_bin_match.group(2))
+                    print("Bin 2 bin: ", oper_bin_bin)
+                    oper_abs_12b = oper_bin_bin
+
+                oper_hex_match = re.match(regex_oper_hex, oper_ind)
+                if oper_hex_match:
+                    oper_hex = int(oper_hex_match.group(2), 16)
+                    oper_hex_hex = format(oper_hex, '#08b')[-6:]
+                    print("hexa Operand: ", oper_hex_match.group(2))
+                    print("hex 2 hex: ", oper_hex_hex)
+                    oper_abs_12b = oper_hex_hex
+
+                ind_fi = str(cont_mem_pos) + " " + str(opcode_ind) + " " + str(oper_abs_12b)
+                cont_mem_pos += 3
+                fi_list.append(ind_fi)
+
+
+                # fsm_dic.update(cont_mem_pos=inst_ind_dic)
+                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_ind, oper=oper_ind)
+
+                # print("FSM DICTIONARY:",fsm_dic)
+
+                # print("Operand!:",inst_abs_match.group(3))
+                print("This is an indirect instruction+argument:")
+                print(num_line_int, "|", data_source_line_n)
+
+            if inst_inm_match:
+
+                # Actualizacion del contador de posicion de memoria.
+                # El direccionamiento inmediato cuenta con 2 palabras.
+
+                pc_list.append(cont_mem_pos)
+
+                inst_inm_key = inst_inm_match.group(1) + "_INM"
+                print("The opcode for this instruct is:", opcode_dic[inst_inm_key])
+
+                # opcode_inm = opcode_dic[inst_inm_key]
+                # oper_inm = inst_inm_match.group(4)
+                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_inm, oper=oper_inm)
+
+                opcode_inm = opcode_dic[inst_inm_key]
+                oper_inm = inst_inm_match.group(4)
+                inst_inm_dic = dict(opcode=opcode_inm, oper=oper_inm)
+                fsm_dic[cont_mem_pos] = inst_inm_dic
+
+                oper_dec_match = re.match(regex_oper_dec, oper_inm)
+                if oper_dec_match:
+                    oper_dec = int(oper_dec_match.group(1))
+                    oper_dec_bin = format(oper_dec, '#08b')[-6:]
+                    print("Decimal Operand: ", oper_dec_match.group(1))
+                    print("Decimal to bin Operand: ", oper_dec_bin)
+                    oper_abs_12b = oper_dec_bin+"XXXXXX"
+
+
+                oper_oct_match = re.match(regex_oper_oct, oper_inm)
+                if oper_oct_match:
+                    oper_oct = int(oper_oct_match.group(2), 8)
+                    oper_oct_bin = format(oper_oct, '#08b')[-6:]
+                    print("Octal Operand: ", oper_oct)
+                    print("Octal to bin Operand: ", oper_oct_bin)
+                    oper_abs_12b = oper_oct_bin+"XXXXXX"
+
+
+                oper_bin_match = re.match(regex_oper_bin, oper_inm)
+                if oper_bin_match:
+                    oper_bin = int(oper_bin_match.group(2), 2)
+                    oper_bin_bin = format(oper_bin, '#08b')[-6:]
+                    print("Binary Operand: ", oper_bin_match.group(2))
+                    print("Bin 2 bin: ", oper_bin_bin)
+                    oper_abs_12b = oper_bin_bin+"XXXXXX"
+
+                oper_hex_match = re.match(regex_oper_hex, oper_inm)
+                if oper_hex_match:
+                    oper_hex = int(oper_hex_match.group(2), 16)
+                    oper_hex_hex = format(oper_hex, '#08b')[-6:]
+                    print("hexa Operand: ", oper_hex_match.group(2))
+                    print("hex 2 hex: ", oper_hex_hex)
+                    oper_abs_12b = oper_hex_hex+"XXXXXX"
+
+
+                inm_fi = str(cont_mem_pos) + " " + str(opcode_inm) + " " + str(oper_abs_12b)
+                cont_mem_pos += 2
+                fi_list.append(inm_fi)
+
+                # print("FSM DICTIONARY:",fsm_dic)
+
+                # print("Operand!:",inst_abs_match.group(3))
+                print("This is an inmediate instruction+argument:")
+                print(num_line_int, "|", data_source_line_n)
+
+            if inst_io_match:
+
+                # Actualizacion del contador de posicion de memoria.
+                # El direccionamiento IO cuenta con 2 palabras.
+
+                pc_list.append(cont_mem_pos)
+
+                inst_io_key = inst_io_match.group(1) + "_IO"
+                print("The opcode for this instruct is:", opcode_dic[inst_io_key])
+
+                opcode_io = opcode_dic[inst_io_key]
+                oper_io = inst_io_match.group(4)
+
+                # oper_oct_match = re.match(regex_oper_oct, oper_io)
+                # if oper_oct_match:
+                #     oper_oct = int(oper_oct_match.group(2), 8)
+                #     oper_oct_bin = format(oper_oct, '#014b')[-6:]
+                #     print("Octal Operand: ", oper_oct)
+                #     print("Octal to bin Operand: ", oper_oct_bin)
+                #     oper_abs_12b = oper_oct_bin+"XXXXXX"
+                #
+
+                oper_dec_match = re.match(regex_oper_dec, oper_io)
+                if oper_dec_match:
+                    oper_dec = int(oper_dec_match.group(1))
+                    oper_dec_bin = format(oper_dec, '#08b')[-6:]
+                    print("Decimal Operand: ", oper_dec_match.group(1))
+                    print("Decimal to bin Operand: ", oper_dec_bin)
+                    oper_abs_12b = oper_dec_bin+"XXXXXX"
+
+
+                oper_oct_match = re.match(regex_oper_oct, oper_io)
+                if oper_oct_match:
+                    oper_oct = int(oper_oct_match.group(2), 8)
+                    oper_oct_bin = format(oper_oct, '#08b')[-6:]
+                    print("Octal Operand: ", oper_oct)
+                    print("Octal to bin Operand: ", oper_oct_bin)
+                    oper_abs_12b = oper_oct_bin+"XXXXXX"
+
+
+                oper_bin_match = re.match(regex_oper_bin, oper_io)
+                if oper_bin_match:
+                    oper_bin = int(oper_bin_match.group(2), 2)
+                    oper_bin_bin = format(oper_bin, '#08b')[-6:]
+                    print("Binary Operand: ", oper_bin_match.group(2))
+                    print("Bin 2 bin: ", oper_bin_bin)
+                    oper_abs_12b = oper_bin_bin+"XXXXXX"
+
+                oper_hex_match = re.match(regex_oper_hex, oper_io)
+                if oper_hex_match:
+                    oper_hex = int(oper_hex_match.group(2), 16)
+                    oper_hex_hex = format(oper_hex, '#08b')[-6:]
+                    print("hexa Operand: ", oper_hex_match.group(2))
+                    print("hex 2 hex: ", oper_hex_hex)
+                    oper_abs_12b = oper_hex_hex+"XXXXXX"
+
+                # inst_io_dic = dict(opcode=opcode_io, oper=oper_abs_12b)
+                # fsm_dic[cont_mem_pos] = inst_io_dic
+
+                io_fi = str(cont_mem_pos) + " " + str(opcode_io) + " " + str(oper_abs_12b)
+                cont_mem_pos += 2
+                fi_list.append(io_fi)
+
+
+                # print("Operand!:",inst_abs_match.group(3))
+                print("This is an IO instruction+argument:")
+                print(num_line_int, "|", data_source_line_n)
+
+            if inst_rel_match:
+                # Actualizacion del contador de posicion de memoria.
+                # El direccionamiento relativo cuenta con 2 palabras.
+
+                pc_list.append(cont_mem_pos)
+
+                label_rel = inst_rel_match.group(4)
+
+                print("Label_rel", label_rel)
+                label_rel = int(label_rel[1:],8)
+                oper_rel = format(label_rel, '#014b')[-6:]
+                oper_rel = str(oper_rel)+"XXXXXX"
+                print("oper_rel", oper_rel)
+                # if label_rel in label_dic:
+                #     oper_rel = label_dic[label_rel]
+                #     print("oper_rel", oper_rel)
+                #     oper_rel = format(oper_rel, '#08b')[-6:]
+
+                inst_rel_key = inst_rel_match.group(1) + "_REL"
+                print("The opcode for this instruct is:", opcode_dic[inst_rel_key])
+
+                # opcode_rel = opcode_dic[inst_rel_key]
+                # # cont_mem_pos += VALOR DE ETIQUETA
+                # oper_rel = inst_rel_match.group(4)
+                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_rel, oper=oper_rel)
+                # print("FSM DICTIONARY:",fsm_dic)
+
+                opcode_rel = opcode_dic[inst_rel_key]
+                # oper_rel = inst_rel_match.group(4)
+                inst_rel_dic = dict(opcode=opcode_rel, oper=oper_rel)
+                print("inst_rel_dic",inst_rel_dic)
+                fsm_dic[cont_mem_pos] = inst_rel_dic
+                print("fsm_dic",fsm_dic)
+                rel_fi = str(cont_mem_pos) + " " + str(opcode_rel) + " " + str(oper_rel)
+                cont_mem_pos += 2
+                fi_list.append(rel_fi)
+                print("fi_list",fi_list)
+                # print("Operand!:",inst_abs_match.group(3))
+                print("This is a relative instruction+argument:")
+                print(num_line_int, "|", data_source_line_n)
+
+            if inst_acum_match:
+                # Actualizacion del contador de posicion de memoria.
+                # El direccionamiento acumulador cuenta con 1 palabra.
+
+                pc_list.append(cont_mem_pos)
+
+                inst_acum_key = inst_acum_match.group(1) + "_ACU"
+                print("The opcode for this instruct is:", opcode_dic[inst_acum_key])
+
+                # opcode_acum = opcode_dic[inst_acum_key]
+                # oper_acum = ""
+                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_acum, oper=oper_acum)
+                # print("FSM DICTIONARY:",fsm_dic)
+
+                opcode_acum = opcode_dic[inst_acum_key]
+                oper_acum = "XXXXXXXXXXXX"
+                inst_acum_dic = dict(opcode=opcode_acum, oper=oper_acum)
+                fsm_dic[cont_mem_pos] = inst_acum_dic
+
+                acum_fi = str(cont_mem_pos) + " " + str(opcode_acum) + " " + str(oper_acum)
+                cont_mem_pos += 1
+                fi_list.append(acum_fi)
+
+
+                # print("Operand!:",inst_abs_match.group(1))
+                print("This is an accumulator instruction+argument:")
+                print(num_line_int, "|", data_source_line_n)
+
+            if inst_ctrl_match:
+                # Actualizacion del contador de posicion de memoria.
+                # El direccionamiento control cuenta con 1 palabra.
+
+                pc_list.append(cont_mem_pos)
+
+                inst_ctrl_key = inst_ctrl_match.group(1) + "_CTR"
+                print("The opcode for this instruct is:", opcode_dic[inst_ctrl_key])
+
+                # opcode_ctrl = opcode_dic[inst_ctrl_key]
+                # oper_ctrl = "XXXXXXXXXXXX"
+                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_ctrl, oper=oper_ctrl)
+                # print("FSM DICTIONARY:",fsm_dic)
+
+                opcode_ctrl = opcode_dic[inst_ctrl_key]
+                oper_ctrl = "XXXXXXXXXXXX"
+                inst_ctrl_dic = dict(opcode=opcode_ctrl, oper=oper_ctrl)
+                fsm_dic[cont_mem_pos] = inst_ctrl_dic
+
+                ctrl_fi = str(cont_mem_pos) + " " + str(opcode_ctrl) + " " + str(oper_ctrl)
+                cont_mem_pos += 1
+                fi_list.append(ctrl_fi)
+
+                # print("Operand!:",inst_abs_match.group(2))
+                print("This is an control instruction+argument:")
+                print(num_line_int, "|", data_source_line_n)
+
+            if inst_imp_match:
+                # Actualizacion del contador de posicion de memoria.
+                # El direccionamiento implicito cuenta con 1 palabra.
+
+                pc_list.append(cont_mem_pos)
+
+                inst_imp_key = inst_imp_match.group(1) + "_IMP"
+                print("The opcode for this instruct is:", opcode_dic[inst_imp_key])
+
+                # opcode_imp = opcode_dic[inst_imp_key]
+                # oper_ctrl = "XXXXXXXXXXXX"
+                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_imp, oper=oper_ctrl)
+                # print("FSM DICTIONARY:",fsm_dic)
+
+                opcode_imp = opcode_dic[inst_imp_key]
+                oper_imp = "XXXXXXXXXXXX"
+                inst_imp_dic = dict(opcode=opcode_imp, oper=oper_imp)
+                fsm_dic[cont_mem_pos] = inst_imp_dic
+
+                imp_fi = str(cont_mem_pos) + " " + str(opcode_imp) + " " + str(oper_imp)
+                cont_mem_pos += 1
+                fi_list.append(imp_fi)
+
+                # print("Operand!:",inst_abs_match.group(1))
+                print("This is an implicit instruction+argument:")
+                print(num_line_int, "|", data_source_line_n)
+
+        # elif label_inst_abs_match or label_inst_ind_match or \
+        #         label_inst_inm_match or label_inst_io_match \
+        #         or label_inst_rel_match or label_inst_acum_match \
+        #         or label_inst_ctrl_match or label_inst_imp_match:
+        #     print("Cumple con la condicion de etiqueta de 8 caracteres + instruccion")
+        #
+        #     if label_inst_abs_match:
+        #         # Actualizacion del contador de posicion de memoria.
+        #         # El direccionamiento absoluto cuenta con 3 palabras.
+        #         cont_mem_pos += 3
+        #
+        #         print("Operand!:", label_inst_abs_match.group(6))
+        #         print("Es una instruccion de direccionamiento absoluto")
+        #         print(num_line_int, "|", data_source_line_n)
+        #
+        #     if label_inst_ind_match:
+        #         # Actualizacion del contador de posicion de memoria.
+        #         # El direccionamiento absoluto cuenta con 3 palabras.
+        #         cont_mem_pos += 3
+        #
+        #         print("Es una instruccion de direccionamiento indirecto")
+        #         print(num_line_int, "|", data_source_line_n)
+        #
+        #     if label_inst_inm_match:
+        #
+        #         label_inm = label_inst_inm_match.group(1)
+        #
+        #         if label_inm in label_dic:
+        #
+        #             print("Error, se esta utilizando la etiqueta: "+label_inm+", en 2 ocasiones.\n")
+        #             error += 1
+        #
+        #         else:
+        #             cont_mem_pos += 2
+        #             label_dic[label_inm] = cont_mem_pos
+        #             print("Es una instruccion de direccionamiento inmediato")
+        #             print("Etiqueta:", label_inm)
+        #             print(num_line_int, "|", data_source_line_n)
+        #
+        #
+        #             # Actualizacion del contador de posicion de memoria.
+        #             # El direccionamiento absoluto cuenta con 3 palabras.
+        #
+        #
+        #
+        #
+        #     if label_inst_io_match:
+        #         # Actualizacion del contador de posicion de memoria.
+        #         # El direccionamiento absoluto cuenta con 3 palabras.
+        #         cont_mem_pos += 2
+        #
+        #         print("Es una instruccion de direccionamiento entrada/salida")
+        #         print(num_line_int, "|", data_source_line_n)
+        #
+        #     if label_inst_rel_match:
+        #         # Actualizacion del contador de posicion de memoria.
+        #         # El direccionamiento absoluto cuenta con 3 palabras.
+        #         cont_mem_pos += 2
+        #
+        #         print("Es una instruccion de direccionamiento relativo")
+        #         print(num_line_int, "|", data_source_line_n)
+        #
+        #     if label_inst_acum_match:
+        #         # Actualizacion del contador de posicion de memoria.
+        #         # El direccionamiento acumulador cuenta con 1 palabra.
+        #         cont_mem_pos += 1
+        #
+        #         print("Es una instruccion de direccionamiento acumulador")
+        #         print(num_line_int, "|", data_source_line_n)
+        #
+        #     if label_inst_ctrl_match:
+        #         # Actualizacion del contador de posicion de memoria.
+        #         # El direccionamiento control cuenta con 1 palabra.
+        #         cont_mem_pos += 1
+        #
+        #         print("Es una instruccion de direccionamiento control")
+        #         print(num_line_int, "|", data_source_line_n)
+        #
+        #     if label_inst_imp_match:
+        #         # Actualizacion del contador de posicion de memoria.
+        #         # El direccionamiento implicito cuenta con 1 palabra.
+        #         cont_mem_pos += 1
+        #
+        #         print("Es una instruccion de direccionamiento implicito")
+        #         print(num_line_int, "|", data_source_line_n)
+
         else:
             error += 1
-            print("Error!: Macro is not supported")
-            print(num_line_int, "|", non_num_line)
+            print("Error!: No valid instruction format.")
+            print(num_line_int, "|", data_source_line_n)
+
+        # else:
+        #     error += 1
+        #     print("Error!: No valid argument in line")
+        #     print(num_line_int, "|", data_source_line_n)
+        # else:
+        #     error += 1
+        #     print("Error!: Macro is not supported")
+        #     print(num_line_int, "|", non_num_line)
 
     # print("PC list:", pc_list)
     # print("Format instruction list:",fi_list)
