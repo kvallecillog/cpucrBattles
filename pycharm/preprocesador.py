@@ -471,10 +471,10 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                      RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
 
     regex_label_abs_inst = re.compile(
-        r'\b^([a-zA-Z](\w{1,7})?)\b(\s)\b(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        r'\b^([a-zA-Z](\w{1,7})?)\b(\s)\b(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
     regex_inst_abs = re.compile(
-        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
 
     # regex_label_ind_inst = re.compile(
@@ -485,28 +485,28 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
     #     re.IGNORECASE)
 
     regex_label_ind_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
+        r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
         re.IGNORECASE)
     regex_inst_ind = re.compile(
-        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
+        r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
         re.IGNORECASE)
 
     # Cambios para aceptar operandos hexadecimales.
     regex_label_inm_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        r'^([a-zA-Z](\w{1,7})?)\s(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
     regex_inst_inm = re.compile(
-        r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
+        r'\b^(LDA|ADD|SUB|AND|ORA)\b(\s)(\#)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
 
     regex_label_io_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s(INP|OUT)\b(\s)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
-    regex_inst_io = re.compile(r'\b^(INP|OUT)\b(\s)(((\@)[0-7]{1,2}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+        r'^([a-zA-Z](\w{1,7})?)\s(INP|OUT)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+    regex_inst_io = re.compile(r'\b^(INP|OUT)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
 
     regex_label_rel_inst = re.compile(
-        r'^([a-zA-Z](\w{1,7})?)\s\b(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b\s([a-zA-Z](\w{1,7})?)$', re.IGNORECASE)
+        r'^([a-zA-Z](\w{1,7})?)\s\b(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
     regex_inst_rel = re.compile(
-        r'\b^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b(\s)([0-7]{1,2}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
+        r'\b^(BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,6}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$', re.IGNORECASE)
 
     regex_label_acum_inst = re.compile(r'^([a-zA-Z](\w{1,7})?)\s(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)$', re.IGNORECASE)
     regex_inst_acum = re.compile(r'\b^(CLA|CPA|INA|DCA|ROL|ROR|PLA|PHA)\b$', re.IGNORECASE)
@@ -627,7 +627,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                             if const_abs in label_dic:
                                                 print("CONST remplazada: ", const_abs)
                                                 const_abs_dec = int(label_dic[const_abs])
-                                                const_abs_oct = format(const_abs_dec, '#06o')[2:]
+                                                const_abs_oct = format(const_abs_dec, '#06o')[-4:]
                                                 oper_abs ="@"+const_abs_oct
                                                 print("Valor decimal de CONST: ", oper_abs)
                                                 # oper_abs = format(oper_abs, '#08b')[-6:]
@@ -692,7 +692,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                             if const_ind in label_dic:
                                                 print("CONST remplazada: ", const_ind)
                                                 const_ind_dec = int(label_dic[const_ind])
-                                                const_ind_oct = format(const_ind_dec, '#06o')[2:]
+                                                const_ind_oct = format(const_ind_dec, '#06o')[-4:]
                                                 oper_ind ="@"+const_ind_oct
                                                 print("Valor decimal de CONST: ", oper_ind)
                                                 # oper_ind = format(oper_ind, '#08b')[-6:]
@@ -750,8 +750,10 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                 oper_inm =str(label_dic[const_inm])
                                                 print("Valor decimal de CONST: ", oper_inm)
                                                 # oper_inm = format(oper_inm, '#08b')[-6:]
+                                                const_inm_dec = int(label_dic[const_inm])
+                                                const_inm_oct = "@"+format(const_inm_dec, '#06o')[-2:]
                                                 label_regex = re.compile(r'\b'+re.escape(const_inm)+r'\b', re.IGNORECASE)
-                                                data_list_x = re.sub(label_regex,oper_inm, data_list_x)
+                                                data_list_x = re.sub(label_regex,const_inm_oct, data_list_x)
                                                 # print("Linea con CONST actualizada: ",data_list_x)
                                                 data_list[x] = data_list_x
                                                 print("Linea con CONST actualizada:", data_list, end='' )
@@ -974,7 +976,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                         if const_abs in label_dic:
                                             print("CONST remplazada: ", const_abs)
                                             const_abs_dec = int(label_dic[const_abs])
-                                            const_abs_oct = format(const_abs_dec, '#06o')[2:]
+                                            const_abs_oct = format(const_abs_dec, '#06o')[-4:]
                                             oper_abs ="@"+const_abs_oct
                                             print("Valor octal de CONST: ", oper_abs)
                                             # oper_abs = format(oper_abs, '#08b')[-6:]
@@ -1037,14 +1039,40 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
 
                             elif inst_inm_match:
 
-                                oper_inm = inst_inm_match.group(4)
+                                # oper_inm = inst_inm_match.group(4)
 
-                                oper_lab_match = re.match(regex_oper_lab, oper_inm)
+                                if i == 0:
+                                    print("inst_inm_match iter: ", i)
 
-                                if oper_lab_match:
+                                    # const_inm = inst_inm_match.group(7)
+                                    const_inm = inst_inm_match.group(4)
+                                    print("constante inm ", const_inm)
 
-                                    oper_lab = oper_lab_match.group(1)
-                                    print("Decimal oper_lab: ", oper_lab)
+                                    oper_lab_match = re.match(regex_oper_lab, const_inm)
+
+                                    if oper_lab_match:
+
+                                        if const_inm in label_dic:
+                                            const_inm_dec = int(label_dic[const_inm])
+                                            const_inm_oct = format(const_inm_dec, '#06o')[-2:]
+                                            oper_inm = "@"+const_inm_oct
+                                            print("Valor octal de CONST: ", oper_inm)
+                                            # oper_inm = format(oper_inm, '#08b')[-6:]
+                                            label_regex = re.compile(r'\b'+re.escape(const_inm)+r'\b', re.IGNORECASE)
+                                            data_list_x = re.sub(label_regex,oper_inm, data_list_x)
+                                            # print("Linea con CONST actualizada: ",data_list_x)
+                                            data_list[x] = data_list_x
+                                            print("Linea con CONST actualizada:", data_list, end='' )
+                                            cont_mem_pos += 2
+                                        else:
+                                            error_cont_id = "Error, constante: "+const_inm+", no fue definida dentro del ASM."
+                                            error_list.append(error_cont_id)
+                                            error += 1
+                                    else:
+                                        print("Argumentos numericos:", const_inm)
+                                else:
+
+                                    print("inst_inm_match iter: ", i)          
 
 
                             elif inst_io_match:
