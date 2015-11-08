@@ -585,7 +585,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                             if label_inst_abs_match:
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento absoluto cuenta con 3 palabras.
-                                cont_mem_pos += 3
+                                # cont_mem_pos += 3
 
                                 print("Operand!:", label_inst_abs_match.group(6))
                                 print("Es una instruccion de direccionamiento absoluto")
@@ -613,10 +613,11 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
 
                                         oper_lab_match = re.match(regex_oper_lab, const_abs)
 
-                                        print("CONST remplazada: ", const_abs)
+
                                         if oper_lab_match:
 
                                             if const_abs in label_dic:
+                                                print("CONST remplazada: ", const_abs)
                                                 const_abs_dec = int(label_dic[const_abs])
                                                 const_abs_oct = format(const_abs_dec, '#06o')[2:]
                                                 oper_abs ="@"+const_abs_oct
@@ -627,11 +628,13 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                 # print("Linea con CONST actualizada: ",data_list_x)
                                                 data_list[x] = data_list_x
                                                 print("Linea con CONST actualizada:", data_list, end='' )
-                                                cont_mem_pos += 2
+                                                cont_mem_pos += 3
                                             else:
-                                                error_cont_id = "Error, identificador"+label_abs+" no definido"
+                                                error_cont_id = "Error, constante: "+const_abs+", no fue definida dentro del ASM."
+                                                error_list.append(error_cont_id)
+                                                error += 1
                                         else:
-                                            print("Horror")
+                                            print("Argumentos numericos:", const_abs)
                                 else:
 
                                     print("label_inst_abs_match iter: ", i)
@@ -648,13 +651,68 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                             elif label_inst_ind_match:
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento absoluto cuenta con 3 palabras.
-                                cont_mem_pos += 3
+                                # cont_mem_pos += 3
 
                                 print("Es una instruccion de direccionamiento indirecto")
                                 print(num_line_int, "|", data_source_line_n)
 
                             # EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+                                if i == 0:
+                                    print("label_inst_ind_match iter: ", i)
+                                    label_ind = label_inst_ind_match.group(1)
+
+                                    if label_ind in label_dic:
+                                        error_id_dup = "Error, identificador: "+label_ind+", duplicado.\n"
+                                        error += 1
+                                        error_list.append(error_id_dup)
+
+                                    else:
+
+                                        label_dic[label_ind] = cont_mem_pos
+                                        print("Es una instruccion de direccionamiento indediato")
+                                        print("Etiqueta ingresada al diccionario:", label_dic)
+                                        print(num_line_int, "|", data_source_line_n, end='')
+
+                                        const_ind = label_inst_ind_match.group(6)
+
+                                        oper_lab_match = re.match(regex_oper_lab, const_ind)
+
+
+                                        if oper_lab_match:
+
+                                            if const_ind in label_dic:
+                                                print("CONST remplazada: ", const_ind)
+                                                const_ind_dec = int(label_dic[const_ind])
+                                                const_ind_oct = format(const_ind_dec, '#06o')[2:]
+                                                oper_ind ="@"+const_ind_oct
+                                                print("Valor decimal de CONST: ", oper_ind)
+                                                # oper_ind = format(oper_ind, '#08b')[-6:]
+                                                label_regex = re.compile(r'\b'+re.escape(const_ind)+r'\b', re.IGNORECASE)
+                                                data_list_x = re.sub(label_regex,oper_ind, data_list_x)
+                                                # print("Linea con CONST actualizada: ",data_list_x)
+                                                data_list[x] = data_list_x
+                                                print("Linea con CONST actualizada:", data_list, end='' )
+                                                cont_mem_pos += 3
+                                            else:
+                                                error_cont_id = "Error, constante: "+const_ind+", no fue definida dentro del ASM."
+                                                error_list.append(error_cont_id)
+                                                error += 1
+                                        else:
+                                            print("Argumentos numericos:", const_ind)
+                                else:
+
+                                    print("label_inst_ind_match iter: ", i)
+                                    label_ind = label_inst_ind_match.group(1)+" "
+                                    print("label_ind", label_ind)
+                                    label_regex = re.compile(r'\b'+re.escape(label_ind)+r'\b', re.IGNORECASE)
+                                    data_list_x = re.sub(label_regex,"", data_list_x)
+                                    print("data_list_x: ",data_list_x)
+                                    data_list[x] = data_list_x
+                                    print("data_list", data_list)
                             # EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+                            
+                            
+                            
                             elif label_inst_inm_match:
                                 if i == 0:
                                     print("label_inst_inm_match iter: ", i)
@@ -710,10 +768,69 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                             elif label_inst_io_match:
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento absoluto cuenta con 3 palabras.
-                                cont_mem_pos += 2
+                                # cont_mem_pos += 2
 
                                 print("Es una instruccion de direccionamiento entrada/salida")
                                 print(num_line_int, "|", data_source_line_n)
+
+                            # ###################################################################################################################3
+                            
+                                if i == 0:
+                                        print("label_inst_io_match iter: ", i)
+                                        label_io = label_inst_io_match.group(1)
+    
+                                        if label_io in label_dic:
+                                            error_id_dup = "Error, identificador: "+label_io+", duplicado.\n"
+                                            error += 1
+                                            error_list.append(error_id_dup)
+    
+                                        else:
+    
+                                            label_dic[label_io] = cont_mem_pos
+                                            print("Es una instruccion de direccionamiento ioediato")
+                                            print("Etiqueta ingresada al diccionario:", label_dic)
+                                            print(num_line_int, "|", data_source_line_n, end='')
+    
+                                            const_io = label_inst_io_match.group(5)
+                                            print("constante io ", const_io)
+    
+                                            oper_lab_match = re.match(regex_oper_lab, const_io)
+    
+    
+                                            if oper_lab_match:
+    
+                                                if const_io in label_dic:
+                                                    print("CONST remplazada: ", const_io)
+                                                    const_io_dec = int(label_dic[const_io])
+                                                    const_io_oct = format(const_io_dec, '#04o')[2:4]
+                                                    oper_io ="@"+const_io_oct
+                                                    print("Valor octal de CONST: ", oper_io)
+                                                    # oper_io = format(oper_io, '#08b')[-6:]
+                                                    label_regex = re.compile(r'\b'+re.escape(const_io)+r'\b', re.IGNORECASE)
+                                                    data_list_x = re.sub(label_regex,oper_io, data_list_x)
+                                                    # print("Linea con CONST actualizada: ",data_list_x)
+                                                    data_list[x] = data_list_x
+                                                    print("Linea con CONST actualizada:", data_list, end='' )
+                                                    cont_mem_pos += 2
+                                                else:
+                                                    error_cont_id = "Error, constante: "+const_io+", no fue definida dentro del ASM."
+                                                    error_list.append(error_cont_id)
+                                                    error += 1
+                                            else:
+                                                print("Argumentos numericos:", const_io)
+                                else:
+
+                                    print("label_inst_io_match iter: ", i)
+                                    label_io = label_inst_io_match.group(1)+" "
+                                    print("label_io", label_io)
+                                    label_regex = re.compile(r'\b'+re.escape(label_io)+r'\b', re.IGNORECASE)
+                                    data_list_x = re.sub(label_regex,"", data_list_x)
+                                    print("data_list_x: ",data_list_x)
+                                    data_list[x] = data_list_x
+                                    print("data_list", data_list)
+                            ######################################################################################################################
+
+
 
                             elif label_inst_rel_match:
                                 # Actualizacion del contador de posicion de memoria.
@@ -736,12 +853,35 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                         print("Etiqueta ingresada al diccionario:", label_dic)
                                         print(num_line_int, "|", data_source_line_n)
                                         cont_mem_pos += 2
-
+                                      
                                 else:
                                     print("label_inst_rel_match iter: ", i)
 
-                                print("Es una instruccion de direccionamiento relativo")
-                                print(num_line_int, "|", data_source_line_n)
+                                    print("Es una instruccion de direccionamiento relativo")
+                                    print(num_line_int, "|", data_source_line_n)
+                                    print("Bne iter", i)
+                                    print("BNE data_list[x]: ", data_list[x])
+                                    label_rel = label_inst_rel_match.group(4)
+                                    print("Label_rel", label_rel)
+
+                                    if label_rel in label_dic:
+                                        oper_rel = "#"+str(label_dic[label_rel])
+                                        print("oper_rel", oper_rel)
+                                        # oper_rel = format(oper_rel, '#08b')[-6:]
+                                        label_regex = re.compile(r'\b'+re.escape(label_rel)+r'\b', re.IGNORECASE)
+                                        data_list_x = re.sub(label_regex, oper_rel, data_list_x)
+                                        print("data_list_x: ", data_list_x)
+                                        data_list[x] = data_list_x
+                                        print("data_list", data_list)
+                                    
+                                    print("label_inst_rel_match iter: ", i)
+                                    label_rel = label_inst_rel_match.group(1)+" "
+                                    print("label_rel", label_rel)
+                                    label_regex = re.compile(r'\b'+re.escape(label_rel)+r'\b', re.IGNORECASE)
+                                    data_list_x = re.sub(label_regex,"", data_list_x)
+                                    print("data_list_x: ",data_list_x)
+                                    data_list[x] = data_list_x
+                                    print("data_list", data_list)
 
                             elif label_inst_acum_match:
                                 # Actualizacion del contador de posicion de memoria.
@@ -1001,13 +1141,52 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                 # data_list_x = re.sub(comment_regex, "", data_list_x)
                                 # # Se ingresa el nuevo string a su posicion original en la lista.
                                 # data_list[x] = data_list_x
-                                if i == 0:
-                                    print("Bne iter", i)
-                                    pc_list.append(cont_mem_pos)
-                                    cont_mem_pos += 2
-                                else:
-                                    print("Bne iter", i)
+                                # if i == 0:
+                                #     print("Bne iter", i)
+                                #     pc_list.append(cont_mem_pos)
+                                #     cont_mem_pos += 2
+                                # else:
+                                #     print("Bne iter", i)
+                                # 
+                                #     print("BNE data_list[x]: ", data_list[x])
+                                #     label_rel = inst_rel_match.group(4)
+                                #     print("Label_rel", label_rel)
+                                # 
+                                #     if label_rel in label_dic:
+                                #         oper_rel = "#"+str(label_dic[label_rel])
+                                #         print("oper_rel", oper_rel)
+                                #         # oper_rel = format(oper_rel, '#08b')[-6:]
+                                #         label_regex = re.compile(r'\b'+re.escape(label_rel)+r'\b', re.IGNORECASE)
+                                #         data_list_x = re.sub(label_regex,oper_rel, data_list_x)
+                                #         print("data_list_x: ",data_list_x)
+                                #         data_list[x] = data_list_x
+                                #         print("data_list", data_list )
 
+
+                                if i == 0:
+                                    print("inst_rel_match iter: ", i)
+                                    label_rel = inst_rel_match.group(1)
+
+                                    if label_rel in label_dic:
+
+                                        error_id_dup = "Error, identificador: "+label_rel+", duplicado.\n"
+                                        error += 1
+                                        error_list.append(error_id_dup)
+
+                                    else:
+
+                                        label_dic[label_rel] = cont_mem_pos
+                                        print("Es una instruccion de direccionamiento relediato")
+                                        print("Etiqueta ingresada al diccionario:", label_dic)
+                                        print(num_line_int, "|", data_source_line_n)
+                                        cont_mem_pos += 2
+                                      
+                                else:
+                                    print("inst_rel_match iter: ", i)
+
+                                    print("Es una instruccion de direccionamiento relativo")
+                                    print(num_line_int, "|", data_source_line_n)
+                                    print("Bne iter", i)
                                     print("BNE data_list[x]: ", data_list[x])
                                     label_rel = inst_rel_match.group(4)
                                     print("Label_rel", label_rel)
@@ -1017,15 +1196,14 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                         print("oper_rel", oper_rel)
                                         # oper_rel = format(oper_rel, '#08b')[-6:]
                                         label_regex = re.compile(r'\b'+re.escape(label_rel)+r'\b', re.IGNORECASE)
-                                        data_list_x = re.sub(label_regex,oper_rel, data_list_x)
-                                        print("data_list_x: ",data_list_x)
+                                        data_list_x = re.sub(label_regex, oper_rel, data_list_x)
+                                        print("data_list_x: ", data_list_x)
                                         data_list[x] = data_list_x
-                                        print("data_list", data_list )
-
+                                        print("data_list", data_list)
 
                                 # print("Operand!:",inst_abs_match.group(3))
-                                print("This is a relative instruction+argument:")
-                                print(num_line_int, "|", data_source_line_n)
+                                # print("This is a relative instruction+argument:")
+                                # print(num_line_int, "|", data_source_line_n)
                             # EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
                             # EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 
