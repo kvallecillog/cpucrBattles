@@ -66,3 +66,38 @@
 #define CTR 6
 //In/Out instructions
 #define IO 7
+
+//Definicion de los estados de la FSM
+
+#define Estado_0 0
+#define Estado_1 1
+#define Estado_2 2
+#define Estado_3 3
+#define Estado_4 4
+#define Estado_5 5
+#define Estado_6 6
+#define Estado_7 7
+#define Estado_8 8
+#define Estado_9 9
+#define Estado_10 10
+#define Estado_11 11
+#define Estado_12 12
+#define Estado_13 13
+#define Estado_14 14
+#define Estado_15 15
+#define Estado_16 16
+#define Estado_17 17
+#define Estado_18 18
+#define Estado_19 19
+#define Estado_20 20
+#define Estado_21 21
+#define Estado_22 22
+#define Estado_23 23
+#define Estado_24 24
+#define Estado_25 25
+#define Estado_26 26
+#define Estado_27 27
+#define Estado_28 28
+#define Estado_29 29
+#define Estado_30 30
+#define Estado_31 31
