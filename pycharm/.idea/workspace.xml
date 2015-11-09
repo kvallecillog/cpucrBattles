@@ -33,8 +33,8 @@
             <file leaf-file-name="preprocesador.py" pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/preprocesador.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="-16.770493">
-                    <caret line="367" column="45" selection-start-line="367" selection-start-column="45" selection-end-line="367" selection-end-column="45" />
+                  <state vertical-scroll-proportion="-3.1967213">
+                    <caret line="576" column="105" selection-start-line="576" selection-start-column="93" selection-end-line="576" selection-end-column="105" />
                     <folding>
                       <element signature="e#406#415#0" expanded="true" />
                     </folding>
@@ -42,21 +42,21 @@
                 </provider>
               </entry>
             </file>
-            <file leaf-file-name="raw_file.ASM" pinned="false" current-in-tab="true">
+            <file leaf-file-name="raw_file.ASM" pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/raw_file.ASM">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.7109005">
-                    <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+                  <state vertical-scroll-proportion="-11.129032">
+                    <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
                     <folding />
                   </state>
                 </provider>
               </entry>
             </file>
-            <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+            <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/main.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.0">
-                    <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+                  <state vertical-scroll-proportion="0.6807229">
+                    <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
                     <folding />
                   </state>
                 </provider>
@@ -77,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/deleted_spaces_file.ASM">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -86,8 +86,8 @@
       <file leaf-file-name="preprocesador.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/preprocesador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.57865167">
-              <caret line="2034" column="12" selection-start-line="2034" selection-start-column="12" selection-end-line="2034" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.58290154">
+              <caret line="2169" column="0" selection-start-line="2169" selection-start-column="0" selection-end-line="2169" selection-end-column="0" />
               <folding>
                 <element signature="e#406#415#0" expanded="true" />
               </folding>
@@ -124,9 +124,9 @@
         <option value="$PROJECT_DIR$/pgm" />
         <option value="$PROJECT_DIR$/file.obj" />
         <option value="$PROJECT_DIR$/deleted_spaces_file.ASM" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/raw_file.ASM" />
         <option value="$PROJECT_DIR$/preprocesador.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -515,32 +515,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/preprocesador.py</url>
-          <line>1081</line>
+          <line>1180</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/preprocesador.py</url>
-          <line>937</line>
+          <line>1036</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/preprocesador.py</url>
-          <line>1227</line>
+          <line>1326</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/preprocesador.py</url>
-          <line>686</line>
+          <line>785</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/preprocesador.py</url>
-          <line>748</line>
+          <line>847</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/preprocesador.py</url>
-          <line>872</line>
+          <line>971</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
@@ -911,7 +911,7 @@
     <entry file="file://$PROJECT_DIR$/deleted_spaces_file.ASM">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -931,29 +931,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/raw_file.ASM">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7109005">
-          <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+        <state vertical-scroll-proportion="-11.129032">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/preprocesador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57865167">
-          <caret line="2034" column="12" selection-start-line="2034" selection-start-column="12" selection-end-line="2034" selection-end-column="12" />
+        <state vertical-scroll-proportion="-3.1967213">
+          <caret line="576" column="105" selection-start-line="576" selection-start-column="93" selection-end-line="576" selection-end-column="105" />
           <folding>
             <element signature="e#406#415#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6807229">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

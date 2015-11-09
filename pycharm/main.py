@@ -39,7 +39,7 @@ def main():
     deleted_blanks_list = preprocesador.delete_blanks(lines_raw_list)
     deleted_comments_list = preprocesador.delete_comments(deleted_blanks_list)
     deleted_spaces_list = preprocesador.delete_spaces(deleted_comments_list)
-    error_init, error_init_list,deleted_init_list, pos_cont_dec, const_dic = preprocesador.init_checker(deleted_spaces_list, lines_raw_list, error)
+    error_init, error_init_list, deleted_init_list, pos_cont_dec, const_dic, res_words_dic, warning_list = preprocesador.init_checker(deleted_spaces_list, lines_raw_list, error)
 
     if error_init == 0:
 
@@ -54,8 +54,9 @@ def main():
             if error_inst == 0:
 
                 print("Main program without error's:", error_inst, "\n")
-                obj_list = preprocesador.obj_creator(fi_list, lines_raw_list)
+                obj_list = preprocesador.obj_creator(fi_list, res_words_dic, lines_raw_list)
 
+                print("Advertencia: ",warning_list[len(warning_list)-1])
             else:
 
                 print("Error detected at main flow: ASM cannot be assembled!")

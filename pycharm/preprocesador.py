@@ -184,8 +184,11 @@ def init_checker(data_list, lines_raw_list,error):
     # Inicializacion de la lista que contiene los errores del init.
     error_init_list = []
 
+    warning_list = []
+
     # Inicializacion el diccionario de constantes.
     const_dic = dict()
+    res_words_dic = {}
 
     # Limpia la memoria del diccionario
     const_dic.clear()
@@ -214,7 +217,8 @@ def init_checker(data_list, lines_raw_list,error):
     # Un ejemplo de declaracion de constantes en tiempo de ejecucion:
     # DBWRD @7777; Notese que debe declararse con espacios en blanco.
     # WRD @77; Notese que debe de ser 1 palabra, 6 bits maximo.
-    regex_init_res_words = re.compile(r"\b^((DBWRD)|(WRD))\b(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
+    # regex_init_res_words = re.compile(r"\b^((DBWRD)|(WRD))\b(\s)((\@)[0-7]{1,4})$", re.IGNORECASE)
+    regex_init_res_words = re.compile(r"\b^((DBWRD)|(WRD))\b(\s)(((\@)([0-7]{1,4}))|((\$)([0-9A-Fa-f]{1,4}))|(\d*)|((\%)([0-1]{1,12})))$", re.IGNORECASE)
 
     regex_init_const = re.compile(r"^([a-zA-Z](\w{1,7})?)(\s)(\=)(\s)(((\@)([0-7]{1,4}))|((\$)([0-9A-Fa-f]{1,4}))|(\d*)|((\%)([0-1]{1,12})))$", re.IGNORECASE)
 
@@ -222,11 +226,11 @@ def init_checker(data_list, lines_raw_list,error):
                      DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
                      RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
 
+    regex_res_dbwrd = re.compile(r"\b(DBWRD|WRD)\b", re.IGNORECASE)
     pos_cont_dec = 0
     pos_cont = False
 
     for x in range(0, len(data_list)):
-
         data_list_x = ''.join(data_list[x])
         num_line = data_list_x.split(" ")
         non_num_line = " ".join(num_line[1:len(num_line)])
@@ -245,6 +249,8 @@ def init_checker(data_list, lines_raw_list,error):
         init_const_match = re.match(regex_init_const, non_num_line)
         init_res_words_match = re.match(regex_init_res_words, non_num_line)
 
+        res_dbwrd_match = re.match(regex_res_dbwrd, non_num_line)
+
         cont_res_word_dic = Counter(w.lower() for w in re.findall(regex_res_word, non_num_line))
 
         cont_res_word_int = sum(cont_res_word_dic.values())
@@ -262,7 +268,7 @@ def init_checker(data_list, lines_raw_list,error):
                     # Octal pc
                     if pos_def_match.group(6):
 
-                        print("Position counter hex declaration:", pos_def_match.group(6))
+                        print("Position counter oct declaration:", pos_def_match.group(6))
                         pos_cont_oct = pos_def_match.group(5)[1:]
                         pos_cont_dec = int(pos_cont_oct, 8)
                         print("Position counter oct declaration:", pos_cont_oct)
@@ -313,6 +319,8 @@ def init_checker(data_list, lines_raw_list,error):
                         print("Position counter line:")
                         print(num_line_int, "|", non_num_line)
 
+                    pos_cont_dec_resword = pos_cont_dec
+
 
                 # CONST = *
                 elif pos_assign_match:
@@ -333,6 +341,8 @@ def init_checker(data_list, lines_raw_list,error):
                     pos_cont = True
                     print("Position counter line:")
                     print(num_line_int, "|", non_num_line)
+                    pos_cont_dec_resword = pos_cont_dec
+
 
                 # CONST = * + 1
                 elif pos_assign_match_plus:
@@ -345,61 +355,139 @@ def init_checker(data_list, lines_raw_list,error):
                     print("Constant assignation line:")
                     print(num_line_int, "|", non_num_line)
 
-
+                #
                 elif init_res_words_match:
-
-                    print("DBWORD | WRD reservadas, no se estan procesando, el programa no tiene la capacidad")
+                    warning_dbwrd = "DBWORD | WRD, AUN NO FUNCIONA PARA ESTA VERSION"
+                    warning_list.append(warning_dbwrd)
+                    print("DBWORD | WRD, AUN NO FUNCIONA PARA ESTA VERSION")
                     print(num_line_int, "|", non_num_line)
+                    print("pos_cont_dec_resword: ", pos_cont_dec_resword)
                     
-                    
-                    # print(init_res_words_match.group(5))
-                    # # Octal res_words
-                    # if init_res_words_match.group(5):
-                    #
-                    #     print("res_words OCT declaration:", init_res_words_match.group(5))
-                    #     res_words_oct = init_res_words_match.group(5)[1:]
-                    #     res_words_dec = int(res_words_oct, 8)
-                    #     res_words_dic[init_res_words_match.group(1)] = res_words_dec
-                    #     print("res_words oct declaration:", res_words_oct)
-                    #     print("res_words dec declaration:", res_words_dec)
-                    #     print("res_words line:")
-                    #     print(num_line_int, "|", non_num_line)
-                    #
-                    # # Hexadecimal res_words
-                    # elif init_res_words_match.group(10):
-                    #
-                    #     print("res_words HEX declaration:", init_res_words_match.group(10))
-                    #     res_words_hex = init_res_words_match.group(10)[1:]
-                    #     res_words_dec = int(res_words_hex, 16)
-                    #     res_words_dic[init_res_words_match.group(1)] = res_words_dec
-                    #     print("res_words hex declaration:", res_words_hex)
-                    #     print("res_words dec declaration:", res_words_dec)
-                    #     print("res_words line:")
-                    #     print(num_line_int, "|", non_num_line)
-                    #
-                    # # Decimal res_words
-                    # elif init_res_words_match.group(13):
-                    #
-                    #     print("res_words DEC declaration:", init_res_words_match.group(13))
-                    #     res_words_dec_str = init_res_words_match.group(13)
-                    #     res_words_dec_int = int(res_words_dec_str)
-                    #     res_words_dic[init_res_words_match.group(1)] = res_words_dec_int
-                    #     print("res_words dec declaration:", res_words_dec_int)
-                    #     print(num_line_int, "|", non_num_line)
-                    #
-                    # # Binary res_words
-                    # elif init_res_words_match.group(14):
-                    #
-                    #     print("res_words BIN declaration:", init_res_words_match.group(14))
-                    #     res_words_bin = init_res_words_match.group(14)[1:]
-                    #     res_words_dec = int(res_words_bin,2)
-                    #     res_words_dic[init_res_words_match.group(1)] = res_words_dec
-                    #     print("res_words dec declaration:", res_words_dec)
-                    #     print("res_words line:")
-                    #     print(num_line_int, "|", non_num_line)
-                
-                #  CONST = @0001
-                elif init_const_match:
+                    if pos_cont:
+
+                        # Octal res_words
+                        if init_res_words_match.group(6):
+
+                            print("res_words OCT declaration:", init_res_words_match.group(6))
+
+                            # res_words_oct = init_res_words_match.group(6)[1:]
+                            
+                            if init_res_words_match.group(2):
+                                print("Es DBWRD oct")
+                                
+                                res_words_oct = init_res_words_match.group(6)[-4:]                                
+                                oper_bin = int(res_words_oct,8)
+                                res_words_oct = format(oper_bin, '#014b')[-12:]                            
+                                print("res_words_oct: ", res_words_oct)
+                                
+                            elif init_res_words_match.group(3):
+                                print("Es WRD oct")
+                                res_words_oct = init_res_words_match.group(6)[-2:]                                
+                                oper_bin = int(res_words_oct,8)
+                                res_words_oct = format(oper_bin, '#014b')[-6:]                            
+                                print("res_words_oct: ", res_words_oct)
+                                
+                            # res_words_dec = int(res_words_oct, 8)
+                            # print("res_words_dec: ", res_words_dec)
+                            res_words_dic[pos_cont_dec_resword] = res_words_oct
+                            print("res_words oct declaration:", res_words_oct)
+                            # print("res_words dec declaration:", res_words_dec)
+                            # print("res_words dec declaration:", res_words_dic)
+                            print("res_words dec declaration:", res_words_dic)
+
+                            print("res_words line:")
+                            print(num_line_int, "|", non_num_line)
+
+                        # Hexadecimal res_words
+                        elif init_res_words_match.group(9):
+
+                            print("res_words HEX declaration:", init_res_words_match.group(9))
+
+                            if init_res_words_match.group(2):
+                                print("Es DBWRD hex")
+                                res_words_hex = init_res_words_match.group(9)[-4:]
+                                oper_bin = int(res_words_hex,16)
+                                res_words_hex = format(oper_bin, '#014b')[-12:]
+                                print("res_words_hex: ", res_words_hex)
+                            elif init_res_words_match.group(3):
+                                print("Es WRD hex")
+                                res_words_hex = init_res_words_match.group(9)[-2:]
+                                oper_bin = int(res_words_hex,16)
+                                res_words_hex = format(oper_bin, '#014b')[-6:]
+                                print("res_words_hex: ", res_words_hex)
+                            # res_words_dec = int(res_words_hex, 16)
+                            res_words_dic[pos_cont_dec_resword] = res_words_hex
+                            print("res_words hex declaration:", res_words_hex)
+                            print("res_words dec declaration:", res_words_dic)
+
+                            # print("res_words dec declaration:", res_words_dec)
+                            # print("res_words dec declaration:", res_words_dic)
+
+                            print("res_words line:")
+                            print(num_line_int, "|", non_num_line)
+
+                        # Decimal res_words
+                        elif init_res_words_match.group(12):
+
+                            print("res_words DEC declaration:", init_res_words_match.group(12))
+                            # res_words_dec_str = init_res_words_match.group(12)
+                            
+                            if init_res_words_match.group(2):
+                                print("Es DBWRD dec")
+                                # res_words_dec = init_res_words_match.group(12)[-4:]
+                                res_words_dec = init_res_words_match.group(12)
+                                oper_bin = int(res_words_dec)
+                                res_words_dec = format(oper_bin, '#014b')[-12:]
+                                print("res_words_dec: ", res_words_dec)
+                            elif init_res_words_match.group(3):
+                                print("Es WRD dec")
+                                # res_words_dec = init_res_words_match.group(12)[-2:]
+                                res_words_dec = init_res_words_match.group(12)
+                                oper_bin = int(res_words_dec)
+                                res_words_dec = format(oper_bin, '#08b')[-6:]
+                                print("res_words_dec: ", res_words_dec)
+                            
+                            # res_words_dec_int = int(res_words_dec_str)
+                            print("res_words dec declaration:", res_words_dic)
+
+                            res_words_dic[pos_cont_dec_resword] = res_words_dec
+                            
+                            print("res_words dec declaration:", res_words_dec)
+                            print(num_line_int, "|", non_num_line)
+
+                        # Binary res_words
+                        elif init_res_words_match.group(13):
+
+                            print("res_words BIN declaration:", init_res_words_match.group(13))
+                            # res_words_bin = init_res_words_match.group(13)[1:]
+                            
+                            if init_res_words_match.group(2):
+                                print("Es DBWRD bin")
+                                res_words_bin = init_res_words_match.group(13)[-12:]
+                                print("res_words_bin: ", res_words_bin)
+                            elif init_res_words_match.group(3):
+                                print("Es WRD bin")
+                                res_words_bin = init_res_words_match.group(13)[-6:]
+                                print("res_words_bin: ", res_words_bin)                            
+
+                            # res_words_dec = int(res_words_bin, 2)
+                            
+                            res_words_dic[pos_cont_dec_resword] = res_words_bin
+                            # print("res_words dec declaration:", res_words_dec)
+                            print("res_words dec declaration:", res_words_dic)
+                            print("res_words line:")
+                            print(num_line_int, "|", non_num_line)
+                    else:
+                        error_pc_id = "Error, no esta definido * = antes de: "+str(num_line_int) + " | " + non_num_line
+                        error += 1
+                        print(error_pc_id)
+                        error_init_list.append(error_pc_id)
+
+                    pos_cont_dec_resword += 1
+                    print("pos_cont_dec_resword: ", pos_cont_dec_resword)
+
+                # CONST = @0001
+                elif init_const_match and not res_dbwrd_match:
 
                     print(init_const_match.group(5))
                     # Octal CONST
@@ -447,6 +535,13 @@ def init_checker(data_list, lines_raw_list,error):
                         print("CONST line:")
                         print(num_line_int, "|", non_num_line)
 
+                else:
+                    error += 1
+                    error_arg_inv = "Error!:" + str(num_line_int) + "|" +non_num_line+ ", argumento invalido"
+                    error_init_list.append(error_arg_inv)
+                    print(error_arg_inv)
+                    print(num_line_int, "|", non_num_line)
+
             else:
                 error += 1
                 error_res_word = "Error!:" + str(num_line_int) + "|" +non_num_line+ ", palabra reservada utilizada como identificador"
@@ -475,7 +570,11 @@ def init_checker(data_list, lines_raw_list,error):
 
     print("\n" + bcolors.FAIL + "\nPosition counter for main program:" + str(pos_cont_dec) + bcolors.ENDC, "\n")
 
-    return error, error_init_list, delete_init_list, pos_cont_dec, const_dic
+
+    for key, value in res_words_dic.items():
+        print(key, value)
+
+    return error, error_init_list, delete_init_list, pos_cont_dec, const_dic, res_words_dic, warning_list
 
 
 def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
@@ -2020,10 +2119,13 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
     return error, fi_list
 
 
-
-def obj_creator(fi_list, lines_raw_list):
+def obj_creator(fi_list, res_words_dic, lines_raw_list):
     # print(fi_list)
-
+    # res_words_dic_obj = dict()
+    # res_words_dic_obj = res_words_dic
+    for key, value in res_words_dic.items():
+        print(key, value)
+    # print("CHECK",res_words_dic)
     ram_init_file_name = '../clion/ram_init.txt'
     ram_init_file = open(ram_init_file_name, 'w+')
 
