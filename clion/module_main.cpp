@@ -45,6 +45,8 @@ int sc_main(int argc, char* argv[]) {
     sc_signal < bool > init;
     sc_signal < sc_lv <12> > pc;
 
+
+
     // Se crea el trace vcd que contiene la simulacion gtkwave.
     sc_trace_file *wf = sc_create_vcd_trace_file("cpucr");
 
