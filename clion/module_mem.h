@@ -50,31 +50,32 @@ SC_MODULE(memory){
 //
         SC_METHOD(entry);
 
-        dont_initialize();
-        sensitive << dat_m_o << addr_m_i << rw_m_i <<  en_m_i;
+//        dont_initialize();
+//        sensitive << dat_m_o << addr_m_i << rw_m_i <<  en_m_i;
+        sensitive << dat_m_i << addr_m_i << rw_m_i <<  en_m_i;
 
-//        FILE *fp ;
-//
-//        fp = fopen("ram_init.txt","r");
-//
-//        if(!fp)
-//        {
-//            perror("error. cannot find ram_init.");
-//        }
-//
-//        int size=0;
-//
-//        unsigned int mem_word;
-//
-//        // for (size = 0; size < 255; size++) {
-//        //     ramdata[size].write(0x0);
-//        // }
-//        size = 0;
-//        while (fscanf(fp,"%xn", &mem_word) != EOF) {
-//            ramdata[size].write( mem_word );
-////            cout << mem_word << endl;
-//            size++;
-//        }
+        FILE *fp ;
+
+        fp = fopen("ram_init.txt","r");
+
+        if(!fp)
+        {
+            perror("error. cannot find ram_init.");
+        }
+
+        int size=0;
+
+        unsigned int mem_word;
+
+        // for (size = 0; size < 255; size++) {
+        //     ramdata[size].write(0x0);
+        // }
+        size = 0;
+        while (fscanf(fp,"%un", &mem_word) != EOF) {
+            ramdata[size].write( mem_word );
+            cout << mem_word << endl;
+            size++;
+        }
 
     }
 };

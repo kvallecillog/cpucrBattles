@@ -29,7 +29,7 @@ void memory::entry(){
 
     if(en_m_i.read() == 1) {
 
-        if(rw_m_i.read() == 1) {
+        if(rw_m_i.read() == 0) {
 
             //write
             ramdata[addr_m_i.read().to_uint()].write( dat_m_i.read() );
@@ -45,9 +45,9 @@ void memory::entry(){
         }
     }
     else if(en_m_i.read() == 0) {
-        
+
         dat_m_o.write("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-    
+
     }
     
     else{

@@ -21,7 +21,7 @@ using namespace boost::algorithm;
 
 int sc_main(int argc, char* argv[]) {
 
-    
+
     sc_set_time_resolution(1, SC_NS);
     // Generacion de la señal de reloj de 2 MHz
     sc_clock clk("clk", 500, SC_NS, 0.5, 0, SC_NS, false);
@@ -44,7 +44,12 @@ int sc_main(int argc, char* argv[]) {
     sc_signal < bool > rps;
     sc_signal < bool > init;
     sc_signal < sc_lv <12> > pc;
+    sc_signal < int > est_pres;
+    sc_signal < int > est_prox;
 
+    sc_signal < bool > CB;
+    sc_signal < bool > CM;
+    sc_signal < bool > LE;
 
 
     // Se crea el trace vcd que contiene la simulacion gtkwave.
@@ -65,6 +70,10 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, rps, "rps");
     sc_trace(wf, pc, "pc");
 
+    sc_trace(wf, CB, "CB");
+    sc_trace(wf, CM, "CM");
+    sc_trace(wf, LE, "LE");
+
     // Señales del modulo Testbench.
     sc_trace(wf, test_bench.rps_stim_o, "rps_stim_o");
 
@@ -84,7 +93,7 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.memory1.dat_m_o, "dat_m_o");
     sc_trace(wf, cpucr1.memory1.en_m_i, "en_m_i");
     sc_trace(wf, cpucr1.memory1.rw_m_i, "rw_m_i");
-    
+
     // Señales del modulo transactor
     sc_trace(wf, cpucr1.transactor1.addr_t_o, "addr_t_o");
     sc_trace(wf, cpucr1.transactor1.dat_t_i, "dat_t_i");
@@ -97,8 +106,18 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.transactor1.ports_t_o, "ports_t_o");
     sc_trace(wf, cpucr1.transactor1.rps_t_i ,"rps_t_i");
 
-    sc_trace(wf, cpucr1.transactor1.init_t_o ,"init_t_o");    
-    sc_trace(wf, cpucr1.init_c_o ,"init_c_o");    
+    sc_trace(wf, cpucr1.transactor1.init_t_o ,"init_t_o");
+
+    sc_trace(wf, cpucr1.transactor1.s_est_pres ,"s_est_pres");
+    sc_trace(wf, cpucr1.transactor1.s_est_prox ,"s_est_prox");
+
+    sc_trace(wf, cpucr1.transactor1.s_CB ,"s_CB");
+    sc_trace(wf, cpucr1.transactor1.s_CM,"s_CM");
+    sc_trace(wf, cpucr1.transactor1.s_LE ,"s_LE");
+
+
+
+    sc_trace(wf, cpucr1.init_c_o ,"init_c_o");
 
 
     // Conexiones entre el testbench y las señales externas.
@@ -116,17 +135,30 @@ int sc_main(int argc, char* argv[]) {
     cpucr1.acum_c_o(acum);
     cpucr1.s_c_o(s);
     cpucr1.ports_c_i(ports_i);
-    
+
     cpucr1.ports_c_o(ports_o);
-    
+
+    cpucr1.s_est_pres_c_o(est_pres);
+
+    cpucr1.s_est_prox_c_o(est_prox);
+
+
+    cpucr1.s_CB_c_o(CB);
+
+    cpucr1.s_CM_c_o(CM);
+
+    cpucr1.s_LE_c_o(LE);
+
+
+
     cpucr1.pc_c_o(pc);
     cpucr1.init_c_o(init);
-    
+
     sc_start(10, SC_US);
-    
+
     test_bench.stimgen();
 
-    
+
     cpucr1.monitor();
 
 //    cpucr1.transactor1.init_cpucr();

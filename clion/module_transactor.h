@@ -38,11 +38,17 @@ SC_MODULE(transactor){
         sc_in_clk  clk_t_i;
         sc_out < bool > init_t_o;
 
-        sc_signal < int > s_est_pres;
-        sc_signal < int > s_est_prox;
-        sc_signal < bool > s_CB;
-        sc_signal < bool > s_CM;
- 
+        sc_out < int > s_est_pres;
+        sc_out < int > s_est_prox;
+
+        sc_out < bool > s_CB;
+        sc_out < bool > s_CM;
+
+         bool v_CM;
+
+        sc_out < bool > s_LE;
+
+
         sc_signal < sc_uint<6> > s_RI;
         sc_signal < sc_uint<6> > s_A;
         sc_signal < sc_uint<1> > s_bn_t;
@@ -51,13 +57,18 @@ SC_MODULE(transactor){
         sc_signal < sc_uint<1> > s_bz_t;
         sc_signal < sc_uint<1> > s_bc_t;
 
-         sc_uint<6> v_RI;
-         sc_uint<6> v_A;
-         sc_uint<1> v_bn_t;
-         sc_uint<1> v_bv_t;
-         sc_uint<1> v_bi_t;
-         sc_uint<1> v_bz_t;
-         sc_uint<1> v_bc_t;
+        sc_signal < sc_uint<12> > s_PC;
+
+        sc_uint<12> v_PC;
+
+        sc_uint<6> v_RI;
+        sc_uint<6> v_A;
+        sc_uint<1> v_bn_t;
+        sc_uint<1> v_bv_t;
+        sc_uint<1> v_bi_t;
+        sc_uint<1> v_bz_t;
+        sc_uint<1> v_bc_t;
+        sc_uint<6> v_S;
 
         // Bits temporales
         sc_uint<1> v_bt1_t;
@@ -71,26 +82,43 @@ SC_MODULE(transactor){
         void p_est_pres();
         void p_est_prox();
         void p_acum_a();
+        void p_LE();
+        void p_PC();
 
 
-        SC_CTOR(transactor){
+
+        SC_CTOR(transactor):acum_t_o("acum_t_o"),s_est_pres("s_est_pres"), s_est_prox("s_est_prox"){
 
                 SC_METHOD(p_CB);
+                sensitive << clk_t_i.neg();
+
+                SC_METHOD(p_LE);
+                en_t_o.initialize("0");
+                sensitive << clk_t_i.neg();
+
+                SC_METHOD(p_PC);
                 sensitive << clk_t_i.neg();
 
                 SC_METHOD(p_RI);
                 sensitive << clk_t_i.neg();
 
                 SC_METHOD(p_est_pres);
+                dont_initialize();
                 sensitive << clk_t_i.neg();
 
                 SC_METHOD(p_est_prox);
+
                 sensitive << s_est_pres;
 
                 SC_METHOD(p_acum_a);
-                v_A = "100000";
-//                s_A.initialize("100000");
+                v_A = "0";
+                acum_t_o.initialize("0");
+//                v_A = "111111";
+//                s_A = "111111";
+
                 sensitive << clk_t_i.neg();
+
+
 
         }
 
