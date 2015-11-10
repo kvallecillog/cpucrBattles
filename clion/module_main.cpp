@@ -41,6 +41,7 @@ int sc_main(int argc, char* argv[]) {
     sc_signal < sc_lv <6> > s;
     sc_signal < sc_lv <6> > ports_i;
     sc_signal < sc_lv <6> > ports_o;
+    sc_signal < sc_lv <6> > RI;
     sc_signal < bool > rps;
     sc_signal < bool > init;
     sc_signal < sc_lv <12> > pc;
@@ -85,6 +86,8 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.rps_c_i, "rps_c_i");
     sc_trace(wf, cpucr1.pc_c_o, "pc_c_o");
     sc_trace(wf, cpucr1.s_c_o, "s_c_o");
+    sc_trace(wf, cpucr1.ri_c_o, "RI");
+
 
 
     // Señales del modulo de memoria.
@@ -135,6 +138,7 @@ int sc_main(int argc, char* argv[]) {
     cpucr1.acum_c_o(acum);
     cpucr1.s_c_o(s);
     cpucr1.ports_c_i(ports_i);
+    cpucr1.ri_c_o(RI);
 
     cpucr1.ports_c_o(ports_o);
 

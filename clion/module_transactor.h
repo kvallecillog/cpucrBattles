@@ -34,6 +34,7 @@ SC_MODULE(transactor){
         sc_out < sc_lv <6> > s_t_o;
         sc_in < sc_lv <6> > ports_t_i;
         sc_out < sc_lv <6> > ports_t_o;
+        sc_out < sc_lv <6> > ri_t_o;
         sc_out < sc_lv<12> > pc_t_o;
         sc_in_clk  clk_t_i;
         sc_out < bool > init_t_o;
@@ -76,6 +77,7 @@ SC_MODULE(transactor){
 
 //        int v_dat_t_i = dat_t_i.read().to_int();
         int v_dat_t_o;
+        int i1, i2, i3, i4, i5, i6, i7;
 
         void p_CB();
         void p_RI();
@@ -103,19 +105,17 @@ SC_MODULE(transactor){
                 sensitive << clk_t_i.neg();
 
                 SC_METHOD(p_est_pres);
-                dont_initialize();
                 sensitive << clk_t_i.neg();
 
                 SC_METHOD(p_est_prox);
-
                 sensitive << s_est_pres;
 
                 SC_METHOD(p_acum_a);
                 v_A = "0";
-                acum_t_o.initialize("0");
+                i1 = i2 = i3 = i4 = i5 = i6 = i7 = 0;
+//                acum_t_o.initialize("0");
 //                v_A = "111111";
 //                s_A = "111111";
-
                 sensitive << clk_t_i.neg();
 
 

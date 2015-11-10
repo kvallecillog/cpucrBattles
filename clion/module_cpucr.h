@@ -24,6 +24,7 @@ SC_MODULE(cpucr){
     sc_out < sc_lv <6> > s_c_o;
     sc_in < sc_lv <6> > ports_c_i;
     sc_out < sc_lv <6> > ports_c_o;
+    sc_out < sc_lv <6> > ri_c_o;
     sc_in < bool > rps_c_i;
     sc_out < sc_lv<12> > pc_c_o;
 
@@ -97,6 +98,9 @@ SC_MODULE(cpucr){
 
         transactor1.s_est_pres(s_est_pres_c_o);
         transactor1.s_est_prox(s_est_prox_c_o);
+
+        transactor1.ri_t_o(ri_c_o);
+
 
         transactor1.s_CB(s_CB_c_o);
         transactor1.s_CM(s_CM_c_o);

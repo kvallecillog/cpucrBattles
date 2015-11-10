@@ -1,5 +1,5 @@
 $date
-     Nov 09, 2015       21:43:42
+     Nov 10, 2015       09:49:44
 $end
 
 $version
@@ -50,11 +50,12 @@ $var wire    6  aaabj  dat_m_i [5:0]  $end
 $var wire    1  aaabk  init_c_o       $end
 $var wire   12  aaabl  pc_c_o [11:0]  $end
 $var wire    1  aaabm  rps_c_i       $end
-$var wire    6  aaabn  s_c_o [5:0]  $end
-$var wire    1  aaabo  en_c_o       $end
-$var wire    1  aaabp  rw_c_o       $end
-$var wire   12  aaabq  addr_c_o [11:0]  $end
-$var wire    6  aaabr  dat_c_o [5:0]  $end
+$var wire    6  aaabn  RI [5:0]  $end
+$var wire    6  aaabo  s_c_o [5:0]  $end
+$var wire    1  aaabp  en_c_o       $end
+$var wire    1  aaabq  rw_c_o       $end
+$var wire   12  aaabr  addr_c_o [11:0]  $end
+$var wire    6  aaabs  dat_c_o [5:0]  $end
 $upscope $end
 $enddefinitions  $end
 
@@ -71,7 +72,7 @@ bZZZZZZ aaaab
 b0 aaaaf
 b10010 aaaag
 bXXXXXX aaaah
-b0 aaaai
+bXXXXXX aaaai
 0aaaaj
 bXXXXXXXXXXXX aaaak
 0aaaal
@@ -84,7 +85,7 @@ bXXXXXXXXXXXX aaaak
 b1 aaaas
 b0 aaaat
 0aaaau
-b0 aaaav
+bXXXXXX aaaav
 bXXXXXX aaaaw
 b10010 aaaax
 b0 aaaay
@@ -102,11 +103,12 @@ bZZZZZZ aaabj
 0aaabk
 bXXXXXXXXXXXX aaabl
 0aaabm
-b10010 aaabn
-0aaabo
-1aaabp
-bXXXXXXXXXXXX aaabq
-bZZZZZZ aaabr
+b0 aaabn
+b10010 aaabo
+0aaabp
+1aaabq
+bXXXXXXXXXXXX aaabr
+bZZZZZZ aaabs
 $end
 
 #250
@@ -137,30 +139,29 @@ b10101 aaabi
 b10101 aaabj
 b0 aaabl
 1aaabm
-1aaabo
-b0 aaabq
-b10101 aaabr
+1aaabp
+b0 aaabr
+b10101 aaabs
 
 #750
 1aaaae
 
 #1000
 0aaaae
-b10101 aaaai
 0aaaal
 0aaaam
 0aaaaq
 0aaaar
 b1 aaaas
 b10 aaaat
-b10101 aaaav
+b10101 aaabn
 
 #1250
 1aaaae
 
 #1500
 b1 aaaaa
-b11101 aaaab
+b0 aaaab
 0aaaae
 b1 aaaaf
 b10000 aaaag
@@ -174,15 +175,15 @@ b1 aaaat
 b10000 aaaax
 b1 aaaay
 b1 aaabb
-b11101 aaabc
-b11101 aaabd
+b0 aaabc
+b0 aaabd
 b1 aaabh
-b11101 aaabi
-b11101 aaabj
+b0 aaabi
+b0 aaabj
 b1 aaabl
-b10000 aaabn
-b1 aaabq
-b11101 aaabr
+b10000 aaabo
+b1 aaabr
+b0 aaabs
 
 #1750
 1aaaae
@@ -190,59 +191,29 @@ b11101 aaabr
 #2000
 0aaaae
 b10 aaaaf
-b11101 aaaai
 0aaaal
 0aaaam
 0aaaaq
 0aaaar
-b1 aaaas
 b10 aaaat
-b11101 aaaav
 b10 aaaay
+b0 aaabn
 
 #2250
 1aaaae
 
 #2500
-b10 aaaaa
-b0 aaaab
 0aaaae
-b1 aaaaf
-b10 aaaak
-1aaaal
 1aaaam
 1aaaaq
-1aaaar
-b10 aaaas
-b1 aaaat
-b1 aaaay
-b10 aaabb
-b0 aaabc
-b0 aaabd
-b10 aaabh
-b0 aaabi
-b0 aaabj
-b10 aaabl
-b10 aaabq
-b0 aaabr
 
 #2750
 1aaaae
 
 #3000
 0aaaae
-b0 aaaaf
-b10010 aaaag
-b0 aaaai
-0aaaal
 0aaaam
 0aaaaq
-0aaaar
-b10 aaaat
-b0 aaaav
-b10010 aaaax
-b0 aaaay
-b10010 aaabn
 
 #3250
 1aaaae
