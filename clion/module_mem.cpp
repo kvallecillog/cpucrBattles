@@ -33,14 +33,14 @@ void memory::entry(){
 
             //write
             ramdata[addr_m_i.read().to_uint()].write( dat_m_i.read() );
-            cout << "@ |[" << sc_time_stamp()  << "]| Escritura de datos " <<"|[" <<dat_m_i.read().to_uint() << "]|" << " en direccion " << "|["<< addr_m_i.read().to_uint() << "]|" << endl;
+//            cout << "@ |[" << sc_time_stamp()  << "]| Escritura de datos " <<"|[" <<dat_m_i.read().to_uint() << "]|" << " en direccion " << "|["<< addr_m_i.read().to_uint() << "]|" << endl;
 
         }
         else {
 
             //read
             dat_m_o.write(ramdata[addr_m_i.read().to_uint()].read());
-            cout << "@ |[" << sc_time_stamp()  << "]| Lectura de datos " <<"|["<< dat_m_o.read().to_uint()<< "]|" << " en direccion " <<"|["<< addr_m_i.read().to_uint() << "]|" << endl;
+//            cout << "@ |[" << sc_time_stamp()  << "]| Lectura de datos " <<"|["<< dat_m_o.read().to_uint()<< "]|" << " en direccion " <<"|["<< addr_m_i.read().to_uint() << "]|" << endl;
 
         }
     }
@@ -52,7 +52,7 @@ void memory::entry(){
     
     else{
 
-        cout << "Inicializacion de la CPUCR" << endl;
+//        cout << "Inicializacion de la CPUCR" << endl;
 
     }
 

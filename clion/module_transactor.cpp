@@ -23,8 +23,6 @@ using namespace sc_dt;
 using namespace boost::algorithm;
 
 void  transactor::p_CB() {
-    cout << "---------------------------Inicio de p_CB---------------------------\n"<< endl;
-    cout << "iteracion de p_CB #: " << i1 << endl;
     i1++;
     if (rps_t_i){
         if(s_est_prox == Estado_1){
@@ -40,68 +38,47 @@ void  transactor::p_CB() {
     if (!rps_t_i){
         v_CM = false;
         s_CM = v_CM;
-//        cout << "v_CM: " << v_CM << endl;
     }
     else if((s_est_prox == Estado_1)&&(s_est_pres == Estado_16)){
         v_CM = true;
         s_CM = v_CM;
         s_CM = true;
-//        cout << "v_CM: " << v_CM << endl;
     }
     else{
-//        cout << "v_CM: " << v_CM << endl;
         v_CM = not v_CM;
         s_CM = v_CM;
-//        cout << "v_CM: " << v_CM << endl;
     }
-    cout << "@ |[" << sc_time_stamp() << " ]| "<< "Bandera de busqueda: " << "|[" << s_CB << "]|" << " Bandera de memoria: " << "|[" << s_CM << "]|" << endl;
-    cout << "---------------------------Final de p_CB---------------------------\n"<< endl;
 }
 
 void  transactor::p_LE() {
-    cout << "---------------------------Inicio de p_LE---------------------------\n"<< endl;
-    cout << "iteracion de p_LE #: " << i2 << endl;
     i2++;
     if(!rps_t_i){
-//        cout << "Estado reset: rps_t_i: " << rps_t_i << endl;
         s_LE = true;
         rw_t_o = true;
-        cout << "s_LE: " << s_LE << endl;
     }
     else {
         switch (s_est_pres) {
             case Estado_0:
-                cout << "Estado actual: " << Estado_0 << endl;
                 s_LE = true;
                 rw_t_o = true;
                 en_t_o = true;
-                cout << "s_LE: " << s_LE << endl;
                 break;
             case Estado_1:
-                cout << "Estado actual: " << Estado_1 << endl;
                 s_LE = true;
                 rw_t_o = true;
                 en_t_o = en_t_o;
-                cout << "s_LE: " << s_LE << endl;
                 break;
             default:
-                cout << "Estado actual: " << "default" << endl;
                 s_LE = true;
                 rw_t_o = true;
                 en_t_o = en_t_o;
-                cout << "s_LE: " << s_LE << endl;
                 break;
         }
     }
-    cout << "@ |[" << sc_time_stamp() << " ]| "<< "Bandera de LE: " << "|[" << s_LE << "]|" << " Estado presente: " << "|[" << s_est_pres << "]|" << " Bandera RPS: " << "|[" << rps_t_i << "]|" << endl;
-    cout << "---------------------------Final de p_LE---------------------------\n"<< endl;
 }
 
 void transactor::p_PC(){
-    cout << "---------------------------Inicio de p_PC---------------------------\n"<< endl;
-    cout << "iteracion de p_PC #: " << i3 << endl;
     i3++;
-
     if(!rps_t_i){
         v_PC = 0;
         s_PC = v_PC;
@@ -109,74 +86,64 @@ void transactor::p_PC(){
     else{
         switch (s_est_pres) {
             case Estado_0:
-                cout << "Estado actual: " << Estado_0 << endl;
                 v_PC = 0;
                 s_PC = v_PC;
                 pc_t_o = v_PC;
                 addr_t_o = v_PC;
-                cout << "s_PC: " << s_PC << endl;
                 break;
             case Estado_1:
-                cout << "Estado actual: " << Estado_1 << endl;
                 v_PC = v_PC;
                 s_PC = s_PC;
                 pc_t_o = v_PC;
                 addr_t_o = addr_t_o;
-                cout << "s_PC: " << s_PC << endl;
                 break;
-            case Estado_2:
-                cout << "Estado actual: " << Estado_2 << endl;
-                switch (v_RI){
-                    case TAP_CTR: case TPA_CTR: case CLA_ACU:
-                    case INA_ACU: case DCA_ACU: case ROL_ACU:
-                    case ROR_ACU: case CLC_IMP: case SEC_IMP:
-                    case SEI_IMP: case CLI_IMP: case NOP_CTR:
-                    case CPA_ACU:{
-                        cout << "Instruccion 1 palabra: " << v_RI << endl;
+            case Estado_2: {
+                switch (v_RI) {
+                    case TAP_CTR:
+                    case TPA_CTR:
+                    case CLA_ACU:
+                    case INA_ACU:
+                    case DCA_ACU:
+                    case ROL_ACU:
+                    case ROR_ACU:
+                    case CLC_IMP:
+                    case SEC_IMP:
+                    case SEI_IMP:
+                    case CLI_IMP:
+                    case NOP_CTR:
+                    case CPA_ACU: {
                         v_PC = v_PC + 1;
                         s_PC = v_PC;
                         pc_t_o = v_PC;
                         addr_t_o = v_PC;
-                        cout << "s_PC: " << s_PC << endl;
                         break;
                     }
                     default:
-                        cout << "v_RI: " << v_RI << endl;
                         v_PC = v_PC;
                         s_PC = s_PC;
                         pc_t_o = v_PC;
                         addr_t_o = addr_t_o;
-                        cout << "s_PC: " << s_PC << endl;
                         break;
                 }
                 break;
+            }
             default:
-                cout << "Estado actual: " << "default" << endl;
                 v_PC = 0;
                 s_PC = v_PC;
                 pc_t_o = v_PC;
                 addr_t_o = v_PC;
-                cout << "s_PC: " << s_PC << endl;
                 break;
         }
     }
-    cout << "@ |[" << sc_time_stamp() << " ]| "<< "Contador s_PC: " << "|[" << s_PC << "]|" << " Estado presente: " << "|[" << s_est_pres << "]|" << " Registro de instruccion v_RI: " << "|[" << v_RI << "]|" << endl;
-    cout << "---------------------------Final de p_PC---------------------------\n"<< endl;
 }
 
 void  transactor::p_RI() {
-    cout << "---------------------------Inicio de p_RI---------------------------\n"<< endl;
-    cout << "iteracion de p_RI #: " << i4 << endl;
     i4++;
-
     if (rps_t_i){
         if (s_CB){
-//            s_RI = INA_ACU;
             v_RI = dat_t_i.read().to_int();
             s_RI = v_RI;
             ri_t_o = v_RI;
-            //            s_RI = dat_t_i.read().to_int();
-//            cout << "Registro de instruccion: " << s_RI << endl;
         }
         else{
             s_RI = s_RI;
@@ -188,35 +155,21 @@ void  transactor::p_RI() {
         v_RI = 0;
         s_RI = 0;
         ri_t_o = v_RI;
-
     }
-    cout << "@ |[" << sc_time_stamp() << " ]| "<< " Bandera de busqueda: " << "|[" << s_CB << "]|" << " Registro de instruccion v_RI: " << "|[" << v_RI << "]|" << endl;
-    cout << "---------------------------Final de p_RI---------------------------\n"<< endl;
 }
 
 void  transactor::p_est_pres() {
-    cout << "---------------------------Inicio de p_est_pres---------------------------\n"<< endl;
-    cout << "iteracion de p_est_pres #: " << i5 << endl;
     i5++;
-
-    cout << "@ |[" << sc_time_stamp() << " ]| " << "]| " << "s_est_pres: " << "|[" << s_est_pres << "]|"<< " = " << " s_est_prox: " << "|["<< s_est_prox << "]|"<< endl;
     if (rps_t_i){
         s_est_pres = s_est_prox;
-        cout <<" Cambie de estado" << "Exec, s_est_pres: " << "|[" << s_est_pres << "]|"<< " = " << " s_est_prox: " << "|["<< s_est_prox << "]|"<< endl;
     }
     else{
         s_est_pres = Estado_0;
-//        cout << "Init, s_est_pres: " << "|["<< s_est_pres << "]|"<< endl;
     }
-    cout << "---------------------------Final de p_est_pres---------------------------\n"<< endl;
 }
 
 void  transactor::p_est_prox() {
-    cout << "---------------------------Inicio de p_est_prox---------------------------\n"<< endl;
-    cout << "iteracion de p_est_prox #: " << i6 << endl;
     i6++;
-//    cout << "@ |[" << sc_time_stamp() << " ]| " << "]| " << "Señal de reposicion activa rps_t_i: |[" << rps_t_i.read() << "|]" << endl;
-//    cout << "s_est_pres: " << "|[" << s_est_pres << "]|"<< " = " << " s_est_prox: " << "|["<< s_est_prox << "]|"<< endl;
     if (!rps_t_i){
         s_est_prox = Estado_1;
     }
@@ -246,20 +199,14 @@ void  transactor::p_est_prox() {
                         (v_bc_t, v_A) = v_A + 1;
                         s_A = v_A;
                         acum_t_o = v_A;
-
-                        break;
-
-
                         break;
                     }
                     default:
                         cout << "s_RI: Default !!!!!! " << s_RI << endl;
-
                         cout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX s_RI.read().to_uint()" << s_RI.read().to_uint() << endl;
                         cout << "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY s_est_pres" << s_est_pres<< endl;
                         cout << "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ s_est_pres" << s_est_prox<< endl;
                         sc_stop();
-
                         break;
                 }
                 break;
@@ -268,16 +215,13 @@ void  transactor::p_est_prox() {
                 break;
         }
     }
-    cout << "---------------------------Final de p_est_prox---------------------------\n"<< endl;
 }
 
 void  transactor::p_acum_a() {
-    cout << "---------------------------Inicio de p_acum_a---------------------------\n"<< endl;
-    cout << "iteracion de p_acum_a #: " << i7 << endl;
     i7++;
-    cout << "@ |[" << sc_time_stamp() << " ]| "<< "s_A: " << "|[" << s_A << "]|" << " s_bn_t: " << "|[" << s_bn_t << "]|" <<
-    " s_bv_t: " << "|[" << s_bv_t << "]|" << " s_bi_t: " << "|[" << s_bi_t << "]|" <<
-    " s_bz_t: " << "|[" << s_bz_t << "]|" << " s_bc_t: " << "|[" << s_bc_t << "]|" << "\n" << endl;
+//    cout << "@ |[" << sc_time_stamp() << " ]| "<< "s_A: " << "|[" << s_A << "]|" << " s_bn_t: " << "|[" << s_bn_t << "]|" <<
+//    " s_bv_t: " << "|[" << s_bv_t << "]|" << " s_bi_t: " << "|[" << s_bi_t << "]|" <<
+//    " s_bz_t: " << "|[" << s_bz_t << "]|" << " s_bc_t: " << "|[" << s_bc_t << "]|" << "\n" << endl;
 //                    cout << "v_A: " << "|[" << v_A << "]|" << " v_bn_t: " << "|[" << v_bn_t << "]|" <<
 //                    " v_bv_t: " << "|[" << v_bv_t << "]|" << " v_bi_t: " << "|[" << v_bi_t << "]|" <<
 //                    " v_bz_t: " << "|[" << v_bz_t << "]|" << " v_bc_t: " << "|[" << v_bc_t << "]|" << "\n" << endl;
@@ -288,10 +232,10 @@ void  transactor::p_acum_a() {
 //            s_bi_t = 1;
 ////            s_A = v_A;
 ////            acum_t_o = v_A;
-////            cout << "v_A " << v_A << endl;
+////
 //            // Calculo de bandera Z, con compuerta nor.
 ////            v_bz_t = v_A.nor_reduce();
-//////            cout << "v_bz_t " << v_bz_t << endl;
+//////
 ////            // Actualizacion de señal de bandera z.
 ////            s_bz_t = v_bz_t;
 ////            // Calculo de bandera N, con el MSB de A.
@@ -392,10 +336,6 @@ void  transactor::p_acum_a() {
 //    }//end switch acum global
     cout << "---------------------------Final de p_acum_a---------------------------\n"<< endl;
 }
-
-
-
-
 
 
 
