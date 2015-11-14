@@ -604,9 +604,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
     # regex_oper_bin = re.compile(r"^(\%)([0-1]{1,6})$", re.IGNORECASE)
     # regex_oper_hex = re.compile(r"^(\$)([0-9A-Fa-f]{1,4})$", re.IGNORECASE)
 
-    regex_res_word = re.compile(r"\b(ADD|AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
-                     DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
-                     RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
+    regex_res_word = re.compile(r"\b(ADD|AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
 
         # regex_label_ind_inst = re.compile(
     #     r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
@@ -2123,8 +2121,8 @@ def obj_creator(fi_list, res_words_dic, lines_raw_list):
     # print(fi_list)
     # res_words_dic_obj = dict()
     # res_words_dic_obj = res_words_dic
-    for key, value in res_words_dic.items():
-        print(key, value)
+    # for key, value in res_words_dic.items():
+    #     print(key, value)
     # print("CHECK",res_words_dic)
     ram_init_file_name = '../clion/ram_init.txt'
     ram_init_file = open(ram_init_file_name, 'w+')
@@ -2134,10 +2132,10 @@ def obj_creator(fi_list, res_words_dic, lines_raw_list):
     pc_file_name = '../clion/pc_init.txt'
     pc_file = open(pc_file_name, 'w+')
     pc_x = ""
-    base = 8
+    base = 10
 
     cero = "0"
-    base_address = 8
+    base_address = 10
     obj_line_dic = {}
     cont_pos = 0
     dont_care = "XXXXXX"
@@ -2219,6 +2217,7 @@ def obj_creator(fi_list, res_words_dic, lines_raw_list):
             print("obj dic", obj_line_dic[i])
         else:
             ram_init_file.writelines(cero+"\n")
+
 
     print("\nram_init_file_name:", ram_init_file_name)
     print("\npc_file_name:", pc_file_name)

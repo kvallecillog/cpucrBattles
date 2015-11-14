@@ -1,6 +1,6 @@
 [*]
 [*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
-[*] Tue Nov 10 16:02:09 2015
+[*] Tue Nov 10 16:07:51 2015
 [*]
 [dumpfile] "/home/kenneth/Dropbox/proyectoElectrico/srcWIP/cpucrBattles/clion/cpucr.vcd"
 [dumpfile_mtime] "Tue Nov 10 15:49:44 2015"
@@ -22,14 +22,15 @@ SystemC.addr_c_o[11:0]
 SystemC.addr_m_i[11:0]
 SystemC.addr_t_o[11:0]
 SystemC.address[11:0]
+@25
+SystemC.pc[11:0]
 @28
 SystemC.clk
-@29
 [color] 7
 SystemC.CM
 [color] 7
 SystemC.CB
-@23
+@22
 [color] 7
 SystemC.acum[5:0]
 @200
@@ -59,7 +60,6 @@ SystemC.enable
 SystemC.init_c_o
 SystemC.init_t_o
 @24
-SystemC.pc[11:0]
 SystemC.pc_c_o[11:0]
 @22
 SystemC.ports_i[5:0]
