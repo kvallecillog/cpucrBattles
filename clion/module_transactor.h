@@ -83,7 +83,7 @@ SC_MODULE(transactor){
         void p_RI();
         void p_est_pres();
         void p_est_prox();
-        void p_acum_a();
+//        void p_acum_a();
         void p_LE();
         void p_PC();
 
@@ -108,15 +108,17 @@ SC_MODULE(transactor){
                 sensitive << clk_t_i.neg();
 
                 SC_METHOD(p_est_prox);
+                v_A = 63;
+                i1 = i2 = i3 = i4 = i5 = i6 = i7 = 0;
                 sensitive << s_est_pres;
 
-                SC_METHOD(p_acum_a);
-                v_A = "0";
-                i1 = i2 = i3 = i4 = i5 = i6 = i7 = 0;
-//                acum_t_o.initialize("0");
-//                v_A = "111111";
-//                s_A = "111111";
-                sensitive << clk_t_i.neg();
+//                SC_METHOD(p_acum_a);
+//                v_A = "0";
+//                i1 = i2 = i3 = i4 = i5 = i6 = i7 = 0;
+////                acum_t_o.initialize("0");
+////                v_A = "111111";
+////                s_A = "111111";
+//                sensitive << clk_t_i.neg();
 
 
 

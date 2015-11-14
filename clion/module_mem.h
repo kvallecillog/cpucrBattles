@@ -71,14 +71,18 @@ SC_MODULE(memory){
         //     ramdata[size].write(0x0);
         // }
         size = 0;
+        cout << "-------------------------------------" << endl;
+        cout << "Cargando el programa objeto a memoria" << endl;
+        cout << "-------------------------------------" << endl;
+        cout << "|[" << "Address" << "]|::|[" << "Data" << "]|" << endl;
         while (fscanf(fp,"%un", &mem_word) != EOF) {
             ramdata[size].write( mem_word );
-            if (size < 10 ){
-                cout << mem_word << endl;
+            if (size < 30 ){
+                cout << "|[" << size << "]|:::::::::|[" << mem_word << "]|" << endl;
                 }
             size++;
         }
-
+            cout << "-------------------------------------" << endl;
     }
 };
 

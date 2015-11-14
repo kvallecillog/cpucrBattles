@@ -66,7 +66,28 @@ void  transactor::p_LE() {
             case Estado_1:
                 s_LE = true;
                 rw_t_o = true;
-                en_t_o = en_t_o;
+                en_t_o = true;
+                break;
+            case Estado_3:
+                switch (s_RI.read().to_uint()) {
+                    case PHA_ACU: case PHS_CTR:{
+                        s_LE = false;
+                        rw_t_o = false;
+                        en_t_o = true;
+                        break;
+                    }
+                    case JSR_ABS:{
+                        s_LE = false;
+                        rw_t_o = false;
+                        en_t_o = true;
+                        break;
+                    }
+                    default:
+                        s_LE = true;
+                        rw_t_o = true;
+                        en_t_o = true;
+                        break;
+                }
                 break;
             default:
                 s_LE = true;
@@ -98,20 +119,26 @@ void transactor::p_PC(){
                 addr_t_o = addr_t_o;
                 break;
             case Estado_2: {
-                switch (v_RI) {
-                    case TAP_CTR:
-                    case TPA_CTR:
-                    case CLA_ACU:
-                    case INA_ACU:
-                    case DCA_ACU:
-                    case ROL_ACU:
-                    case ROR_ACU:
-                    case CLC_IMP:
-                    case SEC_IMP:
-                    case SEI_IMP:
-                    case CLI_IMP:
-                    case NOP_CTR:
-                    case CPA_ACU: {
+                switch (s_RI.read().to_uint()) {
+                    case CPA_ACU: case LDA_INM: case ADD_INM:
+                    case TAP_CTR: case TPA_CTR: case CLA_ACU:
+                    case INA_ACU: case DCA_ACU: case SUB_INM:
+                    case AND_INM: case ORA_INM: case INP_IO:
+                    case OUT_IO: {
+                        v_PC = v_PC + 1;
+                        s_PC = v_PC;
+                        pc_t_o = v_PC;
+                        addr_t_o = v_PC;
+                        break;
+                    }
+                    case ROL_ACU: case ROR_ACU: case BCC_REL:
+                    case BCS_REL: case CLC_IMP: case SEC_IMP:
+                    case SEI_IMP: case CLI_IMP: case NOP_CTR:
+                    case BNE_REL: case BEQ_REL: case BMI_REL:
+                    case BPL_REL: case STA_ABS: case LDA_ABS:
+                    case AND_ABS: case SUB_ABS: case ORA_ABS:
+                    case ADD_ABS: case JMP_ABS: case BVS_REL:
+                    case BVC_REL:{
                         v_PC = v_PC + 1;
                         s_PC = v_PC;
                         pc_t_o = v_PC;
@@ -123,6 +150,68 @@ void transactor::p_PC(){
                         s_PC = s_PC;
                         pc_t_o = v_PC;
                         addr_t_o = addr_t_o;
+                        break;
+                }
+                break;
+            }
+            case Estado_3: {
+                switch (s_RI.read().to_uint()) {
+                    case LDA_INM: case ADD_INM: case SUB_INM:
+                    case AND_INM: case ORA_INM: case STA_ABS:
+                    case LDA_ABS: case AND_ABS: case SUB_ABS:
+                    case ORA_ABS: case ADD_ABS: case JMP_ABS:
+                    case PLA_ACU:{
+                        v_PC = v_PC;
+                        s_PC = v_PC;
+                        pc_t_o = v_PC;
+                        addr_t_o = v_PC;
+                        break;
+                    }
+                    case BCC_REL: case BCS_REL: case BEQ_REL:
+                    case BNE_REL: case BMI_REL: case BPL_REL:
+                    case BVC_REL: case BVS_REL:{
+                        v_PC = v_PC + 1;
+                        s_PC = v_PC;
+                        pc_t_o = v_PC;
+                        addr_t_o = addr_t_o;
+                        break;
+                    }
+                    default:
+                        v_PC = v_PC + 1;
+                        s_PC = v_PC;
+                        pc_t_o = v_PC;
+                        addr_t_o = addr_t_o;
+                        break;
+                }
+                break;
+            }
+            case Estado_4: {
+                switch (s_RI.read().to_uint()) {
+                    case LDA_INM: case ADD_INM: case SUB_INM:
+                    case AND_INM: case ORA_INM: case STA_ABS:
+                    case LDA_ABS: case AND_ABS: case SUB_ABS:
+                    case ORA_ABS: case ADD_ABS: case JMP_ABS:
+                    case PLA_ACU:{
+                        v_PC = v_PC + 1;
+                        s_PC = v_PC;
+                        pc_t_o = v_PC;
+                        addr_t_o = v_PC;
+                        break;
+                    }
+                    case BCC_REL: case BCS_REL: case BEQ_REL:
+                    case BNE_REL: case BMI_REL: case BPL_REL:
+                    case BVC_REL: case BVS_REL:{
+                        v_PC = v_PC + 1;
+                        s_PC = v_PC;
+                        pc_t_o = v_PC;
+                        addr_t_o = addr_t_o;
+                        break;
+                    }
+                    default:
+                        v_PC = v_PC + 1;
+                        s_PC = v_PC;
+                        pc_t_o = v_PC;
+                        addr_t_o = v_PC;
                         break;
                 }
                 break;
@@ -172,53 +261,363 @@ void  transactor::p_est_prox() {
     i6++;
     if (!rps_t_i){
         s_est_prox = Estado_1;
+        acum_t_o = v_A;
     }
     else{
         switch (s_est_pres) {
             case Estado_0:
-                cout << "Estado actual: " << Estado_0 << endl;
+                cout << "\n##################################################################" << endl;
+                cout << "======================INICIO DE ESTADO============================" << endl;
+                cout << "Estado actual: " << "|[" << Estado_0 << "]|" << endl;
                 s_est_prox = Estado_1;
+                // Calculo de banderas.
+                v_bi_t = 1;
+                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                s_t_o = v_S;
+                // Fin de calculo de banderas.
+                cout << "=======================FIN DE ESTADO==============================" << endl;
+                cout << "##################################################################\n" << endl;
                 break;
             case Estado_1:
-                cout << "Estado actual: " << Estado_1 << endl;
+                cout << "\n##################################################################" << endl;
+                cout << "======================INICIO DE ESTADO============================" << endl;
+                cout << "Estado actual: " << "|[" << Estado_1 << "]|" << endl;
+                cout << "==================================================================" << endl;
                 s_est_prox = Estado_2;
+                cout << "=======================FIN DE ESTADO==============================" << endl;
+                cout << "##################################################################\n" << endl;
                 break;
             case Estado_2:
-                cout << "Estado actual: " << Estado_2 << endl;
+                cout << "\n##################################################################" << endl;
+                cout << "======================INICIO DE ESTADO============================" << endl;
+                cout << "Estado actual: " << "|[" << Estado_2 << "]|" << endl;
+                cout << "==================================================================" << endl;
+                cout << "PC actual: " << "|[" << pc_t_o << "]|" <<endl;
                 switch (s_RI.read().to_uint()){
                     case TAP_CTR: case TPA_CTR: case CLA_ACU:
                     case INA_ACU: case DCA_ACU: case ROL_ACU:
                     case ROR_ACU: case CLC_IMP: case SEC_IMP:
                     case SEI_IMP: case CLI_IMP: case NOP_CTR:
-                    case CPA_ACU:{
-                        cout << "Instruccion 1 palabra: " << v_RI    << endl;
-//                        cout << "s_RI.read().to_uint(): " << s_RI.read().to_uint() << endl;
-                        s_est_prox = Estado_1;
-
-                        cout << "INA: " << pc_t_o <<endl;
-                        (v_bc_t, v_A) = v_A + 1;
-                        s_A = v_A;
-                        acum_t_o = v_A;
+                    case CPA_ACU:{// Inicio switch inst 1 palabra/
+                        switch (s_RI.read().to_uint()) {
+                            case TAP_CTR:
+                                cout << "Instruccion TAP_CTR RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                break;
+                            case TPA_CTR:
+                                cout << "Instruccion TPA_CTR RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                break;
+                            case CLA_ACU:
+                                cout << "Instruccion INA_ACU RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Colocar el acumulador en 0.
+                                v_A = 0;
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case INA_ACU:
+                                cout << "Instruccion INA_ACU RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Incrementar acumulador en 1 y actualizar BC.
+                                v_bt1_t = v_A[5];
+                                (v_bc_t, v_A) = v_A + 1;
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                s_bv_t = v_bt1_t? 0:v_A[5]; // Bandera V para INA.
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case DCA_ACU:
+                                cout << "Instruccion DCA_ACU RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Incrementar acumulador en 1 y actualizar BC.
+                                v_bt1_t = v_A[5];
+                                (v_bc_t, v_A) = v_A - 1;
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                s_bv_t = v_bt1_t? not v_A[5]: 1; // Bandera V para DCA.
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case ROL_ACU:
+                                cout << "Instruccion ROL_ACU RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Incrementar acumulador en 1 y actualizar BC.
+                                v_bt2_t = v_A[5];
+                                // Rotacion hacia la izquierda.
+                                v_A = (v_A[4],v_A[3],v_A[2],v_A[1],v_A[0],v_bc_t);
+                                // Acutalizacion de la bandera BC.
+                                v_bc_t = v_bt2_t;
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case ROR_ACU:
+                                cout << "Instruccion ROR_ACU RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Incrementar acumulador en 1 y actualizar BC.
+                                v_bt2_t = v_A[0];
+                                // Rotacion hacia la derecha.
+                                v_A = (v_bc_t, v_A[5],v_A[4],v_A[3],v_A[2],v_A[1]);
+                                // Acutalizacion de la bandera BC.
+                                v_bc_t = v_bt2_t;
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case CLC_IMP:
+                                cout << "Instruccion CLC_IMP RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Poner en bajo la bandera de acarreo BC.
+                                // Calculo de banderas.
+                                v_bc_t = 0;
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case SEC_IMP:
+                                cout << "Instruccion SEC_IMP RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Poner en alto la bandera de acarreo BC.
+                                // Calculo de banderas.
+                                v_bc_t = 1;
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case SEI_IMP:
+                                cout << "Instruccion SEI_IMP RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Poner en alto la bandera de interrupcion BI.
+                                // Calculo de banderas.
+                                v_bi_t = 1;
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case CLI_IMP:
+                                cout << "Instruccion CLI_IMP RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Poner en bajo la bandera de interrupcion BI.
+                                // Calculo de banderas.
+                                v_bi_t = 0;
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case CPA_ACU:
+                                cout << "Instruccion CPA_ACU RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Complementar el acumulador.
+                                v_A = ~v_A;
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case NOP_CTR:
+                                cout << "Instruccion NOP_CTR RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                break;
+                            default:
+                                cout << "RI Invalido: Default " << "|[" << s_RI  << "]|" << endl;
+                                sc_stop();
+                                break;
+                        }
                         break;
-                    }
+                    }// Fin switch inst 1 palabra/
+                    case LDA_INM: case ADD_INM: case SUB_INM:
+                    case AND_INM: case ORA_INM: case BCC_REL:
+                    case BCS_REL: case BEQ_REL: case BNE_REL:
+                    case BMI_REL: case BPL_REL: case PHA_ACU:
+                    case PLS_CTR: case BVC_REL: case BVS_REL:{// Inicio switch inst 2 palabras.
+                        // Actualizar proximo estado.
+                        s_est_prox = Estado_3;
+                        break;
+                    }// Fin switch inst 2 palabras.
                     default:
-                        cout << "s_RI: Default !!!!!! " << s_RI << endl;
-                        cout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX s_RI.read().to_uint()" << s_RI.read().to_uint() << endl;
-                        cout << "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY s_est_pres" << s_est_pres<< endl;
-                        cout << "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ s_est_pres" << s_est_prox<< endl;
+                        cout << "RI Invalido: Default " << "|[" << s_RI  << "]|" << endl;
                         sc_stop();
                         break;
                 }
+                cout << "=======================FIN DE ESTADO==============================" << endl;
+                cout << "##################################################################\n" << endl;
+                break;
+            case Estado_3:
+                cout << "\n##################################################################" << endl;
+                cout << "======================INICIO DE ESTADO============================" << endl;
+                cout << "Estado actual: " << "|[" << Estado_3 << "]|" << endl;
+                cout << "==================================================================" << endl;
+                s_est_prox = Estado_4;
+                cout << "=======================FIN DE ESTADO==============================" << endl;
+                cout << "##################################################################\n" << endl;
+                break;
+            case Estado_4:
+                cout << "\n##################################################################" << endl;
+                cout << "======================INICIO DE ESTADO============================" << endl;
+                cout << "Estado actual: " << "|[" << Estado_3 << "]|" << endl;
+                cout << "==================================================================" << endl;
+//                s_est_prox = Estado_4;
+                switch (s_RI.read().to_uint()) {
+
+                    case LDA_INM: case ADD_INM: case SUB_INM:
+                    case AND_INM: case ORA_INM: case BCC_REL:
+                    case BCS_REL: case BEQ_REL: case BNE_REL:
+                    case BMI_REL: case BPL_REL: case PHA_ACU:
+                    case PLS_CTR: case BVC_REL: case BVS_REL:{// Inicio switch inst 2 palabras.
+                        switch (s_RI.read().to_uint()) {
+                            case LDA_INM:
+                                cout << "Instruccion LDA_INM RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Cargar valor de memoria en acumulador.
+                                v_A = dat_t_i.read().to_int();
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case ADD_INM:
+                                cout << "Instruccion ADD_INM RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Sumar al acumulador el argumento y actualizar BC.
+                                v_bt1_t = v_A[5];
+                                (v_bc_t, v_A) = v_A + dat_t_i.read().to_int();
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                s_bv_t = v_bt1_t? 0:v_A[5]; // Bandera V para INA.
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case SUB_INM:
+                                cout << "Instruccion SUB_INM RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Restar al acumulador el argumento y actualizar BC.
+                                v_bt1_t = v_A[5];
+                                (v_bc_t, v_A) = v_A - dat_t_i.read().to_int();
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                s_bv_t = v_bt1_t? not v_A[5]: 1; // Bandera V para DCA.
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case AND_INM:
+                                cout << "Instruccion AND_INM RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Operacion logica AND bit a bit entre acumulador y argumento.
+                                v_A = v_A & dat_t_i.read().to_int();
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            case ORA_INM:
+                                cout << "Instruccion ORA_INM RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Operacion logica OR bit a bit entre acumulador y argumento.
+                                v_A = v_A | dat_t_i.read().to_int();
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            default:
+                                cout << "RI Invalido: Default " << "|[" << s_RI << "]|" << endl;
+                                sc_stop();
+                                break;
+                        }
+                    }// Fin switch inst 2 palabras.
+                }
+                cout << "=======================FIN DE ESTADO==============================" << endl;
+                cout << "##################################################################\n" << endl;
                 break;
             default:
+                cout << "Estado actual: " << "|[" << "default" << "]|" << endl;
                 s_est_prox = Estado_0;
                 break;
         }
     }
 }
 
-void  transactor::p_acum_a() {
-    i7++;
+//void  transactor::p_acum_a() {
+//    i7++;
 //    cout << "@ |[" << sc_time_stamp() << " ]| "<< "s_A: " << "|[" << s_A << "]|" << " s_bn_t: " << "|[" << s_bn_t << "]|" <<
 //    " s_bv_t: " << "|[" << s_bv_t << "]|" << " s_bi_t: " << "|[" << s_bi_t << "]|" <<
 //    " s_bz_t: " << "|[" << s_bz_t << "]|" << " s_bc_t: " << "|[" << s_bc_t << "]|" << "\n" << endl;
@@ -334,8 +733,8 @@ void  transactor::p_acum_a() {
 //
 //            break;
 //    }//end switch acum global
-    cout << "---------------------------Final de p_acum_a---------------------------\n"<< endl;
-}
+//    cout << "---------------------------Final de p_acum_a---------------------------\n"<< endl;
+//}
 
 
 

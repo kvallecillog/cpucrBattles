@@ -3,7 +3,6 @@
 #define SUB_INM 24
 #define AND_INM 32
 #define ORA_INM 40
-
 #define LDA_ABS 1
 #define STA_ABS 9
 #define ADD_ABS 17
@@ -12,7 +11,6 @@
 #define ORA_ABS 41
 #define JMP_ABS 49
 #define JSR_ABS 57
-
 #define BEQ_REL 2
 #define BNE_REL 10
 #define BCS_REL 18
@@ -21,7 +19,6 @@
 #define BPL_REL 42
 #define BVS_REL 50
 #define BVC_REL 58
-
 #define LDA_IND 3
 #define STA_IND 11
 #define ADD_IND 19
@@ -30,12 +27,10 @@
 #define ORA_IND 43
 #define JMP_IND 51
 #define JSR_IND 59
-
 #define SEC_IMP 20
 #define CLC_IMP 28
 #define SEI_IMP 36
 #define CLI_IMP 44
-
 #define CLA_ACU 5
 #define CPA_ACU 13
 #define INA_ACU 21
@@ -44,7 +39,6 @@
 #define ROR_ACU 45
 #define PLA_ACU 53
 #define PHA_ACU 61
-
 #define TPA_CTR 6
 #define TAP_CTR 14
 #define RTI_CTR 22
@@ -53,7 +47,6 @@
 #define NOP_CTR 46
 #define PLS_CTR 54
 #define PHS_CTR 62
-
 #define INP_IO 7
 #define OUT_IO 15
 

@@ -36,8 +36,24 @@ WRD %100000
 ;* = 4096
 ;* = %000000000000
 
-L1 INA
-INA
+L0 LDA #63
+L1 ora #%101001
+
+
+
+;L0 LDA #0
+;L1 LDA #1
+;L2 LDA #2
+;L3 LDA #3
+;L4 LDA #4
+;L5 LDA #5
+
+;L0 LDA #0
+;L1 LDA #63
+;L2 SUB #62
+;L3 SUB #1
+;L4 ADD #1
+;L5 ADD #1
 
 ;K3 BNE K3
 ;K5 BNE K3

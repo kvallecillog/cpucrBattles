@@ -158,7 +158,7 @@ int sc_main(int argc, char* argv[]) {
     cpucr1.pc_c_o(pc);
     cpucr1.init_c_o(init);
 
-    sc_start(10, SC_US);
+    sc_start(100, SC_US);
 
     test_bench.stimgen();
 
