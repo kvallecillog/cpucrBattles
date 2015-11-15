@@ -196,7 +196,7 @@ void transactor::p_PC(){
                     case BVC_REL: case BVS_REL:{
                         switch (s_RI.read().to_uint()) {
                             case BCC_REL:
-                                cout << "BCC s_t_o[0]: " << s_t_o[0] << endl;
+                                cout << "BCC_REL s_t_o[0]: " << s_t_o[0] << endl;
                                 v_S_read = s_t_o;
                                 if (v_S_read[0] == 1){
                                     pc_t_o = pc_t_o;
@@ -204,6 +204,119 @@ void transactor::p_PC(){
                                     addr_t_o = v_addr;
                                 }
                                 else if(v_S_read[0] == 0){
+                                    v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    addr_t_o = v_addr;
+                                }
+                                break;
+                            case BCS_REL:
+                                cout << "BCS_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                v_S_read = s_t_o;
+                                if (v_S_read[0] == 0){
+                                    pc_t_o = pc_t_o;
+                                    v_addr = v_addr + 1;
+                                    addr_t_o = v_addr;
+                                }
+                                else if(v_S_read[0] == 1){
+                                    v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    addr_t_o = v_addr;
+                                }
+                                break;
+
+                            case BEQ_REL:
+                                cout << "BEQ_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                v_S_read = s_t_o;
+                                if (v_S_read[1] == 0){
+                                    pc_t_o = pc_t_o;
+                                    v_addr = v_addr + 1;
+                                    addr_t_o = v_addr;
+                                }
+                                else if(v_S_read[1] == 1){
+                                    v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    addr_t_o = v_addr;
+                                }
+                                break;
+                            case BNE_REL:
+                                cout << "BNE_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                v_S_read = s_t_o;
+                                if (v_S_read[1] == 1){
+                                    pc_t_o = pc_t_o;
+                                    v_addr = v_addr + 1;
+                                    addr_t_o = v_addr;
+                                }
+                                else if(v_S_read[1] == 0){
+                                    v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    addr_t_o = v_addr;
+                                }
+                                break;
+                            case BMI_REL:
+                                cout << "BMI_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                v_S_read = s_t_o;
+                                if (v_S_read[5] == 0){
+                                    pc_t_o = pc_t_o;
+                                    v_addr = v_addr + 1;
+                                    addr_t_o = v_addr;
+                                }
+                                else if(v_S_read[5] == 1){
+                                    v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    addr_t_o = v_addr;
+                                }
+                                break;
+                            case BPL_REL:
+                                cout << "BPL_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                v_S_read = s_t_o;
+                                if (v_S_read[5] == 1){
+                                    pc_t_o = pc_t_o;
+                                    v_addr = v_addr + 1;
+                                    addr_t_o = v_addr;
+                                }
+                                else if(v_S_read[5] == 0){
+                                    v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    addr_t_o = v_addr;
+                                }
+                                break;
+                            case BVC_REL:
+                                cout << "BVC_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                v_S_read = s_t_o;
+                                if (v_S_read[3] == 1){
+                                    pc_t_o = pc_t_o;
+                                    v_addr = v_addr + 1;
+                                    addr_t_o = v_addr;
+                                }
+                                else if(v_S_read[3] == 0){
+                                    v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    addr_t_o = v_addr;
+                                }
+                                break;
+                            case BVS_REL:
+                                cout << "BVS_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                v_S_read = s_t_o;
+                                if (v_S_read[3] == 0){
+                                    pc_t_o = pc_t_o;
+                                    v_addr = v_addr + 1;
+                                    addr_t_o = v_addr;
+                                }
+                                else if(v_S_read[3] == 1){
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();

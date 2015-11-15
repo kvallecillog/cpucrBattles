@@ -39,20 +39,38 @@ WRD %100000
 ;L0 LDA #63
 ;L1 ora #%101001
 
-L SEC
-L0 CLC
-L1 LDA #0
-L2 INA
-BCC L2
+; Prueba de BCC
+;L0 LDA #0
+;L1 INA
+;L2 BCC L0
+;L3 LDA #1
+
+
+; Prueba de BNE
+;L SEC
+;L0 CLC
+;L1 LDA #0
+;L2 INA
+;L6 BNE L2
 ;L4 INA
 ;L5 LDA #1
 
+; Prueba de BEQ
+;L SEC
+;L0 CLC
+;L1 LDA #0
+;L6 BEQ L1
+;L4 INA
+;L5 LDA #1
+
+;Prueba de LDA inmediata
 ;L1 LDA #1
 ;L2 LDA #2
 ;L3 LDA #3
 ;L4 LDA #4
 ;L5 LDA #5
 
+;Prueba de SUB y ADD inmediatas
 ;L0 LDA #0
 ;L1 LDA #63
 ;L2 SUB #62
