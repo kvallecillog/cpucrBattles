@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
-[*] Sat Nov 14 23:56:16 2015
+[*] Sun Nov 15 00:19:51 2015
 [*]
 [dumpfile] "/home/kenneth/Dropbox/proyectoElectrico/srcWIP/cpucrBattles/clion/cpucr.vcd"
-[dumpfile_mtime] "Sat Nov 14 23:55:35 2015"
-[dumpfile_size] 98547
+[dumpfile_mtime] "Sun Nov 15 00:17:06 2015"
+[dumpfile_size] 93554
 [savefile] "/home/kenneth/Dropbox/proyectoElectrico/srcWIP/cpucrBattles/clion/cpucr_fsm.gtkw"
-[timestart] 151570
+[timestart] 243590
 [size] 1366 744
 [pos] -1 -1
-*-13.950041 191500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-11.950041 253500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [sst_width] 223
 [signals_width] 158
 [sst_expanded] 1
@@ -18,8 +18,9 @@
 SystemC.LE
 @24
 SystemC.acum_t_o[5:0]
-@22
+@25
 SystemC.addr_c_o[11:0]
+@22
 SystemC.addr_m_i[11:0]
 SystemC.addr_t_o[11:0]
 SystemC.address[11:0]
@@ -34,8 +35,17 @@ SystemC.CB
 @22
 [color] 7
 SystemC.acum[5:0]
-@23
+@800022
 SystemC.s_t_o[5:0]
+@28
+(0)SystemC.s_t_o[5:0]
+(1)SystemC.s_t_o[5:0]
+(2)SystemC.s_t_o[5:0]
+(3)SystemC.s_t_o[5:0]
+(4)SystemC.s_t_o[5:0]
+(5)SystemC.s_t_o[5:0]
+@1001200
+-group_end
 @200
 -
 @24

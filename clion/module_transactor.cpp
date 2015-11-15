@@ -102,7 +102,7 @@ void transactor::p_PC(){
     i3++;
     if(!rps_t_i){
         v_PC = 0;
-        s_PC = v_PC;
+        v_addr = 0;
     }
     else{
         switch (s_est_pres) {
@@ -110,10 +110,10 @@ void transactor::p_PC(){
                 v_PC = 0;
                 s_PC = v_PC;
                 pc_t_o = v_PC;
-                addr_t_o = v_PC;
+                v_addr = 0;
+                addr_t_o = v_addr;
                 break;
             case Estado_1:
-                s_PC = s_PC;
                 pc_t_o = pc_t_o;
                 addr_t_o = addr_t_o;
                 break;
@@ -125,9 +125,9 @@ void transactor::p_PC(){
                     case AND_INM: case ORA_INM: case INP_IO:
                     case OUT_IO: {
                         v_PC = v_PC + 1;
-                        s_PC = v_PC;
                         pc_t_o = v_PC;
-                        addr_t_o = v_PC;
+                        v_addr = v_addr + 1;
+                        addr_t_o = v_addr;
                         break;
                     }
                     case ROL_ACU: case ROR_ACU: case BCC_REL:
@@ -139,15 +139,13 @@ void transactor::p_PC(){
                     case ADD_ABS: case JMP_ABS: case BVS_REL:
                     case BVC_REL:{
                         v_PC = v_PC + 1;
-                        s_PC = v_PC;
                         pc_t_o = v_PC;
-                        addr_t_o = v_PC;
+                        v_addr = v_addr + 1;
+                        addr_t_o = v_addr;
                         break;
                     }
                     default:
-                        v_PC = v_PC;
-                        s_PC = s_PC;
-                        pc_t_o = v_PC;
+                        pc_t_o = pc_t_o;
                         addr_t_o = addr_t_o;
                         break;
                 }
@@ -160,24 +158,20 @@ void transactor::p_PC(){
                     case LDA_ABS: case AND_ABS: case SUB_ABS:
                     case ORA_ABS: case ADD_ABS: case JMP_ABS:
                     case PLA_ACU:{
-                        v_PC = v_PC;
-                        s_PC = v_PC;
-                        pc_t_o = v_PC;
-                        addr_t_o = v_PC;
+                        pc_t_o = pc_t_o;
+                        addr_t_o = addr_t_o;
                         break;
                     }
                     case BCC_REL: case BCS_REL: case BEQ_REL:
                     case BNE_REL: case BMI_REL: case BPL_REL:
                     case BVC_REL: case BVS_REL:{
                         v_PC = v_PC + 1;
-                        s_PC = v_PC;
                         pc_t_o = v_PC;
                         addr_t_o = addr_t_o;
                         break;
                     }
                     default:
                         v_PC = v_PC + 1;
-                        s_PC = v_PC;
                         pc_t_o = v_PC;
                         addr_t_o = addr_t_o;
                         break;
@@ -192,9 +186,9 @@ void transactor::p_PC(){
                     case ORA_ABS: case ADD_ABS: case JMP_ABS:
                     case PLA_ACU:{
                         v_PC = v_PC + 1;
-                        s_PC = v_PC;
                         pc_t_o = v_PC;
-                        addr_t_o = v_PC;
+                        v_addr = v_addr + 1;
+                        addr_t_o = v_addr;
                         break;
                     }
                     case BCC_REL: case BCS_REL: case BEQ_REL:
@@ -203,26 +197,19 @@ void transactor::p_PC(){
                         switch (s_RI.read().to_uint()) {
                             case BCC_REL:
                                 cout << "BCC s_t_o[0]: " << s_t_o[0] << endl;
-//                                if (s_t_o[0]){
-//                                    v_PC = v_PC + 1;
-//                                    s_PC = v_PC;
-//                                    pc_t_o = pc_t_o;
-//                                    addr_t_o = v_PC;
-//                                }
-//                                else if(!s_t_o[0]){
-                                cout << "dat_t_i.read().to_int(): " << dat_t_i.read().to_int() << endl;
-                                cout << "Antes pc_t_o.read().to_int(): " << pc_t_o.read().to_int() << endl;
-                                v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int() ;
-//                                cout << "Despues v_PC: " << v_PC << endl;
-                                s_PC = v_PC;
-                                pc_t_o = v_PC;
-                                ports_t_o = v_PC;
-//                                cout << "Antes pc_t_o: " << pc_t_o << endl;
-                                pc_t_o = v_PC;
-
-
-                                addr_t_o = v_PC;
-//                                }
+                                v_S_read = s_t_o;
+                                if (v_S_read[0] == 1){
+                                    pc_t_o = pc_t_o;
+                                    v_addr = v_addr + 1;
+                                    addr_t_o = v_addr;
+                                }
+                                else if(v_S_read[0] == 0){
+                                    v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
+                                    pc_t_o = v_PC;
+                                    addr_t_o = v_addr;
+                                }
                                 break;
                         }
                     }break;
