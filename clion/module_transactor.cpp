@@ -113,9 +113,8 @@ void transactor::p_PC(){
                 addr_t_o = v_PC;
                 break;
             case Estado_1:
-                v_PC = v_PC;
                 s_PC = s_PC;
-                pc_t_o = v_PC;
+                pc_t_o = pc_t_o;
                 addr_t_o = addr_t_o;
                 break;
             case Estado_2: {
@@ -201,12 +200,32 @@ void transactor::p_PC(){
                     case BCC_REL: case BCS_REL: case BEQ_REL:
                     case BNE_REL: case BMI_REL: case BPL_REL:
                     case BVC_REL: case BVS_REL:{
-                        v_PC = v_PC + 1;
-                        s_PC = v_PC;
-                        pc_t_o = v_PC;
-                        addr_t_o = addr_t_o;
-                        break;
-                    }
+                        switch (s_RI.read().to_uint()) {
+                            case BCC_REL:
+                                cout << "BCC s_t_o[0]: " << s_t_o[0] << endl;
+//                                if (s_t_o[0]){
+//                                    v_PC = v_PC + 1;
+//                                    s_PC = v_PC;
+//                                    pc_t_o = pc_t_o;
+//                                    addr_t_o = v_PC;
+//                                }
+//                                else if(!s_t_o[0]){
+                                cout << "dat_t_i.read().to_int(): " << dat_t_i.read().to_int() << endl;
+                                cout << "Antes pc_t_o.read().to_int(): " << pc_t_o.read().to_int() << endl;
+                                v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int() ;
+//                                cout << "Despues v_PC: " << v_PC << endl;
+                                s_PC = v_PC;
+                                pc_t_o = v_PC;
+                                ports_t_o = v_PC;
+//                                cout << "Antes pc_t_o: " << pc_t_o << endl;
+                                pc_t_o = v_PC;
+
+
+                                addr_t_o = v_PC;
+//                                }
+                                break;
+                        }
+                    }break;
                     default:
                         v_PC = v_PC + 1;
                         s_PC = v_PC;
@@ -599,8 +618,9 @@ void  transactor::p_est_prox() {
                                 // Fin de calculo de banderas.
                                 break;
                             default:
-                                cout << "RI Invalido: Default " << "|[" << s_RI << "]|" << endl;
-                                sc_stop();
+                                s_est_prox = Estado_1;
+//                                cout << "RI Invalido: Default " << "|[" << s_RI << "]|" << endl;
+//                                sc_stop();
                                 break;
                         }
                     }// Fin switch inst 2 palabras.

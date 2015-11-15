@@ -70,6 +70,9 @@ SC_MODULE(transactor){
         sc_uint<1> v_bz_t;
         sc_uint<1> v_bc_t;
         sc_uint<6> v_S;
+        sc_uint<6> v_S_read;
+        sc_uint<6> v_addr;
+
 
         // Bits temporales
         sc_uint<1> v_bt1_t;
