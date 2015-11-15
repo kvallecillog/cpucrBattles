@@ -11,15 +11,7 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e884eca-5d13-4def-8528-72d310f45b6b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/cpucr_battles.x" afterPath="$PROJECT_DIR$/../clion/cpucr_battles.x" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.o" afterPath="$PROJECT_DIR$/../clion/module_transactor.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/cpucr.vcd" afterPath="$PROJECT_DIR$/../clion/cpucr.vcd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/cpucr_fsm.gtkw" afterPath="$PROJECT_DIR$/../clion/cpucr_fsm.gtkw" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.cpp" afterPath="$PROJECT_DIR$/../clion/module_transactor.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/ram_init.txt" afterPath="$PROJECT_DIR$/../clion/ram_init.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" />
-    </list>
+    <list default="true" id="5e884eca-5d13-4def-8528-72d310f45b6b" name="Default" comment="" />
     <ignored path="cpucrBattles.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,7 +45,7 @@
         <entry file="file://$PROJECT_DIR$/raw_file.ASM">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.8561151">
-              <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
+              <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -63,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/preprocesador.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="1018" column="92" selection-start-line="1018" selection-start-column="92" selection-end-line="1018" selection-end-column="92" />
+              <caret line="1364" column="0" selection-start-line="1364" selection-start-column="0" selection-end-line="1364" selection-end-column="0" />
               <folding>
                 <element signature="e#406#415#0" expanded="true" />
               </folding>
@@ -909,7 +901,7 @@
     <entry file="file://$PROJECT_DIR$/preprocesador.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="1018" column="92" selection-start-line="1018" selection-start-column="92" selection-end-line="1018" selection-end-column="92" />
+          <caret line="1364" column="0" selection-start-line="1364" selection-start-column="0" selection-end-line="1364" selection-end-column="0" />
           <folding>
             <element signature="e#406#415#0" expanded="true" />
           </folding>
@@ -919,7 +911,7 @@
     <entry file="file://$PROJECT_DIR$/raw_file.ASM">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8561151">
-          <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
+          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding />
         </state>
       </provider>

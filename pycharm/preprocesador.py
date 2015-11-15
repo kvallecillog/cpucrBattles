@@ -1361,7 +1361,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                         const_rel_dec = int(label_dic[const_rel])
                                         print("const_rel_dec: ", const_rel_dec)
                                         print("cont_mem_pos_i2: ", cont_mem_pos_i2)
-                                        const_rel_dec = const_rel_dec - cont_mem_pos_i2
+                                        const_rel_dec = const_rel_dec - (cont_mem_pos_i2 + 2)
                                         print("const_rel_dec: ", const_rel_dec)
                                         # format(num & 0xffff, '016b')
                                         const_rel_oct = format(const_rel_dec & 0xff, '#06o')[-4:]

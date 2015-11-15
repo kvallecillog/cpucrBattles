@@ -10,12 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42719d69-4724-47df-ad71-029cddd923a3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/cpucr_battles.x" afterPath="$PROJECT_DIR$/clion/cpucr_battles.x" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/module_transactor.o" afterPath="$PROJECT_DIR$/clion/module_transactor.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/cpucr.vcd" afterPath="$PROJECT_DIR$/clion/cpucr.vcd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/cpucr_fsm.gtkw" afterPath="$PROJECT_DIR$/clion/cpucr_fsm.gtkw" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/module_transactor.cpp" afterPath="$PROJECT_DIR$/clion/module_transactor.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/module_transactor.h" afterPath="$PROJECT_DIR$/clion/module_transactor.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/deleted_blanks_file.ASM" afterPath="$PROJECT_DIR$/pycharm/deleted_blanks_file.ASM" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/deleted_comments_file.ASM" afterPath="$PROJECT_DIR$/pycharm/deleted_comments_file.ASM" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/deleted_spaces_file.ASM" afterPath="$PROJECT_DIR$/pycharm/deleted_spaces_file.ASM" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/lines_raw_file_name.ASM" afterPath="$PROJECT_DIR$/pycharm/lines_raw_file_name.ASM" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/preprocesador.py" afterPath="$PROJECT_DIR$/pycharm/preprocesador.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/raw_file.ASM" afterPath="$PROJECT_DIR$/pycharm/raw_file.ASM" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/.idea/workspace.xml" afterPath="$PROJECT_DIR$/pycharm/.idea/workspace.xml" />
     </list>
     <ignored path="cpucrBattles.iws" />
     <ignored path=".idea/workspace.xml" />
