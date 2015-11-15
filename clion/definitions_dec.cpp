@@ -3,6 +3,7 @@
 #define SUB_INM 24
 #define AND_INM 32
 #define ORA_INM 40
+
 #define LDA_ABS 1
 #define STA_ABS 9
 #define ADD_ABS 17
@@ -11,6 +12,7 @@
 #define ORA_ABS 41
 #define JMP_ABS 49
 #define JSR_ABS 57
+
 #define BEQ_REL 2
 #define BNE_REL 10
 #define BCS_REL 18
