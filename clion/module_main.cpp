@@ -164,13 +164,9 @@ int sc_main(int argc, char* argv[]) {
 
 
     cpucr1.monitor();
-
-//    cpucr1.transactor1.init_cpucr();
-//    cpucr1.transactor1.inst_exec();
-   // cpucr1.memory1.memdump();
+    cpucr1.memory1.memdump();
 
     sc_stop();
-
 
     sc_close_vcd_trace_file(wf);
 

@@ -58,25 +58,62 @@ void  transactor::p_LE() {
     }
     else {
         switch (s_est_pres) {
-            case Estado_0:
+            case Estado_0:{
                 s_LE = true;
                 rw_t_o = true;
                 en_t_o = true;
                 break;
-            case Estado_1:
+            }
+            case Estado_1:{
                 s_LE = true;
                 rw_t_o = true;
                 en_t_o = true;
                 break;
-            case Estado_3:
+            }
+            case Estado_3:{
                 switch (s_RI.read().to_uint()) {
-                    case PHA_ACU: case PHS_CTR:{
+                    case PHA_ACU:
+                    case PHS_CTR: {
                         s_LE = false;
                         rw_t_o = false;
                         en_t_o = true;
                         break;
                     }
-                    case JSR_ABS:{
+                    case JSR_ABS: {
+                        s_LE = false;
+                        rw_t_o = false;
+                        en_t_o = true;
+                        break;
+                    }
+                    default: {
+                        s_LE = true;
+                        rw_t_o = true;
+                        en_t_o = true;
+                        break;
+                    }
+                }
+                break;
+            }
+            case Estado_5:{
+                switch (s_RI.read().to_uint()) {
+                    case JSR_ABS: case OUT_IO:{
+                        s_LE = false;
+                        rw_t_o = false;
+                        en_t_o = true;
+                        break;
+                    }
+                    default: {
+                        s_LE = true;
+                        rw_t_o = true;
+                        en_t_o = true;
+                        break;
+                    }
+                }
+                break;
+            }
+            case Estado_7:{
+                switch (s_RI.read().to_uint()) {
+                    case STA_ABS:{
                         s_LE = false;
                         rw_t_o = false;
                         en_t_o = true;
@@ -89,11 +126,13 @@ void  transactor::p_LE() {
                         break;
                 }
                 break;
-            default:
+            }
+            default: {
                 s_LE = true;
                 rw_t_o = true;
                 en_t_o = en_t_o;
                 break;
+            }
         }
     }
 }
@@ -107,18 +146,19 @@ void transactor::p_PC(){
     }
     else{
         switch (s_est_pres) {
-            case Estado_0:
+            case Estado_0:{
                 v_PC = 0;
-                s_PC = v_PC;
                 pc_t_o = v_PC;
                 v_addr = 0;
                 addr_t_o = v_addr;
                 break;
-            case Estado_1:
+            }
+            case Estado_1:{
                 pc_t_o = pc_t_o;
                 addr_t_o = addr_t_o;
                 break;
-            case Estado_2: {
+            }
+            case Estado_2:{
                 switch (s_RI.read().to_uint()) {
                     case CPA_ACU: case LDA_INM: case ADD_INM:
                     case TAP_CTR: case TPA_CTR: case CLA_ACU:
@@ -145,10 +185,11 @@ void transactor::p_PC(){
                         addr_t_o = v_addr;
                         break;
                     }
-                    default:
+                    default: {
                         pc_t_o = pc_t_o;
                         addr_t_o = addr_t_o;
                         break;
+                    }
                 }
                 break;
             }
@@ -171,19 +212,27 @@ void transactor::p_PC(){
                         addr_t_o = addr_t_o;
                         break;
                     }
-                    default:
+                    case STA_IND: case LDA_IND: case AND_IND: 
+                    case SUB_IND: case ORA_IND: case ADD_IND: 
+                    case JMP_IND: case RTS_CTR: case RTI_CTR:
+                    case INP_IO: case OUT_IO:{
+                        pc_t_o = pc_t_o;
+                        addr_t_o = addr_t_o;
+                        break;
+                    }                        
+                    default: {
                         v_PC = v_PC + 1;
                         pc_t_o = v_PC;
-                        addr_t_o = addr_t_o;
+                        v_addr = v_addr + 1;
+                        addr_t_o = v_addr;
                         s_PB = s_PB;
                         break;
+                    }
                 }
                 break;
             }
             case Estado_4: {
                 switch (s_RI.read().to_uint()) {
-//                    case LDA_INM: case ADD_INM: case SUB_INM:
-//                    case AND_INM: case ORA_INM:
                     case LDA_ABS: case STA_ABS: case ADD_ABS:
                     case SUB_ABS: case AND_ABS: case ORA_ABS:
                     case JMP_ABS:{
@@ -206,15 +255,15 @@ void transactor::p_PC(){
                     case BNE_REL: case BMI_REL: case BPL_REL:
                     case BVC_REL: case BVS_REL:{
                         switch (s_RI.read().to_uint()) {
-                            case BCC_REL:
+                            case BCC_REL: {
                                 cout << "BCC_REL s_t_o[0]: " << s_t_o[0] << endl;
                                 v_S_read = s_t_o;
-                                if (v_S_read[0] == 1){
+                                if (v_S_read[0] == 1) {
                                     pc_t_o = pc_t_o;
                                     v_addr = v_addr + 1;
                                     addr_t_o = v_addr;
                                 }
-                                else if(v_S_read[0] == 0){
+                                else if (v_S_read[0] == 0) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
@@ -222,15 +271,16 @@ void transactor::p_PC(){
                                     addr_t_o = v_addr;
                                 }
                                 break;
-                            case BCS_REL:
+                            }
+                            case BCS_REL: {
                                 cout << "BCS_REL s_t_o[0]: " << s_t_o[0] << endl;
                                 v_S_read = s_t_o;
-                                if (v_S_read[0] == 0){
+                                if (v_S_read[0] == 0) {
                                     pc_t_o = pc_t_o;
                                     v_addr = v_addr + 1;
                                     addr_t_o = v_addr;
                                 }
-                                else if(v_S_read[0] == 1){
+                                else if (v_S_read[0] == 1) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
@@ -238,16 +288,16 @@ void transactor::p_PC(){
                                     addr_t_o = v_addr;
                                 }
                                 break;
-
-                            case BEQ_REL:
+                            }
+                            case BEQ_REL: {
                                 cout << "BEQ_REL s_t_o[0]: " << s_t_o[0] << endl;
                                 v_S_read = s_t_o;
-                                if (v_S_read[1] == 0){
+                                if (v_S_read[1] == 0) {
                                     pc_t_o = pc_t_o;
                                     v_addr = v_addr + 1;
                                     addr_t_o = v_addr;
                                 }
-                                else if(v_S_read[1] == 1){
+                                else if (v_S_read[1] == 1) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
@@ -255,15 +305,16 @@ void transactor::p_PC(){
                                     addr_t_o = v_addr;
                                 }
                                 break;
-                            case BNE_REL:
+                            }
+                            case BNE_REL: {
                                 cout << "BNE_REL s_t_o[0]: " << s_t_o[0] << endl;
                                 v_S_read = s_t_o;
-                                if (v_S_read[1] == 1){
+                                if (v_S_read[1] == 1) {
                                     pc_t_o = pc_t_o;
                                     v_addr = v_addr + 1;
                                     addr_t_o = v_addr;
                                 }
-                                else if(v_S_read[1] == 0){
+                                else if (v_S_read[1] == 0) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
@@ -271,15 +322,16 @@ void transactor::p_PC(){
                                     addr_t_o = v_addr;
                                 }
                                 break;
-                            case BMI_REL:
+                            }
+                            case BMI_REL: {
                                 cout << "BMI_REL s_t_o[0]: " << s_t_o[0] << endl;
                                 v_S_read = s_t_o;
-                                if (v_S_read[5] == 0){
+                                if (v_S_read[5] == 0) {
                                     pc_t_o = pc_t_o;
                                     v_addr = v_addr + 1;
                                     addr_t_o = v_addr;
                                 }
-                                else if(v_S_read[5] == 1){
+                                else if (v_S_read[5] == 1) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
@@ -287,15 +339,16 @@ void transactor::p_PC(){
                                     addr_t_o = v_addr;
                                 }
                                 break;
-                            case BPL_REL:
+                            }
+                            case BPL_REL: {
                                 cout << "BPL_REL s_t_o[0]: " << s_t_o[0] << endl;
                                 v_S_read = s_t_o;
-                                if (v_S_read[5] == 1){
+                                if (v_S_read[5] == 1) {
                                     pc_t_o = pc_t_o;
                                     v_addr = v_addr + 1;
                                     addr_t_o = v_addr;
                                 }
-                                else if(v_S_read[5] == 0){
+                                else if (v_S_read[5] == 0) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
@@ -303,15 +356,16 @@ void transactor::p_PC(){
                                     addr_t_o = v_addr;
                                 }
                                 break;
-                            case BVC_REL:
+                            }
+                            case BVC_REL: {
                                 cout << "BVC_REL s_t_o[0]: " << s_t_o[0] << endl;
                                 v_S_read = s_t_o;
-                                if (v_S_read[3] == 1){
+                                if (v_S_read[3] == 1) {
                                     pc_t_o = pc_t_o;
                                     v_addr = v_addr + 1;
                                     addr_t_o = v_addr;
                                 }
-                                else if(v_S_read[3] == 0){
+                                else if (v_S_read[3] == 0) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
@@ -319,15 +373,16 @@ void transactor::p_PC(){
                                     addr_t_o = v_addr;
                                 }
                                 break;
-                            case BVS_REL:
+                            }
+                            case BVS_REL: {
                                 cout << "BVS_REL s_t_o[0]: " << s_t_o[0] << endl;
                                 v_S_read = s_t_o;
-                                if (v_S_read[3] == 0){
+                                if (v_S_read[3] == 0) {
                                     pc_t_o = pc_t_o;
                                     v_addr = v_addr + 1;
                                     addr_t_o = v_addr;
                                 }
-                                else if(v_S_read[3] == 1){
+                                else if (v_S_read[3] == 1) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
@@ -335,10 +390,10 @@ void transactor::p_PC(){
                                     addr_t_o = v_addr;
                                 }
                                 break;
+                            }
                         }
                         break;
                     }
-
                     default: {
                         v_PC = v_PC + 1;
                         pc_t_o = v_PC;
@@ -373,10 +428,14 @@ void transactor::p_PC(){
                     case LDA_ABS: case STA_ABS: case ADD_ABS:
                     case SUB_ABS: case AND_ABS: case ORA_ABS:
                     {
+                        cout << "s_RI.read().to_uint(): "<< s_RI.read().to_uint() << endl;
                         v_PC = v_PC + 1;
                         pc_t_o = v_PC;
-                        v_addr = dat_t_i.read().to_int();
-                        v_addr = (v_addr,v_PB);
+                        v_PA = dat_t_i.read().to_int();
+                        cout << "v_PA: "<< v_PA <<" v_PB: "<< v_PB << endl;
+                        v_addr = (v_PA,v_PB);
+                        cout << "v_addr: "<< v_addr << endl;
+                        cout << "dat_t_i: "<< dat_t_i << endl;
                         addr_t_o = v_addr;
                         break;
                     }
@@ -416,7 +475,8 @@ void transactor::p_PC(){
                     case SUB_ABS: case AND_ABS: case ORA_ABS:
                     {
                         pc_t_o = pc_t_o;
-                        addr_t_o = addr_t_o;
+                        v_addr = pc_t_o;
+                        addr_t_o = pc_t_o;
                         break;
                     }
                     default:{
@@ -735,7 +795,7 @@ void  transactor::p_est_prox() {
                     case BCS_REL: case BEQ_REL: case BNE_REL:
                     case BMI_REL: case BPL_REL: case PHA_ACU:
                     case PLS_CTR: case BVC_REL: case BVS_REL:{// Inicio switch inst 2 palabras.
-                        switch (s_RI.read().to_uint()) {
+                        switch (s_RI.read().to_uint()){
                             case LDA_INM:
                                 cout << "Instruccion LDA_INM RI: " << "|[" << s_RI << "]|" << endl;
                                 // Actualizar proximo estado.
@@ -756,6 +816,7 @@ void  transactor::p_est_prox() {
                                 cout << "Instruccion ADD_INM RI: " << "|[" << s_RI << "]|" << endl;
                                 // Actualizar proximo estado.
                                 s_est_prox = Estado_1;
+                                v_A = acum_t_o;
                                 // Sumar al acumulador el argumento y actualizar BC.
                                 v_bt1_t = v_A[5];
                                 (v_bc_t, v_A) = v_A + dat_t_i.read().to_int();
@@ -774,6 +835,7 @@ void  transactor::p_est_prox() {
                                 cout << "Instruccion SUB_INM RI: " << "|[" << s_RI << "]|" << endl;
                                 // Actualizar proximo estado.
                                 s_est_prox = Estado_1;
+                                v_A = acum_t_o;
                                 // Restar al acumulador el argumento y actualizar BC.
                                 v_bt1_t = v_A[5];
                                 (v_bc_t, v_A) = v_A - dat_t_i.read().to_int();
@@ -792,11 +854,12 @@ void  transactor::p_est_prox() {
                                 cout << "Instruccion AND_INM RI: " << "|[" << s_RI << "]|" << endl;
                                 // Actualizar proximo estado.
                                 s_est_prox = Estado_1;
+                                v_A = acum_t_o;
                                 // Operacion logica AND bit a bit entre acumulador y argumento.
                                 v_A = v_A & dat_t_i.read().to_int();
-                                s_A = v_A;
                                 //Actualizacion del acumulador.
                                 acum_t_o = v_A;
+                                cout << "acum_t_o: " << acum_t_o << endl;
                                 // Calculo de banderas.
                                 v_bn_t = v_A[5];
                                 v_bz_t = v_A.nor_reduce();
@@ -808,6 +871,7 @@ void  transactor::p_est_prox() {
                                 cout << "Instruccion ORA_INM RI: " << "|[" << s_RI << "]|" << endl;
                                 // Actualizar proximo estado.
                                 s_est_prox = Estado_1;
+                                v_A = acum_t_o;
                                 // Operacion logica OR bit a bit entre acumulador y argumento.
                                 v_A = v_A | dat_t_i.read().to_int();
                                 s_A = v_A;
@@ -864,8 +928,7 @@ void  transactor::p_est_prox() {
                                 // Actualizar proximo estado.
                                 s_est_prox = Estado_1;
                                 // Cargar valor de memoria en acumulador.
-                                v_A = dat_t_i.read().to_int();
-                                s_A = v_A;
+                                v_A = ports_t_i.read().to_int();
                                 //Actualizacion del acumulador.
                                 acum_t_o = v_A;
                                 // Calculo de banderas.
@@ -874,6 +937,14 @@ void  transactor::p_est_prox() {
                                 v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
                                 s_t_o = v_S;
                                 // Fin de calculo de banderas.
+                                break;
+                            }
+                            case OUT_IO:{
+                                cout << "Instruccion INP_IO RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                //Actualizacion de los puertos.
+                                ports_t_o = acum_t_o;
                                 break;
                             }
                             default:{
@@ -907,25 +978,118 @@ void  transactor::p_est_prox() {
                 cout << "======================INICIO DE ESTADO============================" << endl;
                 cout << "Estado actual: " << "|[" << Estado_7 << "]|" << endl;
                 cout << "==================================================================" << endl;
-                switch (s_RI.read().to_uint()) {
-                    case  LDA_ABS:{
-                        cout << "Instruccion LDA_ABS RI: " << "|[" << s_RI << "]|" << endl;
-                        // Actualizar proximo estado.
-                        s_est_prox = Estado_1;
-                        // Cargar valor de memoria en acumulador.
-                        v_A = dat_t_i.read().to_int();
-                        s_A = v_A;
-                        //Actualizacion del acumulador.
-                        acum_t_o = v_A;
-                        // Calculo de banderas.
-                        v_bn_t = v_A[5];
-                        v_bz_t = v_A.nor_reduce();
-                        v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
-                        s_t_o = v_S;
-                        // Fin de calculo de banderas.
+                switch (s_RI.read().to_uint()){
+                    case STA_ABS: case LDA_ABS: case ADD_ABS:
+                    case SUB_ABS: case AND_ABS: case ORA_ABS:
+                    case JMP_ABS: case JSR_ABS: case JSR_IND:
+                    case RTS_CTR: case INP_IO: case OUT_IO:{
+                        switch (s_RI.read().to_uint()){
+                            case STA_ABS: {
+                                cout << "Instruccion LDA_ABS RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Cargar valor de memoria en acumulador.
+                                cout << "acum_t_o: "<< acum_t_o << endl;
+                                //Actualizacion del acumulador.
+                                dat_t_o = acum_t_o;
+                                break;
+                            }
+                            case LDA_ABS: {
+                                cout << "Instruccion LDA_ABS RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Cargar valor de memoria en acumulador.
+                                cout << "dat_t_i: "<< dat_t_i << endl;
+                                v_A = dat_t_i.read().to_int();
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            }
+                            case ADD_ABS:{
+                                cout << "Instruccion ADD_ABS RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Sumar al acumulador el argumento y actualizar BC.
+                                v_bt1_t = v_A[5];
+                                (v_bc_t, v_A) = v_A + dat_t_i.read().to_int();
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                s_bv_t = v_bt1_t ? 0 : v_A[5]; // Bandera V para INA.
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            }
+                            case SUB_ABS:{
+                                cout << "Instruccion SUB_ABS RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Restar al acumulador el argumento y actualizar BC.
+                                v_bt1_t = v_A[5];
+                                (v_bc_t, v_A) = v_A - dat_t_i.read().to_int();
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                s_bv_t = v_bt1_t ? not v_A[5] : 1; // Bandera V para DCA.
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            }
+                            case AND_ABS:{
+                                cout << "Instruccion AND_ABS RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Operacion logica AND bit a bit entre acumulador y argumento.
+                                v_A = v_A & dat_t_i.read().to_int();
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            }
+                            case ORA_ABS:{
+                                cout << "Instruccion ORA_ABS RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Operacion logica OR bit a bit entre acumulador y argumento.
+                                v_A = v_A | dat_t_i.read().to_int();
+                                s_A = v_A;
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            }
+                            default:{
+                                s_est_prox = Estado_1;
+                                break;
+                            }
+                        }
                         break;
                     }
-                    default: {
+                    default:{
                         s_est_prox = Estado_1;
                         break;
                     }

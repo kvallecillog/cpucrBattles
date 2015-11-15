@@ -73,6 +73,8 @@ SC_MODULE(transactor){
         sc_uint<6> v_S;
         sc_uint<6> v_S_read;
         sc_uint<12> v_addr;
+        sc_uint<6> v_PA;
+
         sc_uint<6> v_PB;
 
 
@@ -94,7 +96,7 @@ SC_MODULE(transactor){
 
 
 
-        SC_CTOR(transactor):acum_t_o("acum_t_o"),s_est_pres("s_est_pres"), s_est_prox("s_est_prox"){
+        SC_CTOR(transactor):acum_t_o("acum_t_o"),s_est_pres("s_est_pres"), s_est_prox("s_est_prox"), dat_t_o("dat_t_o"), dat_t_i("dat_t_i"){
 
                 SC_METHOD(p_CB);
                 sensitive << clk_t_i.neg();

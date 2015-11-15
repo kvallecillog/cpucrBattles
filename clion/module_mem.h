@@ -26,9 +26,9 @@ SC_MODULE(memory){
 
     void entry();
 
-    void memdump()
-    {
-        FILE *fp = fopen("memdump","w");
+    void memdump(){
+        cout << "Dumping memory" << endl;
+        FILE *fp = fopen("memdump.txt","w");
         int size;
         fprintf(fp, "--------------\n");
         fprintf(fp, "|Address|Data|\n");
@@ -45,7 +45,7 @@ SC_MODULE(memory){
         }
     }
 
-        SC_CTOR(memory){
+        SC_CTOR(memory):dat_m_i("dat_m_i"),dat_m_o("dat_m_o"){
 
 //
         SC_METHOD(entry);
