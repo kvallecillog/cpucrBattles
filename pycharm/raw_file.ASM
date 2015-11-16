@@ -38,15 +38,16 @@ WRD %100000
 
 ; Todas las pruebas han sido correctamente ensambladas
 
+NOP
 ;Prueba de STA IND
-L0 LDA #@01
-L1 STA @0300
-L2 LDA #@01
-L3 STA @0301
-L7 LDA #7
-L4 STA (@0300)
-L5 INA
-L6 LDA @0101
+;L0 LDA #@01
+;L1 STA @0300
+;L2 LDA #@01
+;L3 STA @0301
+;L7 LDA #7
+;L4 STA (@0300)
+;L5 INA
+;L6 LDA @0101
 ;HLT
 
 
