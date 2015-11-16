@@ -1,5 +1,5 @@
-#ifndef MEMORY_H_
-#define MEMORY_H_ 4096
+#ifndef PORTS_H_
+#define PORTS_H_ 64
 
  // SystemC library.
 //#include </usr/local/systemc-2.3.1/include/systemc>
@@ -12,22 +12,22 @@ using namespace std;
 using namespace sc_core;
 using namespace sc_dt;
 
-SC_MODULE(memory){
+SC_MODULE(ports){
 
     // Port declarations
-    sc_in < sc_lv <6> > dat_m_i;
-    sc_out < sc_lv <6> > dat_m_o;
-    sc_in < sc_lv <12> > addr_m_i;
-    sc_in < sc_lv<1> > rw_m_i;
-    sc_in < sc_lv<1> > en_m_i;
+    sc_in < sc_lv <6> > dat_p_i;
+    sc_out < sc_lv <6> > dat_p_o;
+    sc_in < sc_lv <6> > addr_p_i;
+    sc_in < sc_lv<1> > rw_p_i;
+    sc_in < sc_lv<1> > en_p_i;
 
     // Signals declarations.
-    sc_signal< sc_uint<6> > ramdata[MEMORY_H_];
+    sc_signal< sc_uint<6> > ramdata[PORTS_H_];
 
     void entry();
 
     void memdump(){
-        cout << "Dumping memory" << endl;
+        cout << "Dumping ports" << endl;
         FILE *fp = fopen("memdump.txt","w");
         int size;
         fprintf(fp, "--------------\n");
@@ -36,7 +36,7 @@ SC_MODULE(memory){
         int  data_int = 0;
 
 
-        for (size = 0; size < MEMORY_H_-1; size++) {
+        for (size = 0; size < PORTS_H_-1; size++) {
 
             data_int = ramdata[size].read().to_int();
 
@@ -45,18 +45,18 @@ SC_MODULE(memory){
         }
     }
 
-        SC_CTOR(memory):dat_m_i("dat_m_i"),dat_m_o("dat_m_o"){
+        SC_CTOR(ports):dat_p_i("dat_p_i"),dat_p_o("dat_p_o"){
 
 //
         SC_METHOD(entry);
 
 //        dont_initialize();
-//        sensitive << dat_m_o << addr_m_i << rw_m_i <<  en_m_i;
-        sensitive << dat_m_i << addr_m_i << rw_m_i <<  en_m_i;
+//        sensitive << dat_p_o << addr_p_i << rw_p_i <<  en_p_i;
+        sensitive << dat_p_i << addr_p_i << rw_p_i <<  en_p_i;
 
         FILE *fp ;
 
-        fp = fopen("ram_init.txt","r");
+        fp = fopen("ports_init.txt","r");
 
         if(!fp)
         {
@@ -77,7 +77,7 @@ SC_MODULE(memory){
         cout << "|[" << "Address" << "]|::|[" << "Data" << "]|" << endl;
         while (fscanf(fp,"%un", &mem_word) != EOF) {
             ramdata[size].write( mem_word );
-            if (size < 30 ){
+            if (size < 64 ){
                 cout << "|[" << size << "]|:::::::::|[" << mem_word << "]|" << endl;
                 }
             size++;
@@ -86,4 +86,4 @@ SC_MODULE(memory){
     }
 };
 
-#endif /* MEMORY_H_ */
+#endif /* PORTS_H_ */

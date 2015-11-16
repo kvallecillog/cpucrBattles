@@ -1,30 +1,62 @@
 [*]
 [*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
-[*] Sun Nov 15 00:19:51 2015
+[*] Mon Nov 16 06:48:00 2015
 [*]
 [dumpfile] "/home/kenneth/Dropbox/proyectoElectrico/srcWIP/cpucrBattles/clion/cpucr.vcd"
-[dumpfile_mtime] "Sun Nov 15 00:17:06 2015"
-[dumpfile_size] 93554
+[dumpfile_mtime] "Mon Nov 16 06:47:29 2015"
+[dumpfile_size] 73975
 [savefile] "/home/kenneth/Dropbox/proyectoElectrico/srcWIP/cpucrBattles/clion/cpucr_fsm.gtkw"
-[timestart] 243590
+[timestart] 0
 [size] 1366 744
 [pos] -1 -1
-*-11.950041 253500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-11.950041 9310 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [sst_width] 223
-[signals_width] 158
+[signals_width] 174
 [sst_expanded] 1
 [sst_vpaned_height] 257
 @28
 SystemC.LE
 @24
 SystemC.acum_t_o[5:0]
-@25
-SystemC.addr_c_o[11:0]
+@28
+SystemC.rw_ports
+@800022
+SystemC.address_ports[5:0]
+@28
+(0)SystemC.address_ports[5:0]
+(1)SystemC.address_ports[5:0]
+(2)SystemC.address_ports[5:0]
+(3)SystemC.address_ports[5:0]
+(4)SystemC.address_ports[5:0]
+(5)SystemC.address_ports[5:0]
+@1001200
+-group_end
+@28
+SystemC.enable_ports
 @22
+SystemC.ports_i[5:0]
+SystemC.ports_o[5:0]
+@c00030
+SystemC.addr_c_o[11:0]
+@28
+(0)SystemC.addr_c_o[11:0]
+(1)SystemC.addr_c_o[11:0]
+(2)SystemC.addr_c_o[11:0]
+(3)SystemC.addr_c_o[11:0]
+(4)SystemC.addr_c_o[11:0]
+(5)SystemC.addr_c_o[11:0]
+(6)SystemC.addr_c_o[11:0]
+(7)SystemC.addr_c_o[11:0]
+(8)SystemC.addr_c_o[11:0]
+(9)SystemC.addr_c_o[11:0]
+(10)SystemC.addr_c_o[11:0]
+(11)SystemC.addr_c_o[11:0]
+@1401200
+-group_end
+@30
 SystemC.addr_m_i[11:0]
 SystemC.addr_t_o[11:0]
 SystemC.address[11:0]
-@24
 SystemC.pc[11:0]
 @28
 SystemC.clk
@@ -32,7 +64,7 @@ SystemC.clk
 SystemC.CM
 [color] 7
 SystemC.CB
-@22
+@24
 [color] 7
 SystemC.acum[5:0]
 @800022

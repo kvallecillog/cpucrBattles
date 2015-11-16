@@ -32,8 +32,13 @@ SC_MODULE(transactor){
         sc_out < sc_lv<1> > en_t_o;
         sc_out < sc_lv <6> > acum_t_o;
         sc_out < sc_lv <6> > s_t_o;
+
         sc_in < sc_lv <6> > ports_t_i;
         sc_out < sc_lv <6> > ports_t_o;
+        sc_out < sc_lv <6> > addr_ports_t_o;
+        sc_out < sc_lv<1> > rw_ports_t_o;
+        sc_out < sc_lv<1> > en_ports_t_o;
+
         sc_out < sc_lv <6> > ri_t_o;
         sc_out < sc_lv<12> > pc_t_o;
         sc_in_clk  clk_t_i;
@@ -75,6 +80,9 @@ SC_MODULE(transactor){
         sc_uint<6> v_S;
         sc_uint<6> v_S_read;
         sc_uint<12> v_addr;
+
+        sc_uint<6> v_addr_ports;
+
         sc_uint<6> v_PA;
 
         sc_uint<6> v_PB;

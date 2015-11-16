@@ -25,7 +25,7 @@ using namespace sc_dt;
 using namespace boost::algorithm;
 
 
-void port::entry(){
+void ports::entry(){
 
     if(en_p_i.read() == 1) {
 

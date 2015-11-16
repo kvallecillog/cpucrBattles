@@ -96,11 +96,15 @@ void  transactor::p_LE() {
             }
             case Estado_5:{
                 switch (s_RI.read().to_uint()) {
-                    case JSR_ABS: case OUT_IO:{
+                    case JSR_ABS:{
                         s_LE = false;
                         rw_t_o = false;
                         en_t_o = true;
                         break;
+                    }
+                    case OUT_IO:{
+                        rw_ports_t_o = false;
+                        en_ports_t_o = true;
                     }
                     default: {
                         s_LE = true;
@@ -322,9 +326,15 @@ void transactor::p_PC(){
                         break;
                     }
                     case INP_IO: case OUT_IO:{
+//                        v_PC = v_PC + 1;
+//                        pc_t_o = v_PC;
+//                        v_addr = dat_t_i.read().to_int();
+//                        addr_t_o = v_addr;
                         v_PC = v_PC + 1;
                         pc_t_o = v_PC;
-                        v_addr = dat_t_i.read().to_int();
+                        v_addr_ports = dat_t_i.read().to_int();
+                        addr_ports_t_o = v_addr_ports;
+                        v_addr = v_addr + 1;
                         addr_t_o = v_addr;
                         break;
                     }
@@ -500,6 +510,7 @@ void transactor::p_PC(){
                     case INP_IO: case OUT_IO: {
                         pc_t_o = pc_t_o;
                         addr_t_o = addr_t_o;
+                        addr_ports_t_o = addr_ports_t_o;
                         break;
                     }
                     case LDA_IND: case ADD_IND: case SUB_IND:
@@ -551,8 +562,11 @@ void transactor::p_PC(){
                         break;
                     }
                     case INP_IO: case OUT_IO:{
-                        pc_t_o = pc_t_o;
-                        addr_t_o = addr_t_o;
+                        v_PC = v_PC + 1;
+                        pc_t_o = v_PC;
+                        v_addr = v_addr + 1;
+                        addr_t_o = v_addr;
+                        addr_ports_t_o = addr_ports_t_o;
                         break;
                     }
                     default:{

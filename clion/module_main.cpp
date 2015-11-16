@@ -39,8 +39,15 @@ int sc_main(int argc, char* argv[]) {
     sc_signal<sc_lv<12> > address;
     sc_signal < sc_lv <6> > acum;
     sc_signal < sc_lv <6> > s;
+
     sc_signal < sc_lv <6> > ports_i;
     sc_signal < sc_lv <6> > ports_o;
+    sc_signal<sc_lv<6> > address_ports;
+    sc_signal<sc_lv<1> > enable_ports;
+    sc_signal<sc_lv<1> > rw_ports;
+
+
+
     sc_signal < sc_lv <6> > RI;
     sc_signal < bool > rps;
     sc_signal < bool > init;
@@ -66,8 +73,14 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, clk, "clk");
     sc_trace(wf, acum, "acum");
     sc_trace(wf, s, "s");
+
     sc_trace(wf, ports_i, "ports_i");
     sc_trace(wf, ports_o, "ports_o");
+    sc_trace(wf, enable_ports, "enable_ports");
+    sc_trace(wf, address_ports, "address_ports");
+    sc_trace(wf, rw_ports, "rw_ports");
+
+
     sc_trace(wf, rps, "rps");
     sc_trace(wf, pc, "pc");
 
@@ -139,8 +152,11 @@ int sc_main(int argc, char* argv[]) {
     cpucr1.s_c_o(s);
     cpucr1.ports_c_i(ports_i);
     cpucr1.ri_c_o(RI);
-
     cpucr1.ports_c_o(ports_o);
+
+    cpucr1.addr_ports_c_o(address_ports);
+    cpucr1.rw_ports_c_o(rw_ports);
+    cpucr1.en_ports_c_o(enable_ports);
 
     cpucr1.s_est_pres_c_o(est_pres);
 
