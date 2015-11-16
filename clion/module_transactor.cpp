@@ -602,9 +602,10 @@ void transactor::p_PC(){
                         break;
                     }
                     default:{
-                        pc_t_o = pc_t_o;
-                        addr_t_o = pc_t_o;
                         s_PB = s_PB;
+                        pc_t_o = pc_t_o;
+                        v_addr = pc_t_o;
+                        addr_t_o = pc_t_o;
                         break;
                     }
                 }

@@ -10,6 +10,7 @@
 #define SUB_ABS 25
 #define AND_ABS 33
 #define ORA_ABS 41
+
 #define JMP_ABS 49
 #define JSR_ABS 57
 
@@ -28,6 +29,7 @@
 #define SUB_IND 27
 #define AND_IND 35
 #define ORA_IND 43
+
 #define JMP_IND 51
 #define JSR_IND 59
 
@@ -41,14 +43,17 @@
 #define DCA_ACU 29
 #define ROL_ACU 37
 #define ROR_ACU 45
+
 #define PLA_ACU 53
 #define PHA_ACU 61
 #define TPA_CTR 6
 #define TAP_CTR 14
 #define RTI_CTR 22
 #define RTS_CTR 30
+
 #define HLT_CTR 38
 #define NOP_CTR 46
+
 #define PLS_CTR 54
 #define PHS_CTR 62
 
