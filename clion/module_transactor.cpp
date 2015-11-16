@@ -153,6 +153,57 @@ void  transactor::p_LE() {
     }
 }
 
+void transactor::p_M(){
+
+    if(!rps_t_i){
+        v_M = false;
+    }
+    else{
+        switch (s_est_prox) {
+            case Estado_0:{
+                v_M = true;
+                break;
+            }
+            case Estado_1:{
+                v_M = true;
+                break;
+            }
+            case Estado_5:{
+                switch (s_RI.read().to_uint()) {
+                    case INP_IO: case OUT_IO:{
+                        v_M = false;
+                        break;
+                    }
+                    default:{
+                        v_M = true;
+                        break;
+                    }
+                }
+                break;
+            }
+            case Estado_6:{
+                switch (s_RI.read().to_uint()) {
+                    case INP_IO: case OUT_IO:{
+                        v_M = false;
+                        break;
+                    }
+                    default:{
+                        v_M = true;
+                        break;
+                    }
+                }
+                break;
+            }
+            default:{
+                v_M = true;
+                break;
+            }
+        }
+
+    }
+
+}
+
 void transactor::p_PC(){
     i3++;
     if(!rps_t_i){
@@ -612,10 +663,14 @@ void transactor::p_PC(){
                 break;
             }
             default: {
-                v_PC = 0;
-                pc_t_o = v_PC;
-                v_addr = 0;
-                addr_t_o = v_addr;
+//                v_PC = 0;
+//                pc_t_o = pc_t_o;
+//                v_addr = 0;
+//                addr_t_o = v_addr;
+                pc_t_o = pc_t_o;
+                pc_t_o = pc_t_o;
+                v_addr = addr_t_o;
+                addr_t_o = addr_t_o;
                 break;
             }
         }

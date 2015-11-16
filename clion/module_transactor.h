@@ -45,9 +45,11 @@ SC_MODULE(transactor){
         sc_out < bool > s_CB;
         sc_out < bool > s_CM;
 
-         bool v_CM;
+        bool v_CM;
 
         sc_out < bool > s_LE;
+        sc_signal < bool > v_M;
+
 
 
         sc_signal < sc_uint<6> > s_RI;
@@ -93,31 +95,36 @@ SC_MODULE(transactor){
 //        void p_acum_a();
         void p_LE();
         void p_PC();
+        void p_M();
+
 
 
 
         SC_CTOR(transactor):acum_t_o("acum_t_o"),s_est_pres("s_est_pres"), s_est_prox("s_est_prox"){
 
-                SC_METHOD(p_CB);
-                sensitive << clk_t_i.neg();
+            SC_METHOD(p_CB);
+            sensitive << clk_t_i.neg();
 
-                SC_METHOD(p_LE);
-                en_t_o.initialize("0");
-                sensitive << clk_t_i.neg();
+            SC_METHOD(p_M);
+            sensitive << clk_t_i.neg();
 
-                SC_METHOD(p_PC);
-                sensitive << clk_t_i.neg();
+            SC_METHOD(p_LE);
+            en_t_o.initialize("0");
+            sensitive << clk_t_i.neg();
 
-                SC_METHOD(p_RI);
-                sensitive << clk_t_i.neg();
+            SC_METHOD(p_PC);
+            sensitive << clk_t_i.neg();
 
-                SC_METHOD(p_est_pres);
-                sensitive << clk_t_i.neg();
+            SC_METHOD(p_RI);
+            sensitive << clk_t_i.neg();
 
-                SC_METHOD(p_est_prox);
-                v_A = 63;
-                i1 = i2 = i3 = i4 = i5 = i6 = i7 = 0;
-                sensitive << s_est_pres;
+            SC_METHOD(p_est_pres);
+            sensitive << clk_t_i.neg();
+
+            SC_METHOD(p_est_prox);
+            v_A = 63;
+            i1 = i2 = i3 = i4 = i5 = i6 = i7 = 0;
+            sensitive << s_est_pres;
 
 //                SC_METHOD(p_acum_a);
 //                v_A = "0";

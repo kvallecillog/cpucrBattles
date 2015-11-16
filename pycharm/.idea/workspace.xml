@@ -12,11 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e884eca-5d13-4def-8528-72d310f45b6b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/cpucr_battles.x" afterPath="$PROJECT_DIR$/../clion/cpucr_battles.x" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.o" afterPath="$PROJECT_DIR$/../clion/module_transactor.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/cpucr.vcd" afterPath="$PROJECT_DIR$/../clion/cpucr.vcd" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/module_transactor.cpp" afterPath="$PROJECT_DIR$/../clion/module_transactor.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../clion/ram_init.txt" afterPath="$PROJECT_DIR$/../clion/ram_init.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" />
     </list>
     <ignored path="cpucrBattles.iws" />
