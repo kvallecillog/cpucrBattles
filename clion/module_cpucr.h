@@ -58,7 +58,7 @@ SC_MODULE(cpucr){
     transactor transactor1;
 
 
-    SC_CTOR(cpucr):memory1("memory 1"), transactor1("transactor 1"), dat_c_o("dat_c_o"){
+    SC_CTOR(cpucr):memory1("memory 1"), transactor1("transactor 1"){
 
 
 //        memory1.dat_m_i(transactor1.dat_t_o);

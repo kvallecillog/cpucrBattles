@@ -96,7 +96,7 @@ SC_MODULE(transactor){
 
 
 
-        SC_CTOR(transactor):acum_t_o("acum_t_o"),s_est_pres("s_est_pres"), s_est_prox("s_est_prox"), dat_t_o("dat_t_o"), dat_t_i("dat_t_i"){
+        SC_CTOR(transactor):acum_t_o("acum_t_o"),s_est_pres("s_est_pres"), s_est_prox("s_est_prox"){
 
                 SC_METHOD(p_CB);
                 sensitive << clk_t_i.neg();

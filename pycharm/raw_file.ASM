@@ -36,13 +36,23 @@ WRD %100000
 ;* = 4096
 ;* = %000000000000
 
+; Todas las pruebas han sido correctamente ensambladas
+
+;Prueba de STA IND
+L0 LDA #@01
+L1 STA @0300
+L2 LDA #@01
+L3 STA @0301
+L4 STA (@0300)
+L5 INA
+L6 LDA (@0300)
 
 
 ;Prueba AND ABS
-L0 LDA #%000111
-L1 STA @0300
-L2 LDA #%111000
-L3 ORA @0300
+;L0 LDA #%000111
+;L1 STA @0300
+;L2 LDA #%111000
+;L3 ORA @0300
 
 ;Prueba SUB ABS
 ;L0 LDA #1

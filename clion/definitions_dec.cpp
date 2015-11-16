@@ -21,6 +21,7 @@
 #define BPL_REL 42
 #define BVS_REL 50
 #define BVC_REL 58
+
 #define LDA_IND 3
 #define STA_IND 11
 #define ADD_IND 19
@@ -29,6 +30,7 @@
 #define ORA_IND 43
 #define JMP_IND 51
 #define JSR_IND 59
+
 #define SEC_IMP 20
 #define CLC_IMP 28
 #define SEI_IMP 36
@@ -49,6 +51,7 @@
 #define NOP_CTR 46
 #define PLS_CTR 54
 #define PHS_CTR 62
+
 #define INP_IO 7
 #define OUT_IO 15
 
