@@ -10,13 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42719d69-4724-47df-ad71-029cddd923a3" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/cpucr_battles.x" afterPath="$PROJECT_DIR$/clion/cpucr_battles.x" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/module_transactor.o" afterPath="$PROJECT_DIR$/clion/module_transactor.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/cpucr.vcd" afterPath="$PROJECT_DIR$/clion/cpucr.vcd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/definitions_dec.cpp" afterPath="$PROJECT_DIR$/clion/definitions_dec.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/deleted_blanks_file.ASM" afterPath="$PROJECT_DIR$/pycharm/deleted_blanks_file.ASM" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/deleted_comments_file.ASM" afterPath="$PROJECT_DIR$/pycharm/deleted_comments_file.ASM" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/deleted_spaces_file.ASM" afterPath="$PROJECT_DIR$/pycharm/deleted_spaces_file.ASM" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/file.obj" afterPath="$PROJECT_DIR$/pycharm/file.obj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/lines_raw_file_name.ASM" afterPath="$PROJECT_DIR$/pycharm/lines_raw_file_name.ASM" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/module_transactor.cpp" afterPath="$PROJECT_DIR$/clion/module_transactor.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clion/ram_init.txt" afterPath="$PROJECT_DIR$/clion/ram_init.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pycharm/raw_file.ASM" afterPath="$PROJECT_DIR$/pycharm/raw_file.ASM" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -53,23 +55,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="module_transactor.cpp" pinned="false" current-in-tab="false">
+          <file leaf-file-name="module_transactor.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/clion/module_transactor.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-117.90164">
-                  <caret line="604" column="36" selection-start-line="604" selection-start-column="36" selection-end-line="604" selection-end-column="36" />
-                  <folding>
-                    <marker date="1447637210232" expanded="true" signature="3936:24110" placeholder="{...}" />
-                  </folding>
+                <state vertical-scroll-proportion="0.33834586">
+                  <caret line="900" column="30" selection-start-line="900" selection-start-column="30" selection-end-line="900" selection-end-column="30" />
+                  <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="definitions_dec.cpp" pinned="false" current-in-tab="true">
+          <file leaf-file-name="definitions_dec.cpp" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/clion/definitions_dec.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.38365898">
-                  <caret line="42" column="14" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
                   <folding />
                 </state>
               </provider>
@@ -169,8 +169,8 @@
         <option value="$PROJECT_DIR$/clion/module_mem.h" />
         <option value="$PROJECT_DIR$/clion/module_cpucr.h" />
         <option value="$PROJECT_DIR$/clion/module_transactor.h" />
-        <option value="$PROJECT_DIR$/clion/module_transactor.cpp" />
         <option value="$PROJECT_DIR$/clion/definitions_dec.cpp" />
+        <option value="$PROJECT_DIR$/clion/module_transactor.cpp" />
       </list>
     </option>
   </component>
@@ -437,9 +437,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="207" column="28" selection-start-line="207" selection-start-column="28" selection-end-line="207" selection-end-column="28" />
-          <folding>
-            <marker date="1447637210232" expanded="true" signature="3936:24110" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -786,20 +784,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clion/module_transactor.cpp">
+    <entry file="file://$PROJECT_DIR$/clion/definitions_dec.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-117.90164">
-          <caret line="604" column="36" selection-start-line="604" selection-start-column="36" selection-end-line="604" selection-end-column="36" />
-          <folding>
-            <marker date="1447637210232" expanded="true" signature="3936:24110" placeholder="{...}" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clion/definitions_dec.cpp">
+    <entry file="file://$PROJECT_DIR$/clion/module_transactor.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38365898">
-          <caret line="42" column="14" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.33834586">
+          <caret line="900" column="30" selection-start-line="900" selection-start-column="30" selection-end-line="900" selection-end-column="30" />
           <folding />
         </state>
       </provider>

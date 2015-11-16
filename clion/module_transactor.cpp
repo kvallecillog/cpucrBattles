@@ -896,12 +896,13 @@ void  transactor::p_est_prox() {
                         break;
                     }// Fin switch inst 3 palabras.
                     case HLT_CTR:{// Inicio switch inst HLT.
-                        sc_stop();
+                        cout << "Instruccion HLT_CTR RI: " << "|[" << s_RI << "]|" << endl;
+                        s_est_prox = Estado_30;
                         break;
                     }// Fin switch inst HLT.
                     default: {
                         cout << "RI Invalido: Default " << "|[" << s_RI << "]|" << endl;
-                        sc_stop();
+                        s_est_prox = Estado_31;
                         break;
                     }
                 }
@@ -1063,40 +1064,40 @@ void  transactor::p_est_prox() {
                 cout << "Estado actual: " << "|[" << Estado_6 << "]|" << endl;
                 cout << "==================================================================" << endl;
                 switch (s_RI.read().to_uint()) {
-//                    case JMP_ABS: case RTS_CTR: case INP_IO:
-//                    case OUT_IO: case RTI_CTR:{
-//                        switch (s_RI.read().to_uint()) {
-//                            case INP_IO:{
-//                                cout << "Instruccion INP_IO RI: " << "|[" << s_RI << "]|" << endl;
-//                                // Actualizar proximo estado.
-//                                s_est_prox = Estado_1;
-//                                // Cargar valor de memoria en acumulador.
-//                                v_A = ports_t_i.read().to_int();
-//                                //Actualizacion del acumulador.
-//                                acum_t_o = v_A;
-//                                // Calculo de banderas.
-//                                v_bn_t = v_A[5];
-//                                v_bz_t = v_A.nor_reduce();
-//                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
-//                                s_t_o = v_S;
-//                                // Fin de calculo de banderas.
-//                                break;
-//                            }
-//                            case OUT_IO:{
-//                                cout << "Instruccion INP_IO RI: " << "|[" << s_RI << "]|" << endl;
-//                                // Actualizar proximo estado.
-//                                s_est_prox = Estado_1;
-//                                //Actualizacion de los puertos.
-//                                ports_t_o = acum_t_o;
-//                                break;
-//                            }
-//                            default:{
-//                                s_est_prox = Estado_1;
-//                                break;
-//                            }
-//                        }
-//                        break;
-//                    }
+                    case JMP_ABS: case RTS_CTR: case INP_IO:
+                    case OUT_IO: case RTI_CTR:{
+                        switch (s_RI.read().to_uint()) {
+                            case INP_IO:{
+                                cout << "Instruccion INP_IO RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                // Cargar valor de memoria en acumulador.
+                                v_A = ports_t_i.read().to_int();
+                                //Actualizacion del acumulador.
+                                acum_t_o = v_A;
+                                // Calculo de banderas.
+                                v_bn_t = v_A[5];
+                                v_bz_t = v_A.nor_reduce();
+                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
+                                s_t_o = v_S;
+                                // Fin de calculo de banderas.
+                                break;
+                            }
+                            case OUT_IO:{
+                                cout << "Instruccion INP_IO RI: " << "|[" << s_RI << "]|" << endl;
+                                // Actualizar proximo estado.
+                                s_est_prox = Estado_1;
+                                //Actualizacion de los puertos.
+                                ports_t_o = acum_t_o;
+                                break;
+                            }
+                            default:{
+                                s_est_prox = Estado_1;
+                                break;
+                            }
+                        }
+                        break;
+                    }
                     default: {
                         s_est_prox = Estado_7;
                         break;
@@ -1127,7 +1128,7 @@ void  transactor::p_est_prox() {
                     case JMP_ABS:{
                         switch (s_RI.read().to_uint()){
                             case STA_ABS: {
-                                cout << "Instruccion LDA_ABS RI: " << "|[" << s_RI << "]|" << endl;
+                                cout << "Instruccion STA_ABS RI: " << "|[" << s_RI << "]|" << endl;
                                 // Actualizar proximo estado.
                                 s_est_prox = Estado_1;
                                 // Cargar valor de memoria en acumulador.
@@ -1302,7 +1303,7 @@ void  transactor::p_est_prox() {
                     case JMP_IND: {
                         switch (s_RI.read().to_uint()){
                             case STA_IND: {
-                                cout << "Instruccion LDA_IND RI: " << "|[" << s_RI << "]|" << endl;
+                                cout << "Instruccion STA_IND RI: " << "|[" << s_RI << "]|" << endl;
                                 // Actualizar proximo estado.
                                 s_est_prox = Estado_1;
                                 // Cargar valor de memoria en acumulador.
@@ -1436,6 +1437,26 @@ void  transactor::p_est_prox() {
                 cout << "Estado actual: " << "|[" << Estado_14 << "]|" << endl;
                 cout << "==================================================================" << endl;
                 s_est_prox = Estado_1;
+                cout << "=======================FIN DE ESTADO==============================" << endl;
+                cout << "##################################################################\n" << endl;
+                break;
+            }
+            case Estado_30: {
+                cout << "\n##################################################################" << endl;
+                cout << "======================INICIO DE ESTADO============================" << endl;
+                cout << "Estado actual: " << "|[" << Estado_30 << "]|" << endl;
+                cout << "==================================================================" << endl;
+                s_est_prox = Estado_30;
+                cout << "=======================FIN DE ESTADO==============================" << endl;
+                cout << "##################################################################\n" << endl;
+                break;
+            }
+            case Estado_31: {
+                cout << "\n##################################################################" << endl;
+                cout << "======================INICIO DE ESTADO============================" << endl;
+                cout << "Estado actual: " << "|[" << Estado_31 << "]|" << endl;
+                cout << "==================================================================" << endl;
+                s_est_prox = Estado_31;
                 cout << "=======================FIN DE ESTADO==============================" << endl;
                 cout << "##################################################################\n" << endl;
                 break;
