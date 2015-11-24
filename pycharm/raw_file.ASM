@@ -40,16 +40,25 @@ WRD %100000
 
 ;Prueba de NOP
 ;NOP
+L1 LDX #1
+;L0 LDA #1
+;INP @01
+;OUT @01
+;INP @01
+
+;LDA @01
+;STA @01
 
 ;Prueba de STA IND
 L0 LDA #@01
-L1 STA @0300
-L2 LDA #@01
-L3 STA @0301
-L7 LDA #7
-L4 STA (@0300)
+
+;L1 STA @0300
+;L2 LDA #@01
+;L3 STA @0301
+;L7 LDA #7
+;L4 STA (@0300)
 L5 INA
-L6 LDA @0101
+;L6 LDA @0101
 HLT
 
 
@@ -220,7 +229,7 @@ HLT
 ;HLT
 
 
-;LDA #7
+;LDA #0
 ;HLT
 ;HLT
 ;HLT

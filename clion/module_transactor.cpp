@@ -23,7 +23,19 @@ using namespace sc_dt;
 using namespace boost::algorithm;
 
 void  transactor::p_CB() {
+/** Calcula la bandera s_CB para identificar el ciclo de busqueda.
+ *  Tambien calcula la bandera CM.
+ * @param rps_t_i - rps_t_i señal de reposicion.
+ * @param s_est_prox - s_est_prox variable que contiene el proximo estado.
+ * @param s_est_pres - s_est_pres variable que contiene el estado presente.
+ * @param s_CB - s_CB señal de ciclo de busqueda.
+ * @param s_CM - s_CM señal de ciclo de memoria.
+ * @return s_CB - s_CB retorna la bandera de ciclo de busqueda.
+ * @return s_CM - s_CM retorna la bandera de ciclo de memoria.
+ */
+
     i1++;
+
     if (rps_t_i){
         if(s_est_prox == Estado_1){
             s_CB = true;
@@ -51,6 +63,16 @@ void  transactor::p_CB() {
 }
 
 void  transactor::p_LE() {
+/** Calcula la bandera rw_t_o, lectura y escritura, la cual se define dependiendo del estado presente.
+ * @param rps_t_i - rps_t_i señal de reposicion.
+ * @param s_est_prox - s_est_prox variable que contiene el proximo estado.
+ * @param s_est_pres - s_est_pres variable que contiene el estado presente.
+ * @param rw_t_o - rw_t_o señal de lectura y escritura.
+ * @param en_t_o - en_t_o señal de habilitar memoria.
+ * @param s_RI - s_RI variable que contiene el codigo de instruccion leido.
+ */
+
+
     i2++;
     if(!rps_t_i){
         s_LE = true;
@@ -209,6 +231,15 @@ void transactor::p_M(){
 }
 
 void transactor::p_PC(){
+/** Calcula el contador de posicion y la direccion de memoria.
+ * @param rps_t_i - rps_t_i señal de reposicion.
+ * @param s_est_prox - s_est_prox variable que contiene el proximo estado.
+ * @param s_est_pres - s_est_pres variable que contiene el estado presente.
+ * @param addr_t_o - addr_t_o puerto que contiene la direccion de memoria accesada.
+ * @param pc_t_o - pc_t_o puerto que contiene el contador de posicion PC.
+ * @param s_RI - s_RI variable que contiene el codigo de instruccion leido.
+ */
+
     i3++;
     if(!rps_t_i){
         v_PC = 0;
@@ -692,37 +723,64 @@ void transactor::p_PC(){
 }
 
 void  transactor::p_RI() {
+/** Proceso que obtiene el codigo de operacion de la instruccion a ejecutar.
+ * @param rps_t_i - rps_t_i señal de reposicion.
+ * @param s_est_prox - s_est_prox variable que contiene el proximo estado.
+ * @param s_est_pres - s_est_pres variable que contiene el estado presente.
+ * @param addr_t_o - addr_t_o puerto que contiene la direccion de memoria accesada.
+ * @param pc_t_o - pc_t_o puerto que contiene el contador de posicion PC.
+ * @param s_RI - s_RI variable que contiene el codigo de instruccion leido.
+ * @param s_CB - s_CB señal de ciclo de busqueda.
+ * @param ri_t_o - ri_t_o puerto que contiene el codigo de instruccion leido.
+ */
     i4++;
     if (rps_t_i){
         if (s_CB){
-            v_RI = dat_t_i.read().to_int();
-            s_RI = v_RI;
-            ri_t_o = v_RI;
+            v_RI = dat_t_i.read().to_int(); /**< Se hace fetch de la memoria
+            * del codigo de instruccion */
+            s_RI = v_RI; /**< Se guarda el valor en una sc_signal */
+            ri_t_o = v_RI; /**< Se escribe al puerto de registro de instruccion */
         }
         else{
-            s_RI = s_RI;
+            s_RI = s_RI;  /**< Si no es ciclo de busqueda se mantienen los valores */
             v_RI = v_RI;
             ri_t_o = v_RI;
         }
     }
     else{
-        v_RI = 0;
+        v_RI = 0; /**< Si RPS es 0 se asigna 0 al registro de instruccion */
         s_RI = 0;
         ri_t_o = v_RI;
     }
 }
 
 void  transactor::p_est_pres() {
+/** Proceso que calcula el estado presente.
+ * @param rps_t_i - rps_t_i señal de reposicion.
+ * @param s_est_prox - s_est_prox variable que contiene el proximo estado.
+ * @param s_est_pres - s_est_pres variable que contiene el estado presente
+ */
+
     i5++;
     if (rps_t_i){
-        s_est_pres = s_est_prox;
+        s_est_pres = s_est_prox; /**< Estado presente es proximo estado
+ * cuando proximo es actualizado */
     }
     else{
-        s_est_pres = Estado_0;
+        s_est_pres = Estado_0; /**< Si RPS es 0 estado presente es 0; se reinicia la FSM */
     }
 }
 
 void  transactor::p_est_prox() {
+/** Proceso que calcula el proximo estado y ejecuta la instruccion respectiva.
+ * @param rps_t_i - rps_t_i señal de reposicion.
+ * @param s_est_prox - s_est_prox variable que contiene el proximo estado.
+ * @param s_est_pres - s_est_pres variable que contiene el estado presente.
+ * @param addr_t_o - addr_t_o puerto que contiene la direccion de memoria accesada.
+ * @param pc_t_o - pc_t_o puerto que contiene el contador de posicion PC.
+ * @param s_RI - s_RI variable que contiene el codigo de instruccion leido.
+ * @param s_CB - s_CB señal de ciclo de busqueda.
+ */
     i6++;
     if (!rps_t_i){
         s_est_prox = Estado_1;
