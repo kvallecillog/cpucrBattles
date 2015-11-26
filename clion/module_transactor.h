@@ -57,6 +57,7 @@ SC_MODULE(transactor){
         sc_signal < sc_uint<1> > s_bz_t;
         sc_signal < sc_uint<1> > s_bc_t;
         sc_signal < sc_uint<12> > s_PC;
+        sc_signal < sc_uint<12> > s_PP;
         sc_signal < sc_uint<6> > s_PB;
 
         sc_uint<12> v_PC;
@@ -73,7 +74,7 @@ SC_MODULE(transactor){
         sc_uint<6> v_addr_ports;
         sc_uint<6> v_PA;
         sc_uint<6> v_PB;
-
+        sc_uint<12> v_PP;
 
         // Bits temporales
         sc_uint<1> v_bt1_t;
@@ -89,6 +90,8 @@ SC_MODULE(transactor){
         void p_LE();
         void p_PC();
         void p_M();
+        void p_P();
+
 
         SC_CTOR(transactor):acum_t_o("acum_t_o"),s_est_pres("s_est_pres"), s_est_prox("s_est_prox"){
 
@@ -96,6 +99,9 @@ SC_MODULE(transactor){
             sensitive << clk_t_i.neg();
 
             SC_METHOD(p_M);
+            sensitive << clk_t_i.neg();
+
+            SC_METHOD(p_P);
             sensitive << clk_t_i.neg();
 
             SC_METHOD(p_LE);

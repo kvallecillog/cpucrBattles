@@ -722,6 +722,130 @@ void transactor::p_PC(){
     }
 }
 
+void  transactor::p_P() {
+/** Proceso que actualiza el puntero de pila.
+ * @param rps_t_i - rps_t_i señal de reposicion.
+ * @param s_est_prox - s_est_prox variable que contiene el proximo estado.
+ * @param s_est_pres - s_est_pres variable que contiene el estado presente.
+ * @param addr_t_o - addr_t_o puerto que contiene la direccion de memoria accesada.
+ * @param pc_t_o - pc_t_o puerto que contiene el contador de posicion PC.
+ * @param s_RI - s_RI variable que contiene el codigo de instruccion leido.
+ * @param s_CB - s_CB señal de ciclo de busqueda.
+ * @param ri_t_o - ri_t_o puerto que contiene el codigo de instruccion leido.
+ */
+    if (!rps_t_i){
+        v_PP = 0;
+        s_PP = v_PP;
+    }
+    else{
+        switch (s_est_pres) {
+            case Estado_1:{
+                switch (s_RI.read().to_uint()){
+                    case TAP_CTR:{
+                        s_PP = acum_t_o.read().to_uint();
+                        break;
+                    }
+                    default:{
+                        s_PP = s_PP;
+                        break;
+                    }
+
+                }
+                break;
+            }
+            case Estado_2:{
+                switch (s_RI.read().to_uint()){
+                    case TAP_CTR:{
+                        s_PP = acum_t_o.read().to_uint();
+                        break;
+                    }
+                    case RTS_CTR: case RTI_CTR:{
+                        v_PP = v_PP - acum_t_o.read().to_uint();
+                        s_PP = v_PP;
+                        break;
+                    }
+                    default:{
+                        s_PP = s_PP;
+                        break;
+                    }
+                }
+                break;
+            }
+            case Estado_3:{
+                switch (s_RI.read().to_uint()){
+                    case JSR_ABS:{
+                        v_PP = v_PP + acum_t_o.read().to_uint();
+                        s_PP = v_PP;
+                        break;
+                    }
+                    case RTS_CTR:{
+                        v_PP = v_PP - acum_t_o.read().to_uint();
+                        s_PP = v_PP;
+                        break;
+                    }
+                    default:{
+                        s_PP = s_PP;
+                        break;
+                    }
+                }
+                break;
+            }
+            case Estado_4:{
+                switch (s_RI.read().to_uint()){
+                    case PHA_ACU: case PHS_CTR:{
+                        v_PP = v_PP + acum_t_o.read().to_uint();
+                        s_PP = v_PP;
+                        break;
+                    }
+                    case PLS_CTR: case PLA_ACU: case RTI_CTR:{
+                        v_PP = v_PP - acum_t_o.read().to_uint();
+                        s_PP = v_PP;
+                        break;
+                    }
+                    default:{
+                        s_PP = s_PP;
+                        break;
+                    }
+                }
+                break;
+            }
+            case Estado_6:{
+                switch (s_RI.read().to_uint()){
+                    case JSR_ABS:{
+                        v_PP = v_PP + acum_t_o.read().to_uint();
+                        s_PP = v_PP;
+                        break;
+                    }
+                    case RTS_CTR:{
+                        v_PP = v_PP - acum_t_o.read().to_uint();
+                        s_PP = v_PP;
+                        break;
+                    }
+                    default:{
+                        s_PP = s_PP;
+                        break;
+                    }
+                }
+                break;
+            }
+            case Estado_18:{
+                v_PP = v_PP + acum_t_o.read().to_uint();
+                s_PP = v_PP;
+                break;
+            }
+            case Estado_21:{
+                v_PP = v_PP + acum_t_o.read().to_uint();
+                s_PP = v_PP;
+                break;
+            }
+            default:{
+                s_PP = s_PP;
+                break;
+            }
+        }
+    }
+
+}
 void  transactor::p_RI() {
 /** Proceso que obtiene el codigo de operacion de la instruccion a ejecutar.
  * @param rps_t_i - rps_t_i señal de reposicion.
