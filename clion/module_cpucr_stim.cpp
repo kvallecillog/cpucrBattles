@@ -11,14 +11,12 @@ using namespace sc_dt;
 
 
 void cpucr_stim::stimgen() {
-
+/** Proceso que simula el estimulo externo de la señal de reposicion.
+ * @param rps_stim_o - rps_stim_o puerto de señal de reposicion.
+ */
     while (true) {
-
-
         sc_core::wait(500, SC_NS);
-
-        rps_stim_o.write(1);
-
+        rps_stim_o.write(1);/**< Se genera el estimulo de reposicion. */
 
     }
 }

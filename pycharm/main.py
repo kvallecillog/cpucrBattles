@@ -56,7 +56,7 @@ def main():
                 print("Main program without error's:", error_inst, "\n")
                 obj_list = preprocesador.obj_creator(fi_list, res_words_dic, lines_raw_list)
 
-                print("Advertencia: ",warning_list[len(warning_list)-1])
+                # print("Advertencia: ",warning_list[len(warning_list)-1])
             else:
 
                 print("Error detected at main flow: ASM cannot be assembled!")

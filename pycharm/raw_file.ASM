@@ -18,29 +18,30 @@
 ;PUNT1 = *
 ;PUNT2 = * + 20
 ;* = $3fff
-* = @0000
+* = @0010
 ;DBWRD = $000A
-DBWRD $000A
-WRD $000A
+;DBWRD $000A
+;WRD $000A
 
 
-DBWRD @0100
-WRD @0000
+;DBWRD @0100
+;WRD @0000
 
-DBWRD 0
-WRD 0
+;DBWRD 0
+;WRD 0
 
-DBWRD %100000000000
-WRD %100000
+;DBWRD %100000000000
+;WRD %100000
 
 ;* = 4096
 ;* = %000000000000
 
 ; Todas las pruebas han sido correctamente ensambladas
 
+; Prueba PC diferente de 0
+
 ;Prueba de NOP
 ;NOP
-L1 LDX #1
 ;L0 LDA #1
 ;INP @01
 ;OUT @01

@@ -14,17 +14,17 @@ using namespace sc_dt;
 
 SC_MODULE(memory){
 
-    // Port declarations
-    sc_in < sc_lv <6> > dat_m_i;
-    sc_out < sc_lv <6> > dat_m_o;
-    sc_in < sc_lv <12> > addr_m_i;
-    sc_in < sc_lv<1> > rw_m_i;
-    sc_in < sc_lv<1> > en_m_i;
+    // Declaracion de puertos.
+    sc_in < sc_lv <6> > dat_m_i; /**< Puerto de entrada de datos a memoria de 6 bits */
+    sc_out < sc_lv <6> > dat_m_o; /**< Puerto de salida de datos a memoria de 6 bits */
+    sc_in < sc_lv <12> > addr_m_i; /**< Puerto de entrada de direccion de memoria de 12 bits */
+    sc_in < sc_lv<1> > rw_m_i; /**< Puerto de entrada de escritura o lectura de memoria de 1 bit */
+    sc_in < sc_lv<1> > en_m_i; /**< Puerto de entrada habilitacion de memoria de 1 bit */
 
-    // Signals declarations.
-    sc_signal< sc_uint<6> > ramdata[MEMORY_H_];
+    // Declaracion de señales internas.
+    sc_signal< sc_uint<6> > ramdata[MEMORY_H_]; /**< Arreglo interno de memoria de 4096 posiciones */
 
-    void entry();
+    void entry(); /**< Metodo de escritura y lectura de la memoria */
 
     void memdump(){
         cout << "Dumping memory" << endl;
@@ -34,42 +34,26 @@ SC_MODULE(memory){
         fprintf(fp, "|Address|Data|\n");
         fprintf(fp, "--------------\n");
         int  data_int = 0;
-
-
         for (size = 0; size < MEMORY_H_-1; size++) {
-
             data_int = ramdata[size].read().to_int();
-
             fprintf(fp, "|@%.4o|::|@%.2o|\n", size, data_int);
             fprintf(fp, "--------------\n");
         }
     }
 
-        SC_CTOR(memory):dat_m_i("dat_m_i"),dat_m_o("dat_m_o"){
-
-//
+    SC_CTOR(memory):dat_m_i("dat_m_i"),dat_m_o("dat_m_o"){
         SC_METHOD(entry);
-
 //        dont_initialize();
-//        sensitive << dat_m_o << addr_m_i << rw_m_i <<  en_m_i;
         sensitive << dat_m_i << addr_m_i << rw_m_i <<  en_m_i;
 
         FILE *fp ;
-
         fp = fopen("ram_init.txt","r");
-
         if(!fp)
         {
-            perror("error. cannot find ram_init.");
+            perror("error. no se puede encontrar el archivo ram_init.txt.");
         }
-
         int size=0;
-
         unsigned int mem_word;
-
-        // for (size = 0; size < 255; size++) {
-        //     ramdata[size].write(0x0);
-        // }
         size = 0;
         cout << "-------------------------------------" << endl;
         cout << "Cargando el programa objeto a memoria" << endl;

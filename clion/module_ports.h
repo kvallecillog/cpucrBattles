@@ -25,7 +25,6 @@ SC_MODULE(ports){
     sc_signal< sc_uint<6> > ramdata[PORTS_H_];
 
     void entry();
-
     void memdump(){
         cout << "Dumping ports" << endl;
         FILE *fp = fopen("memdump.txt","w");
@@ -34,45 +33,27 @@ SC_MODULE(ports){
         fprintf(fp, "|Address|Data|\n");
         fprintf(fp, "--------------\n");
         int  data_int = 0;
-
-
         for (size = 0; size < PORTS_H_-1; size++) {
-
             data_int = ramdata[size].read().to_int();
-
             fprintf(fp, "|@%.4o|::|@%.2o|\n", size, data_int);
             fprintf(fp, "--------------\n");
         }
     }
-
-        SC_CTOR(ports):dat_p_i("dat_p_i"),dat_p_o("dat_p_o"){
-
-//
+    SC_CTOR(ports):dat_p_i("dat_p_i"),dat_p_o("dat_p_o"){
         SC_METHOD(entry);
-
 //        dont_initialize();
-//        sensitive << dat_p_o << addr_p_i << rw_p_i <<  en_p_i;
         sensitive << dat_p_i << addr_p_i << rw_p_i <<  en_p_i;
-
         FILE *fp ;
-
         fp = fopen("ports_init.txt","r");
-
         if(!fp)
         {
-            perror("error. cannot find ram_init.");
+            perror("error. no se puede encontrar el archivo ports_init.txt.");
         }
-
         int size=0;
-
         unsigned int mem_word;
-
-        // for (size = 0; size < 255; size++) {
-        //     ramdata[size].write(0x0);
-        // }
         size = 0;
         cout << "-------------------------------------" << endl;
-        cout << "Cargando el programa objeto a memoria" << endl;
+        cout << "Cargando valor de puertos por defecto" << endl;
         cout << "-------------------------------------" << endl;
         cout << "|[" << "Address" << "]|::|[" << "Data" << "]|" << endl;
         while (fscanf(fp,"%un", &mem_word) != EOF) {

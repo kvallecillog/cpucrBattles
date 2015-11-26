@@ -1,4 +1,6 @@
 // Funcionan
+// Codigos de operacion de las instrucciones en decimal
+// para se utilizados por el switch case de c++.
 #define LDA_INM 0
 #define ADD_INM 16
 #define SUB_INM 24

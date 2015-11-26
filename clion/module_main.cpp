@@ -6,12 +6,10 @@
 //
 //#include </usr/local/systemc-2.3.1/include/systemc>
 #include </usr/local/systemc-2.3.1/include/sysc/kernel/sc_wait.h>
-
 #include <systemc>
 
 #include "module_cpucr.h"
 #include "module_cpucr_stim.h"
-
 
 using namespace std;
 using namespace sc_core;
@@ -20,7 +18,6 @@ using namespace sc_dt;
 using namespace boost::algorithm;
 
 int sc_main(int argc, char* argv[]) {
-
 
     sc_set_time_resolution(1, SC_NS);
     // Generacion de la señal de reloj de 2 MHz
@@ -73,17 +70,13 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, clk, "clk");
     sc_trace(wf, acum, "acum");
     sc_trace(wf, s, "s");
-
     sc_trace(wf, ports_i, "ports_i");
     sc_trace(wf, ports_o, "ports_o");
     sc_trace(wf, enable_ports, "enable_ports");
     sc_trace(wf, address_ports, "address_ports");
     sc_trace(wf, rw_ports, "rw_ports");
-
-
     sc_trace(wf, rps, "rps");
     sc_trace(wf, pc, "pc");
-
     sc_trace(wf, CB, "CB");
     sc_trace(wf, CM, "CM");
     sc_trace(wf, LE, "LE");
@@ -100,8 +93,6 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.pc_c_o, "pc_c_o");
     sc_trace(wf, cpucr1.s_c_o, "s_c_o");
     sc_trace(wf, cpucr1.ri_c_o, "RI");
-
-
 
     // Señales del modulo de memoria.
     sc_trace(wf, cpucr1.memory1.addr_m_i, "addr_m_i");
@@ -121,17 +112,12 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.transactor1.ports_t_i, "ports_t_i");
     sc_trace(wf, cpucr1.transactor1.ports_t_o, "ports_t_o");
     sc_trace(wf, cpucr1.transactor1.rps_t_i ,"rps_t_i");
-
     sc_trace(wf, cpucr1.transactor1.init_t_o ,"init_t_o");
-
     sc_trace(wf, cpucr1.transactor1.s_est_pres ,"s_est_pres");
     sc_trace(wf, cpucr1.transactor1.s_est_prox ,"s_est_prox");
-
     sc_trace(wf, cpucr1.transactor1.s_CB ,"s_CB");
     sc_trace(wf, cpucr1.transactor1.s_CM,"s_CM");
     sc_trace(wf, cpucr1.transactor1.s_LE ,"s_LE");
-
-
 
     sc_trace(wf, cpucr1.init_c_o ,"init_c_o");
 
@@ -157,19 +143,12 @@ int sc_main(int argc, char* argv[]) {
     cpucr1.addr_ports_c_o(address_ports);
     cpucr1.rw_ports_c_o(rw_ports);
     cpucr1.en_ports_c_o(enable_ports);
-
     cpucr1.s_est_pres_c_o(est_pres);
-
     cpucr1.s_est_prox_c_o(est_prox);
 
-
     cpucr1.s_CB_c_o(CB);
-
     cpucr1.s_CM_c_o(CM);
-
     cpucr1.s_LE_c_o(LE);
-
-
 
     cpucr1.pc_c_o(pc);
     cpucr1.init_c_o(init);
