@@ -41,10 +41,10 @@
 #define BCC_REL 26
 #define BMI_REL 34
 #define BPL_REL 42
-
-
 #define BVS_REL 50
 #define BVC_REL 58
+
+
 
 #define INP_IO 7
 #define OUT_IO 15

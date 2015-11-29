@@ -1172,7 +1172,7 @@ void  transactor::p_est_prox() {
 
                     case LDA_INM: case ADD_INM: case SUB_INM:
                     case AND_INM: case ORA_INM: case PHA_ACU:
-                    case PLS_CTR: case BVC_REL: case BVS_REL:{// Inicio switch inst 2 palabras.
+                    case PLS_CTR:{// Inicio switch inst 2 palabras.
                         switch (s_RI.read().to_uint()){
                             case LDA_INM:
                                 cout << "Instruccion LDA_INM RI: " << "|[" << s_RI << "]|" << endl;
@@ -1204,7 +1204,7 @@ void  transactor::p_est_prox() {
                                 // Calculo de banderas.
                                 v_bn_t = v_A[5];
                                 v_bz_t = v_A.nor_reduce();
-                                s_bv_t = v_bt1_t ? 0 : v_A[5]; // Bandera V para INA.
+                                v_bv_t = v_bt1_t ? 0 : v_A[5]; // Bandera V para INA.
                                 v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
                                 s_t_o = v_S;
                                 // Fin de calculo de banderas.

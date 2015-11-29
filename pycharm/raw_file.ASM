@@ -387,14 +387,31 @@
 ;=============================================================
 ; Prueba de instruccion BMI relativa.
 ;=============================================================
-* = @0000 ; Declaracion del puntero de posicion.
-L1 LDA #%100000 ; LDA con argumento binario negativo.
-L2 BMI L1 ; Salta a L1 si el acumulador es negativo.
-HLT ; Instruccion de detencion.
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #%100000 ; LDA con argumento binario negativo.
+;L2 BMI L1 ; Salta a L1 si el acumulador es negativo.
+;HLT ; Instruccion de detencion.
 ;=============================================================
 
+;=============================================================
+; Prueba de instruccion BVC relativa.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #1 ; LDA con argumento binario.
+;L2 ADD #1 ; Se agrega %001010 al acumulador.
+;L3 BVC L1 ; Salta a L1 si la bandera de rebase es 0.
+;HLT ; Instruccion de detencion.
+;=============================================================
 
-
+;=============================================================
+; Prueba de instruccion BVS relativa.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #%010110 ; LDA con argumento binario.
+;L2 ADD #%001010 ; Se agrega %001010 al acumulador.
+;L3 BVS L1 ; Salta a L1 si la bandera de rebase es 1.
+;HLT ; Instruccion de detencion.
+;=============================================================
 
 
 
