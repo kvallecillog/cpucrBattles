@@ -44,8 +44,6 @@
 #define BVS_REL 50
 #define BVC_REL 58
 
-
-
 #define INP_IO 7
 #define OUT_IO 15
 

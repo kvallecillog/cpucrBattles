@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
-[*] Sun Nov 29 00:26:51 2015
+[*] Sun Nov 29 06:34:31 2015
 [*]
 [dumpfile] "/home/kenneth/Dropbox/proyectoElectrico/srcWIP/cpucrBattles/clion/cpucr.vcd"
-[dumpfile_mtime] "Sun Nov 29 00:18:24 2015"
-[dumpfile_size] 34323
+[dumpfile_mtime] "Sun Nov 29 06:33:43 2015"
+[dumpfile_size] 78691
 [savefile] "/home/kenneth/Dropbox/proyectoElectrico/srcWIP/cpucrBattles/clion/lda_inm_all_arg.gtkw"
-[timestart] 10000
+[timestart] 0
 [size] 1366 744
 [pos] -1 -1
-*-11.950041 13930 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-11.950041 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [sst_width] 223
 [signals_width] 158
 [sst_expanded] 1
@@ -22,7 +22,11 @@ SystemC.clk
 SystemC.acum[5:0]
 @200
 -
-@24
+@22
+SystemC.ports_o[5:0]
+@200
+-
+@28
 SystemC.s[5:0]
 @200
 -
@@ -30,7 +34,7 @@ SystemC.s[5:0]
 SystemC.address[11:0]
 @200
 -
-@24
+@30
 SystemC.pc[11:0]
 @200
 -
@@ -46,7 +50,7 @@ SystemC.enable
 SystemC.LE
 @200
 -
-@24
+@30
 SystemC.RI[5:0]
 @200
 -
@@ -54,11 +58,11 @@ SystemC.RI[5:0]
 SystemC.CB
 @200
 -
-@31
+@30
 SystemC.dat_m_o[5:0]
-@211
+@200
 -
-@31
+@30
 SystemC.dat_t_i[5:0]
 @200
 -
