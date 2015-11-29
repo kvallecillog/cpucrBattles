@@ -103,6 +103,7 @@ int sc_main(int argc, char* argv[]) {
 
     // Señales del modulo transactor
     sc_trace(wf, cpucr1.transactor1.addr_t_o, "addr_t_o");
+    sc_trace(wf, cpucr1.transactor1.pc_t_o, "pc_t_o");
     sc_trace(wf, cpucr1.transactor1.dat_t_i, "dat_t_i");
     sc_trace(wf, cpucr1.transactor1.dat_t_o, "dat_t_o");
     sc_trace(wf, cpucr1.transactor1.en_t_o, "en_t_i");

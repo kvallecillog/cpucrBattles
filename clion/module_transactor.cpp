@@ -374,7 +374,7 @@ void transactor::p_PC(){
                     case BVC_REL: case BVS_REL:{
                         switch (s_RI.read().to_uint()) {
                             case BCC_REL: {
-                                cout << "BCC_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                cout << "BCC_REL v_S_read[0]: " << v_S_read[0] << endl;
                                 v_S_read = s_t_o;
                                 if (v_S_read[0] == 1) {
                                     pc_t_o = pc_t_o;
@@ -383,7 +383,6 @@ void transactor::p_PC(){
                                 }
                                 else if (v_S_read[0] == 0) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
-                                    pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     addr_t_o = v_addr;
@@ -391,7 +390,7 @@ void transactor::p_PC(){
                                 break;
                             }
                             case BCS_REL: {
-                                cout << "BCS_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                cout << "BCS_REL v_S_read[0]: " << v_S_read[0] << endl;
                                 v_S_read = s_t_o;
                                 if (v_S_read[0] == 0) {
                                     pc_t_o = pc_t_o;
@@ -400,7 +399,6 @@ void transactor::p_PC(){
                                 }
                                 else if (v_S_read[0] == 1) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
-                                    pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     addr_t_o = v_addr;
@@ -408,7 +406,7 @@ void transactor::p_PC(){
                                 break;
                             }
                             case BEQ_REL: {
-                                cout << "BEQ_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                cout << "BEQ_REL v_S_read[1]: " << v_S_read[1] << endl;
                                 v_S_read = s_t_o;
                                 if (v_S_read[1] == 0) {
                                     pc_t_o = pc_t_o;
@@ -417,7 +415,6 @@ void transactor::p_PC(){
                                 }
                                 else if (v_S_read[1] == 1) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
-                                    pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     addr_t_o = v_addr;
@@ -425,7 +422,7 @@ void transactor::p_PC(){
                                 break;
                             }
                             case BNE_REL: {
-                                cout << "BNE_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                cout << "BNE_REL v_S_read[1]: " << v_S_read[1] << endl;
                                 v_S_read = s_t_o;
                                 if (v_S_read[1] == 1) {
                                     pc_t_o = pc_t_o;
@@ -434,7 +431,6 @@ void transactor::p_PC(){
                                 }
                                 else if (v_S_read[1] == 0) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
-                                    pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     addr_t_o = v_addr;
@@ -442,7 +438,7 @@ void transactor::p_PC(){
                                 break;
                             }
                             case BMI_REL: {
-                                cout << "BMI_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                cout << "BMI_REL v_S_read[5]: " << v_S_read[5] << endl;
                                 v_S_read = s_t_o;
                                 if (v_S_read[5] == 0) {
                                     pc_t_o = pc_t_o;
@@ -451,7 +447,6 @@ void transactor::p_PC(){
                                 }
                                 else if (v_S_read[5] == 1) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
-                                    pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     addr_t_o = v_addr;
@@ -459,7 +454,7 @@ void transactor::p_PC(){
                                 break;
                             }
                             case BPL_REL: {
-                                cout << "BPL_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                cout << "BPL_REL v_S_read[5]: " << v_S_read[5] << endl;
                                 v_S_read = s_t_o;
                                 if (v_S_read[5] == 1) {
                                     pc_t_o = pc_t_o;
@@ -468,7 +463,6 @@ void transactor::p_PC(){
                                 }
                                 else if (v_S_read[5] == 0) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
-                                    pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     addr_t_o = v_addr;
@@ -476,7 +470,7 @@ void transactor::p_PC(){
                                 break;
                             }
                             case BVC_REL: {
-                                cout << "BVC_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                cout << "BVC_REL v_S_read[3]: " << v_S_read[3] << endl;
                                 v_S_read = s_t_o;
                                 if (v_S_read[3] == 1) {
                                     pc_t_o = pc_t_o;
@@ -485,7 +479,6 @@ void transactor::p_PC(){
                                 }
                                 else if (v_S_read[3] == 0) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
-                                    pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     addr_t_o = v_addr;
@@ -493,7 +486,7 @@ void transactor::p_PC(){
                                 break;
                             }
                             case BVS_REL: {
-                                cout << "BVS_REL s_t_o[0]: " << s_t_o[0] << endl;
+                                cout << "BVS_REL v_S_read[3]: " << v_S_read[3]  << endl;
                                 v_S_read = s_t_o;
                                 if (v_S_read[3] == 0) {
                                     pc_t_o = pc_t_o;
@@ -502,7 +495,6 @@ void transactor::p_PC(){
                                 }
                                 else if (v_S_read[3] == 1) {
                                     v_PC = pc_t_o.read().to_int() + dat_t_i.read().to_int();
-                                    pc_t_o = v_PC;
                                     v_addr = pc_t_o.read().to_int() + dat_t_i.read().to_int();
                                     pc_t_o = v_PC;
                                     addr_t_o = v_addr;
@@ -1179,9 +1171,7 @@ void  transactor::p_est_prox() {
                 switch (s_RI.read().to_uint()) {
 
                     case LDA_INM: case ADD_INM: case SUB_INM:
-                    case AND_INM: case ORA_INM: case BCC_REL:
-                    case BCS_REL: case BEQ_REL: case BNE_REL:
-                    case BMI_REL: case BPL_REL: case PHA_ACU:
+                    case AND_INM: case ORA_INM: case PHA_ACU:
                     case PLS_CTR: case BVC_REL: case BVS_REL:{// Inicio switch inst 2 palabras.
                         switch (s_RI.read().to_uint()){
                             case LDA_INM:
@@ -1292,6 +1282,7 @@ void  transactor::p_est_prox() {
                     default: {
                         // Proximo estado 1. Termina instruccion.
                         s_est_prox = Estado_1;
+                        acum_t_o = acum_t_o;
                         break;
                     }
                 }

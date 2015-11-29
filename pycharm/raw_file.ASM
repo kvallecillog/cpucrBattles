@@ -229,6 +229,7 @@
 ;L9 LDA @2211 ; LDA absoluto.
 ;HLT ; Instruccion de detencion.
 ;=============================================================
+;***********************************************************************************************************************
 
 ;***********************************************************************************************************************
 ; Instrucciones de acumulador
@@ -237,26 +238,120 @@
 ;=============================================================
 ; Prueba de instruccion CLA de acumulador.
 ;=============================================================
-* = @0000 ; Declaracion del puntero de posicion.
-L1 LDA #1 ; LDA con argumento decimal.
-L2 CLA ; CLA de acumulador, limpia el acumulador.
-HLT ; Instruccion de detencion.
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #1 ; LDA con argumento decimal.
+;L2 CLA ; CLA de acumulador, limpia el acumulador.
+;HLT ; Instruccion de detencion.
 ;=============================================================
 
+;=============================================================
+; Prueba de instruccion CPA de acumulador.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #%111000 ; LDA con argumento decimal.
+;L2 CPA ; CPA de acumulador, complementa el acumulador.
+;HLT ; Instruccion de detencion.
+;=============================================================
+
+;=============================================================
+; Prueba de instruccion INA de acumulador.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #1 ; LDA con argumento decimal.
+;L2 INA ; INA de acumulador, incrementa el acumulador en 1.
+;HLT ; Instruccion de detencion.
+;=============================================================
+
+;=============================================================
+; Prueba de instruccion INA de acumulador.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #1 ; LDA con argumento decimal.
+;L2 DCA ; DCA de acumulador, decremento el acumulador en 1.
+;HLT ; Instruccion de detencion.
+;=============================================================
+
+;=============================================================
+; Prueba de instruccion ROL de acumulador.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #%111011 ; LDA con argumento decimal.
+;L2 ROL ; ROL de acumulador, rota el acumulador hacia la izq.
+;HLT ; Instruccion de detencion.
+;=============================================================
+
+;=============================================================
+; Prueba de instruccion ROR de acumulador.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #%111011 ; LDA con argumento decimal.
+;L2 ROR ; ROR de acumulador, rota el acumulador hacia la der.
+;HLT ; Instruccion de detencion.
+;=============================================================
 ;***********************************************************************************************************************
 
+;***********************************************************************************************************************
+; Instrucciones de implicitas
+;***********************************************************************************************************************
 
+;=============================================================
+; Prueba de instruccion SEC implicita.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #0 ; LDA con argumento decimal.
+;L2 SEC ; SEC implicito, pone en alto la bandera de acarreo.
+;HLT ; Instruccion de detencion.
+;=============================================================
 
+;=============================================================
+; Prueba de instruccion CLC implicita.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #0 ; LDA con argumento decimal.
+;L2 SEC ; SEC implicito, pone en alto la bandera de acarreo.
+;L3 CLC ; CLC implicito, pone en bajo la bandera de acarreo.
+;HLT ; Instruccion de detencion.
+;=============================================================
 
+;=============================================================
+; Prueba de instruccion SEI implicita.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #0 ; LDA con argumento decimal.
+;L2 SEI ; SEI implicito, pone en alto la bandera de interrup.
+;HLT ; Instruccion de detencion.
+;=============================================================
 
+;=============================================================
+; Prueba de instruccion CLI implicita.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #0 ; LDA con argumento decimal.
+;L2 SEI ; SEI implicito, pone en alto la bandera de interrup.
+;L3 CLI ; CLI implicito, pone en bajo la bandera de interrup.
+;HLT ; Instruccion de detencion.
+;=============================================================
+;***********************************************************************************************************************
 
+;***********************************************************************************************************************
+; Instrucciones de relativas
+;***********************************************************************************************************************
+; Prueba de BEQ
+;L SEC
+;L0 CLC
+;L1 LDA #0
+;L6 BEQ L1
+;L4 INA
+;L5 LDA #1
 
-
-
-
-
-
-
+;=============================================================
+; Prueba de instruccion BEQ relativa.
+;=============================================================
+* = @0000 ; Declaracion del puntero de posicion.
+L1 LDA #0 ; LDA con argumento decimal.
+L2 BEQ L1 ; Salta a L1 si el acumulador es 0.
+HLT ; Instruccion de detencion.
+;=============================================================
 
 
 

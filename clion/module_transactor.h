@@ -56,11 +56,11 @@ SC_MODULE(transactor){
         sc_signal < sc_uint<1> > s_bi_t;
         sc_signal < sc_uint<1> > s_bz_t;
         sc_signal < sc_uint<1> > s_bc_t;
-        sc_signal < sc_uint<12> > s_PC;
+        sc_signal < sc_int<12> > s_PC;
         sc_signal < sc_uint<12> > s_PP;
         sc_signal < sc_uint<6> > s_PB;
 
-        sc_uint<12> v_PC;
+        sc_int<12> v_PC;
         sc_uint<6> v_RI;
         sc_uint<6> v_A;
         sc_uint<1> v_bn_t;
@@ -70,7 +70,7 @@ SC_MODULE(transactor){
         sc_uint<1> v_bc_t;
         sc_uint<6> v_S;
         sc_uint<6> v_S_read;
-        sc_uint<12> v_addr;
+        sc_int<12> v_addr;
         sc_uint<6> v_addr_ports;
         sc_uint<6> v_PA;
         sc_uint<6> v_PB;
