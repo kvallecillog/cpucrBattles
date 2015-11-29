@@ -1,0 +1,7 @@
+;=============================================================
+; Prueba de instruccion LDA absoluta.
+;=============================================================
+* = @0000 ; Declaracion del puntero de posicion.
+L1 LDA @01 ; LDA absoluto.
+HLT ; Instruccion de detencion.
+;=============================================================

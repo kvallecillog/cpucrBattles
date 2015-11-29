@@ -1,0 +1,11 @@
+;=============================================================
+; Prueba de instruccion ADD inmediata.
+;=============================================================
+* = @0000 ; Declaracion del puntero de posicion.
+L1 LDA #1 ; LDA con argumento decimal.
+BIN ADD #%000010 ; ADD con argumento binario.
+OCT ADD #@02 ; ADD con argumento octacl.
+DEC ADD #2 ; ADD con argumento decimal.
+HEX ADD #$02 ; ADD con argumento hexadecimal.
+HLT ; Instruccion de detencion.
+;=============================================================

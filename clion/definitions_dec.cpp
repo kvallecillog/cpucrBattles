@@ -6,12 +6,14 @@
 #define SUB_INM 24
 #define AND_INM 32
 #define ORA_INM 40
+
 #define LDA_ABS 1
 #define STA_ABS 9
 #define ADD_ABS 17
 #define SUB_ABS 25
 #define AND_ABS 33
 #define ORA_ABS 41
+
 #define BEQ_REL 2
 #define BNE_REL 10
 #define BCS_REL 18
@@ -20,24 +22,29 @@
 #define BPL_REL 42
 #define BVS_REL 50
 #define BVC_REL 58
+
 #define LDA_IND 3
 #define STA_IND 11
 #define ADD_IND 19
 #define SUB_IND 27
 #define AND_IND 35
 #define ORA_IND 43
+
 #define SEC_IMP 20
 #define CLC_IMP 28
 #define SEI_IMP 36
 #define CLI_IMP 44
+
 #define CLA_ACU 5
 #define CPA_ACU 13
 #define INA_ACU 21
 #define DCA_ACU 29
 #define ROL_ACU 37
 #define ROR_ACU 45
+
 #define NOP_CTR 46
 #define HLT_CTR 38
+
 #define INP_IO 7
 #define OUT_IO 15
 

@@ -1,0 +1,11 @@
+;=============================================================
+; Prueba de instruccion AND inmediata.
+;=============================================================
+* = @0000 ; Declaracion del puntero de posicion.
+L1 LDA #%111111 ; LDA con argumento decimal.
+BIN AND #%000111 ; AND con argumento binario.
+OCT AND #@07 ; AND con argumento octacl.
+DEC AND #3 ; AND con argumento decimal.
+HEX AND #$01 ; AND con argumento hexadecimal.
+HLT ; Instruccion de detencion.
+;=============================================================

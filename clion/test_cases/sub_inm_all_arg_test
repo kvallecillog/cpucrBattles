@@ -1,0 +1,11 @@
+;=============================================================
+; Prueba de instruccion SUB inmediata.
+;=============================================================
+* = @0000 ; Declaracion del puntero de posicion.
+L1 LDA #10 ; LDA con argumento decimal.
+BIN SUB #%000010 ; SUB con argumento binario.
+OCT SUB #@02 ; SUB con argumento octacl.
+DEC SUB #2 ; SUB con argumento decimal.
+HEX SUB #$02 ; SUB con argumento hexadecimal.
+HLT ; Instruccion de detencion.
+;=============================================================

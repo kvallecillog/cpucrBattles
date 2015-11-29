@@ -1,0 +1,65 @@
+
+;***********************************************************************************************************************
+; Instrucciones inmediatas
+;***********************************************************************************************************************
+
+;=============================================================
+; Prueba de instruccion LDA inmediata.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;BIN LDA #%000001 ; LDA con argumento binario.
+;OCT LDA #@02 ; LDA con argumento octal.
+;HEX LDA #$03 ; LDA con argumento hexadecimal.
+;DEC LDA #4 ; LDA con argumento decimal.
+;HLT ; Instruccion de detencion.
+;=============================================================
+
+;=============================================================
+; Prueba de instruccion ADD inmediata.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #1 ; LDA con argumento decimal.
+;BIN ADD #%000010 ; ADD con argumento binario.
+;OCT ADD #@02 ; ADD con argumento octacl.
+;DEC ADD #2 ; ADD con argumento decimal.
+;HEX ADD #$02 ; ADD con argumento hexadecimal.
+;HLT ; Instruccion de detencion.
+;=============================================================
+
+;=============================================================
+; Prueba de instruccion SUB inmediata.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #10 ; LDA con argumento decimal.
+;BIN SUB #%000010 ; SUB con argumento binario.
+;OCT SUB #@02 ; SUB con argumento octacl.
+;DEC SUB #2 ; SUB con argumento decimal.
+;HEX SUB #$02 ; SUB con argumento hexadecimal.
+;HLT ; Instruccion de detencion.
+;=============================================================
+
+;=============================================================
+; Prueba de instruccion AND inmediata.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #%111111 ; LDA con argumento decimal.
+;BIN AND #%000111 ; AND con argumento binario.
+;OCT AND #@07 ; AND con argumento octacl.
+;DEC AND #3 ; AND con argumento decimal.
+;HEX AND #$01 ; AND con argumento hexadecimal.
+;HLT ; Instruccion de detencion.
+;=============================================================
+
+;=============================================================
+; Prueba de instruccion ORA inmediata.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #%101000 ; LDA con argumento decimal.
+;BIN ORA #%000101 ; ORA con argumento binario.
+;OCT ORA #@20 ; ORA con argumento octacl.
+;DEC ORA #2 ; ORA con argumento decimal.
+;HEX ORA #$00 ; ORA con argumento hexadecimal.
+;HLT ; Instruccion de detencion.
+;=============================================================
+
+;***********************************************************************************************************************

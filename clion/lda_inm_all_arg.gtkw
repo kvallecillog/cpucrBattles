@@ -1,0 +1,72 @@
+[*]
+[*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
+[*] Sun Nov 29 00:26:51 2015
+[*]
+[dumpfile] "/home/kenneth/Dropbox/proyectoElectrico/srcWIP/cpucrBattles/clion/cpucr.vcd"
+[dumpfile_mtime] "Sun Nov 29 00:18:24 2015"
+[dumpfile_size] 34323
+[savefile] "/home/kenneth/Dropbox/proyectoElectrico/srcWIP/cpucrBattles/clion/lda_inm_all_arg.gtkw"
+[timestart] 10000
+[size] 1366 744
+[pos] -1 -1
+*-11.950041 13930 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 223
+[signals_width] 158
+[sst_expanded] 1
+[sst_vpaned_height] 211
+@28
+SystemC.clk
+@200
+-
+@28
+SystemC.acum[5:0]
+@200
+-
+@24
+SystemC.s[5:0]
+@200
+-
+@30
+SystemC.address[11:0]
+@200
+-
+@24
+SystemC.pc[11:0]
+@200
+-
+@24
+SystemC.rps
+@200
+-
+@24
+SystemC.enable
+@200
+-
+@24
+SystemC.LE
+@200
+-
+@24
+SystemC.RI[5:0]
+@200
+-
+@24
+SystemC.CB
+@200
+-
+@31
+SystemC.dat_m_o[5:0]
+@211
+-
+@31
+SystemC.dat_t_i[5:0]
+@200
+-
+@24
+SystemC.s_est_pres[31:0]
+@200
+-
+@24
+SystemC.s_est_prox[31:0]
+[pattern_trace] 1
+[pattern_trace] 0
