@@ -35,13 +35,14 @@
 #define NOP_CTR 46
 #define HLT_CTR 38
 
-
 #define BEQ_REL 2
 #define BNE_REL 10
 #define BCS_REL 18
 #define BCC_REL 26
 #define BMI_REL 34
 #define BPL_REL 42
+
+
 #define BVS_REL 50
 #define BVC_REL 58
 

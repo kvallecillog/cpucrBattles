@@ -336,26 +336,62 @@
 ;***********************************************************************************************************************
 ; Instrucciones de relativas
 ;***********************************************************************************************************************
-; Prueba de BEQ
-;L SEC
-;L0 CLC
-;L1 LDA #0
-;L6 BEQ L1
-;L4 INA
-;L5 LDA #1
 
 ;=============================================================
 ; Prueba de instruccion BEQ relativa.
 ;=============================================================
-* = @0000 ; Declaracion del puntero de posicion.
-L1 LDA #0 ; LDA con argumento decimal.
-L2 BEQ L1 ; Salta a L1 si el acumulador es 0.
-HLT ; Instruccion de detencion.
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #0 ; LDA con argumento decimal.
+;L2 BEQ L1 ; Salta a L1 si el acumulador es 0.
+;HLT ; Instruccion de detencion.
 ;=============================================================
 
+;=============================================================
+; Prueba de instruccion BNE relativa.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #1 ; LDA con argumento decimal.
+;L2 BNE L1 ; Salta a L1 si el acumulador es distinto de 0.
+;HLT ; Instruccion de detencion.
+;=============================================================
 
+;=============================================================
+; Prueba de instruccion BCC relativa.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 SEC ; Pone en alto la bandera de acarreo.
+;L2 CLC ; Pone en bajo la bandera de acarreo.
+;L3 BCC L2 ; Salta a L1 si la bandera de acarreo es 0.
+;HLT ; Instruccion de detencion.
+;=============================================================
 
+;=============================================================
+; Prueba de instruccion BCS relativa.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 CLC ; Pone en BAJO la bandera de acarreo.
+;L2 SEC ; Pone en alto la bandera de acarreo.
+;L3 BCS L2 ; Salta a L1 si la bandera de acarreo es 1.
+;HLT ; Instruccion de detencion.
+;=============================================================
 
+;=============================================================
+; Prueba de instruccion BPL relativa.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #%000001 ; LDA con argumento binario.
+;L2 BPL L1 ; Salta a L1 si el acumulador es positivo.
+;HLT ; Instruccion de detencion.
+;=============================================================
+
+;=============================================================
+; Prueba de instruccion BMI relativa.
+;=============================================================
+* = @0000 ; Declaracion del puntero de posicion.
+L1 LDA #%100000 ; LDA con argumento binario negativo.
+L2 BMI L1 ; Salta a L1 si el acumulador es negativo.
+HLT ; Instruccion de detencion.
+;=============================================================
 
 
 
