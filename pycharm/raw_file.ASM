@@ -6,12 +6,17 @@
 ;=============================================================
 ; Prueba de instruccion LDA inmediata.
 ;=============================================================
-;* = @0000 ; Declaracion del puntero de posicion.
+* = @0000 ; Declaracion del puntero de posicion.
+LABEL = @0010
+BIN0 LDA #LABEL+1
+BIN LDA LABEL+2
+BIN2 LDA (LABEL+10000000)
 ;BIN LDA #%000001 ; LDA con argumento binario.
 ;OCT LDA #@02 ; LDA con argumento octal.
 ;HEX LDA #$03 ; LDA con argumento hexadecimal.
 ;DEC LDA #4 ; LDA con argumento decimal.
-;HLT ; Instruccion de detencion.
+;1234567 INA ;
+HLT ; Instruccion de detencion.
 ;=============================================================
 
 ;=============================================================
@@ -442,12 +447,37 @@
 ;=============================================================
 ; Prueba de instruccion OUT de control.
 ;=============================================================
-* = @0000 ; Declaracion del puntero de posicion.
-BIN LDA #%000001 ; LDA con argumento binario.
-OUT @01 ; Escritura al puerto de salida con direccion @01.
-HLT ; Instruccion de control HTL, detiene la ejecucion.
+;* = @0000 ; Declaracion del puntero de posicion.
+;BIN LDA #%000001 ; LDA con argumento binario.
+;OUT @01 ; Escritura al puerto de salida con direccion @01.
+;HLT ; Instruccion de control HTL, detiene la ejecucion.
 ;=============================================================
 
+;=============================================================
+; Prueba de instruccion INP de control.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;BIN1 LDA #%000001 ; LDA con argumento binario.
+;INP @00 ; Carga del puerto de entrada al acumulador @01.
+;BIN7 LDA #%000111 ; LDA con argumento binario.
+;INP @03 ; Carga del puerto de entrada al acumulador @01.
+;HLT ; Instruccion de control HTL, detiene la ejecucion.
+;=============================================================
+
+;=============================================================
+; Prueba de instruccion STA indirecta.
+;=============================================================
+;* = @0000 ; Declaracion del puntero de posicion.
+;L1 LDA #@11 ; LDA inmediato con argumento decimal.
+;L2 STA @1000 ; STA absoluto, escritura a PB.
+;L3 LDA #@22 ; LDA inmediato con argumento decimal.
+;L4 STA @1001 ; STA absoluto, escritura a PA.
+;L5 LDA #7 ; LDA inmediato con argumento decimal.
+;L6 STA (@1000) ; STA indirecto, escritura de 7 a @0102.
+;L7 ADD #1 ; ADD inmediato con argumento decimal.
+;L8 LDA @2211 ; LDA absoluto.
+;HLT ; Instruccion de detencion.
+;=============================================================
 
 
 ;DBWRD @0000

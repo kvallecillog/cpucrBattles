@@ -30,12 +30,14 @@ void ports::entry(){
  * @param dat_p_i - dat_p_i variable que contiene los datos a escribir en memoria de puertos.
  * @param dat_p_o - dat_p_o variable que contiene los datos leidos de memoria de puertos.
  */
+//    cout << "@ |[" << sc_time_stamp()  << "]| Port datos " <<"|[" <<dat_p_i.read().to_uint() << "]|" << " en direccion " << "|["<< addr_p_i.read().to_uint() << "]|" << endl;
+
     // Si la memoria esta habilitada realice la operacion (Lectura o escritura).
     if(en_p_i.read() == 1) {
         if(rw_p_i.read() == 0) {
             // Escritura de memoria.
             ramdata[addr_p_i.read().to_uint()].write( dat_p_i.read() );
-//            cout << "@ |[" << sc_time_stamp()  << "]| Escritura de datos " <<"|[" <<dat_p_i.read().to_uint() << "]|" << " en direccion " << "|["<< addr_p_i.read().to_uint() << "]|" << endl;
+            //            cout << "@ |[" << sc_time_stamp()  << "]| Escritura de datos " <<"|[" <<dat_p_i.read().to_uint() << "]|" << " en direccion " << "|["<< addr_p_i.read().to_uint() << "]|" << endl;
         }
         else {
             // Lectura de memoria.

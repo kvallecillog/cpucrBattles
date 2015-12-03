@@ -32,11 +32,18 @@ SC_MODULE(transactor){
         sc_out < sc_lv<1> > en_t_o;
         sc_out < sc_lv <6> > acum_t_o;
         sc_out < sc_lv <6> > s_t_o;
+
         sc_in < sc_lv <6> > ports_t_i;
         sc_out < sc_lv <6> > ports_t_o;
+
         sc_out < sc_lv <6> > addr_ports_t_o;
         sc_out < sc_lv<1> > rw_ports_t_o;
         sc_out < sc_lv<1> > en_ports_t_o;
+
+        sc_in < sc_lv <6> > addr_ports_t_i;
+        sc_in < sc_lv<1> > rw_ports_t_i;
+        sc_in < sc_lv<1> > en_ports_t_i;
+
         sc_out < sc_lv <6> > ri_t_o;
         sc_out < sc_lv<12> > pc_t_o;
         sc_in_clk  clk_t_i;
@@ -106,6 +113,7 @@ SC_MODULE(transactor){
 
             SC_METHOD(p_LE);
             en_t_o.initialize("0");
+            en_ports_t_o.initialize("0");
             sensitive << clk_t_i.neg();
 
             SC_METHOD(p_PC);
@@ -131,11 +139,3 @@ SC_MODULE(transactor){
         }
 
 };
-
-
-
-
-
-
-
-

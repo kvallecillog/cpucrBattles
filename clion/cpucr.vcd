@@ -1,5 +1,5 @@
 $date
-     Nov 29, 2015       01:16:56
+     Nov 30, 2015       18:02:41
 $end
 
 $version
@@ -36,30 +36,36 @@ $var wire   32  aaaav  s_est_prox [31:0]  $end
 $var wire   32  aaaaw  s_est_pres [31:0]  $end
 $var wire    1  aaaax  init_t_o       $end
 $var wire   12  aaaay  pc_t_o [11:0]  $end
-$var wire    6  aaaaz  ports_t_o [5:0]  $end
-$var wire    6  aaaba  ports_t_i [5:0]  $end
-$var wire    6  aaabb  s_t_o [5:0]  $end
-$var wire    6  aaabc  acum_t_o [5:0]  $end
-$var wire    1  aaabd  en_t_i       $end
-$var wire    1  aaabe  rw_t_i       $end
-$var wire   12  aaabf  addr_t_o [11:0]  $end
-$var wire    6  aaabg  dat_t_o [5:0]  $end
-$var wire    6  aaabh  dat_t_i [5:0]  $end
-$var wire    1  aaabi  rps_t_i       $end
-$var wire    1  aaabj  en_m_i       $end
-$var wire    1  aaabk  rw_m_i       $end
-$var wire   12  aaabl  addr_m_i [11:0]  $end
-$var wire    6  aaabm  dat_m_o [5:0]  $end
-$var wire    6  aaabn  dat_m_i [5:0]  $end
-$var wire    1  aaabo  init_c_o       $end
-$var wire   12  aaabp  pc_c_o [11:0]  $end
-$var wire    1  aaabq  rps_c_i       $end
-$var wire    6  aaabr  RI [5:0]  $end
-$var wire    6  aaabs  s_c_o [5:0]  $end
-$var wire    1  aaabt  en_c_o       $end
-$var wire    1  aaabu  rw_c_o       $end
-$var wire   12  aaabv  addr_c_o [11:0]  $end
-$var wire    6  aaabw  dat_c_o [5:0]  $end
+$var wire    6  aaaaz  addr_ports_t_o [5:0]  $end
+$var wire    6  aaaba  ports_t_o [5:0]  $end
+$var wire    6  aaabb  ports_t_i [5:0]  $end
+$var wire    6  aaabc  s_t_o [5:0]  $end
+$var wire    6  aaabd  acum_t_o [5:0]  $end
+$var wire    1  aaabe  en_t_i       $end
+$var wire    1  aaabf  rw_t_i       $end
+$var wire   12  aaabg  addr_t_o [11:0]  $end
+$var wire    6  aaabh  dat_t_o [5:0]  $end
+$var wire    6  aaabi  dat_t_i [5:0]  $end
+$var wire    1  aaabj  rps_t_i       $end
+$var wire    1  aaabk  en_p_i       $end
+$var wire    1  aaabl  rw_p_i       $end
+$var wire    6  aaabm  addr_p_i [5:0]  $end
+$var wire    6  aaabn  dat_p_o [5:0]  $end
+$var wire    6  aaabo  dat_p_i [5:0]  $end
+$var wire    1  aaabp  en_m_i       $end
+$var wire    1  aaabq  rw_m_i       $end
+$var wire   12  aaabr  addr_m_i [11:0]  $end
+$var wire    6  aaabs  dat_m_o [5:0]  $end
+$var wire    6  aaabt  dat_m_i [5:0]  $end
+$var wire    1  aaabu  init_c_o       $end
+$var wire   12  aaabv  pc_c_o [11:0]  $end
+$var wire    1  aaabw  rps_c_i       $end
+$var wire    6  aaabx  RI [5:0]  $end
+$var wire    6  aaaby  s_c_o [5:0]  $end
+$var wire    1  aaabz  en_c_o       $end
+$var wire    1  aaaca  rw_c_o       $end
+$var wire   12  aaacb  addr_c_o [11:0]  $end
+$var wire    6  aaacc  dat_c_o [5:0]  $end
 $upscope $end
 $enddefinitions  $end
 
@@ -75,11 +81,11 @@ bXXXXXX aaaab
 0aaaae
 b111111 aaaaf
 bXXXXXX aaaag
-bXXXXXX aaaah
-bXXXXXX aaaai
-Xaaaaj
+b0 aaaah
+bZZZZZZ aaaai
+0aaaaj
 bXXXXXX aaaak
-Xaaaal
+0aaaal
 0aaaam
 bXXXXXXXXXXXX aaaan
 0aaaao
@@ -94,29 +100,35 @@ b0 aaaaw
 0aaaax
 bXXXXXXXXXXXX aaaay
 bXXXXXX aaaaz
-bXXXXXX aaaba
-bXXXXXX aaabb
-b111111 aaabc
-0aaabd
-1aaabe
-bXXXXXXXXXXXX aaabf
-bXXXXXX aaabg
-bZZZZZZ aaabh
-0aaabi
+bZZZZZZ aaaba
+bZZZZZZ aaabb
+bXXXXXX aaabc
+b111111 aaabd
+0aaabe
+1aaabf
+bXXXXXXXXXXXX aaabg
+bXXXXXX aaabh
+bZZZZZZ aaabi
 0aaabj
-1aaabk
-bXXXXXXXXXXXX aaabl
-bZZZZZZ aaabm
-bXXXXXX aaabn
-0aaabo
-bXXXXXXXXXXXX aaabp
-0aaabq
-b0 aaabr
-bXXXXXX aaabs
-0aaabt
-1aaabu
+0aaabk
+1aaabl
+bXXXXXX aaabm
+bZZZZZZ aaabn
+b0 aaabo
+0aaabp
+1aaabq
+bXXXXXXXXXXXX aaabr
+bZZZZZZ aaabs
+bXXXXXX aaabt
+0aaabu
 bXXXXXXXXXXXX aaabv
-bXXXXXX aaabw
+0aaabw
+b0 aaabx
+bXXXXXX aaaby
+0aaabz
+1aaaca
+bXXXXXXXXXXXX aaacb
+bXXXXXX aaacc
 $end
 
 #250
@@ -126,6 +138,7 @@ $end
 b0 aaaaa
 1aaaac
 0aaaae
+b0 aaaai
 1aaaam
 b0 aaaan
 1aaaao
@@ -136,29 +149,39 @@ b0 aaaan
 b10 aaaav
 b1 aaaaw
 b0 aaaay
-1aaabd
-b0 aaabf
-b0 aaabh
-1aaabi
+b0 aaaba
+b0 aaabb
+1aaabe
+b0 aaabg
+b0 aaabi
 1aaabj
-b0 aaabl
-b0 aaabm
-b0 aaabp
-1aaabq
-1aaabt
+1aaabk
+b0 aaabn
+1aaabp
+b0 aaabr
+b0 aaabs
 b0 aaabv
+1aaabw
+1aaabz
+b0 aaacb
 
 #750
 1aaaae
 
 #1000
 0aaaae
+b111 aaaah
+1aaaaj
+b0 aaaak
+1aaaal
 0aaaao
 0aaaap
 0aaaat
 0aaaau
 b11 aaaav
 b10 aaaaw
+b0 aaabm
+b111 aaabo
 
 #1250
 1aaaae
@@ -172,12 +195,12 @@ b1 aaaan
 b100 aaaav
 b11 aaaaw
 b1 aaaay
-b1 aaabf
-b1 aaabh
-b1 aaabl
-b1 aaabm
-b1 aaabp
+b1 aaabg
+b1 aaabi
+b1 aaabr
+b1 aaabs
 b1 aaabv
+b1 aaacb
 
 #1750
 1aaaae
@@ -190,9 +213,9 @@ b10000 aaaag
 0aaaat
 b1 aaaav
 b100 aaaaw
-b10000 aaabb
-b1 aaabc
-b10000 aaabs
+b10000 aaabc
+b1 aaabd
+b10000 aaaby
 
 #2250
 1aaaae
@@ -208,12 +231,12 @@ b10 aaaan
 b10 aaaav
 b1 aaaaw
 b10 aaaay
-b10 aaabf
-b1111 aaabh
-b10 aaabl
-b1111 aaabm
-b10 aaabp
+b10 aaabg
+b0 aaabi
+b10 aaabr
+b0 aaabs
 b10 aaabv
+b10 aaacb
 
 #2750
 1aaaae
@@ -226,7 +249,6 @@ b10 aaabv
 0aaaau
 b11 aaaav
 b10 aaaaw
-b1111 aaabr
 
 #3250
 1aaaae
@@ -240,24 +262,24 @@ b11 aaaan
 b100 aaaav
 b11 aaaaw
 b11 aaaay
-b11 aaabf
-b1 aaabh
-b11 aaabl
-b1 aaabm
-b11 aaabp
+b11 aaabg
+b10 aaabi
+b11 aaabr
+b10 aaabs
 b11 aaabv
+b11 aaacb
 
 #3750
 1aaaae
 
 #4000
 0aaaae
-b1 aaaai
+b10 aaaaf
 0aaaap
 0aaaat
 b1 aaaav
 b100 aaaaw
-b1 aaaaz
+b10 aaabd
 
 #4250
 1aaaae
@@ -265,7 +287,6 @@ b1 aaaaz
 #4500
 b100 aaaaa
 0aaaae
-b1 aaaak
 b100 aaaan
 1aaaao
 1aaaap
@@ -274,12 +295,12 @@ b100 aaaan
 b10 aaaav
 b1 aaaaw
 b100 aaaay
-b100 aaabf
-b100110 aaabh
-b100 aaabl
-b100110 aaabm
-b100 aaabp
+b100 aaabg
+b0 aaabi
+b100 aaabr
+b0 aaabs
 b100 aaabv
+b100 aaacb
 
 #4750
 1aaaae
@@ -290,74 +311,137 @@ b100 aaabv
 0aaaap
 0aaaat
 0aaaau
-b11110 aaaav
+b11 aaaav
 b10 aaaaw
-b100110 aaabr
 
 #5250
 1aaaae
 
 #5500
+b101 aaaaa
 0aaaae
+b101 aaaan
 1aaaap
 1aaaat
-b11110 aaaaw
+b100 aaaav
+b11 aaaaw
+b101 aaaay
+b101 aaabg
+b11 aaabi
+b101 aaabr
+b11 aaabs
+b101 aaabv
+b101 aaacb
 
 #5750
 1aaaae
 
 #6000
 0aaaae
+b11 aaaaf
 0aaaap
 0aaaat
+b1 aaaav
+b100 aaaaw
+b11 aaabd
 
 #6250
 1aaaae
 
 #6500
+b110 aaaaa
 0aaaae
+b110 aaaan
+1aaaao
 1aaaap
 1aaaat
+1aaaau
+b10 aaaav
+b1 aaaaw
+b110 aaaay
+b110 aaabg
+b0 aaabi
+b110 aaabr
+b0 aaabs
+b110 aaabv
+b110 aaacb
 
 #6750
 1aaaae
 
 #7000
 0aaaae
+0aaaao
 0aaaap
 0aaaat
+0aaaau
+b11 aaaav
+b10 aaaaw
 
 #7250
 1aaaae
 
 #7500
+b111 aaaaa
 0aaaae
+b111 aaaan
 1aaaap
 1aaaat
+b100 aaaav
+b11 aaaaw
+b111 aaaay
+b111 aaabg
+b100 aaabi
+b111 aaabr
+b100 aaabs
+b111 aaabv
+b111 aaacb
 
 #7750
 1aaaae
 
 #8000
 0aaaae
+b100 aaaaf
 0aaaap
 0aaaat
+b1 aaaav
+b100 aaaaw
+b100 aaabd
 
 #8250
 1aaaae
 
 #8500
+b1000 aaaaa
 0aaaae
+b1000 aaaan
+1aaaao
 1aaaap
 1aaaat
+1aaaau
+b10 aaaav
+b1 aaaaw
+b1000 aaaay
+b1000 aaabg
+b100110 aaabi
+b1000 aaabr
+b100110 aaabs
+b1000 aaabv
+b1000 aaacb
 
 #8750
 1aaaae
 
 #9000
 0aaaae
+0aaaao
 0aaaap
 0aaaat
+0aaaau
+b11110 aaaav
+b10 aaaaw
+b100110 aaabx
 
 #9250
 1aaaae
@@ -366,6 +450,7 @@ b11110 aaaaw
 0aaaae
 1aaaap
 1aaaat
+b11110 aaaaw
 
 #9750
 1aaaae

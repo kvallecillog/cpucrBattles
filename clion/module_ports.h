@@ -27,7 +27,7 @@ SC_MODULE(ports){
     void entry();
     void memdump(){
         cout << "Dumping ports" << endl;
-        FILE *fp = fopen("memdump.txt","w");
+        FILE *fp = fopen("portdump.txt","w");
         int size;
         fprintf(fp, "--------------\n");
         fprintf(fp, "|Address|Data|\n");

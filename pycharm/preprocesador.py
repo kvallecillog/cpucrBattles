@@ -15,7 +15,8 @@ __status__ = "WIP: Working In Progress"
 
 import re
 from collections import Counter
-###################################################################################################################
+###########################################################################
+# '''
 # '''
 #     Clase FileProcessor
 #     Descripcion:
@@ -29,14 +30,14 @@ from collections import Counter
 #     Fecha: 30/08/15.
 #     Revision: 1.0.1
 # '''
-###################################################################################################################
+###########################################################################
 '''Metodo para borrar comentarios del archivo raw. Contiene el archivo sin comentarios.
 # Entradas: Archivo original del .ASM
 # Salidas: Archivo procesado sin comentarios.
 # Fecha: 30/08/15.
 # Revision: 1.0.1
 '''
-###################################################################################################################
+###########################################################################
 print("Inicio del analisis de sintaxis \n")
 
 
@@ -568,7 +569,7 @@ def init_checker(data_list, lines_raw_list,error):
 
     print("\nList without init data:", delete_init_list)
 
-    print("\n" + bcolors.FAIL + "\nPosition counter for main program:" + str(pos_cont_dec) + bcolors.ENDC, "\n")
+    # print("\n" + bcolors.FAIL + "\nPosition counter for main program:" + str(pos_cont_dec) + bcolors.ENDC, "\n")
 
 
     for key, value in res_words_dic.items():
@@ -598,21 +599,13 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
 
     regex_macro = re.compile(r"\b^(MACRO|FINMAC)\b(\s)*.*", re.IGNORECASE)
 
-    regex_oper_lab = re.compile(r"^([a-zA-Z](\w{1,7})?)(\+?)(\d*)$", re.IGNORECASE)
+    regex_oper_lab = re.compile(r"^([a-zA-Z](\w{1,7})?)((\+)(\d*))?$", re.IGNORECASE)
     # regex_oper_dec = re.compile(r"^([0-9]+)$", re.IGNORECASE)
     # regex_oper_oct = re.compile(r"^(\@)([0-7]{1,4})$", re.IGNORECASE)
     # regex_oper_bin = re.compile(r"^(\%)([0-1]{1,6})$", re.IGNORECASE)
     # regex_oper_hex = re.compile(r"^(\$)([0-9A-Fa-f]{1,4})$", re.IGNORECASE)
 
     regex_res_word = re.compile(r"\b(ADD|AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
-
-        # regex_label_ind_inst = re.compile(
-    #     r'^([a-zA-Z](\w{1,7})?)\s(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
-    #     re.IGNORECASE)
-    # regex_inst_ind = re.compile(
-    #     r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(\()((\@)[0-7]{1,4}|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))(\))$',
-    #     re.IGNORECASE)
-
 
     regex_label_abs_inst = re.compile(
         r'\b^([a-zA-Z](\w{1,7})?)\b(\s)\b(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
@@ -659,7 +652,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
 
             if error == 0:
                 print("\n\nData_list",data_list[x], end = '')
-                print("MEM position counter updating:", cont_mem_pos)
+                print("Contador de posicion actualizado:", cont_mem_pos)
                 data_list_x =''.join(data_list[x])
                 num_line = data_list_x.split(" ")
                 non_num_line = " ".join(num_line[1:len(num_line)])
@@ -672,8 +665,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                 macro_match = re.match(regex_macro, non_num_line)
 
                 if not macro_match:
-                    # warning_dbwrd = "MACROS, AUN NO FUNCIONA PARA ESTA VERSION"
-                    # warning_list.append(warning_dbwrd)
+
                     cont_res_word_dic = Counter(w.lower() for w in re.findall(regex_res_word, non_num_line))
                     cont_res_word_int = sum(cont_res_word_dic.values())
 
@@ -694,7 +686,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                             print(num_line_int, "|", non_num_line)
 
                     else:
-                        print("OK!: Labels and instrucions are valid")
+                        print("OK!:Las etiquetas e instrucciones cumplen las reglas")
 
                         label_inst_abs_match = re.match(regex_label_abs_inst, non_num_line)
                         inst_abs_match = re.match(regex_inst_abs, non_num_line)
@@ -745,20 +737,28 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                         error_list.append(error_id_dup)
                                     else:
                                         label_dic[label_abs] = cont_mem_pos
-                                        print("Es una instruccion de direccionamiento absediato")
+                                        print("Es una instruccion de direccionamiento absoluto")
                                         print("Etiqueta ingresada al diccionario:", label_dic)
                                         print(num_line_int, "|", data_source_line_n, end='')
                                         const_abs = label_inst_abs_match.group(6)
                                         oper_lab_match = re.match(regex_oper_lab, const_abs)
+                                        #  Se actualiza el contador de posicion.
                                         cont_mem_pos += 3
 
                                         if oper_lab_match:
-                                            if const_abs in label_dic:
+                                            print("Constante remplazada: ", oper_lab_match.group(1))
+
+                                            conts_abs_str = oper_lab_match.group(1)
+                                            if conts_abs_str in label_dic:
                                                 print("CONST remplazada: ", const_abs)
-                                                const_abs_dec = int(label_dic[const_abs])
+                                                const_abs_dec = int(label_dic[conts_abs_str])
+                                                if oper_lab_match.group(3):
+                                                    print("Valor sumado: ", oper_lab_match.group(5))
+                                                    const_abs_dec = const_abs_dec + int(oper_lab_match.group(5))
+                                                    print("Valor calculado: ", const_abs_dec)
                                                 const_abs_oct = format(const_abs_dec, '#06o')[-4:]
                                                 oper_abs ="@"+const_abs_oct
-                                                print("Valor decimal de CONST: ", oper_abs)
+                                                print("Valor OCTAL de CONST: ", oper_abs)
                                                 # oper_abs = format(oper_abs, '#08b')[-6:]
                                                 label_regex = re.compile(r'\b'+re.escape(const_abs)+r'\b', re.IGNORECASE)
                                                 data_list_x = re.sub(label_regex,oper_abs, data_list_x)
@@ -812,14 +812,21 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                         oper_lab_match = re.match(regex_oper_lab, const_ind)
                                         cont_mem_pos += 3
 
+
                                         if oper_lab_match:
 
-                                            if const_ind in label_dic:
+                                            conts_ind_str = oper_lab_match.group(1)
+
+                                            if conts_ind_str in label_dic:
                                                 print("CONST remplazada: ", const_ind)
-                                                const_ind_dec = int(label_dic[const_ind])
+                                                const_ind_dec = int(label_dic[conts_ind_str])
+                                                if oper_lab_match.group(3):
+                                                    print("Valor sumado: ", oper_lab_match.group(5))
+                                                    const_ind_dec = const_ind_dec + int(oper_lab_match.group(5))
+                                                    print("Valor calculado: ", const_ind_dec)
                                                 const_ind_oct = format(const_ind_dec, '#06o')[-4:]
                                                 oper_ind ="@"+const_ind_oct
-                                                print("Valor decimal de CONST: ", oper_ind)
+                                                print("Valor octal de CONST: ", oper_ind)
                                                 label_regex = re.compile(r'\b'+re.escape(const_ind)+r'\b', re.IGNORECASE)
                                                 data_list_x = re.sub(label_regex,oper_ind, data_list_x)
                                                 data_list[x] = data_list_x
@@ -865,13 +872,17 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                         oper_lab_match = re.match(regex_oper_lab, const_inm)
                                         cont_mem_pos += 2
                                         print("CONST remplazada: ", const_inm)
+
                                         if oper_lab_match:
-                                            
-                                            if const_inm in label_dic:
-                                                oper_inm =str(label_dic[const_inm])
-                                                print("Valor decimal de CONST: ", oper_inm)
-                                                const_inm_dec = int(label_dic[const_inm])
+                                            conts_inm_str = oper_lab_match.group(1)
+                                            if conts_inm_str in label_dic:
+                                                const_inm_dec = int(label_dic[conts_inm_str])
+                                                if oper_lab_match.group(3):
+                                                    print("Valor sumado: ", oper_lab_match.group(5))
+                                                    const_inm_dec = const_inm_dec + int(oper_lab_match.group(5))
+                                                    print("Valor calculado: ", const_inm_dec)
                                                 const_inm_oct = "@"+format(const_inm_dec, '#06o')[-2:]
+                                                print("Valor octal de CONST: ", const_inm_oct)
                                                 label_regex = re.compile(r'\b'+re.escape(const_inm)+r'\b', re.IGNORECASE)
                                                 data_list_x = re.sub(label_regex,const_inm_oct, data_list_x)
                                                 data_list[x] = data_list_x
@@ -1472,7 +1483,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
     for x in range(0, len(data_list)):
 
-        print("MEM position counter updating:", cont_mem_pos)
+        print("Contador de posicion actualizado:", cont_mem_pos)
         data_list_x = ''.join(data_list[x])
         num_line = data_list_x.split(" ")
         non_num_line = " ".join(num_line[1:len(num_line)])

@@ -23,9 +23,11 @@ SC_MODULE(cpucr){
     sc_out < sc_lv <6> > s_c_o;
     sc_in < sc_lv <6> > ports_c_i;
     sc_out < sc_lv <6> > ports_c_o;
-    sc_out< sc_lv <6> > addr_ports_c_o;
-    sc_out < sc_lv<1> > rw_ports_c_o;
-    sc_out < sc_lv<1> > en_ports_c_o;
+
+    sc_in< sc_lv <6> > addr_ports_c_i;
+    sc_in < sc_lv<1> > rw_ports_c_i;
+    sc_in < sc_lv<1> > en_ports_c_i;
+
     sc_out < sc_lv <6> > ri_c_o;
     sc_in < bool > rps_c_i;
     sc_out < sc_lv<12> > pc_c_o;
@@ -44,6 +46,15 @@ SC_MODULE(cpucr){
     sc_signal< sc_lv <12> > addr_c_s;
     sc_signal < sc_lv<1> > rw_c_s;
     sc_signal < sc_lv<1> > en_c_s;
+
+    sc_signal < sc_lv <6> > addr_ports_c_o;
+    sc_signal < sc_lv <6> > addr_ports_c_test;
+
+    sc_signal < sc_lv <1> > rw_ports_c_o;
+    sc_signal < bool > estado;
+
+    sc_signal < sc_lv <1> > en_ports_c_o;
+
 
     void monitor();
 
@@ -69,9 +80,9 @@ SC_MODULE(cpucr){
         transactor1.acum_t_o(acum_c_o);
         transactor1.s_t_o(s_c_o);
 
-        ports1.dat_p_i(transactor1.ports_t_o);
-        ports1.dat_p_o(ports_c_o_s);
-        ports1.addr_p_i(transactor1.addr_ports_t_o);
+        ports1.dat_p_i(ports_c_i);
+        ports1.dat_p_o(ports_c_o);
+        ports1.addr_p_i(addr_ports_c_i);
         ports1.rw_p_i(transactor1.rw_ports_t_o);
         ports1.en_p_i(transactor1.en_ports_t_o);
 
@@ -80,6 +91,10 @@ SC_MODULE(cpucr){
         transactor1.addr_ports_t_o(addr_ports_c_o);
         transactor1.rw_ports_t_o(rw_ports_c_o);
         transactor1.en_ports_t_o(en_ports_c_o);
+
+        transactor1.addr_ports_t_i(addr_ports_c_i);
+        transactor1.rw_ports_t_i(rw_ports_c_i);
+        transactor1.en_ports_t_i(en_ports_c_i);
 
         transactor1.rps_t_i(rps_c_i);
         transactor1.pc_t_o(pc_c_o);

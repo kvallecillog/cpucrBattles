@@ -29,6 +29,9 @@ int sc_main(int argc, char* argv[]) {
     // Declaracion de la instancia del testbench.
     cpucr_stim test_bench ("test_bench");
 
+    // Declaracion de la instancia del mem_ports.
+//    ports mem_ports ("mem_ports");
+
     // Señales de observacion.
     sc_signal<sc_lv<1> > enable;
     sc_signal<sc_lv<1> > rw;
@@ -112,6 +115,7 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.transactor1.s_t_o, "s_t_o");
     sc_trace(wf, cpucr1.transactor1.ports_t_i, "ports_t_i");
     sc_trace(wf, cpucr1.transactor1.ports_t_o, "ports_t_o");
+    sc_trace(wf, cpucr1.transactor1.addr_ports_t_o, "addr_ports_t_o");
     sc_trace(wf, cpucr1.transactor1.rps_t_i ,"rps_t_i");
     sc_trace(wf, cpucr1.transactor1.init_t_o ,"init_t_o");
     sc_trace(wf, cpucr1.transactor1.s_est_pres ,"s_est_pres");
@@ -120,6 +124,16 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.transactor1.s_CM,"s_CM");
     sc_trace(wf, cpucr1.transactor1.s_LE ,"s_LE");
 
+
+    sc_trace(wf, cpucr1.ports1.dat_p_i ,"dat_p_i");
+    sc_trace(wf, cpucr1.ports1.dat_p_o ,"dat_p_o");
+    sc_trace(wf, cpucr1.ports1.addr_p_i ,"addr_p_i");
+    sc_trace(wf, cpucr1.ports1.rw_p_i ,"rw_p_i");
+    sc_trace(wf, cpucr1.ports1.en_p_i ,"en_p_i");
+
+
+
+
     sc_trace(wf, cpucr1.init_c_o ,"init_c_o");
 
 
@@ -127,6 +141,24 @@ int sc_main(int argc, char* argv[]) {
 
     test_bench.clk_stim_i(clk);
     test_bench.rps_stim_o(rps);
+
+    sc_signal < sc_lv <6> > ports_i_x;
+    sc_signal < sc_lv <6> > ports_o_x;
+    sc_signal < sc_lv <6> > address_o_x;
+    sc_signal < sc_lv <1> > enable_o_x;
+    sc_signal < sc_lv <1> > rw_o_x;
+
+    test_bench.ports_stim_o(ports_i);
+    test_bench.en_ports_stim_o(enable_ports);
+    test_bench.address_ports_stim_o(address_ports);
+    test_bench.rw_ports_stim_o(rw_ports);
+
+
+//    mem_ports.dat_p_i(test_bench.ports_stim_o);
+//    mem_ports.en_p_i(test_bench.en_ports_stim_o);
+//    mem_ports.addr_p_i(test_bench.address_ports_stim_o);
+//    mem_ports.dat_p_o(ports_o_x);
+//    mem_ports.rw_p_i(test_bench.rw_ports_stim_o);
 
     // Conexiones entre el modulo cpucr y las señales externas.
     cpucr1.rps_c_i(test_bench.rps_stim_o);
@@ -137,13 +169,14 @@ int sc_main(int argc, char* argv[]) {
     cpucr1.clk_c_i(clk);
     cpucr1.acum_c_o(acum);
     cpucr1.s_c_o(s);
-    cpucr1.ports_c_i(ports_i);
     cpucr1.ri_c_o(RI);
-    cpucr1.ports_c_o(ports_o);
 
-    cpucr1.addr_ports_c_o(address_ports);
-    cpucr1.rw_ports_c_o(rw_ports);
-    cpucr1.en_ports_c_o(enable_ports);
+    cpucr1.ports_c_i(ports_i);
+    cpucr1.ports_c_o(ports_o);
+    cpucr1.addr_ports_c_i(address_ports);
+    cpucr1.rw_ports_c_i(rw_ports);
+    cpucr1.en_ports_c_i(enable_ports);
+
     cpucr1.s_est_pres_c_o(est_pres);
     cpucr1.s_est_prox_c_o(est_prox);
 
