@@ -88,6 +88,10 @@ SC_MODULE(transactor){
         sc_uint<1> v_bt2_t;
 
         int v_dat_t_o;
+        sc_uint<6> *port_data = new sc_uint<6>[64];
+        sc_uint<6> port_address;
+        sc_uint<6> port_data_uint;
+        sc_uint<6> v_data_ports;
         int i1, i2, i3, i4, i5, i6, i7;
         bool v_CM;
         void p_CB();
@@ -98,9 +102,15 @@ SC_MODULE(transactor){
         void p_PC();
         void p_M();
         void p_P();
+        void p_Ports();
+
 
 
         SC_CTOR(transactor):acum_t_o("acum_t_o"),s_est_pres("s_est_pres"), s_est_prox("s_est_prox"){
+
+
+            SC_THREAD(p_Ports);
+//            sensitive << clk_t_i.neg();
 
             SC_METHOD(p_CB);
             sensitive << clk_t_i.neg();
@@ -126,16 +136,15 @@ SC_MODULE(transactor){
             sensitive << clk_t_i.neg();
 
             SC_METHOD(p_est_prox);
-            v_A = 63;
+            v_A = 0;
             i1 = i2 = i3 = i4 = i5 = i6 = i7 = 0;
+            s_t_o.initialize(0);
+
             sensitive << s_est_pres;
-//                SC_METHOD(p_acum_a);
-//                v_A = "0";
-//                i1 = i2 = i3 = i4 = i5 = i6 = i7 = 0;
-////                acum_t_o.initialize("0");
-////                v_A = "111111";
-////                s_A = "111111";
-//                sensitive << clk_t_i.neg();
+
+
+
+
         }
 
 };

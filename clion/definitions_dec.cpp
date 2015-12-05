@@ -113,3 +113,6 @@
 #define Estado_29 29
 #define Estado_30 30
 #define Estado_31 31
+
+//extern int portdata[64];
+

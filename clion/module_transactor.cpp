@@ -22,6 +22,43 @@ using namespace boost;
 using namespace sc_dt;
 using namespace boost::algorithm;
 
+void  transactor::p_Ports() {
+/** Proceso que simula la interface de escritura externa de puertos.
+ * @param port_address - port_address Direccion del puerto al que se quiere escribir.
+ * @param port_data - port_data Arreglo que contiene los datos escritos a los puertos.
+ * @param port_data_uint - port_data_uint variable que contiene el proximo estado.
+ * @return port_data - port_data El arreglo con los datos escritos a los puertos.
+ */
+
+    cout << "Ingresa al proceso: tiempo " << sc_time_stamp() << endl;
+
+    sc_core::wait(500, SC_NS);
+    port_address = 0;
+    port_data[port_address] = 0;
+    port_data_uint = port_data[port_address];
+    cout << "Puerto: " << "|[@" << port_address << "]|" << " Dato: " << "|[@" << port_data_uint << "]|" << " en T: " << "|[" << sc_time_stamp() << "]|" << endl;
+
+    sc_core::wait(500, SC_NS);
+    port_address = 1;
+    port_data[port_address] = 1;
+    port_data_uint = port_data[port_address];
+    cout << "Puerto: " << "|[@" << port_address << "]|" << " Dato: " << "|[@" << port_data_uint << "]|" << " en T: " << "|[" << sc_time_stamp() << "]|" << endl;
+
+    sc_core::wait(500, SC_NS);
+    port_address = 2;
+    port_data[port_address] = 2;
+    port_data_uint = port_data[port_address];
+    cout << "Puerto: " << "|[@" << port_address << "]|" << " Dato: " << "|[@" << port_data_uint << "]|" << " en T: " << "|[" << sc_time_stamp() << "]|" << endl;
+
+
+    sc_core::wait(500, SC_NS);
+    port_address = 3;
+    port_data[port_address] = 3;
+    port_data_uint = port_data[port_address];
+    cout << "Puerto: " << "|[@" << port_address << "]|" << " Dato: " << "|[@" << port_data_uint << "]|" << " en T: " << "|[" << sc_time_stamp() << "]|" << endl;
+
+}
+
 void  transactor::p_CB() {
 /** Calcula la bandera s_CB para identificar el ciclo de busqueda.
  *  Tambien calcula la bandera CM.
@@ -186,56 +223,56 @@ void  transactor::p_LE() {
     }
 }
 
-void transactor::p_M(){
-
-    if(!rps_t_i){
-        v_M = false;
-    }
-    else{
-        switch (s_est_prox) {
-            case Estado_0:{
-                v_M = true;
-                break;
-            }
-            case Estado_1:{
-                v_M = true;
-                break;
-            }
-            case Estado_5:{
-                switch (s_RI.read().to_uint()) {
-                    case INP_IO: case OUT_IO:{
-                        v_M = false;
-                        break;
-                    }
-                    default:{
-                        v_M = true;
-                        break;
-                    }
-                }
-                break;
-            }
-            case Estado_6:{
-                switch (s_RI.read().to_uint()) {
-                    case INP_IO: case OUT_IO:{
-                        v_M = false;
-                        break;
-                    }
-                    default:{
-                        v_M = true;
-                        break;
-                    }
-                }
-                break;
-            }
-            default:{
-                v_M = true;
-                break;
-            }
-        }
-
-    }
-
-}
+//void transactor::p_M(){
+//
+//    if(!rps_t_i){
+//        v_M = false;
+//    }
+//    else{
+//        switch (s_est_prox) {
+//            case Estado_0:{
+//                v_M = true;
+//                break;
+//            }
+//            case Estado_1:{
+//                v_M = true;
+//                break;
+//            }
+//            case Estado_5:{
+//                switch (s_RI.read().to_uint()) {
+//                    case INP_IO: case OUT_IO:{
+//                        v_M = false;
+//                        break;
+//                    }
+//                    default:{
+//                        v_M = true;
+//                        break;
+//                    }
+//                }
+//                break;
+//            }
+//            case Estado_6:{
+//                switch (s_RI.read().to_uint()) {
+//                    case INP_IO: case OUT_IO:{
+//                        v_M = false;
+//                        break;
+//                    }
+//                    default:{
+//                        v_M = true;
+//                        break;
+//                    }
+//                }
+//                break;
+//            }
+//            default:{
+//                v_M = true;
+//                break;
+//            }
+//        }
+//
+//    }
+//
+//}
 
 void transactor::p_PC(){
 /** Calcula el contador de posicion y la direccion de memoria.
@@ -279,7 +316,6 @@ void transactor::p_PC(){
                         pc_t_o = v_PC;
                         v_addr = v_addr + 1;
                         addr_t_o = v_addr;
-//                        v_addrr;
                         break;
                     }
                     case ROL_ACU: case ROR_ACU: case BCC_REL:
@@ -369,9 +405,13 @@ void transactor::p_PC(){
 //                        pc_t_o = v_PC;
 //                        v_addr = dat_t_i.read().to_int();
 //                        addr_t_o = v_addr;
+
+
                         v_PC = v_PC + 1;
                         pc_t_o = v_PC;
                         v_addr_ports = dat_t_i.read().to_int();
+                        v_data_ports = port_data[v_addr_ports];
+//                        cout << "Puerto leido: " << address_in << " Dato leido: " <<port_data_uint << endl;
                         addr_ports_t_o = v_addr_ports;
                         v_addr = 4031+v_addr_ports;
                         addr_t_o = v_addr + 1;
@@ -1381,7 +1421,9 @@ void  transactor::p_est_prox() {
                         // Actualizar proximo estado.
                         s_est_prox = Estado_1;
                         // Cargar valor de memoria en acumulador.
-                        v_A = ports_t_i.read().to_int();
+
+//                        cout << "Puerto Dato leido: " <<port_data_uint << endl;
+                        v_A = v_data_ports;
 
                         cout << "v_A: " << v_A << endl;
                         cout << "ports_t_i.read().: " << ports_t_i.read() << endl;

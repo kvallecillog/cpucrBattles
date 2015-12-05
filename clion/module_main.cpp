@@ -17,11 +17,13 @@ using namespace boost;
 using namespace sc_dt;
 using namespace boost::algorithm;
 
+
 int sc_main(int argc, char* argv[]) {
 
     sc_set_time_resolution(1, SC_NS);
     // Generacion de la señal de reloj de 2 MHz
     sc_clock clk("clk", 500, SC_NS, 0.5, 0, SC_NS, false);
+
 
     // Declaracion de la instancia CPUCR.
     cpucr cpucr1("cpucr");
@@ -123,7 +125,9 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.transactor1.s_CB ,"s_CB");
     sc_trace(wf, cpucr1.transactor1.s_CM,"s_CM");
     sc_trace(wf, cpucr1.transactor1.s_LE ,"s_LE");
-
+    sc_trace(wf, cpucr1.transactor1.port_address ,"port_address");
+    sc_trace(wf, cpucr1.transactor1.port_data ,"port_data");
+    sc_trace(wf, cpucr1.transactor1.port_data_uint ,"port_data_uint");
 
     sc_trace(wf, cpucr1.ports1.dat_p_i ,"dat_p_i");
     sc_trace(wf, cpucr1.ports1.dat_p_o ,"dat_p_o");
@@ -187,7 +191,23 @@ int sc_main(int argc, char* argv[]) {
     cpucr1.pc_c_o(pc);
     cpucr1.init_c_o(init);
 
+//    test_bench.port_data[2] = 7;
+
+
+
+//    cpucr1.transactor1.port_address = 65;
+//    cpucr1.transactor1.port_data[cpucr1.transactor1.port_address] = 65;
+
+
     sc_start(300, SC_US);
+
+//    sc_core::wait(500, SC_NS);
+//    cpucr1.transactor1.port_data[0] = 1;
+//    sc_core::wait(500, SC_NS);
+//    cpucr1.transactor1.port_data[1] = 1;
+//    sc_core::wait(500, SC_NS);
+//    cpucr1.transactor1.port_data[2] = 2;
+//    sc_core::wait(500, SC_NS);
 
     test_bench.stimgen();
 

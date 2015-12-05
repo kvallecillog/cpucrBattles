@@ -7,9 +7,21 @@
 ; Prueba de instruccion LDA inmediata.
 ;=============================================================
 * = @0000 ; Declaracion del puntero de posicion.
+;LDA #1
+
+INP @00
+INP @01
+INP @02
+INP @03
+
+;INP @03
+;INP @02
+;INP @01
+;INP @00
+
 ;LABEL = @0001
-LABEL = @0002
-BNE LABEL
+;LABEL = @0002
+;BNE LABEL
 ;BIN0 LDA #LABEL+1
 ;BIN LDA LABEL+2
 ;BIN2 LDA (LABEL+10000000)
