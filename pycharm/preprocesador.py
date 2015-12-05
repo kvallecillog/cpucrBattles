@@ -15,13 +15,13 @@ __status__ = "WIP: Working In Progress"
 
 import re
 from collections import Counter
+
 ###########################################################################
 # '''
 # '''
-#     Clase FileProcessor
 #     Descripcion:
-#         La clase FileProcessor se encapsula los metodos y atributos del modulo preprocesador.
-#         Metodos principales de la clase FileProcessor son:
+#         Se encapsula los metodos y atributos del modulo preprocesador.
+#         Metodos principales son:
 #             1-delete_comments()
 #             2-
 #             3-
@@ -31,26 +31,8 @@ from collections import Counter
 #     Revision: 1.0.1
 # '''
 ###########################################################################
-'''Metodo para borrar comentarios del archivo raw. Contiene el archivo sin comentarios.
-# Entradas: Archivo original del .ASM
-# Salidas: Archivo procesado sin comentarios.
-# Fecha: 30/08/15.
-# Revision: 1.0.1
-'''
-###########################################################################
+
 print("Inicio del analisis de sintaxis \n")
-
-
-# Clase para definir colores de las impresiones de pantalla.
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 
 def lines_mapper(raw_file_name, lines_counter, data_list):
@@ -569,8 +551,6 @@ def init_checker(data_list, lines_raw_list,error):
 
     print("\nList without init data:", delete_init_list)
 
-    # print("\n" + bcolors.FAIL + "\nPosition counter for main program:" + str(pos_cont_dec) + bcolors.ENDC, "\n")
-
 
     for key, value in res_words_dic.items():
         print(key, value)
@@ -581,16 +561,11 @@ def init_checker(data_list, lines_raw_list,error):
 def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
 
     print("Checking labels\n")
-
     cont_mem_pos = pos_cont_dec
-
     print(data_list)
-
     # Inicializacion el diccionario de constantes.
     label_dic = const_dic
-    # fsm_dic = dict()
     error_list = []
-    # pc_list = []
     fi_list = []
 
     cont_mem_pos_i2 = pos_cont_dec
@@ -1164,10 +1139,14 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     oper_lab_match = re.match(regex_oper_lab, const_abs)
 
                                     if oper_lab_match:
-
-                                        if const_abs in label_dic:
+                                        conts_abs_str = oper_lab_match.group(1)
+                                        if conts_abs_str in label_dic:
                                             print("CONST remplazada: ", const_abs)
-                                            const_abs_dec = int(label_dic[const_abs])
+                                            const_abs_dec = int(label_dic[conts_abs_str])
+                                            if oper_lab_match.group(3):
+                                                    print("Valor sumado: ", oper_lab_match.group(5))
+                                                    const_abs_dec = const_abs_dec + int(oper_lab_match.group(5))
+                                                    print("Valor calculado: ", const_abs_dec)
                                             const_abs_oct = format(const_abs_dec, '#06o')[-4:]
                                             oper_abs ="@"+const_abs_oct
                                             print("Valor octal de CONST: ", oper_abs)
@@ -1204,11 +1183,15 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     oper_lab_match = re.match(regex_oper_lab, const_ind)
 
                                     if oper_lab_match:
-
-                                        if const_ind in label_dic:
-                                            print("CONST remplazada: ", const_ind)
-                                            const_ind_dec = int(label_dic[const_ind])
-                                            const_ind_oct = format(const_ind_dec, '#06o')[2:]
+                                        conts_ind_str = oper_lab_match.group(1)
+                                        if conts_ind_str in label_dic:
+                                            print("CONST remplazada: ", conts_ind_str)
+                                            const_ind_dec = int(label_dic[conts_ind_str])
+                                            if oper_lab_match.group(3):
+                                                    print("Valor sumado: ", oper_lab_match.group(5))
+                                                    const_ind_dec = const_ind_dec + int(oper_lab_match.group(5))
+                                                    print("Valor calculado: ", const_ind_dec)
+                                            const_ind_oct = format(const_ind_dec, '#06o')[-4:]
                                             oper_ind ="@"+const_ind_oct
                                             print("Valor octal de CONST: ", oper_ind)
                                             # oper_ind = format(oper_ind, '#08b')[-6:]
@@ -1243,9 +1226,13 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     oper_lab_match = re.match(regex_oper_lab, const_inm)
 
                                     if oper_lab_match:
-
-                                        if const_inm in label_dic:
-                                            const_inm_dec = int(label_dic[const_inm])
+                                        conts_inm_str = oper_lab_match.group(1)
+                                        if conts_inm_str in label_dic:
+                                            const_inm_dec = int(label_dic[conts_inm_str])
+                                            if oper_lab_match.group(3):
+                                                    print("Valor sumado: ", oper_lab_match.group(5))
+                                                    const_inm_dec = const_inm_dec + int(oper_lab_match.group(5))
+                                                    print("Valor calculado: ", const_inm_dec)
                                             const_inm_oct = format(const_inm_dec, '#06o')[-2:]
                                             oper_inm = "@"+const_inm_oct
                                             print("Valor octal de CONST: ", oper_inm)
@@ -1418,18 +1405,20 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
 
 
 def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
-    global label_rel
+    # global label_rel
     print("Checking instructions\n")
 
     cont_mem_pos = pos_cont_dec
 
     # Inicializacion el diccionario de constantes.
     fsm_dic = dict()
-    label_dic = dict()
+    # label_dic = dict()
     pc_list = []
     fi_list = []
 
     # Inicializacion el diccionario de constantes.
+
+    # Codigos de las instrucciones de la CPUCR.
     opcode_dic = dict(LDA_INM='000000', ADD_INM='010000', SUB_INM='011000', AND_INM='100000',
                       ORA_INM='101000',
 
@@ -1452,15 +1441,17 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
                       INP_IO='000111', OUT_IO='001111')
 
+    # Declaracion de las regex para identificar operandos.
     regex_oper_dec = re.compile(r"^([0-9]+)$", re.IGNORECASE)
     regex_oper_oct = re.compile(r"^(\@)([0-7]{1,4})$", re.IGNORECASE)
     regex_oper_bin = re.compile(r"^(\%)([0-1]{1,6})$", re.IGNORECASE)
     regex_oper_hex = re.compile(r"^(\$)([0-9A-Fa-f]{1,4})$", re.IGNORECASE)
 
-    regex_res_word = re.compile(r"\b(ADD|AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
-                     DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
-                     RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
+    # regex_res_word = re.compile(r"\b(ADD|AND|BCC|BCS|BEQ|BMI|BNE|BPL|BVC|BVS|CLA|CLC|CLI|CPA|\
+    #                  DCA|HLT|INA|INP|JMP|JSR|LDA|NOP|ORA|OUT|PHA|PHS|PLA|PLS|ROL|ROR|RTI|\
+    #                  RTS|SEC|SEI|STA|SUB|TAP|TPA)\b", re.IGNORECASE)
 
+    # Declaracion de las regex para identificar instrucciones.
     regex_inst_abs = re.compile(
         r'\b^(LDA|STA|ADD|SUB|AND|ORA|JMP|JSR)\b(\s)(((\@)[0-7]{1,4}|(\%)[0-1]{1,12}|[0-9]+|(\$)[0-9A-Fa-f]{1,4})|(([a-zA-Z](\w{1,7})?)(\+?)(\d*)))$',
         re.IGNORECASE)
@@ -1481,18 +1472,29 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
     regex_inst_imp = re.compile(r'\b^(SEC|CLC|SEI|CLI)\b$', re.IGNORECASE)
 
+    # Se recorre toda la lista que contiene las lineas con la instruccion a evaluar.
     for x in range(0, len(data_list)):
 
-        print("Contador de posicion actualizado:", cont_mem_pos)
+        # print("Contador de posicion actualizado:", cont_mem_pos)
+        
+        # Se transforma el contenido extraido de la lista a un string.
         data_list_x = ''.join(data_list[x])
+        # Se obtiene el numero de linea,
         num_line = data_list_x.split(" ")
+        # Se elimina el numero de la linea.
         non_num_line = " ".join(num_line[1:len(num_line)])
+        # Se transforma a un int el numero de la linea.
         num_line_int = int(num_line[0])
+        # El numero de linea mapeado va del 1 al valor final, por lo que se ajusta 
+        # al index de la lista. Restando 1
         num_line_int_0 = int(num_line[0]) - 1
         data_source_line = lines_raw_list[num_line_int_0]
         data_source_line_list = data_source_line.split(" ")
+        # String que contiene el formato de notificacion de linea 
+        # al usuario, i.e. "12 | BNE LABEL"
         data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
 
+        # Evaluacion de la linea por medio de la regex.
         inst_abs_match = re.match(regex_inst_abs, non_num_line)
 
         inst_ind_match = re.match(regex_inst_ind, non_num_line)
@@ -1509,10 +1511,11 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
         inst_imp_match = re.match(regex_inst_imp, non_num_line)
 
+        # Se determina si la linea cumple con las reglas definidas.
         if inst_abs_match or inst_ind_match or inst_inm_match or inst_io_match \
                 or inst_rel_match or inst_acum_match or inst_ctrl_match or inst_imp_match:
 
-            print("This is an Instruction+Argument entry")
+            print("Es una instruccion + argumento")
 
             if inst_abs_match:
 
@@ -1523,10 +1526,9 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
                 inst_abs_key = inst_abs_match.group(1) + "_ABS"
 
-                print("The opcode for this instruct is:", opcode_dic[inst_abs_key])
+                print("OPCODE de INST:", opcode_dic[inst_abs_key])
                 opcode_abs = opcode_dic[inst_abs_key]
                 print("La lista de instrucciones es:", data_list)
-
 
                 oper_abs = inst_abs_match.group(4)
 
@@ -1534,8 +1536,8 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 if oper_dec_match:
                     oper_dec = int(oper_dec_match.group(1))
                     oper_dec_bin = format(oper_dec, '#014b')[-12:]
-                    print("Decimal Operand: ", oper_dec_match.group(1))
-                    print("Decimal to bin Operand: ", oper_dec_bin)
+                    print("Oper Decimal: ", oper_dec_match.group(1))
+                    print("Dec a Bin Oper: ", oper_dec_bin)
                     oper_abs_12b = oper_dec_bin
 
                 oper_oct_match = re.match(regex_oper_oct, oper_abs)
@@ -1562,7 +1564,6 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                     print("hex 2 hex: ", oper_hex_hex)
                     oper_abs_12b = oper_hex_hex
 
-
                 # inst_abs_dic = dict(opcode=opcode_abs, oper=oper_abs_12b)
                 # fsm_dic[cont_mem_pos] = inst_abs_dic
 
@@ -1585,7 +1586,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 pc_list.append(cont_mem_pos)
 
                 inst_ind_key = inst_ind_match.group(1) + "_IND"
-                print("The opcode for this instruct is:", opcode_dic[inst_ind_key])
+                print("OPCODE de INST:", opcode_dic[inst_ind_key])
 
                 opcode_ind = opcode_dic[inst_ind_key]
                 oper_ind = inst_ind_match.group(4)
@@ -1596,8 +1597,8 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 if oper_dec_match:
                     oper_dec = int(oper_dec_match.group(1))
                     oper_dec_bin = format(oper_dec, '#014b')[-12:]
-                    print("Decimal Operand: ", oper_dec_match.group(1))
-                    print("Decimal to bin Operand: ", oper_dec_bin)
+                    print("Oper Decimal: ", oper_dec_match.group(1))
+                    print("Dec a Bin Oper: ", oper_dec_bin)
                     oper_abs_12b = oper_dec_bin
 
                 oper_oct_match = re.match(regex_oper_oct, oper_ind)
@@ -1646,7 +1647,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 pc_list.append(cont_mem_pos)
 
                 inst_inm_key = inst_inm_match.group(1) + "_INM"
-                print("The opcode for this instruct is:", opcode_dic[inst_inm_key])
+                print("OPCODE de INST:", opcode_dic[inst_inm_key])
 
                 # opcode_inm = opcode_dic[inst_inm_key]
                 # oper_inm = inst_inm_match.group(4)
@@ -1661,8 +1662,8 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 if oper_dec_match:
                     oper_dec = int(oper_dec_match.group(1))
                     oper_dec_bin = format(oper_dec, '#08b')[-6:]
-                    print("Decimal Operand: ", oper_dec_match.group(1))
-                    print("Decimal to bin Operand: ", oper_dec_bin)
+                    print("Oper Decimal: ", oper_dec_match.group(1))
+                    print("Dec a Bin Oper: ", oper_dec_bin)
                     oper_abs_12b = "XXXXXX"+oper_dec_bin
 
 
@@ -1710,7 +1711,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 pc_list.append(cont_mem_pos)
 
                 inst_io_key = inst_io_match.group(1) + "_IO"
-                print("The opcode for this instruct is:", opcode_dic[inst_io_key])
+                print("OPCODE de INST:", opcode_dic[inst_io_key])
 
                 opcode_io = opcode_dic[inst_io_key]
                 oper_io = inst_io_match.group(4)
@@ -1728,8 +1729,8 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 if oper_dec_match:
                     oper_dec = int(oper_dec_match.group(1))
                     oper_dec_bin = format(oper_dec, '#08b')[-6:]
-                    print("Decimal Operand: ", oper_dec_match.group(1))
-                    print("Decimal to bin Operand: ", oper_dec_bin)
+                    print("Oper Decimal: ", oper_dec_match.group(1))
+                    print("Dec a Bin Oper: ", oper_dec_bin)
                     oper_abs_12b = "XXXXXX"+oper_dec_bin
 
 
@@ -1789,7 +1790,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 #     oper_rel = format(oper_rel, '#08b')[-6:]
 
                 inst_rel_key = inst_rel_match.group(1) + "_REL"
-                print("The opcode for this instruct is:", opcode_dic[inst_rel_key])
+                print("OPCODE de INST:", opcode_dic[inst_rel_key])
 
                 # opcode_rel = opcode_dic[inst_rel_key]
                 # # cont_mem_pos += VALOR DE ETIQUETA
@@ -1818,7 +1819,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 pc_list.append(cont_mem_pos)
 
                 inst_acum_key = inst_acum_match.group(1) + "_ACU"
-                print("The opcode for this instruct is:", opcode_dic[inst_acum_key])
+                print("OPCODE de INST:", opcode_dic[inst_acum_key])
 
                 # opcode_acum = opcode_dic[inst_acum_key]
                 # oper_acum = ""
@@ -1846,7 +1847,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 pc_list.append(cont_mem_pos)
 
                 inst_ctrl_key = inst_ctrl_match.group(1) + "_CTR"
-                print("The opcode for this instruct is:", opcode_dic[inst_ctrl_key])
+                print("OPCODE de INST:", opcode_dic[inst_ctrl_key])
 
                 # opcode_ctrl = opcode_dic[inst_ctrl_key]
                 # oper_ctrl = "XXXXXXXXXXXX"
@@ -1873,7 +1874,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 pc_list.append(cont_mem_pos)
 
                 inst_imp_key = inst_imp_match.group(1) + "_IMP"
-                print("The opcode for this instruct is:", opcode_dic[inst_imp_key])
+                print("OPCODE de INST:", opcode_dic[inst_imp_key])
 
                 # opcode_imp = opcode_dic[inst_imp_key]
                 # oper_ctrl = "XXXXXXXXXXXX"
@@ -1897,21 +1898,11 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
             print("Error!: No valid instruction format.")
             print(num_line_int, "|", data_source_line_n)
 
-    # print("PC list:", pc_list)
-    # print("Format instruction list:",fi_list)
-    # print("FINAL FSM DICTIONARY:", fsm_dic)
-    #print("Error's detected:", error,"\n")
-    #print("Error's detected:", error,"\n")
     return error, fi_list
 
 
 def obj_creator(fi_list, res_words_dic, lines_raw_list):
-    # print(fi_list)
-    # res_words_dic_obj = dict()
-    # res_words_dic_obj = res_words_dic
-    # for key, value in res_words_dic.items():
-    #     print(key, value)
-    # print("CHECK",res_words_dic)
+
     ram_init_file_name = '../clion/ram_init.txt'
     ram_init_file = open(ram_init_file_name, 'w+')
 
@@ -1919,7 +1910,6 @@ def obj_creator(fi_list, res_words_dic, lines_raw_list):
     object_file = open(object_file_name, 'w+')
     pc_file_name = '../clion/pc_init.txt'
     pc_file = open(pc_file_name, 'w+')
-    pc_x = ""
     base = 10
 
     cero = "0"
@@ -1927,7 +1917,6 @@ def obj_creator(fi_list, res_words_dic, lines_raw_list):
     obj_line_dic = {}
     cont_pos = 0
     dont_care = "XXXXXX"
-    # address_int, write_count, opcode_int, operand_pb_int, operand_pa_int = 0
 
     for fi in fi_list:
 
@@ -1939,7 +1928,6 @@ def obj_creator(fi_list, res_words_dic, lines_raw_list):
             pc_file.writelines(pc_x)
 
         opcode = int_2_base(tokens[1],base)
-        # print("Addres, opcode:", address, opcode)
         operand = tokens[2]
         operand_pa = operand[0:6]
         operand_pb = operand[6:12]
@@ -1948,16 +1936,12 @@ def obj_creator(fi_list, res_words_dic, lines_raw_list):
 
         if operand_pa != dont_care and operand_pb != dont_care:
 
-            # operand_pa_int = int(operand_pa,2)
-            # operand_pb_int = int(operand_pb,2)
-
             operand_pa_int = int_2_base(operand_pa,base)
             operand_pb_int = int_2_base(operand_pb,base)
 
             mem_data_vec = str(opcode), str(operand_pb_int), str(operand_pa_int)
 
             for mem_data in mem_data_vec:
-                # print("Address: ", address_pos)
                 mem_address_pos = address_2_base(address_pos, base_address)
                 obj_line = str(mem_address_pos) + " " + mem_data+"\n"
                 # obj_line_dic[mem_address_pos].append(mem_data)

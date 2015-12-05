@@ -1,4 +1,5 @@
-
+//#ifndef PORTS_H1_
+//#define PORTS_H1_ 64
 // SystemC library.
 #include </usr/local/systemc-2.3.1/include/systemc>
 // IO c library.
@@ -54,6 +55,9 @@ SC_MODULE(cpucr){
     sc_signal < bool > estado;
 
     sc_signal < sc_lv <1> > en_ports_c_o;
+
+    sc_uint<6> portdata[64];
+
 
 
     void monitor();

@@ -7,10 +7,15 @@
 ; Prueba de instruccion LDA inmediata.
 ;=============================================================
 * = @0000 ; Declaracion del puntero de posicion.
-LABEL = @0010
-BIN0 LDA #LABEL+1
-BIN LDA LABEL+2
-BIN2 LDA (LABEL+10000000)
+;LABEL = @0001
+LABEL = @0002
+BNE LABEL
+;BIN0 LDA #LABEL+1
+;BIN LDA LABEL+2
+;BIN2 LDA (LABEL+10000000)
+;LDA #LABEL+1
+;LDA LABEL+1
+;LDA (LABEL+1)
 ;BIN LDA #%000001 ; LDA con argumento binario.
 ;OCT LDA #@02 ; LDA con argumento octal.
 ;HEX LDA #$03 ; LDA con argumento hexadecimal.

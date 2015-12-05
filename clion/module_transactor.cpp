@@ -278,7 +278,7 @@ void transactor::p_PC(){
                         v_PC = v_PC + 1;
                         pc_t_o = v_PC;
                         v_addr = v_addr + 1;
-                        addr_t_o = v_add = v_addr;
+                        addr_t_o = v_addr;
 //                        v_addrr;
                         break;
                     }

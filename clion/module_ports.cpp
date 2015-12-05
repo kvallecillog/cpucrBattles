@@ -37,6 +37,7 @@ void ports::entry(){
         if(rw_p_i.read() == 0) {
             // Escritura de memoria.
             ramdata[addr_p_i.read().to_uint()].write( dat_p_i.read() );
+//            ramdata[addr_fsm_i.read().to_uint()].write( dat_fsm_i.read() );
             //            cout << "@ |[" << sc_time_stamp()  << "]| Escritura de datos " <<"|[" <<dat_p_i.read().to_uint() << "]|" << " en direccion " << "|["<< addr_p_i.read().to_uint() << "]|" << endl;
         }
         else {
