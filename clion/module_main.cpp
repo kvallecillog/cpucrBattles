@@ -42,11 +42,11 @@ int sc_main(int argc, char* argv[]) {
     sc_signal < sc_lv <6> > acum;
     sc_signal < sc_lv <6> > s;
 
-    sc_signal < sc_lv <6> > ports_i;
-    sc_signal < sc_lv <6> > ports_o;
-    sc_signal<sc_lv<6> > address_ports;
-    sc_signal<sc_lv<1> > enable_ports;
-    sc_signal<sc_lv<1> > rw_ports;
+//    sc_signal < sc_lv <6> > ports_i;
+//    sc_signal < sc_lv <6> > ports_o;
+//    sc_signal<sc_lv<6> > address_ports;
+//    sc_signal<sc_lv<1> > enable_ports;
+//    sc_signal<sc_lv<1> > rw_ports;
 
 
 
@@ -75,11 +75,11 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, clk, "clk");
     sc_trace(wf, acum, "acum");
     sc_trace(wf, s, "s");
-    sc_trace(wf, ports_i, "ports_i");
-    sc_trace(wf, ports_o, "ports_o");
-    sc_trace(wf, enable_ports, "enable_ports");
-    sc_trace(wf, address_ports, "address_ports");
-    sc_trace(wf, rw_ports, "rw_ports");
+//    sc_trace(wf, ports_i, "ports_i");
+//    sc_trace(wf, ports_o, "ports_o");
+//    sc_trace(wf, enable_ports, "enable_ports");
+//    sc_trace(wf, address_ports, "address_ports");
+//    sc_trace(wf, rw_ports, "rw_ports");
     sc_trace(wf, rps, "rps");
     sc_trace(wf, pc, "pc");
     sc_trace(wf, CB, "CB");
@@ -115,9 +115,9 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.transactor1.rw_t_o, "rw_t_i");
     sc_trace(wf, cpucr1.transactor1.acum_t_o, "acum_t_o");
     sc_trace(wf, cpucr1.transactor1.s_t_o, "s_t_o");
-    sc_trace(wf, cpucr1.transactor1.ports_t_i, "ports_t_i");
-    sc_trace(wf, cpucr1.transactor1.ports_t_o, "ports_t_o");
-    sc_trace(wf, cpucr1.transactor1.addr_ports_t_o, "addr_ports_t_o");
+//    sc_trace(wf, cpucr1.transactor1.ports_t_i, "ports_t_i");
+//    sc_trace(wf, cpucr1.transactor1.ports_t_o, "ports_t_o");
+//    sc_trace(wf, cpucr1.transactor1.addr_ports_t_o, "addr_ports_t_o");
     sc_trace(wf, cpucr1.transactor1.rps_t_i ,"rps_t_i");
     sc_trace(wf, cpucr1.transactor1.init_t_o ,"init_t_o");
     sc_trace(wf, cpucr1.transactor1.s_est_pres ,"s_est_pres");
@@ -126,14 +126,15 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.transactor1.s_CM,"s_CM");
     sc_trace(wf, cpucr1.transactor1.s_LE ,"s_LE");
     sc_trace(wf, cpucr1.transactor1.port_address ,"port_address");
-    sc_trace(wf, cpucr1.transactor1.port_data ,"port_data");
-    sc_trace(wf, cpucr1.transactor1.port_data_uint ,"port_data_uint");
+    sc_trace(wf, cpucr1.transactor1.port_data_write ,"port_data_write");
+    sc_trace(wf, cpucr1.transactor1.port_data_read ,"port_data_read");
 
-    sc_trace(wf, cpucr1.ports1.dat_p_i ,"dat_p_i");
-    sc_trace(wf, cpucr1.ports1.dat_p_o ,"dat_p_o");
-    sc_trace(wf, cpucr1.ports1.addr_p_i ,"addr_p_i");
-    sc_trace(wf, cpucr1.ports1.rw_p_i ,"rw_p_i");
-    sc_trace(wf, cpucr1.ports1.en_p_i ,"en_p_i");
+
+//    sc_trace(wf, cpucr1.ports1.dat_p_i ,"dat_p_i");
+//    sc_trace(wf, cpucr1.ports1.dat_p_o ,"dat_p_o");
+//    sc_trace(wf, cpucr1.ports1.addr_p_i ,"addr_p_i");
+//    sc_trace(wf, cpucr1.ports1.rw_p_i ,"rw_p_i");
+//    sc_trace(wf, cpucr1.ports1.en_p_i ,"en_p_i");
 
 
 
@@ -146,16 +147,16 @@ int sc_main(int argc, char* argv[]) {
     test_bench.clk_stim_i(clk);
     test_bench.rps_stim_o(rps);
 
-    sc_signal < sc_lv <6> > ports_i_x;
-    sc_signal < sc_lv <6> > ports_o_x;
-    sc_signal < sc_lv <6> > address_o_x;
-    sc_signal < sc_lv <1> > enable_o_x;
-    sc_signal < sc_lv <1> > rw_o_x;
+//    sc_signal < sc_lv <6> > ports_i_x;
+//    sc_signal < sc_lv <6> > ports_o_x;
+//    sc_signal < sc_lv <6> > address_o_x;
+//    sc_signal < sc_lv <1> > enable_o_x;
+//    sc_signal < sc_lv <1> > rw_o_x;
 
-    test_bench.ports_stim_o(ports_i);
-    test_bench.en_ports_stim_o(enable_ports);
-    test_bench.address_ports_stim_o(address_ports);
-    test_bench.rw_ports_stim_o(rw_ports);
+//    test_bench.ports_stim_o(ports_i);
+//    test_bench.en_ports_stim_o(enable_ports);
+//    test_bench.address_ports_stim_o(address_ports);
+//    test_bench.rw_ports_stim_o(rw_ports);
 
 
 //    mem_ports.dat_p_i(test_bench.ports_stim_o);
@@ -175,11 +176,11 @@ int sc_main(int argc, char* argv[]) {
     cpucr1.s_c_o(s);
     cpucr1.ri_c_o(RI);
 
-    cpucr1.ports_c_i(ports_i);
-    cpucr1.ports_c_o(ports_o);
-    cpucr1.addr_ports_c_i(address_ports);
-    cpucr1.rw_ports_c_i(rw_ports);
-    cpucr1.en_ports_c_i(enable_ports);
+//    cpucr1.ports_c_i(ports_i);
+//    cpucr1.ports_c_o(ports_o);
+//    cpucr1.addr_ports_c_i(address_ports);
+//    cpucr1.rw_ports_c_i(rw_ports);
+//    cpucr1.en_ports_c_i(enable_ports);
 
     cpucr1.s_est_pres_c_o(est_pres);
     cpucr1.s_est_prox_c_o(est_prox);

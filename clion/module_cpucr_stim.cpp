@@ -19,17 +19,5 @@ void cpucr_stim::stimgen() {
         sc_core::wait(500, SC_NS);
         rps_stim_o.write(1);/**< Se genera el estimulo de reposicion. */
 
-        sc_core::wait(500, SC_NS);
-
-        en_ports_stim_o.write("1");/**< Habilita la memoria de puertos. */
-        address_ports_stim_o.write("0");/**< Direccion del puerto a escribir. */
-        rw_ports_stim_o.write("1"); /**< Modo de escritura a puerto. */
-        int data_in = 7;
-        ports_stim_o.write(data_in);/**< Se genera el estimulo de puerto de entrada. */
-//        int address_in = 0;
-//        port_data[address_in] = data_in;
-
-//        int address_in = 2;
-//        cout << "Puerto leido: " << address_in << " Dato leido: " << port_data[address_in] << endl;
     }
 }
