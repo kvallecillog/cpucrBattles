@@ -1,11 +1,5 @@
-
-
-//#include </usr/local/systemc-2.3.1/include/systemc>
-
 #include <systemc>
-
 #include "module_cpucr.h"
-
 #include <iostream>
 
 using namespace std;

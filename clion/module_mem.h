@@ -1,12 +1,9 @@
-#ifndef MEMORY_H_
-#define MEMORY_H_ 4096
 
  // SystemC library.
-//#include </usr/local/systemc-2.3.1/include/systemc>
 #include <systemc>
-
 // IO c library.
 #include "stdio.h"
+#include "definitions_dec.cpp"
 
 using namespace std;
 using namespace sc_core;
@@ -22,7 +19,7 @@ SC_MODULE(memory){
     sc_in < sc_lv<1> > en_m_i; /**< Puerto de entrada habilitacion de memoria de 1 bit */
 
     // Declaracion de señales internas.
-    sc_signal< sc_uint<6> > ramdata[MEMORY_H_]; /**< Arreglo interno de memoria de 4096 posiciones */
+    sc_signal< sc_uint<6> > ramdata[MEMORY]; /**< Arreglo interno de memoria de 4096 posiciones */
 
     void entry(); /**< Metodo de escritura y lectura de la memoria */
 
@@ -34,7 +31,7 @@ SC_MODULE(memory){
         fprintf(fp, "|Address|Data|\n");
         fprintf(fp, "--------------\n");
         int  data_int = 0;
-        for (size = 0; size < MEMORY_H_-1; size++) {
+        for (size = 0; size < MEMORY-1; size++) {
             data_int = ramdata[size].read().to_int();
             fprintf(fp, "|@%.4o|::|@%.2o|\n", size, data_int);
             fprintf(fp, "--------------\n");
@@ -43,7 +40,6 @@ SC_MODULE(memory){
 
     SC_CTOR(memory):dat_m_i("dat_m_i"),dat_m_o("dat_m_o"){
         SC_METHOD(entry);
-//        dont_initialize();
         sensitive << dat_m_i << addr_m_i << rw_m_i <<  en_m_i;
 
         FILE *fp ;
@@ -69,5 +65,3 @@ SC_MODULE(memory){
             cout << "-------------------------------------" << endl;
     }
 };
-
-#endif /* MEMORY_H_ */

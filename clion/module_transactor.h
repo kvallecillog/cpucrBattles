@@ -1,12 +1,9 @@
 //
 // Created by kenneth on 25/10/15.
 //
-
 // SystemC library.
-//#include </usr/local/systemc-2.3.1/include/systemc>
 
 #include <systemc>
-
 #include <iostream>
 #include <bitset>
 #include <vector>
@@ -24,6 +21,7 @@ using namespace boost::algorithm;
 SC_MODULE(transactor){
 
         // Declaracion de puertos.
+        sc_in_clk  clk_t_i;
         sc_in < bool > rps_t_i;
         sc_in < sc_lv <6> > dat_t_i;
         sc_out < sc_lv <6> > dat_t_o;
@@ -32,12 +30,8 @@ SC_MODULE(transactor){
         sc_out < sc_lv<1> > en_t_o;
         sc_out < sc_lv <6> > acum_t_o;
         sc_out < sc_lv <6> > s_t_o;
-
-
         sc_out < sc_lv <6> > ri_t_o;
         sc_out < sc_lv<12> > pc_t_o;
-        sc_in_clk  clk_t_i;
-        sc_out < bool > init_t_o;
         sc_out < int > s_est_pres;
         sc_out < int > s_est_prox;
         sc_out < bool > s_CB;
@@ -78,16 +72,13 @@ SC_MODULE(transactor){
         sc_uint<1> v_bt2_t;
 
         int v_dat_t_o;
-        sc_uint<6> *port_data = new sc_uint<6>[64];
+        sc_uint<6> *port_data = new sc_uint<6>[PORTS];
         sc_uint<6> port_address;
         sc_uint<6> port_data_write;
         sc_uint<6> port_data_read;
 
         sc_uint<6> v_data_ports;
 
-//        sc_uint<> addr_ports_t_o;
-
-        int i1, i2, i3, i4, i5, i6, i7;
         bool v_CM;
         void p_CB();
         void p_RI();
@@ -98,17 +89,11 @@ SC_MODULE(transactor){
         void p_P();
         void p_Ports();
 
-
-
         SC_CTOR(transactor):acum_t_o("acum_t_o"),s_est_pres("s_est_pres"), s_est_prox("s_est_prox"){
-
-
             SC_THREAD(p_Ports);
-//            sensitive << clk_t_i.neg();
 
             SC_METHOD(p_CB);
             sensitive << clk_t_i.neg();
-
 
             SC_METHOD(p_P);
             sensitive << clk_t_i.neg();
@@ -132,12 +117,6 @@ SC_MODULE(transactor){
             v_A = 0;
             dat_t_o.initialize(0);
             s_t_o.initialize(0);
-
             sensitive << s_est_pres;
-
-
-
-
         }
-
 };

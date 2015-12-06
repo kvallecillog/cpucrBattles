@@ -18,15 +18,26 @@ __status__ = "WIP: Working In Progress"
 '''
 
 import sys
+import argparse
 import preprocesador
 
-
-# def main(argv):
-def main():
+def main(argv):
 ###########################################################################
  # Files names
 ###########################################################################
+
+
+    # for arg in sys.argv:
+    #     print("Argumentos",arg)
+    #
+    # raw_file_name = sys.argv[1]
+    # # try:
+    # #     raw_file_name = getopt.getopt(argv)
+    # #     print(raw_file_name)
+    # #
+    # # except:
     raw_file_name = 'raw_file.ASM'
+    print("ASM procesado:",raw_file_name,"\n")
 ###########################################################################
 # Global variables
 ###########################################################################
@@ -43,24 +54,23 @@ def main():
 
     if error_init == 0:
 
-        print("Init without error's:", error_init, "\n")
+        print("\nInicializacion sin errores:", error_init, "\n")
         error_label, label_list, error_flow_list, num_op_inst_list = preprocesador.label_checker(deleted_init_list, lines_raw_list, error, pos_cont_dec, const_dic)
 
         if error_label == 0:
 
-            print("\nExecuter")
+            print("\nEjecucion de instrucciones")
             error_inst, fi_list = preprocesador.inst_checker(num_op_inst_list, lines_raw_list, error_label, pos_cont_dec)
 
             if error_inst == 0:
 
-                print("Main program without error's:", error_inst, "\n")
+                print("Programa principal sin errores:", error_inst, "\n")
                 obj_list = preprocesador.obj_creator(fi_list, res_words_dic, lines_raw_list)
 
                 # print("Advertencia: ",warning_list[len(warning_list)-1])
             else:
 
-                print("Error detected at main flow: ASM cannot be assembled!")
-                print("List of errors:")
+                print("Errores detectados el ASM no pudo ensamblarse!")
 
         else:
 
@@ -72,6 +82,11 @@ def main():
         print("Error detectado en la inicializacion: El ASM no fue ensamblado!")
         print("Lista de errores:", error_init_list)
 
-if __name__ == "__main__": main()
+    # cpucr_model = "./cpucr_model.x"
+    # os.system(cpucr_model)
+    # cpucr_vcd = "gtkwave cpucr_waves_file.gtkw &"
+    # os.system(cpucr_vcd)
 
-print("\nSuccessful syntax analysis!")
+if __name__ == "__main__": main(sys.argv[1:])
+
+print("\nSe ensamblo y ejecuto correctamente!")

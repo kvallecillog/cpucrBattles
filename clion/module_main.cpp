@@ -1,16 +1,11 @@
 #include <iostream>
-#include <bitset>
-#include <vector>
-#include <boost/algorithm/string.hpp>
 #include <string>
-//
-//#include </usr/local/systemc-2.3.1/include/systemc>
-#include </usr/local/systemc-2.3.1/include/sysc/kernel/sc_wait.h>
 #include <systemc>
-
 #include "module_cpucr.h"
 #include "module_cpucr_stim.h"
-
+//#include <bitset>
+//#include <vector>
+//#include <boost/algorithm/string.hpp>
 using namespace std;
 using namespace sc_core;
 using namespace boost;
@@ -24,15 +19,10 @@ int sc_main(int argc, char* argv[]) {
     // Generacion de la señal de reloj de 2 MHz
     sc_clock clk("clk", 500, SC_NS, 0.5, 0, SC_NS, false);
 
-
     // Declaracion de la instancia CPUCR.
     cpucr cpucr1("cpucr");
-
     // Declaracion de la instancia del testbench.
     cpucr_stim test_bench ("test_bench");
-
-    // Declaracion de la instancia del mem_ports.
-//    ports mem_ports ("mem_ports");
 
     // Señales de observacion.
     sc_signal<sc_lv<1> > enable;
@@ -41,22 +31,11 @@ int sc_main(int argc, char* argv[]) {
     sc_signal<sc_lv<12> > address;
     sc_signal < sc_lv <6> > acum;
     sc_signal < sc_lv <6> > s;
-
-//    sc_signal < sc_lv <6> > ports_i;
-//    sc_signal < sc_lv <6> > ports_o;
-//    sc_signal<sc_lv<6> > address_ports;
-//    sc_signal<sc_lv<1> > enable_ports;
-//    sc_signal<sc_lv<1> > rw_ports;
-
-
-
     sc_signal < sc_lv <6> > RI;
     sc_signal < bool > rps;
-    sc_signal < bool > init;
     sc_signal < sc_lv <12> > pc;
     sc_signal < int > est_pres;
     sc_signal < int > est_prox;
-
     sc_signal < bool > CB;
     sc_signal < bool > CM;
     sc_signal < bool > LE;
@@ -75,11 +54,6 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, clk, "clk");
     sc_trace(wf, acum, "acum");
     sc_trace(wf, s, "s");
-//    sc_trace(wf, ports_i, "ports_i");
-//    sc_trace(wf, ports_o, "ports_o");
-//    sc_trace(wf, enable_ports, "enable_ports");
-//    sc_trace(wf, address_ports, "address_ports");
-//    sc_trace(wf, rw_ports, "rw_ports");
     sc_trace(wf, rps, "rps");
     sc_trace(wf, pc, "pc");
     sc_trace(wf, CB, "CB");
@@ -115,11 +89,7 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.transactor1.rw_t_o, "rw_t_i");
     sc_trace(wf, cpucr1.transactor1.acum_t_o, "acum_t_o");
     sc_trace(wf, cpucr1.transactor1.s_t_o, "s_t_o");
-//    sc_trace(wf, cpucr1.transactor1.ports_t_i, "ports_t_i");
-//    sc_trace(wf, cpucr1.transactor1.ports_t_o, "ports_t_o");
-//    sc_trace(wf, cpucr1.transactor1.addr_ports_t_o, "addr_ports_t_o");
     sc_trace(wf, cpucr1.transactor1.rps_t_i ,"rps_t_i");
-    sc_trace(wf, cpucr1.transactor1.init_t_o ,"init_t_o");
     sc_trace(wf, cpucr1.transactor1.s_est_pres ,"s_est_pres");
     sc_trace(wf, cpucr1.transactor1.s_est_prox ,"s_est_prox");
     sc_trace(wf, cpucr1.transactor1.s_CB ,"s_CB");
@@ -129,42 +99,9 @@ int sc_main(int argc, char* argv[]) {
     sc_trace(wf, cpucr1.transactor1.port_data_write ,"port_data_write");
     sc_trace(wf, cpucr1.transactor1.port_data_read ,"port_data_read");
 
-
-//    sc_trace(wf, cpucr1.ports1.dat_p_i ,"dat_p_i");
-//    sc_trace(wf, cpucr1.ports1.dat_p_o ,"dat_p_o");
-//    sc_trace(wf, cpucr1.ports1.addr_p_i ,"addr_p_i");
-//    sc_trace(wf, cpucr1.ports1.rw_p_i ,"rw_p_i");
-//    sc_trace(wf, cpucr1.ports1.en_p_i ,"en_p_i");
-
-
-
-
-    sc_trace(wf, cpucr1.init_c_o ,"init_c_o");
-
-
     // Conexiones entre el testbench y las señales externas.
-
     test_bench.clk_stim_i(clk);
     test_bench.rps_stim_o(rps);
-
-//    sc_signal < sc_lv <6> > ports_i_x;
-//    sc_signal < sc_lv <6> > ports_o_x;
-//    sc_signal < sc_lv <6> > address_o_x;
-//    sc_signal < sc_lv <1> > enable_o_x;
-//    sc_signal < sc_lv <1> > rw_o_x;
-
-//    test_bench.ports_stim_o(ports_i);
-//    test_bench.en_ports_stim_o(enable_ports);
-//    test_bench.address_ports_stim_o(address_ports);
-//    test_bench.rw_ports_stim_o(rw_ports);
-
-
-//    mem_ports.dat_p_i(test_bench.ports_stim_o);
-//    mem_ports.en_p_i(test_bench.en_ports_stim_o);
-//    mem_ports.addr_p_i(test_bench.address_ports_stim_o);
-//    mem_ports.dat_p_o(ports_o_x);
-//    mem_ports.rw_p_i(test_bench.rw_ports_stim_o);
-
     // Conexiones entre el modulo cpucr y las señales externas.
     cpucr1.rps_c_i(test_bench.rps_stim_o);
     cpucr1.dat_c_o(data);
@@ -175,50 +112,22 @@ int sc_main(int argc, char* argv[]) {
     cpucr1.acum_c_o(acum);
     cpucr1.s_c_o(s);
     cpucr1.ri_c_o(RI);
-
-//    cpucr1.ports_c_i(ports_i);
-//    cpucr1.ports_c_o(ports_o);
-//    cpucr1.addr_ports_c_i(address_ports);
-//    cpucr1.rw_ports_c_i(rw_ports);
-//    cpucr1.en_ports_c_i(enable_ports);
-
     cpucr1.s_est_pres_c_o(est_pres);
     cpucr1.s_est_prox_c_o(est_prox);
-
     cpucr1.s_CB_c_o(CB);
     cpucr1.s_CM_c_o(CM);
     cpucr1.s_LE_c_o(LE);
-
     cpucr1.pc_c_o(pc);
-    cpucr1.init_c_o(init);
 
-//    test_bench.port_data[2] = 7;
-
-
-
-//    cpucr1.transactor1.port_address = 65;
-//    cpucr1.transactor1.port_data[cpucr1.transactor1.port_address] = 65;
-
-
-    sc_start(300, SC_US);
-
-//    sc_core::wait(500, SC_NS);
-//    cpucr1.transactor1.port_data[0] = 1;
-//    sc_core::wait(500, SC_NS);
-//    cpucr1.transactor1.port_data[1] = 1;
-//    sc_core::wait(500, SC_NS);
-//    cpucr1.transactor1.port_data[2] = 2;
-//    sc_core::wait(500, SC_NS);
-
+    // Inicio de simulacion. T_Sim_US, tiempo de simulacion en micro segundos.
+    // Definido en el archivo definitions_dec.cpp, #define T_Sim_US 300.
+    sc_start(T_Sim_US, SC_US);
     test_bench.stimgen();
-
-
     cpucr1.monitor();
     cpucr1.memory1.memdump();
-
     sc_stop();
-
     sc_close_vcd_trace_file(wf);
+    // Fin de simulacion.
 
     return (0);
 }

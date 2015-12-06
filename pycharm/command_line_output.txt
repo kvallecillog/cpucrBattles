@@ -1,0 +1,356 @@
+-------------------------------------
+Cargando el programa objeto a memoria
+-------------------------------------
+|[Address]|::|[Data]|
+|[0]|:::::::::|[0]|
+|[1]|:::::::::|[6]|
+|[2]|:::::::::|[7]|
+|[3]|:::::::::|[0]|
+|[4]|:::::::::|[7]|
+|[5]|:::::::::|[1]|
+|[6]|:::::::::|[38]|
+|[7]|:::::::::|[0]|
+|[8]|:::::::::|[0]|
+|[9]|:::::::::|[0]|
+|[10]|:::::::::|[0]|
+|[11]|:::::::::|[0]|
+|[12]|:::::::::|[0]|
+|[13]|:::::::::|[0]|
+|[14]|:::::::::|[0]|
+|[15]|:::::::::|[0]|
+|[16]|:::::::::|[0]|
+|[17]|:::::::::|[0]|
+|[18]|:::::::::|[0]|
+|[19]|:::::::::|[0]|
+|[20]|:::::::::|[0]|
+|[21]|:::::::::|[0]|
+|[22]|:::::::::|[0]|
+|[23]|:::::::::|[0]|
+|[24]|:::::::::|[0]|
+|[25]|:::::::::|[0]|
+|[26]|:::::::::|[0]|
+|[27]|:::::::::|[0]|
+|[28]|:::::::::|[0]|
+|[29]|:::::::::|[0]|
+-------------------------------------
+Ingresa al proceso: tiempo 0 s
+
+Info: (I702) default timescale unit used for tracing: 1 ns (cpucr.vcd)
+Escritura a Puerto: |[@0]| Dato: |[@0]| en T: |[500 ns]|
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[1]|
+==================================================================
+=======================FIN DE ESTADO==============================
+##################################################################
+
+Escritura a Puerto: |[@1]| Dato: |[@1]| en T: |[1 us]|
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[2]|
+==================================================================
+PC actual: |[000000000000]|
+=======================FIN DE ESTADO==============================
+##################################################################
+
+Escritura a Puerto: |[@2]| Dato: |[@2]| en T: |[1500 ns]|
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[3]|
+==================================================================
+=======================FIN DE ESTADO==============================
+##################################################################
+
+Escritura a Puerto: |[@3]| Dato: |[@3]| en T: |[2 us]|
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[4]|
+==================================================================
+Instruccion LDA_INM RI: |[0]|
+=======================FIN DE ESTADO==============================
+##################################################################
+
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[1]|
+==================================================================
+=======================FIN DE ESTADO==============================
+##################################################################
+
+Lectura a Puerto: |[@1]| Dato: |[@1]| en T: |[3 us]|
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[2]|
+==================================================================
+PC actual: |[000000000010]|
+=======================FIN DE ESTADO==============================
+##################################################################
+
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[3]|
+==================================================================
+=======================FIN DE ESTADO==============================
+##################################################################
+
+v_addr_ports_INP: 0
+v_data_ports_INP: 0
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[4]|
+==================================================================
+Instruccion INP_IO RI: |[7]|
+v_A: 0
+=======================FIN DE ESTADO==============================
+##################################################################
+
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[1]|
+==================================================================
+=======================FIN DE ESTADO==============================
+##################################################################
+
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[2]|
+==================================================================
+PC actual: |[000000000100]|
+=======================FIN DE ESTADO==============================
+##################################################################
+
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[3]|
+==================================================================
+=======================FIN DE ESTADO==============================
+##################################################################
+
+v_addr_ports_INP: 1
+v_data_ports_INP: 1
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[4]|
+==================================================================
+Instruccion INP_IO RI: |[7]|
+v_A: 1
+=======================FIN DE ESTADO==============================
+##################################################################
+
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[1]|
+==================================================================
+=======================FIN DE ESTADO==============================
+##################################################################
+
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[2]|
+==================================================================
+PC actual: |[000000000110]|
+Instruccion HLT_CTR RI: |[38]|
+=======================FIN DE ESTADO==============================
+##################################################################
+
+
+##################################################################
+======================INICIO DE ESTADO============================
+Estado actual: |[30]|
+==================================================================
+=======================FIN DE ESTADO==============================
+##################################################################
+
+
+Error: (E519) wait() is only allowed in SC_THREADs and SC_CTHREADs: 
+        in SC_METHODs use next_trigger() instead
+In file: ../../../../src/sysc/kernel/sc_wait.cpp:166
+Inicio del analisis de sintaxis 
+
+raw_file.ASM
+Catching pcs
+None
+Position counter oct declaration: @0000
+Position counter oct declaration: 0000
+Position counter dec declaration: 0
+Position counter line:
+9 | * = @0000
+
+Catching pcs
+None
+Position counter oct declaration: @0000
+Position counter oct declaration: 0000
+Position counter dec declaration: 0
+Position counter line:
+477 | * = @0000
+
+Warning: No matching line!
+478 | BIN1 LDA #%000110
+
+Warning: No matching line!
+479 | INP @00
+
+Warning: No matching line!
+480 | INP @01
+
+Warning: No matching line!
+481 | HLT
+
+
+Constant extracted, dictionary (Decimal): {}
+
+List without init data: ['478 BIN1 LDA #%000110\n', '479 INP @00\n', '480 INP @01\n', '481 HLT\n']
+Init without error's: 0 
+
+Checking labels
+
+['478 BIN1 LDA #%000110\n', '479 INP @00\n', '480 INP @01\n', '481 HLT\n']
+
+
+Data_list 478 BIN1 LDA #%000110
+Contador de posicion actualizado: 0
+OK!:Las etiquetas e instrucciones cumplen las reglas
+Cumple con la condicion de etiqueta de 8 caracteres + instruccion
+label_inst_inm_match iter:  0
+Es una instruccion de direccionamiento inmediato
+Etiqueta ingresada al diccionario: {'BIN1': 0}
+478 | BIN1 LDA #%000110 ; LDA CON ARGUMENTO BINARIO.
+CONST remplazada:  %000110
+Argumento numerico
+
+
+Data_list 479 INP @00
+Contador de posicion actualizado: 2
+OK!:Las etiquetas e instrucciones cumplen las reglas
+This is an Instruction+Argument entry
+inst_io_match iter:  0
+constante io  @00
+Argumentos numericos: @00
+
+
+Data_list 480 INP @01
+Contador de posicion actualizado: 2
+OK!:Las etiquetas e instrucciones cumplen las reglas
+This is an Instruction+Argument entry
+inst_io_match iter:  0
+constante io  @01
+Argumentos numericos: @01
+
+
+Data_list 481 HLT
+Contador de posicion actualizado: 2
+OK!:Las etiquetas e instrucciones cumplen las reglas
+This is an Instruction+Argument entry
+iter:  0
+
+
+Data_list 478 BIN1 LDA #%000110
+Contador de posicion actualizado: 3
+OK!:Las etiquetas e instrucciones cumplen las reglas
+Cumple con la condicion de etiqueta de 8 caracteres + instruccion
+label_inst_inm_match iter:  1
+label_inm BIN1 
+data_list_x:  478 LDA #%000110
+
+data_list ['478 LDA #%000110\n', '479 INP @00\n', '480 INP @01\n', '481 HLT\n']
+
+
+Data_list 479 INP @00
+Contador de posicion actualizado: 3
+OK!:Las etiquetas e instrucciones cumplen las reglas
+This is an Instruction+Argument entry
+inst_io_match iter:  1
+
+
+Data_list 480 INP @01
+Contador de posicion actualizado: 3
+OK!:Las etiquetas e instrucciones cumplen las reglas
+This is an Instruction+Argument entry
+inst_io_match iter:  1
+
+
+Data_list 481 HLT
+Contador de posicion actualizado: 3
+OK!:Las etiquetas e instrucciones cumplen las reglas
+This is an Instruction+Argument entry
+iter:  1
+Diccionario de instrucciones: ['478 LDA #%000110\n', '479 INP @00\n', '480 INP @01\n', '481 HLT\n']
+Diccionario de identificadores: {'BIN1': 0}
+
+Executer
+Checking instructions
+
+Es una instruccion + argumento
+OPCODE de INST: 000000
+Binary Operand:  000110
+Bin 2 bin:  000110
+This is an inmediate instruction+argument:
+478 | BIN1 LDA #%000110 ; LDA CON ARGUMENTO BINARIO.
+
+Es una instruccion + argumento
+OPCODE de INST: 000111
+Octal Operand:  0
+Octal to bin Operand:  000000
+This is an IO instruction+argument:
+479 | INP @00 ; CARGA DEL PUERTO DE ENTRADA AL ACUMULADOR @01.
+
+Es una instruccion + argumento
+OPCODE de INST: 000111
+Octal Operand:  1
+Octal to bin Operand:  000001
+This is an IO instruction+argument:
+480 | INP @01 ; CARGA DEL PUERTO DE ENTRADA AL ACUMULADOR @01.
+
+Es una instruccion + argumento
+OPCODE de INST: 100110
+This is an control instruction+argument:
+481 | HLT ; INSTRUCCION DE CONTROL HTL, DETIENE LA EJECUCION.
+
+Main program without error's: 0 
+
+Operand,pa,pb XXXXXX000110 XXXXXX 000110
+Obj line:  0 0
+
+Obj line:  1 6
+
+Operand,pa,pb XXXXXX000000 XXXXXX 000000
+Obj line:  2 7
+
+Obj line:  3 0
+
+Operand,pa,pb XXXXXX000001 XXXXXX 000001
+Obj line:  4 7
+
+Obj line:  5 1
+
+Operand,pa,pb XXXXXXXXXXXX XXXXXX XXXXXX
+Obj line:  6 38
+
+obj dic 0
+obj dic 6
+obj dic 7
+obj dic 0
+obj dic 7
+obj dic 1
+obj dic 38
+
+ram_init_file_name: ../clion/ram_init.txt
+
+pc_file_name: ../clion/pc_init.txt
+
+Successful syntax analysis!
+WM Destroy

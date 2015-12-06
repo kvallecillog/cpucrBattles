@@ -1,6 +1,6 @@
 include Makefile.config
 
-PROJECT := cpucr_battles
+PROJECT := cpucr_model
 SRCS    := $(wildcard *.cpp)
 OBJS    := $(SRCS:.cpp=.o)
 

@@ -114,5 +114,11 @@
 #define Estado_30 30
 #define Estado_31 31
 
-//extern int portdata[64];
+// Definicion del tiempo maximo de simulacion.
+#define T_Sim_US 300
 
+// Tamaño del arreglo de puertos. 64 Puertos de la CPUCR.
+#define PORTS 64
+
+// Tamaño del arreglo de memoria. 4096 Puertos de la CPUCR.
+#define MEMORY 4096

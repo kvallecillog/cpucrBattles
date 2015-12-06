@@ -59,7 +59,8 @@ void  transactor::p_Ports() {
     cout << "Escritura a Puerto: " << "|[@" << port_address << "]|" << " Dato: " << "|[@" << port_data_write << "]|" << " en T: " << "|[" << sc_time_stamp() << "]|" << endl;
 
 //  Lectura de puertos
-    sc_core::wait(1000, SC_NS);
+    int tiempo = 1000;
+    sc_core::wait(tiempo, SC_NS);
     port_address = 1;
     port_data_read = port_data[port_address];
     cout << "Lectura a Puerto: " << "|[@" << port_address << "]|" << " Dato: " << "|[@" << port_data_read << "]|" << " en T: " << "|[" << sc_time_stamp() << "]|" << endl;
@@ -366,27 +367,19 @@ void transactor::p_PC(){
                         break;
                     }
                     case INP_IO:{
-
                         v_PC = v_PC + 1;
                         pc_t_o = v_PC;
                         v_addr = v_addr + 1;
                         addr_t_o = v_addr;
-
-//                        v_addr_ports = dat_t_i.read().to_int();
-//                        v_data_ports = port_data[v_addr_ports];
-
                         break;
                     }
                     case OUT_IO:{
-
                         v_PC = v_PC + 1;
                         pc_t_o = v_PC;
                         v_addr = v_addr + 1;
                         addr_t_o = v_addr;
-
                         v_addr_ports = dat_t_i.read().to_int();
-
-                    break;
+                        break;
                     }
                     case BCC_REL: case BCS_REL: case BEQ_REL:
                     case BNE_REL: case BMI_REL: case BPL_REL:
@@ -552,7 +545,6 @@ void transactor::p_PC(){
                     {
                         pc_t_o = pc_t_o;
                         addr_t_o = addr_t_o;
-//                        addr_ports_t_o = addr_ports_t_o;
                         break;
                     }
                     case LDA_IND: case ADD_IND: case SUB_IND:
@@ -1276,7 +1268,6 @@ void  transactor::p_est_prox() {
                         }
                         break;
                     }// Fin switch inst 2 palabras.
-
                     case INP_IO:{
                         cout << "Instruccion INP_IO RI: " << "|[" << s_RI << "]|" << endl;
                         // Actualizar proximo estado.
@@ -1298,28 +1289,8 @@ void  transactor::p_est_prox() {
                         cout << "Instruccion OUT_IO RI: " << "|[" << s_RI << "]|" << endl;
                         // Actualizar proximo estado.
                         s_est_prox = Estado_1;
-                        //Actualizacion de los puertos.
-//                        ports_t_o = acum_t_o;
                         break;
                     }
-
-//                    case INP_IO:{
-//                        cout << "Instruccion INP_IO RI: " << "|[" << s_RI << "]|" << endl;
-//                        // Actualizar proximo estado.
-//                        s_est_prox = Estado_5;
-//                        // Cargar valor de memoria en acumulador.
-//                        //dat_t_o = ports_t_i.read().to_int();
-//                        break;
-//                    }
-//
-////                    case OUT_IO:{
-////                        cout << "Instruccion OUT_IO RI: " << "|[" << s_RI << "]|" << endl;
-////                        // Actualizar proximo estado.
-////                        s_est_prox = Estado_1;
-////                        //Actualizacion de los puertos.
-////                        ports_t_o = acum_t_o;
-////                        break;
-////                    }
                     case STA_ABS: case LDA_ABS: case ADD_ABS:
                     case SUB_ABS: case AND_ABS: case ORA_ABS:
                     case JMP_ABS: case JSR_ABS: case JSR_IND:
@@ -1363,69 +1334,13 @@ void  transactor::p_est_prox() {
                 switch (s_RI.read().to_uint()) {
                     case JMP_ABS: case RTS_CTR: case RTI_CTR:{
                         switch (s_RI.read().to_uint()) {
-//                            case INP_IO:{
-//                                cout << "Instruccion INP_IO RI: " << "|[" << s_RI << "]|" << endl;
-//                                // Actualizar proximo estado.
-//                                s_est_prox = Estado_1;
-//                                // Cargar valor de memoria en acumulador.
-//                                v_A = ports_t_i.read().to_int();
-//                                //Actualizacion del acumulador.
-//                                acum_t_o = v_A;
-//                                // Calculo de banderas.
-//                                v_bn_t = v_A[5];
-//                                v_bz_t = v_A.nor_reduce();
-//                                v_S = (v_bn_t, "X", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
-//                                s_t_o = v_S;
-//                                // Fin de calculo de banderas.
-//                                break;
-//                            }
-//                            case OUT_IO:{
-//                                cout << "Instruccion OUT_IO RI: " << "|[" << s_RI << "]|" << endl;
-//                                // Actualizar proximo estado.
-//                                s_est_prox = Estado_1;
-//                                //Actualizacion de los puertos.
-//                                ports_t_o = acum_t_o;
-//                                break;
-//                            }
-
                             default:{
                                 s_est_prox = Estado_1;
                                 break;
                             }
                         }
                         break;
-
                     }
-//                    case INP_IO:{
-//                        cout << "Instruccion INP_IO RI: " << "|[" << s_RI << "]|" << endl;
-//                        // Actualizar proximo estado.
-//                        s_est_prox = Estado_1;
-//                        // Cargar valor de memoria en acumulador.
-//
-////                        cout << "Puerto Dato leido: " <<port_data_write << endl;
-//                        v_A = v_data_ports;
-//
-//                        cout << "v_A: " << v_A << endl;
-////                        cout << "ports_t_i.read().: " << ports_t_i.read() << endl;
-//                        //Actualizacion del acumulador.
-//                        acum_t_o = v_A;
-//
-//                        // Calculo de banderas.
-//                        v_bn_t = v_A[5];
-//                        v_bz_t = v_A.nor_reduce();
-//                        v_S = (v_bn_t, "1", v_bv_t, v_bi_t, v_bz_t, v_bc_t);
-//                        s_t_o = v_S;
-//                        // Fin de calculo de banderas.
-//                        break;
-//                    }
-//                    case OUT_IO:{
-//                        cout << "Instruccion OUT_IO RI: " << "|[" << s_RI << "]|" << endl;
-//                        // Actualizar proximo estado.
-//                        s_est_prox = Estado_1;
-//                        //Actualizacion de los puertos.
-////                        ports_t_o = acum_t_o;
-//                        break;
-//                    }
                     default: {
                         s_est_prox = Estado_7;
                         break;
