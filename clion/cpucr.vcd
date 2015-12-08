@@ -1,5 +1,5 @@
 $date
-     Dec 05, 2015       19:40:34
+     Dec 06, 2015       18:17:18
 $end
 
 $version
@@ -158,9 +158,9 @@ b100 aaaat
 b11 aaaau
 b1 aaaav
 b1 aaaba
-b110 aaabc
+b1 aaabc
 b1 aaabg
-b110 aaabh
+b1 aaabh
 b1 aaabj
 b1 aaabp
 
@@ -169,7 +169,7 @@ b1 aaabp
 
 #2000
 0aaaae
-b110 aaaaf
+b1 aaaaf
 b10000 aaaag
 0aaaak
 b11 aaaam
@@ -178,7 +178,7 @@ b11 aaaan
 b1 aaaat
 b100 aaaau
 b10000 aaaaw
-b110 aaaax
+b1 aaaax
 b10000 aaabm
 
 #2250
@@ -196,9 +196,9 @@ b10 aaaat
 b1 aaaau
 b10 aaaav
 b10 aaaba
-b111 aaabc
+b0 aaabc
 b10 aaabg
-b111 aaabh
+b0 aaabh
 b10 aaabj
 b10 aaabp
 
@@ -215,7 +215,6 @@ b1 aaaao
 0aaaas
 b11 aaaat
 b10 aaaau
-b111 aaabl
 
 #3250
 1aaaae
@@ -230,9 +229,9 @@ b100 aaaat
 b11 aaaau
 b11 aaaav
 b11 aaaba
-b0 aaabc
+b10 aaabc
 b11 aaabg
-b0 aaabh
+b10 aaabh
 b11 aaabj
 b11 aaabp
 
@@ -241,15 +240,12 @@ b11 aaabp
 
 #4000
 0aaaae
-b0 aaaaf
-b10010 aaaag
+b10 aaaaf
 0aaaak
 0aaaar
 b1 aaaat
 b100 aaaau
-b10010 aaaaw
-b0 aaaax
-b10010 aaabm
+b10 aaaax
 
 #4250
 1aaaae
@@ -266,9 +262,9 @@ b10 aaaat
 b1 aaaau
 b100 aaaav
 b100 aaaba
-b111 aaabc
+b0 aaabc
 b100 aaabg
-b111 aaabh
+b0 aaabh
 b100 aaabj
 b100 aaabp
 
@@ -297,9 +293,9 @@ b100 aaaat
 b11 aaaau
 b101 aaaav
 b101 aaaba
-b1 aaabc
+b11 aaabc
 b101 aaabg
-b1 aaabh
+b11 aaabh
 b101 aaabj
 b101 aaabp
 
@@ -308,15 +304,12 @@ b101 aaabp
 
 #6000
 0aaaae
-b1 aaaaf
-b10000 aaaag
+b11 aaaaf
 0aaaak
 0aaaar
 b1 aaaat
 b100 aaaau
-b10000 aaaaw
-b1 aaaax
-b10000 aaabm
+b11 aaaax
 
 #6250
 1aaaae
@@ -333,9 +326,9 @@ b10 aaaat
 b1 aaaau
 b110 aaaav
 b110 aaaba
-b100110 aaabc
+b0 aaabc
 b110 aaabg
-b100110 aaabh
+b0 aaabh
 b110 aaabj
 b110 aaabp
 
@@ -348,42 +341,73 @@ b110 aaabp
 0aaaak
 0aaaar
 0aaaas
-b11110 aaaat
+b11 aaaat
 b10 aaaau
-b100110 aaabl
 
 #7250
 1aaaae
 
 #7500
+b111 aaaaa
 0aaaae
+b111 aaaai
 1aaaak
 1aaaar
-b11110 aaaau
+b100 aaaat
+b11 aaaau
+b111 aaaav
+b111 aaaba
+b100 aaabc
+b111 aaabg
+b100 aaabh
+b111 aaabj
+b111 aaabp
 
 #7750
 1aaaae
 
 #8000
 0aaaae
+b100 aaaaf
 0aaaak
 0aaaar
+b1 aaaat
+b100 aaaau
+b100 aaaax
 
 #8250
 1aaaae
 
 #8500
+b1000 aaaaa
 0aaaae
+b1000 aaaai
+1aaaaj
 1aaaak
 1aaaar
+1aaaas
+b10 aaaat
+b1 aaaau
+b1000 aaaav
+b1000 aaaba
+b100110 aaabc
+b1000 aaabg
+b100110 aaabh
+b1000 aaabj
+b1000 aaabp
 
 #8750
 1aaaae
 
 #9000
 0aaaae
+0aaaaj
 0aaaak
 0aaaar
+0aaaas
+b11110 aaaat
+b10 aaaau
+b100110 aaabl
 
 #9250
 1aaaae
@@ -392,6 +416,7 @@ b11110 aaaau
 0aaaae
 1aaaak
 1aaaar
+b11110 aaaau
 
 #9750
 1aaaae

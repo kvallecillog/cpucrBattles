@@ -23,7 +23,7 @@ using namespace sc_dt;
 using namespace boost::algorithm;
 
 void  transactor::p_Ports() {
-/** Proceso que simula la interface de escritura externa de puertos.
+/** Proceso que simula la interfaz de escritura externa de puertos.
  * @param port_address - port_address Direccion del puerto al que se quiere escribir.
  * @param port_data - port_data Arreglo que contiene los datos escritos a los puertos.
  * @param port_data_write - port_data_write variable que contiene el proximo estado.
@@ -704,10 +704,6 @@ void transactor::p_PC(){
                 break;
             }
             default: {
-//                v_PC = 0;
-//                pc_t_o = pc_t_o;
-//                v_addr = 0;
-//                addr_t_o = v_addr;
                 pc_t_o = pc_t_o;
                 pc_t_o = pc_t_o;
                 v_addr = addr_t_o;

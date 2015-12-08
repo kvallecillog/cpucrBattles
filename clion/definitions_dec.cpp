@@ -48,14 +48,15 @@
 #define OUT_IO 15
 
 // No funciona en esta version
+#define TPA_CTR 6
+#define TAP_CTR 14
+
 #define JMP_ABS 49
-#define JSR_ABS 57
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        #define JSR_ABS 57
 #define JMP_IND 51
 #define JSR_IND 59
 #define PLA_ACU 53
 #define PHA_ACU 61
-#define TPA_CTR 6
-#define TAP_CTR 14
 #define RTI_CTR 22
 #define RTS_CTR 30
 #define PLS_CTR 54

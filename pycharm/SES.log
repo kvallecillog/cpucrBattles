@@ -1,0 +1,852 @@
+2015-12-08 01:09:45,165 - INFO - ************************************
+2015-12-08 01:09:45,165 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:09:45,166 - INFO - ************************************
+2015-12-08 01:09:45,166 - INFO - ====================================
+2015-12-08 01:09:45,166 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:09:45,166 - INFO - ====================================
+2015-12-08 01:09:45,166 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:09:45,220 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:09:45,253 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:09:45,261 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:09:45,261 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:09:45,262 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:09:45,262 - INFO - Inicia el analisis del init!
+2015-12-08 01:09:45,272 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:09:45,273 - INFO - 9 | * = @0000
+2015-12-08 01:09:45,273 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:09:45,273 - WARNING - 24 | L1 SEC
+2015-12-08 01:09:45,274 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:09:45,274 - WARNING - 25 | HLT
+2015-12-08 01:09:45,274 - INFO - Constantes extraidas (En decimal): {}
+2015-12-08 01:09:45,274 - INFO - Finaliza el analisis del init!
+2015-12-08 01:09:45,275 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:09:45,275 - INFO - ====================================
+2015-12-08 01:09:45,275 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:09:45,276 - INFO - ====================================
+2015-12-08 01:09:45,276 - INFO - Lista de lineas por analizar:
+2015-12-08 01:09:45,276 - INFO - ====================================
+2015-12-08 01:09:45,276 - INFO - 24 L1 SEC
+2015-12-08 01:09:45,276 - INFO - 25 HLT
+2015-12-08 01:09:45,277 - INFO - ====================================
+2015-12-08 01:09:45,303 - INFO - ####################################
+2015-12-08 01:09:45,303 - INFO - Linea en analisis: 24 L1 SEC
+2015-12-08 01:09:45,304 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:09:45,304 - INFO - Instruccion de direccionamiento: imp
+2015-12-08 01:09:45,304 - INFO - Pasada #: 0
+2015-12-08 01:09:45,304 - INFO - Etiqueta ingresada al diccionario: {'L1': 0}
+2015-12-08 01:09:45,304 - INFO - ####################################
+2015-12-08 01:09:45,304 - INFO - Linea en analisis: 25 HLT
+2015-12-08 01:09:45,305 - INFO - Es una linea con inst + argumento
+2015-12-08 01:09:45,305 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:09:45,305 - INFO - Pasada #: 0
+2015-12-08 01:09:45,305 - INFO - ####################################
+2015-12-08 01:09:45,305 - INFO - Linea en analisis: 24 L1 SEC
+2015-12-08 01:09:45,306 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:09:45,306 - INFO - Instruccion de direccionamiento: imp
+2015-12-08 01:09:45,306 - INFO - Pasada #: 1
+2015-12-08 01:09:45,306 - INFO - ####################################
+2015-12-08 01:09:45,307 - INFO - Linea en analisis: 25 HLT
+2015-12-08 01:09:45,307 - INFO - Es una linea con inst + argumento
+2015-12-08 01:09:45,307 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:09:45,307 - INFO - Pasada #: 1
+2015-12-08 01:09:45,307 - INFO - ####################################
+2015-12-08 01:09:45,308 - INFO - Diccionario de identificadores extraidos: {'L1': 0}
+2015-12-08 01:09:45,308 - INFO - Inicia Etapa de instrucciones!
+2015-12-08 01:09:45,309 - INFO - Etapa de instruc sin errores: 0
+2015-12-08 01:09:45,324 - INFO - Programa objeto escrito en el archivo: ../clion/ram_init.txt
+2015-12-08 01:09:45,324 - INFO - |[Address]||[Data]|
+2015-12-08 01:09:45,324 - INFO - |[0]|=====|[20]|
+2015-12-08 01:09:45,325 - INFO - |[1]|=====|[38]|
+2015-12-08 01:09:45,325 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:09:45,325 - INFO - ====================================
+2015-12-08 01:09:45,325 - INFO - ************************************
+2015-12-08 01:11:10,949 - INFO - ************************************
+2015-12-08 01:11:10,949 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:11:10,949 - INFO - ************************************
+2015-12-08 01:11:10,949 - INFO - ====================================
+2015-12-08 01:11:10,950 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:11:10,950 - INFO - ====================================
+2015-12-08 01:11:10,950 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:11:10,981 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:11:11,015 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:11:11,021 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:11:11,024 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:11:11,025 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:11:11,025 - INFO - Inicia el analisis del init!
+2015-12-08 01:11:11,035 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:11:11,035 - INFO - 9 | * = @0000
+2015-12-08 01:11:11,035 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:11:11,036 - WARNING - 24 | L1 SEC
+2015-12-08 01:11:11,036 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:11:11,036 - WARNING - 25 | L4 NOP
+2015-12-08 01:11:11,036 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:11:11,036 - WARNING - 26 | HLT
+2015-12-08 01:11:11,037 - INFO - Constantes extraidas (En decimal): {}
+2015-12-08 01:11:11,037 - INFO - Finaliza el analisis del init!
+2015-12-08 01:11:11,037 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:11:11,037 - INFO - ====================================
+2015-12-08 01:11:11,038 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:11:11,038 - INFO - ====================================
+2015-12-08 01:11:11,038 - INFO - Lista de lineas por analizar:
+2015-12-08 01:11:11,038 - INFO - ====================================
+2015-12-08 01:11:11,038 - INFO - 24 L1 SEC
+2015-12-08 01:11:11,038 - INFO - 25 L4 NOP
+2015-12-08 01:11:11,039 - INFO - 26 HLT
+2015-12-08 01:11:11,039 - INFO - ====================================
+2015-12-08 01:11:11,057 - INFO - ####################################
+2015-12-08 01:11:11,058 - INFO - Linea en analisis: 24 L1 SEC
+2015-12-08 01:11:11,058 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:11:11,058 - INFO - Instruccion de direccionamiento: imp
+2015-12-08 01:11:11,058 - INFO - Pasada #: 0
+2015-12-08 01:11:11,058 - INFO - Etiqueta ingresada al diccionario: {'L1': 0}
+2015-12-08 01:11:11,059 - INFO - ####################################
+2015-12-08 01:11:11,059 - INFO - Linea en analisis: 25 L4 NOP
+2015-12-08 01:11:11,059 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:11:11,059 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:11:11,059 - INFO - Pasada #: 0
+2015-12-08 01:11:11,060 - INFO - Etiqueta extraida: L4
+2015-12-08 01:11:11,060 - INFO - Etiqueta ingresada al diccionario: {'L4': 1, 'L1': 0}
+2015-12-08 01:11:11,060 - INFO - ####################################
+2015-12-08 01:11:11,060 - INFO - Linea en analisis: 26 HLT
+2015-12-08 01:11:11,060 - INFO - Es una linea con inst + argumento
+2015-12-08 01:11:11,060 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:11:11,061 - INFO - Pasada #: 0
+2015-12-08 01:11:11,061 - INFO - ####################################
+2015-12-08 01:11:11,061 - INFO - Linea en analisis: 24 L1 SEC
+2015-12-08 01:11:11,061 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:11:11,061 - INFO - Instruccion de direccionamiento: imp
+2015-12-08 01:11:11,062 - INFO - Pasada #: 1
+2015-12-08 01:11:11,062 - INFO - ####################################
+2015-12-08 01:11:11,062 - INFO - Linea en analisis: 25 L4 NOP
+2015-12-08 01:11:11,062 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:11:11,063 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:11:11,063 - INFO - Pasada #: 1
+2015-12-08 01:11:11,063 - INFO - Instruccion procesada: 25 NOP
+
+2015-12-08 01:11:11,063 - INFO - ####################################
+2015-12-08 01:11:11,064 - INFO - Linea en analisis: 26 HLT
+2015-12-08 01:11:11,064 - INFO - Es una linea con inst + argumento
+2015-12-08 01:11:11,064 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:11:11,065 - INFO - Pasada #: 1
+2015-12-08 01:11:11,065 - INFO - ####################################
+2015-12-08 01:11:11,065 - INFO - Diccionario de identificadores extraidos: {'L4': 1, 'L1': 0}
+2015-12-08 01:11:11,065 - INFO - Inicia Etapa de instrucciones!
+2015-12-08 01:11:11,067 - INFO - Etapa de instruc sin errores: 0
+2015-12-08 01:11:11,082 - INFO - Programa objeto escrito en el archivo: ../clion/ram_init.txt
+2015-12-08 01:11:11,082 - INFO - |[Address]||[Data]|
+2015-12-08 01:11:11,082 - INFO - |[0]|=====|[20]|
+2015-12-08 01:11:11,082 - INFO - |[1]|=====|[46]|
+2015-12-08 01:11:11,082 - INFO - |[2]|=====|[38]|
+2015-12-08 01:11:11,083 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:11:11,083 - INFO - ====================================
+2015-12-08 01:11:11,083 - INFO - ************************************
+2015-12-08 01:11:24,720 - INFO - ************************************
+2015-12-08 01:11:24,721 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:11:24,721 - INFO - ************************************
+2015-12-08 01:11:24,721 - INFO - ====================================
+2015-12-08 01:11:24,721 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:11:24,721 - INFO - ====================================
+2015-12-08 01:11:24,722 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:11:24,752 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:11:24,784 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:11:24,789 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:11:24,789 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:11:24,790 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:11:24,790 - INFO - Inicia el analisis del init!
+2015-12-08 01:11:24,799 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:11:24,799 - INFO - 9 | * = @0000
+2015-12-08 01:11:24,799 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:11:24,799 - WARNING - 24 | L1 SEC
+2015-12-08 01:11:24,799 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:11:24,800 - WARNING - 25 | L4 NOP
+2015-12-08 01:11:24,800 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:11:24,800 - WARNING - 26 | L6 CLA
+2015-12-08 01:11:24,800 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:11:24,800 - WARNING - 27 | HLT
+2015-12-08 01:11:24,801 - INFO - Constantes extraidas (En decimal): {}
+2015-12-08 01:11:24,801 - INFO - Finaliza el analisis del init!
+2015-12-08 01:11:24,801 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:11:24,802 - INFO - ====================================
+2015-12-08 01:11:24,802 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:11:24,802 - INFO - ====================================
+2015-12-08 01:11:24,802 - INFO - Lista de lineas por analizar:
+2015-12-08 01:11:24,803 - INFO - ====================================
+2015-12-08 01:11:24,803 - INFO - 24 L1 SEC
+2015-12-08 01:11:24,803 - INFO - 25 L4 NOP
+2015-12-08 01:11:24,803 - INFO - 26 L6 CLA
+2015-12-08 01:11:24,803 - INFO - 27 HLT
+2015-12-08 01:11:24,803 - INFO - ====================================
+2015-12-08 01:11:24,825 - INFO - ####################################
+2015-12-08 01:11:24,826 - INFO - Linea en analisis: 24 L1 SEC
+2015-12-08 01:11:24,826 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:11:24,826 - INFO - Instruccion de direccionamiento: imp
+2015-12-08 01:11:24,826 - INFO - Pasada #: 0
+2015-12-08 01:11:24,826 - INFO - Etiqueta ingresada al diccionario: {'L1': 0}
+2015-12-08 01:11:24,826 - INFO - ####################################
+2015-12-08 01:11:24,827 - INFO - Linea en analisis: 25 L4 NOP
+2015-12-08 01:11:24,827 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:11:24,827 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:11:24,827 - INFO - Pasada #: 0
+2015-12-08 01:11:24,827 - INFO - Etiqueta extraida: L4
+2015-12-08 01:11:24,827 - INFO - Etiqueta ingresada al diccionario: {'L1': 0, 'L4': 1}
+2015-12-08 01:11:24,827 - INFO - ####################################
+2015-12-08 01:11:24,827 - INFO - Linea en analisis: 26 L6 CLA
+2015-12-08 01:11:24,827 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:11:24,827 - INFO - Instruccion de direccionamiento: acum
+2015-12-08 01:11:24,828 - INFO - Pasada #: 0
+2015-12-08 01:11:24,828 - INFO - Etiqueta extraida: L6
+2015-12-08 01:11:24,828 - INFO - Etiqueta ingresada al diccionario: {'L6': 2, 'L1': 0, 'L4': 1}
+2015-12-08 01:11:24,828 - INFO - ####################################
+2015-12-08 01:11:24,828 - INFO - Linea en analisis: 27 HLT
+2015-12-08 01:11:24,828 - INFO - Es una linea con inst + argumento
+2015-12-08 01:11:24,829 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:11:24,829 - INFO - Pasada #: 0
+2015-12-08 01:11:24,829 - INFO - ####################################
+2015-12-08 01:11:24,829 - INFO - Linea en analisis: 24 L1 SEC
+2015-12-08 01:11:24,829 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:11:24,829 - INFO - Instruccion de direccionamiento: imp
+2015-12-08 01:11:24,829 - INFO - Pasada #: 1
+2015-12-08 01:11:24,830 - INFO - ####################################
+2015-12-08 01:11:24,830 - INFO - Linea en analisis: 25 L4 NOP
+2015-12-08 01:11:24,830 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:11:24,830 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:11:24,830 - INFO - Pasada #: 1
+2015-12-08 01:11:24,830 - INFO - Instruccion procesada: 25 NOP
+
+2015-12-08 01:11:24,830 - INFO - ####################################
+2015-12-08 01:11:24,831 - INFO - Linea en analisis: 26 L6 CLA
+2015-12-08 01:11:24,831 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:11:24,831 - INFO - Instruccion de direccionamiento: acum
+2015-12-08 01:11:24,831 - INFO - Pasada #: 1
+2015-12-08 01:11:24,832 - INFO - Instruccion procesada: 26 CLA
+
+2015-12-08 01:11:24,832 - INFO - ####################################
+2015-12-08 01:11:24,832 - INFO - Linea en analisis: 27 HLT
+2015-12-08 01:11:24,832 - INFO - Es una linea con inst + argumento
+2015-12-08 01:11:24,832 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:11:24,832 - INFO - Pasada #: 1
+2015-12-08 01:11:24,832 - INFO - ####################################
+2015-12-08 01:11:24,832 - INFO - Diccionario de identificadores extraidos: {'L6': 2, 'L1': 0, 'L4': 1}
+2015-12-08 01:11:24,832 - INFO - Inicia Etapa de instrucciones!
+2015-12-08 01:11:24,834 - INFO - Etapa de instruc sin errores: 0
+2015-12-08 01:11:24,849 - INFO - Programa objeto escrito en el archivo: ../clion/ram_init.txt
+2015-12-08 01:11:24,850 - INFO - |[Address]||[Data]|
+2015-12-08 01:11:24,850 - INFO - |[0]|=====|[20]|
+2015-12-08 01:11:24,850 - INFO - |[1]|=====|[46]|
+2015-12-08 01:11:24,850 - INFO - |[2]|=====|[5]|
+2015-12-08 01:11:24,851 - INFO - |[3]|=====|[38]|
+2015-12-08 01:11:24,851 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:11:24,851 - INFO - ====================================
+2015-12-08 01:11:24,851 - INFO - ************************************
+2015-12-08 01:26:41,197 - INFO - ************************************
+2015-12-08 01:26:41,197 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:26:41,197 - INFO - ************************************
+2015-12-08 01:26:41,197 - INFO - ====================================
+2015-12-08 01:26:41,197 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:26:41,197 - INFO - ====================================
+2015-12-08 01:26:41,197 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:26:41,236 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:26:41,263 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:26:41,269 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:26:41,269 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:26:41,270 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:26:41,270 - INFO - Inicia el analisis del init!
+2015-12-08 01:26:41,277 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:26:41,277 - INFO - 9 | * = @0000
+2015-12-08 01:26:41,277 - INFO - Linea con constante: 
+2015-12-08 01:26:41,277 - INFO - 10 | CONST1 = @0000
+2015-12-08 01:26:41,277 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:26:41,277 - WARNING - 24 | L1 SEC
+2015-12-08 01:26:41,278 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:26:41,278 - WARNING - 25 | L4 NOP
+2015-12-08 01:26:41,278 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:26:41,278 - WARNING - 26 | L6 CLA
+2015-12-08 01:26:41,279 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:26:41,279 - WARNING - 27 | INP CONST+1
+2015-12-08 01:26:41,279 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:26:41,279 - WARNING - 28 | HLT
+2015-12-08 01:26:41,279 - INFO - Constantes extraidas (En decimal): {'CONST1': 0}
+2015-12-08 01:26:41,279 - INFO - Finaliza el analisis del init!
+2015-12-08 01:26:41,279 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:26:41,279 - INFO - ====================================
+2015-12-08 01:26:41,280 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:26:41,282 - INFO - ====================================
+2015-12-08 01:26:41,282 - INFO - Lista de lineas por analizar:
+2015-12-08 01:26:41,282 - INFO - ====================================
+2015-12-08 01:26:41,282 - INFO - 24 L1 SEC
+2015-12-08 01:26:41,282 - INFO - 25 L4 NOP
+2015-12-08 01:26:41,283 - INFO - 26 L6 CLA
+2015-12-08 01:26:41,283 - INFO - 27 INP CONST+1
+2015-12-08 01:26:41,283 - INFO - 28 HLT
+2015-12-08 01:26:41,283 - INFO - ====================================
+2015-12-08 01:26:41,310 - INFO - ####################################
+2015-12-08 01:26:41,311 - INFO - Linea en analisis: 24 L1 SEC
+2015-12-08 01:26:41,311 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:26:41,311 - INFO - Instruccion de direccionamiento: imp
+2015-12-08 01:26:41,311 - INFO - Pasada #: 0
+2015-12-08 01:26:41,311 - INFO - Etiqueta ingresada al diccionario: {'L1': 0, 'CONST1': 0}
+2015-12-08 01:26:41,311 - INFO - ####################################
+2015-12-08 01:26:41,311 - INFO - Linea en analisis: 25 L4 NOP
+2015-12-08 01:26:41,312 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:26:41,312 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:26:41,312 - INFO - Pasada #: 0
+2015-12-08 01:26:41,312 - INFO - Etiqueta extraida: L4
+2015-12-08 01:26:41,312 - INFO - Etiqueta ingresada al diccionario: {'L1': 0, 'CONST1': 0, 'L4': 1}
+2015-12-08 01:26:41,312 - INFO - ####################################
+2015-12-08 01:26:41,312 - INFO - Linea en analisis: 26 L6 CLA
+2015-12-08 01:26:41,312 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:26:41,312 - INFO - Instruccion de direccionamiento: acum
+2015-12-08 01:26:41,313 - INFO - Pasada #: 0
+2015-12-08 01:26:41,313 - INFO - Etiqueta extraida: L6
+2015-12-08 01:26:41,313 - INFO - Etiqueta ingresada al diccionario: {'L1': 0, 'CONST1': 0, 'L4': 1, 'L6': 2}
+2015-12-08 01:26:41,313 - INFO - ####################################
+2015-12-08 01:26:41,313 - INFO - Linea en analisis: 27 INP CONST+1
+2015-12-08 01:26:41,313 - INFO - Es una linea con inst + argumento
+2015-12-08 01:26:41,314 - INFO - Instruccion de direccionamiento: io
+2015-12-08 01:26:41,314 - INFO - Argumento extraido: CONST+1
+2015-12-08 01:26:41,314 - INFO - Pasada #: 0
+2015-12-08 01:27:07,227 - INFO - ************************************
+2015-12-08 01:27:07,228 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:27:07,228 - INFO - ************************************
+2015-12-08 01:27:07,228 - INFO - ====================================
+2015-12-08 01:27:07,229 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:27:07,229 - INFO - ====================================
+2015-12-08 01:27:07,229 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:27:07,266 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:27:07,297 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:27:07,301 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:27:07,301 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:27:07,302 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:27:07,302 - INFO - Inicia el analisis del init!
+2015-12-08 01:27:07,308 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:27:07,308 - INFO - 9 | * = @0000
+2015-12-08 01:27:07,309 - INFO - Linea con constante: 
+2015-12-08 01:27:07,309 - INFO - 10 | CONST1 = @0000
+2015-12-08 01:27:07,309 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:27:07,309 - WARNING - 24 | L1 SEC
+2015-12-08 01:27:07,309 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:27:07,309 - WARNING - 25 | L4 NOP
+2015-12-08 01:27:07,310 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:27:07,310 - WARNING - 26 | L6 CLA
+2015-12-08 01:27:07,310 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:27:07,310 - WARNING - 27 | INP CONST+1
+2015-12-08 01:27:07,310 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:27:07,310 - WARNING - 28 | HLT
+2015-12-08 01:27:07,310 - INFO - Constantes extraidas (En decimal): {'CONST1': 0}
+2015-12-08 01:27:07,310 - INFO - Finaliza el analisis del init!
+2015-12-08 01:27:07,310 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:27:07,311 - INFO - ====================================
+2015-12-08 01:27:07,311 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:27:07,311 - INFO - ====================================
+2015-12-08 01:27:07,311 - INFO - Lista de lineas por analizar:
+2015-12-08 01:27:07,311 - INFO - ====================================
+2015-12-08 01:27:07,311 - INFO - 24 L1 SEC
+2015-12-08 01:27:07,311 - INFO - 25 L4 NOP
+2015-12-08 01:27:07,311 - INFO - 26 L6 CLA
+2015-12-08 01:27:07,312 - INFO - 27 INP CONST+1
+2015-12-08 01:27:07,312 - INFO - 28 HLT
+2015-12-08 01:27:07,312 - INFO - ====================================
+2015-12-08 01:27:07,340 - INFO - ####################################
+2015-12-08 01:27:07,340 - INFO - Linea en analisis: 24 L1 SEC
+2015-12-08 01:27:07,340 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:27:07,341 - INFO - Instruccion de direccionamiento: imp
+2015-12-08 01:27:07,341 - INFO - Pasada #: 0
+2015-12-08 01:27:07,341 - INFO - Etiqueta ingresada al diccionario: {'L1': 0, 'CONST1': 0}
+2015-12-08 01:27:07,341 - INFO - ####################################
+2015-12-08 01:27:07,341 - INFO - Linea en analisis: 25 L4 NOP
+2015-12-08 01:27:07,341 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:27:07,342 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:27:07,342 - INFO - Pasada #: 0
+2015-12-08 01:27:07,342 - INFO - Etiqueta extraida: L4
+2015-12-08 01:27:07,342 - INFO - Etiqueta ingresada al diccionario: {'L1': 0, 'L4': 1, 'CONST1': 0}
+2015-12-08 01:27:07,342 - INFO - ####################################
+2015-12-08 01:27:07,342 - INFO - Linea en analisis: 26 L6 CLA
+2015-12-08 01:27:07,343 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:27:07,343 - INFO - Instruccion de direccionamiento: acum
+2015-12-08 01:27:07,343 - INFO - Pasada #: 0
+2015-12-08 01:27:07,343 - INFO - Etiqueta extraida: L6
+2015-12-08 01:27:07,343 - INFO - Etiqueta ingresada al diccionario: {'L6': 2, 'L1': 0, 'L4': 1, 'CONST1': 0}
+2015-12-08 01:27:07,343 - INFO - ####################################
+2015-12-08 01:27:07,343 - INFO - Linea en analisis: 27 INP CONST+1
+2015-12-08 01:27:07,344 - INFO - Es una linea con inst + argumento
+2015-12-08 01:27:07,344 - INFO - Instruccion de direccionamiento: io
+2015-12-08 01:27:07,344 - INFO - Argumento extraido: CONST+1
+2015-12-08 01:27:07,344 - INFO - Pasada #: 0
+2015-12-08 01:27:07,345 - ERROR - Error, constante: CONST+1, no fue definida dentro del ASM.
+2015-12-08 01:27:07,345 - INFO - ####################################
+2015-12-08 01:27:07,345 - INFO - Diccionario de identificadores extraidos: {'L6': 2, 'L1': 0, 'L4': 1, 'CONST1': 0}
+2015-12-08 01:27:07,345 - ERROR - Error encontrado en etapa de instrucciones!
+2015-12-08 01:27:07,345 - ERROR - Lista de errores encontrados: ['Error, constante: CONST+1, no fue definida dentro del ASM.']
+2015-12-08 01:27:07,346 - ERROR - El ASM no fue ensamblado!
+2015-12-08 01:27:07,346 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:27:07,346 - INFO - ====================================
+2015-12-08 01:27:07,346 - INFO - ************************************
+2015-12-08 01:27:31,812 - INFO - ************************************
+2015-12-08 01:27:31,812 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:27:31,813 - INFO - ************************************
+2015-12-08 01:27:31,813 - INFO - ====================================
+2015-12-08 01:27:31,813 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:27:31,813 - INFO - ====================================
+2015-12-08 01:27:31,813 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:27:31,843 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:27:31,898 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:27:31,905 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:27:31,906 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:27:31,906 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:27:31,906 - INFO - Inicia el analisis del init!
+2015-12-08 01:27:31,912 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:27:31,912 - INFO - 9 | * = @0000
+2015-12-08 01:27:31,912 - INFO - Linea con constante: 
+2015-12-08 01:27:31,912 - INFO - 10 | CONST1 = @0000
+2015-12-08 01:27:31,913 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:27:31,913 - WARNING - 27 | INP CONST+1
+2015-12-08 01:27:31,913 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:27:31,913 - WARNING - 28 | HLT
+2015-12-08 01:27:31,913 - INFO - Constantes extraidas (En decimal): {'CONST1': 0}
+2015-12-08 01:27:31,913 - INFO - Finaliza el analisis del init!
+2015-12-08 01:27:31,913 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:27:31,913 - INFO - ====================================
+2015-12-08 01:27:31,913 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:27:31,914 - INFO - ====================================
+2015-12-08 01:27:31,914 - INFO - Lista de lineas por analizar:
+2015-12-08 01:27:31,914 - INFO - ====================================
+2015-12-08 01:27:31,914 - INFO - 27 INP CONST+1
+2015-12-08 01:27:31,914 - INFO - 28 HLT
+2015-12-08 01:27:31,914 - INFO - ====================================
+2015-12-08 01:27:31,957 - INFO - ####################################
+2015-12-08 01:27:31,957 - INFO - Linea en analisis: 27 INP CONST+1
+2015-12-08 01:27:31,957 - INFO - Es una linea con inst + argumento
+2015-12-08 01:27:31,958 - INFO - Instruccion de direccionamiento: io
+2015-12-08 01:27:31,958 - INFO - Argumento extraido: CONST+1
+2015-12-08 01:27:31,958 - INFO - Pasada #: 0
+2015-12-08 01:27:31,958 - ERROR - Error, constante: CONST+1, no fue definida dentro del ASM.
+2015-12-08 01:27:31,958 - INFO - ####################################
+2015-12-08 01:27:31,958 - INFO - Diccionario de identificadores extraidos: {'CONST1': 0}
+2015-12-08 01:27:31,958 - ERROR - Error encontrado en etapa de instrucciones!
+2015-12-08 01:27:31,958 - ERROR - Lista de errores encontrados: ['Error, constante: CONST+1, no fue definida dentro del ASM.']
+2015-12-08 01:27:31,958 - ERROR - El ASM no fue ensamblado!
+2015-12-08 01:27:31,959 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:27:31,959 - INFO - ====================================
+2015-12-08 01:27:31,959 - INFO - ************************************
+2015-12-08 01:28:41,809 - INFO - ************************************
+2015-12-08 01:28:41,809 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:28:41,810 - INFO - ************************************
+2015-12-08 01:28:41,810 - INFO - ====================================
+2015-12-08 01:28:41,810 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:28:41,810 - INFO - ====================================
+2015-12-08 01:28:41,810 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:28:41,837 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:28:41,863 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:28:41,869 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:28:41,869 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:28:41,869 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:28:41,870 - INFO - Inicia el analisis del init!
+2015-12-08 01:28:41,876 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:28:41,876 - INFO - 9 | * = @0000
+2015-12-08 01:28:41,877 - INFO - Linea con constante: 
+2015-12-08 01:28:41,877 - INFO - 10 | CONST1 = @0000
+2015-12-08 01:28:41,877 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:28:41,877 - WARNING - 27 | INP CONST+1
+2015-12-08 01:28:41,877 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:28:41,878 - WARNING - 28 | HLT
+2015-12-08 01:28:41,878 - INFO - Constantes extraidas (En decimal): {'CONST1': 0}
+2015-12-08 01:28:41,878 - INFO - Finaliza el analisis del init!
+2015-12-08 01:28:41,878 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:28:41,878 - INFO - ====================================
+2015-12-08 01:28:41,879 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:28:41,879 - INFO - ====================================
+2015-12-08 01:28:41,879 - INFO - Lista de lineas por analizar:
+2015-12-08 01:28:41,879 - INFO - ====================================
+2015-12-08 01:28:41,879 - INFO - 27 INP CONST+1
+2015-12-08 01:28:41,880 - INFO - 28 HLT
+2015-12-08 01:28:41,880 - INFO - ====================================
+2015-12-08 01:28:41,902 - INFO - ####################################
+2015-12-08 01:28:41,902 - INFO - Linea en analisis: 27 INP CONST+1
+2015-12-08 01:28:41,903 - INFO - Es una linea con inst + argumento
+2015-12-08 01:28:41,903 - INFO - Instruccion de direccionamiento: io
+2015-12-08 01:28:41,903 - INFO - Argumento extraido: CONST+1
+2015-12-08 01:28:41,903 - INFO - Pasada #: 0
+2015-12-08 01:28:41,903 - INFO - CONST
+2015-12-08 01:28:41,903 - ERROR - Error, constante: CONST+1, no fue definida dentro del ASM.
+2015-12-08 01:28:41,903 - INFO - ####################################
+2015-12-08 01:28:41,903 - INFO - Diccionario de identificadores extraidos: {'CONST1': 0}
+2015-12-08 01:28:41,903 - ERROR - Error encontrado en etapa de instrucciones!
+2015-12-08 01:28:41,904 - ERROR - Lista de errores encontrados: ['Error, constante: CONST+1, no fue definida dentro del ASM.']
+2015-12-08 01:28:41,904 - ERROR - El ASM no fue ensamblado!
+2015-12-08 01:28:41,904 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:28:41,904 - INFO - ====================================
+2015-12-08 01:28:41,904 - INFO - ************************************
+2015-12-08 01:31:19,103 - INFO - ************************************
+2015-12-08 01:31:19,103 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:31:19,103 - INFO - ************************************
+2015-12-08 01:31:19,103 - INFO - ====================================
+2015-12-08 01:31:19,103 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:31:19,104 - INFO - ====================================
+2015-12-08 01:31:19,104 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:31:19,134 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:31:19,180 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:31:19,188 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:31:19,188 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:31:19,189 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:31:19,189 - INFO - Inicia el analisis del init!
+2015-12-08 01:31:19,204 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:31:19,204 - INFO - 9 | * = @0000
+2015-12-08 01:31:19,204 - INFO - Linea con constante: 
+2015-12-08 01:31:19,205 - INFO - 10 | CONST1 = @0000
+2015-12-08 01:31:19,205 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:31:19,205 - WARNING - 27 | INP CONST+1
+2015-12-08 01:31:19,206 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:31:19,206 - WARNING - 28 | HLT
+2015-12-08 01:31:19,206 - INFO - Constantes extraidas (En decimal): {'CONST1': 0}
+2015-12-08 01:31:19,206 - INFO - Finaliza el analisis del init!
+2015-12-08 01:31:19,206 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:31:19,207 - INFO - ====================================
+2015-12-08 01:31:19,207 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:31:19,207 - INFO - ====================================
+2015-12-08 01:31:19,207 - INFO - Lista de lineas por analizar:
+2015-12-08 01:31:19,207 - INFO - ====================================
+2015-12-08 01:31:19,207 - INFO - 27 INP CONST+1
+2015-12-08 01:31:19,208 - INFO - 28 HLT
+2015-12-08 01:31:19,208 - INFO - ====================================
+2015-12-08 01:31:19,248 - INFO - ####################################
+2015-12-08 01:31:19,249 - INFO - Linea en analisis: 27 INP CONST+1
+2015-12-08 01:31:19,249 - INFO - Es una linea con inst + argumento
+2015-12-08 01:31:19,249 - INFO - Instruccion de direccionamiento: io
+2015-12-08 01:31:19,249 - INFO - Argumento extraido: CONST+1
+2015-12-08 01:31:19,249 - INFO - Pasada #: 0
+2015-12-08 01:31:19,250 - INFO - CONST
+2015-12-08 01:31:19,250 - ERROR - Error, constante: CONST+1, no fue definida dentro del ASM.
+2015-12-08 01:31:19,250 - INFO - ####################################
+2015-12-08 01:31:19,250 - INFO - Diccionario de identificadores extraidos: {'CONST1': 0}
+2015-12-08 01:31:19,250 - ERROR - Error encontrado en etapa de instrucciones!
+2015-12-08 01:31:19,250 - ERROR - Lista de errores encontrados: ['Error, constante: CONST+1, no fue definida dentro del ASM.']
+2015-12-08 01:31:19,250 - ERROR - El ASM no fue ensamblado!
+2015-12-08 01:31:19,251 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:31:19,251 - INFO - ====================================
+2015-12-08 01:31:19,251 - INFO - ************************************
+2015-12-08 01:31:32,705 - INFO - ************************************
+2015-12-08 01:31:32,706 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:31:32,706 - INFO - ************************************
+2015-12-08 01:31:32,706 - INFO - ====================================
+2015-12-08 01:31:32,707 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:31:32,707 - INFO - ====================================
+2015-12-08 01:31:32,707 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:31:32,752 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:31:32,799 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:31:32,811 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:31:32,811 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:31:32,812 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:31:32,813 - INFO - Inicia el analisis del init!
+2015-12-08 01:31:32,821 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:31:32,822 - INFO - 9 | * = @0000
+2015-12-08 01:31:32,822 - INFO - Linea con constante: 
+2015-12-08 01:31:32,823 - INFO - 10 | CONST1 = @0000
+2015-12-08 01:31:32,823 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:31:32,823 - WARNING - 27 | INP CONST+1
+2015-12-08 01:31:32,823 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:31:32,824 - WARNING - 28 | HLT
+2015-12-08 01:31:32,824 - INFO - Constantes extraidas (En decimal): {'CONST1': 0}
+2015-12-08 01:31:32,824 - INFO - Finaliza el analisis del init!
+2015-12-08 01:31:32,824 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:31:32,824 - INFO - ====================================
+2015-12-08 01:31:32,824 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:31:32,825 - INFO - ====================================
+2015-12-08 01:31:32,825 - INFO - Lista de lineas por analizar:
+2015-12-08 01:31:32,825 - INFO - ====================================
+2015-12-08 01:31:32,825 - INFO - 27 INP CONST+1
+2015-12-08 01:31:32,825 - INFO - 28 HLT
+2015-12-08 01:31:32,825 - INFO - ====================================
+2015-12-08 01:31:32,857 - INFO - ####################################
+2015-12-08 01:31:32,857 - INFO - Linea en analisis: 27 INP CONST+1
+2015-12-08 01:31:32,857 - INFO - Es una linea con inst + argumento
+2015-12-08 01:31:32,858 - INFO - Instruccion de direccionamiento: io
+2015-12-08 01:31:32,858 - INFO - Argumento extraido: CONST+1
+2015-12-08 01:31:32,858 - INFO - Pasada #: 0
+2015-12-08 01:31:32,858 - INFO - CONST
+2015-12-08 01:31:32,859 - ERROR - Error, constante: CONST+1, no fue definida dentro del ASM.
+2015-12-08 01:31:32,859 - INFO - ####################################
+2015-12-08 01:31:32,859 - INFO - Diccionario de identificadores extraidos: {'CONST1': 0}
+2015-12-08 01:31:32,859 - ERROR - Error encontrado en etapa de instrucciones!
+2015-12-08 01:31:32,859 - ERROR - Lista de errores encontrados: ['Error, constante: CONST+1, no fue definida dentro del ASM.']
+2015-12-08 01:31:32,888 - ERROR - El ASM no fue ensamblado!
+2015-12-08 01:31:32,890 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:31:32,892 - INFO - ====================================
+2015-12-08 01:31:32,897 - INFO - ************************************
+2015-12-08 01:32:38,849 - INFO - ************************************
+2015-12-08 01:32:38,849 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:32:38,849 - INFO - ************************************
+2015-12-08 01:32:38,850 - INFO - ====================================
+2015-12-08 01:32:38,850 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:32:38,850 - INFO - ====================================
+2015-12-08 01:32:38,850 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:32:38,895 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:32:38,924 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:32:38,929 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:32:38,930 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:32:38,930 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:32:38,931 - INFO - Inicia el analisis del init!
+2015-12-08 01:32:38,937 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:32:38,937 - INFO - 9 | * = @0000
+2015-12-08 01:32:38,937 - INFO - Linea con constante: 
+2015-12-08 01:32:38,937 - INFO - 10 | CONST = @0000
+2015-12-08 01:32:38,938 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:32:38,938 - WARNING - 27 | INP CONST+1
+2015-12-08 01:32:38,938 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:32:38,938 - WARNING - 28 | HLT
+2015-12-08 01:32:38,939 - INFO - Constantes extraidas (En decimal): {'CONST': 0}
+2015-12-08 01:32:38,939 - INFO - Finaliza el analisis del init!
+2015-12-08 01:32:38,939 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:32:38,939 - INFO - ====================================
+2015-12-08 01:32:38,940 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:32:38,940 - INFO - ====================================
+2015-12-08 01:32:38,940 - INFO - Lista de lineas por analizar:
+2015-12-08 01:32:38,940 - INFO - ====================================
+2015-12-08 01:32:38,940 - INFO - 27 INP CONST+1
+2015-12-08 01:32:38,940 - INFO - 28 HLT
+2015-12-08 01:32:38,940 - INFO - ====================================
+2015-12-08 01:32:38,968 - INFO - ####################################
+2015-12-08 01:32:38,968 - INFO - Linea en analisis: 27 INP CONST+1
+2015-12-08 01:32:38,969 - INFO - Es una linea con inst + argumento
+2015-12-08 01:32:38,969 - INFO - Instruccion de direccionamiento: io
+2015-12-08 01:32:38,969 - INFO - Argumento extraido: CONST+1
+2015-12-08 01:32:38,969 - INFO - Pasada #: 0
+2015-12-08 01:32:38,969 - INFO - CONST
+2015-12-08 01:32:38,969 - INFO - Constante remplazada: CONST+1 = @01
+2015-12-08 01:32:38,970 - INFO - Linea con constante remplazada: ['27 INP @01\n', '28 HLT\n']
+2015-12-08 01:32:38,970 - INFO - ####################################
+2015-12-08 01:32:38,970 - INFO - Linea en analisis: 28 HLT
+2015-12-08 01:32:38,970 - INFO - Es una linea con inst + argumento
+2015-12-08 01:32:38,970 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:32:38,971 - INFO - Pasada #: 0
+2015-12-08 01:32:38,971 - INFO - ####################################
+2015-12-08 01:32:38,971 - INFO - Linea en analisis: 27 INP @01
+2015-12-08 01:32:38,971 - INFO - Es una linea con inst + argumento
+2015-12-08 01:32:38,971 - INFO - Instruccion de direccionamiento: io
+2015-12-08 01:32:38,972 - INFO - Argumento extraido: @01
+2015-12-08 01:32:38,972 - INFO - Pasada #: 1
+2015-12-08 01:32:38,972 - INFO - ####################################
+2015-12-08 01:32:38,972 - INFO - Linea en analisis: 28 HLT
+2015-12-08 01:32:38,972 - INFO - Es una linea con inst + argumento
+2015-12-08 01:32:38,973 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:32:38,973 - INFO - Pasada #: 1
+2015-12-08 01:32:38,973 - INFO - ####################################
+2015-12-08 01:32:38,973 - INFO - Diccionario de identificadores extraidos: {'CONST': 0}
+2015-12-08 01:32:38,973 - INFO - Inicia Etapa de instrucciones!
+2015-12-08 01:32:38,975 - INFO - Etapa de instruc sin errores: 0
+2015-12-08 01:32:38,993 - INFO - Programa objeto escrito en el archivo: ../clion/ram_init.txt
+2015-12-08 01:32:38,993 - INFO - |[Address]||[Data]|
+2015-12-08 01:32:38,993 - INFO - |[0]|=====|[7]|
+2015-12-08 01:32:38,993 - INFO - |[1]|=====|[1]|
+2015-12-08 01:32:38,994 - INFO - |[2]|=====|[38]|
+2015-12-08 01:32:38,994 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:32:38,994 - INFO - ====================================
+2015-12-08 01:32:38,994 - INFO - ************************************
+2015-12-08 01:39:43,007 - INFO - ************************************
+2015-12-08 01:39:43,007 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:39:43,007 - INFO - ************************************
+2015-12-08 01:39:43,008 - INFO - ====================================
+2015-12-08 01:39:43,008 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:39:43,008 - INFO - ====================================
+2015-12-08 01:39:43,008 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:39:43,043 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:39:43,072 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:39:43,079 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:39:43,079 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:39:43,081 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:39:43,081 - INFO - Inicia el analisis del init!
+2015-12-08 01:39:43,096 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:39:43,097 - INFO - 9 | * = @0000
+2015-12-08 01:39:43,097 - INFO - Linea con constante: 
+2015-12-08 01:39:43,097 - INFO - 10 | CONST = @0000
+2015-12-08 01:39:43,097 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:39:43,098 - WARNING - 27 | INP CONST+1
+2015-12-08 01:39:43,098 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:39:43,098 - WARNING - 28 | HLT
+2015-12-08 01:39:43,098 - INFO - Constantes extraidas (En decimal): {'CONST': 0}
+2015-12-08 01:39:43,098 - INFO - Finaliza el analisis del init!
+2015-12-08 01:39:43,099 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:39:43,099 - INFO - ====================================
+2015-12-08 01:39:43,099 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:39:43,099 - INFO - ====================================
+2015-12-08 01:39:43,100 - INFO - Lista de lineas por analizar:
+2015-12-08 01:39:43,100 - INFO - ====================================
+2015-12-08 01:39:43,100 - INFO - 27 INP CONST+1
+2015-12-08 01:39:43,100 - INFO - 28 HLT
+2015-12-08 01:39:43,100 - INFO - ====================================
+2015-12-08 01:39:43,137 - INFO - ####################################
+2015-12-08 01:39:43,137 - INFO - Linea en analisis: 27 INP CONST+1
+2015-12-08 01:39:43,137 - INFO - Es una linea con inst + argumento
+2015-12-08 01:39:43,138 - INFO - Instruccion de direccionamiento: io
+2015-12-08 01:39:43,138 - INFO - Argumento extraido: CONST+1
+2015-12-08 01:39:43,138 - INFO - Pasada #: 0
+2015-12-08 01:39:43,138 - INFO - CONST
+2015-12-08 01:39:43,138 - INFO - Constante remplazada: CONST+1 = @01
+2015-12-08 01:39:43,139 - INFO - Linea con constante remplazada: ['27 INP @01\n', '28 HLT\n']
+2015-12-08 01:39:43,139 - INFO - ####################################
+2015-12-08 01:39:43,139 - INFO - Linea en analisis: 28 HLT
+2015-12-08 01:39:43,139 - INFO - Es una linea con inst + argumento
+2015-12-08 01:39:43,140 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:39:43,140 - INFO - Pasada #: 0
+2015-12-08 01:39:43,140 - INFO - ####################################
+2015-12-08 01:39:43,140 - INFO - Linea en analisis: 27 INP @01
+2015-12-08 01:39:43,140 - INFO - Es una linea con inst + argumento
+2015-12-08 01:39:43,140 - INFO - Instruccion de direccionamiento: io
+2015-12-08 01:39:43,141 - INFO - Argumento extraido: @01
+2015-12-08 01:39:43,141 - INFO - Pasada #: 1
+2015-12-08 01:39:43,141 - INFO - ####################################
+2015-12-08 01:39:43,141 - INFO - Linea en analisis: 28 HLT
+2015-12-08 01:39:43,141 - INFO - Es una linea con inst + argumento
+2015-12-08 01:39:43,142 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:39:43,142 - INFO - Pasada #: 1
+2015-12-08 01:39:43,142 - INFO - ####################################
+2015-12-08 01:39:43,142 - INFO - Diccionario de identificadores extraidos: {'CONST': 0}
+2015-12-08 01:39:43,142 - INFO - Inicia Etapa de instrucciones!
+2015-12-08 01:39:43,144 - INFO - Etapa de instruc sin errores: 0
+2015-12-08 01:39:43,167 - INFO - Programa objeto escrito en el archivo: ../clion/ram_init.txt
+2015-12-08 01:39:43,167 - INFO - |[Address]||[Data]|
+2015-12-08 01:39:43,167 - INFO - |[0]|=====|[7]|
+2015-12-08 01:39:43,167 - INFO - |[1]|=====|[1]|
+2015-12-08 01:39:43,167 - INFO - |[2]|=====|[38]|
+2015-12-08 01:39:43,168 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:39:43,168 - INFO - ====================================
+2015-12-08 01:39:43,168 - INFO - ************************************
+2015-12-08 01:39:57,045 - INFO - ************************************
+2015-12-08 01:39:57,045 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:39:57,046 - INFO - ************************************
+2015-12-08 01:39:57,046 - INFO - ====================================
+2015-12-08 01:39:57,046 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:39:57,047 - INFO - ====================================
+2015-12-08 01:39:57,047 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:39:57,077 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:39:57,108 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:39:57,114 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:39:57,115 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:39:57,115 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:39:57,116 - INFO - Inicia el analisis del init!
+2015-12-08 01:39:57,122 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:39:57,123 - INFO - 9 | * = @0000
+2015-12-08 01:39:57,123 - INFO - Linea con constante: 
+2015-12-08 01:39:57,123 - INFO - 10 | CONST = @0000
+2015-12-08 01:39:57,123 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:39:57,123 - WARNING - 28 | BNE L1+1
+2015-12-08 01:39:57,124 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:39:57,124 - WARNING - 29 | HLT
+2015-12-08 01:39:57,124 - INFO - Constantes extraidas (En decimal): {'CONST': 0}
+2015-12-08 01:39:57,124 - INFO - Finaliza el analisis del init!
+2015-12-08 01:39:57,125 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:39:57,125 - INFO - ====================================
+2015-12-08 01:39:57,125 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:39:57,125 - INFO - ====================================
+2015-12-08 01:39:57,126 - INFO - Lista de lineas por analizar:
+2015-12-08 01:39:57,126 - INFO - ====================================
+2015-12-08 01:39:57,126 - INFO - 28 BNE L1+1
+2015-12-08 01:39:57,126 - INFO - 29 HLT
+2015-12-08 01:39:57,126 - INFO - ====================================
+2015-12-08 01:39:57,148 - INFO - ####################################
+2015-12-08 01:39:57,149 - INFO - Linea en analisis: 28 BNE L1+1
+2015-12-08 01:39:57,149 - INFO - Es una linea con inst + argumento
+2015-12-08 01:39:57,149 - INFO - Instruccion de direccionamiento: rel
+2015-12-08 01:39:57,149 - INFO - Pasada #: 0
+2015-12-08 01:39:57,149 - INFO - ####################################
+2015-12-08 01:39:57,150 - INFO - Linea en analisis: 29 HLT
+2015-12-08 01:39:57,150 - INFO - Es una linea con inst + argumento
+2015-12-08 01:39:57,150 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:39:57,150 - INFO - Pasada #: 0
+2015-12-08 01:39:57,150 - INFO - ####################################
+2015-12-08 01:39:57,151 - INFO - Linea en analisis: 28 BNE L1+1
+2015-12-08 01:39:57,151 - INFO - Es una linea con inst + argumento
+2015-12-08 01:39:57,151 - INFO - Instruccion de direccionamiento: rel
+2015-12-08 01:39:57,151 - INFO - Pasada #: 1
+2015-12-08 01:39:57,151 - ERROR - Error, identificador: L1+1, no definido dentro del ASM
+2015-12-08 01:39:57,152 - INFO - ####################################
+2015-12-08 01:39:57,152 - INFO - Diccionario de identificadores extraidos: {'CONST': 0}
+2015-12-08 01:39:57,152 - ERROR - Error encontrado en etapa de instrucciones!
+2015-12-08 01:39:57,152 - ERROR - Lista de errores encontrados: ['Error, identificador: L1+1, no definido dentro del ASM']
+2015-12-08 01:39:57,152 - ERROR - El ASM no fue ensamblado!
+2015-12-08 01:39:57,152 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:39:57,152 - INFO - ====================================
+2015-12-08 01:39:57,153 - INFO - ************************************
+2015-12-08 01:40:10,235 - INFO - ************************************
+2015-12-08 01:40:10,236 - INFO - Resumen de resultados de ensamblado
+2015-12-08 01:40:10,236 - INFO - ************************************
+2015-12-08 01:40:10,236 - INFO - ====================================
+2015-12-08 01:40:10,236 - INFO - Inicia la ejecucion del ensamblador
+2015-12-08 01:40:10,236 - INFO - ====================================
+2015-12-08 01:40:10,236 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-08 01:40:10,267 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-08 01:40:10,311 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:40:10,316 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-08 01:40:10,316 - INFO - Comentarios eliminados de las lineas!
+2015-12-08 01:40:10,317 - INFO - Multiples espacios en blanco eliminados!
+2015-12-08 01:40:10,317 - INFO - Inicia el analisis del init!
+2015-12-08 01:40:10,323 - INFO - Linea con Puntero de Posicion: 
+2015-12-08 01:40:10,323 - INFO - 9 | * = @0000
+2015-12-08 01:40:10,323 - INFO - Linea con constante: 
+2015-12-08 01:40:10,323 - INFO - 10 | CONST = @0000
+2015-12-08 01:40:10,324 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:40:10,324 - WARNING - 28 | BNE L1+1
+2015-12-08 01:40:10,324 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:40:10,324 - WARNING - 29 | L1 INA
+2015-12-08 01:40:10,324 - WARNING - Alerta: Linea de flujo principal!
+2015-12-08 01:40:10,324 - WARNING - 30 | HLT
+2015-12-08 01:40:10,324 - INFO - Constantes extraidas (En decimal): {'CONST': 0}
+2015-12-08 01:40:10,325 - INFO - Finaliza el analisis del init!
+2015-12-08 01:40:10,325 - INFO - Etapa de init sin errores: 0
+2015-12-08 01:40:10,325 - INFO - ====================================
+2015-12-08 01:40:10,325 - INFO - Inicia el analisis de etiquetas!
+2015-12-08 01:40:10,325 - INFO - ====================================
+2015-12-08 01:40:10,325 - INFO - Lista de lineas por analizar:
+2015-12-08 01:40:10,325 - INFO - ====================================
+2015-12-08 01:40:10,325 - INFO - 28 BNE L1+1
+2015-12-08 01:40:10,325 - INFO - 29 L1 INA
+2015-12-08 01:40:10,325 - INFO - 30 HLT
+2015-12-08 01:40:10,326 - INFO - ====================================
+2015-12-08 01:40:10,349 - INFO - ####################################
+2015-12-08 01:40:10,349 - INFO - Linea en analisis: 28 BNE L1+1
+2015-12-08 01:40:10,349 - INFO - Es una linea con inst + argumento
+2015-12-08 01:40:10,350 - INFO - Instruccion de direccionamiento: rel
+2015-12-08 01:40:10,350 - INFO - Pasada #: 0
+2015-12-08 01:40:10,350 - INFO - ####################################
+2015-12-08 01:40:10,350 - INFO - Linea en analisis: 29 L1 INA
+2015-12-08 01:40:10,350 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:40:10,350 - INFO - Instruccion de direccionamiento: acum
+2015-12-08 01:40:10,350 - INFO - Pasada #: 0
+2015-12-08 01:40:10,351 - INFO - Etiqueta extraida: L1
+2015-12-08 01:40:10,351 - INFO - Etiqueta ingresada al diccionario: {'CONST': 0, 'L1': 2}
+2015-12-08 01:40:10,351 - INFO - ####################################
+2015-12-08 01:40:10,351 - INFO - Linea en analisis: 30 HLT
+2015-12-08 01:40:10,352 - INFO - Es una linea con inst + argumento
+2015-12-08 01:40:10,352 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:40:10,352 - INFO - Pasada #: 0
+2015-12-08 01:40:10,352 - INFO - ####################################
+2015-12-08 01:40:10,352 - INFO - Linea en analisis: 28 BNE L1+1
+2015-12-08 01:40:10,352 - INFO - Es una linea con inst + argumento
+2015-12-08 01:40:10,353 - INFO - Instruccion de direccionamiento: rel
+2015-12-08 01:40:10,353 - INFO - Pasada #: 1
+2015-12-08 01:40:10,353 - INFO - Constante remplazada: L1+1 = @0001
+2015-12-08 01:40:10,353 - INFO - Linea con constante remplazada: ['28 BNE @0001\n', '29 L1 INA\n', '30 HLT\n']
+2015-12-08 01:40:10,354 - INFO - ####################################
+2015-12-08 01:40:10,354 - INFO - Linea en analisis: 29 L1 INA
+2015-12-08 01:40:10,354 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-08 01:40:10,354 - INFO - Instruccion de direccionamiento: acum
+2015-12-08 01:40:10,354 - INFO - Pasada #: 1
+2015-12-08 01:40:10,355 - INFO - Instruccion procesada: 29 INA
+
+2015-12-08 01:40:10,355 - INFO - ####################################
+2015-12-08 01:40:10,355 - INFO - Linea en analisis: 30 HLT
+2015-12-08 01:40:10,355 - INFO - Es una linea con inst + argumento
+2015-12-08 01:40:10,356 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-08 01:40:10,356 - INFO - Pasada #: 1
+2015-12-08 01:40:10,356 - INFO - ####################################
+2015-12-08 01:40:10,356 - INFO - Diccionario de identificadores extraidos: {'CONST': 0, 'L1': 2}
+2015-12-08 01:40:10,356 - INFO - Inicia Etapa de instrucciones!
+2015-12-08 01:40:10,358 - INFO - Etapa de instruc sin errores: 0
+2015-12-08 01:40:10,374 - INFO - Programa objeto escrito en el archivo: ../clion/ram_init.txt
+2015-12-08 01:40:10,374 - INFO - |[Address]||[Data]|
+2015-12-08 01:40:10,374 - INFO - |[0]|=====|[10]|
+2015-12-08 01:40:10,374 - INFO - |[1]|=====|[1]|
+2015-12-08 01:40:10,374 - INFO - |[2]|=====|[21]|
+2015-12-08 01:40:10,375 - INFO - |[3]|=====|[38]|
+2015-12-08 01:40:10,375 - INFO - Fin de la ejecucion de SES!
+2015-12-08 01:40:10,376 - INFO - ====================================
+2015-12-08 01:40:10,376 - INFO - ************************************

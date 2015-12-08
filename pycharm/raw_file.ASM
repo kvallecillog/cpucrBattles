@@ -4,41 +4,34 @@
 ;***********************************************************************************************************************
 
 ;=============================================================
-; Prueba de instruccion LDA inmediata.
+;#1  Prueba de instruccion LDA inmediata.
 ;=============================================================
 * = @0000 ; Declaracion del puntero de posicion.
-;LDA #1
-
-;INP @00
-;INP @01
-;INP @02
-;INP @03
-;OUT @01
-
-;INP @03
-;INP @02
-;INP @01
-;INP @00
-
-;LABEL = @0001
-;LABEL = @0002
-;BNE LABEL
-;BIN0 LDA #LABEL+1
-;BIN LDA LABEL+2
-;BIN2 LDA (LABEL+10000000)
-;LDA #LABEL+1
-;LDA LABEL+1
-;LDA (LABEL+1)
+CONST = @0000
+;CONST2 = 10
+;CONST3 = %00001
+;CONST4 = $A
+;ABS LDA @0000
+;BAS LDA CONST1
+;L1 INP CONST1
+;BUN LDA (CONST2)
 ;BIN LDA #%000001 ; LDA con argumento binario.
 ;OCT LDA #@02 ; LDA con argumento octal.
 ;HEX LDA #$03 ; LDA con argumento hexadecimal.
 ;DEC LDA #4 ; LDA con argumento decimal.
-;1234567 INA ;
-;HLT ; Instruccion de detencion.
+;L1 BNE L3+1
+;L3 INA
+;L1 SEC
+;L4 NOP
+;L6 CLA
+;INP CONST+1
+BNE L1+1
+L1 INA
+HLT ; Instruccion de detencion.
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion ADD inmediata.
+;#2 Prueba de instruccion ADD inmediata.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #1 ; LDA con argumento decimal.
@@ -50,7 +43,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion SUB inmediata.
+;#3 Prueba de instruccion SUB inmediata.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #10 ; LDA con argumento decimal.
@@ -62,7 +55,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion AND inmediata.
+;#4 Prueba de instruccion AND inmediata.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #%111111 ; LDA con argumento decimal.
@@ -74,7 +67,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion ORA inmediata.
+;#5 Prueba de instruccion ORA inmediata.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #%101000 ; LDA con argumento decimal.
@@ -93,7 +86,7 @@
 ;***********************************************************************************************************************
 
 ;=============================================================
-; Prueba de instruccion LDA absoluta.
+;#6 Prueba de instruccion LDA absoluta.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA @01 ; LDA absoluto.
@@ -101,7 +94,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion STA absoluta.
+;#7 Prueba de instruccion STA absoluta.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #7 ; LDA inmediato.
@@ -112,7 +105,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion ADD absoluta.
+;#8 Prueba de instruccion ADD absoluta.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #1 ; LDA inmediato con argumento decimal.
@@ -123,7 +116,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion SUB absoluta.
+;#9 Prueba de instruccion SUB absoluta.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #1 ; LDA inmediato con argumento decimal.
@@ -134,7 +127,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion AND absoluta.
+;#10 Prueba de instruccion AND absoluta.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #%111111 ; LDA inmediato con argumento binario.
@@ -145,7 +138,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion ORA absoluta.
+;#12 Prueba de instruccion ORA absoluta.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #%111000 ; LDA inmediato con argumento binario.
@@ -158,7 +151,7 @@
 ;***********************************************************************************************************************
 
 ;***********************************************************************************************************************
-; Instrucciones indirectas
+;#13 Instrucciones indirectas
 ;***********************************************************************************************************************
 ;=============================================================
 ; Prueba de instruccion LDA indirecta.
@@ -175,7 +168,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion STA indirecta.
+;#14 Prueba de instruccion STA indirecta.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #@11 ; LDA inmediato con argumento decimal.
@@ -190,7 +183,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion ADD indirecta.
+;#15 Prueba de instruccion ADD indirecta.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #@11 ; LDA inmediato con argumento decimal.
@@ -206,7 +199,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion SUB indirecta.
+;#16 Prueba de instruccion SUB indirecta.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #@11 ; LDA inmediato con argumento decimal.
@@ -222,7 +215,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion AND indirecta.
+;#17 Prueba de instruccion AND indirecta.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #@11 ; LDA inmediato con argumento decimal.
@@ -238,7 +231,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion ORA indirecta.
+;#18 Prueba de instruccion ORA indirecta.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #@11 ; LDA inmediato con argumento decimal.
@@ -259,7 +252,7 @@
 ;***********************************************************************************************************************
 
 ;=============================================================
-; Prueba de instruccion CLA de acumulador.
+;#19 Prueba de instruccion CLA de acumulador.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #1 ; LDA con argumento decimal.
@@ -268,7 +261,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion CPA de acumulador.
+;#20 Prueba de instruccion CPA de acumulador.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #%111000 ; LDA con argumento decimal.
@@ -277,7 +270,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion INA de acumulador.
+;#21 Prueba de instruccion INA de acumulador.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #1 ; LDA con argumento decimal.
@@ -286,7 +279,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion INA de acumulador.
+;#22 Prueba de instruccion INA de acumulador.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #1 ; LDA con argumento decimal.
@@ -295,7 +288,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion ROL de acumulador.
+;#23 Prueba de instruccion ROL de acumulador.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #%111011 ; LDA con argumento decimal.
@@ -304,7 +297,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion ROR de acumulador.
+;#24 Prueba de instruccion ROR de acumulador.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #%111011 ; LDA con argumento decimal.
@@ -318,7 +311,7 @@
 ;***********************************************************************************************************************
 
 ;=============================================================
-; Prueba de instruccion SEC implicita.
+;#25 Prueba de instruccion SEC implicita.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #0 ; LDA con argumento decimal.
@@ -327,7 +320,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion CLC implicita.
+;#26 Prueba de instruccion CLC implicita.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #0 ; LDA con argumento decimal.
@@ -337,7 +330,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion SEI implicita.
+;#27 Prueba de instruccion SEI implicita.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #0 ; LDA con argumento decimal.
@@ -346,7 +339,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion CLI implicita.
+;#28 Prueba de instruccion CLI implicita.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #0 ; LDA con argumento decimal.
@@ -361,7 +354,7 @@
 ;***********************************************************************************************************************
 
 ;=============================================================
-; Prueba de instruccion BEQ relativa.
+;#29 Prueba de instruccion BEQ relativa.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #0 ; LDA con argumento decimal.
@@ -370,7 +363,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion BNE relativa.
+;#30 Prueba de instruccion BNE relativa.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #1 ; LDA con argumento decimal.
@@ -379,7 +372,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion BCC relativa.
+;#31 Prueba de instruccion BCC relativa.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 SEC ; Pone en alto la bandera de acarreo.
@@ -389,7 +382,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion BCS relativa.
+;#32 Prueba de instruccion BCS relativa.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 CLC ; Pone en BAJO la bandera de acarreo.
@@ -399,7 +392,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion BPL relativa.
+;#33 Prueba de instruccion BPL relativa.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #%000001 ; LDA con argumento binario.
@@ -408,7 +401,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion BMI relativa.
+;#34 Prueba de instruccion BMI relativa.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #%100000 ; LDA con argumento binario negativo.
@@ -417,7 +410,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion BVC relativa.
+;#35 Prueba de instruccion BVC relativa.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #1 ; LDA con argumento binario.
@@ -427,7 +420,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion BVS relativa.
+;#36 Prueba de instruccion BVS relativa.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;L1 LDA #%010110 ; LDA con argumento binario.
@@ -442,7 +435,7 @@
 ;***********************************************************************************************************************
 
 ;=============================================================
-; Prueba de instruccion HLT de control.
+;#37 Prueba de instruccion HLT de control.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;BIN LDA #%000001 ; LDA con argumento binario.
@@ -450,7 +443,7 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion NOP de control.
+;#38 Prueba de instruccion NOP de control.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
 ;NOP ; Instruccion de control NOP.
@@ -459,7 +452,7 @@
 ;***********************************************************************************************************************
 
 ;***********************************************************************************************************************
-; Instrucciones de entrada salida
+;#39 Instrucciones de entrada salida
 ;***********************************************************************************************************************
 
 ;=============================================================
@@ -472,276 +465,11 @@
 ;=============================================================
 
 ;=============================================================
-; Prueba de instruccion INP de control.
-;=============================================================
-* = @0000 ; Declaracion del puntero de posicion.
-BIN1 LDA #%000110 ; LDA con argumento binario.
-INP @00 ; Carga del puerto de entrada al acumulador @01.
-INP @01 ; Carga del puerto de entrada al acumulador @01.
-HLT ; Instruccion de control HTL, detiene la ejecucion.
-;=============================================================
-
-;=============================================================
-; Prueba de instruccion STA indirecta.
+;#40 Prueba de instruccion INP de control.
 ;=============================================================
 ;* = @0000 ; Declaracion del puntero de posicion.
-;L1 LDA #@11 ; LDA inmediato con argumento decimal.
-;L2 STA @1000 ; STA absoluto, escritura a PB.
-;L3 LDA #@22 ; LDA inmediato con argumento decimal.
-;L4 STA @1001 ; STA absoluto, escritura a PA.
-;L5 LDA #7 ; LDA inmediato con argumento decimal.
-;L6 STA (@1000) ; STA indirecto, escritura de 7 a @0102.
-;L7 ADD #1 ; ADD inmediato con argumento decimal.
-;L8 LDA @2211 ; LDA absoluto.
-;HLT ; Instruccion de detencion.
+;BIN1 LDA #%000110 ; LDA con argumento binario.
+;INP @00 ; Carga del puerto de entrada al acumulador @01.
+;INP @01 ; Carga del puerto de entrada al acumulador @01.
+;HLT ; Instruccion de control HTL, detiene la ejecucion.
 ;=============================================================
-
-
-;DBWRD @0000
-;WRD @0000
-;LALA1 = 66
-;upper = 55
-;lala2 = 7
-;BIN = %001000001000
-;OCT = @12
-;HEX = $FFFF
-;DEC = 10
-;LALA2 = @0007
-;LALA3 = 11
-;LALA4 = %111
-;DBWRD @0000
-;WRD @0000
-
-;* = @000A DOESNT WORK
-;* = * + 1
-;PUNT1 = *
-;PUNT2 = * + 20
-;* = $3fff
-;* = @0010
-;DBWRD = $000A
-;DBWRD $000A
-;WRD $000A
-
-
-;DBWRD @0100
-;WRD @0000
-
-;DBWRD 0
-;WRD 0
-
-;DBWRD %100000000000
-;WRD %100000
-
-;* = 4096
-;* = %000000000000
-
-; Todas las pruebas han sido correctamente ensambladas
-
-; Prueba PC diferente de 0
-
-;Prueba de NOP
-;NOP
-;L0 LDA #1
-;INP @01
-;OUT @01
-;INP @01
-
-;LDA @01
-;STA @01
-
-;Prueba de STA IND
-;L0 LDA #@01
-
-;L1 STA @0300
-;L2 LDA #@01
-;L3 STA @0301
-;L7 LDA #7
-;L4 STA (@0300)
-;L5 INA
-;L6 LDA @0101
-;HLT
-
-
-;Prueba AND ABS
-;L0 LDA #%000111
-;L1 STA @0300
-;L2 LDA #%111000
-;L3 ORA @0300
-
-;Prueba SUB ABS
-;L0 LDA #1
-;L1 STA @0300
-;L2 INA
-;L3 SUB @0300
-
-;Prueba ADD ABS
-;L0 LDA #1
-;L1 STA @0300
-;L2 INA
-;L3 ADD @0300
-
-;Prueba de STA ABS
-;L0 LDA #1
-;L1 STA @0300
-;L2 INA
-;L3 LDA @0300
-
-;L0 LDA #01
-;L1 ADD @0001
-
-;L0 LDA #63
-;L1 ora #%101001
-
-; Prueba de BCC
-;L0 LDA #0
-;L1 INA
-;L2 BCC L0
-;L3 LDA #1
-
-
-; Prueba de BNE
-;L SEC
-;L0 CLC
-;L1 LDA #0
-;L2 INA
-;L6 BNE L2
-;L4 INA
-;L5 LDA #1
-
-; Prueba de BEQ
-;L SEC
-;L0 CLC
-;L1 LDA #0
-;L6 BEQ L1
-;L4 INA
-;L5 LDA #1
-
-;Prueba de LDA inmediata
-;L1 LDA #1
-;L2 LDA #2
-;L3 LDA #3
-;L4 LDA #4
-;L5 LDA #5
-
-;Prueba de SUB y ADD inmediatas
-;L0 LDA #0
-;L1 LDA #63
-;L2 SUB #62
-;L3 SUB #1
-;L4 ADD #1
-;L5 ADD #1
-
-;K3 BNE K3
-;K5 BNE K3
-;K1 SEC
-;K2 SEC
-;BNE K1
-;K3 BNE K3
-;K5 BNE K3
-;L1 LDA (@0001)
-;BNE L1
-;L2 LDA @0002
-;L3 LDA @0002
-;BNE L1
-;L1 LDA @0001
-
-;LDA LALA1
-;LDA @0001
-;L1 LDA BIN
-;LDA OCT
-;LDA DEC
-;LDA HEX
-;L1 LDA HEX
-;L2 LDA #HEX
-;LDA #HEX
-;BNE L3
-;BMI L1
-;LOOP1 BNE L1
-;L4 BMI L2
-;LDA (BIN)
-;LDA (OCT)
-;LDA (DEC)
-;LDA (HEX)
-
-;LDA %1010
-;LDA @12
-;LDA 10
-;LDA $0A
-;LDA (%1010)
-;LDA (@12)
-;LDA (10)
-;LDA ($0A)
-
-;LDA #%1010
-;LDA #@12
-;LDA #10
-;LDA $0A
-;LDA #BIN
-;LDA #OCT
-;LDA #DEC
-;LDA #HEX
-
-;IMP SEC
-;ACU CLA
-;CTR TPA
-
-;INP %1010
-;INP @12
-;INP 10
-;INP $0A
-;INP BIN
-;INP OCT
-;INP DEC
-;INP HEX
-
-
-;LDA %111
-;L2 LDA (LALA1)
-;L3 LDA (%01)
-;LDA (@0001)
-;BNE L2
-;BMI L3
-;LABEL BNE LALA2
-;LALA3 BNE LABEL
-;BNE LABEL
-;BMI LALA2
-;LOOP1 CPA
-;INA
-;ROR
-;NOP
-;INP LALA1
-;L1 INP lala2
-;LABEL LDA (LALA1)
-;BNE LABEL
-;LABEL XXX LALA1
-;LABEL LDA @0001
-;LAB1 LDA PERRO
-;BNE LABEL
-;L1 BNE LALA
-;LALA LDA #01
-;LDA #$A
-;LDA #LABEL
-;LABEL LDA #@07
-;LABEL1 LDA #@07
-;BNE LABEL1
-;INP $FF
-;OUT %100
-;HLT
-
-
-;LDA #0
-;HLT
-;HLT
-;HLT
-;LDA #7
-;LDA #7
-;LDA #7
-;HLT
-
-;BEQ JUMP1
-;LDA (@1000)
-;SEC
-;CLA
-;TPA
-;INP @77
-

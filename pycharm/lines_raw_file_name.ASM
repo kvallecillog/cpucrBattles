@@ -4,744 +4,472 @@
 4 ;***********************************************************************************************************************
 5 
 6 ;=============================================================
-7 ; PRUEBA DE INSTRUCCION LDA INMEDIATA.
+7 ;#1  PRUEBA DE INSTRUCCION LDA INMEDIATA.
 8 ;=============================================================
 9 * = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-10 ;LDA #1
-11 
-12 ;INP @00
-13 ;INP @01
-14 ;INP @02
-15 ;INP @03
-16 ;OUT @01
-17 
-18 ;INP @03
-19 ;INP @02
-20 ;INP @01
-21 ;INP @00
-22 
-23 ;LABEL = @0001
-24 ;LABEL = @0002
-25 ;BNE LABEL
-26 ;BIN0 LDA #LABEL+1
-27 ;BIN LDA LABEL+2
-28 ;BIN2 LDA (LABEL+10000000)
-29 ;LDA #LABEL+1
-30 ;LDA LABEL+1
-31 ;LDA (LABEL+1)
-32 ;BIN LDA #%000001 ; LDA CON ARGUMENTO BINARIO.
-33 ;OCT LDA #@02 ; LDA CON ARGUMENTO OCTAL.
-34 ;HEX LDA #$03 ; LDA CON ARGUMENTO HEXADECIMAL.
-35 ;DEC LDA #4 ; LDA CON ARGUMENTO DECIMAL.
-36 ;1234567 INA ;
-37 ;HLT ; INSTRUCCION DE DETENCION.
-38 ;=============================================================
-39 
-40 ;=============================================================
-41 ; PRUEBA DE INSTRUCCION ADD INMEDIATA.
-42 ;=============================================================
-43 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-44 ;L1 LDA #1 ; LDA CON ARGUMENTO DECIMAL.
-45 ;BIN ADD #%000010 ; ADD CON ARGUMENTO BINARIO.
-46 ;OCT ADD #@02 ; ADD CON ARGUMENTO OCTACL.
-47 ;DEC ADD #2 ; ADD CON ARGUMENTO DECIMAL.
-48 ;HEX ADD #$02 ; ADD CON ARGUMENTO HEXADECIMAL.
-49 ;HLT ; INSTRUCCION DE DETENCION.
-50 ;=============================================================
-51 
-52 ;=============================================================
-53 ; PRUEBA DE INSTRUCCION SUB INMEDIATA.
-54 ;=============================================================
-55 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-56 ;L1 LDA #10 ; LDA CON ARGUMENTO DECIMAL.
-57 ;BIN SUB #%000010 ; SUB CON ARGUMENTO BINARIO.
-58 ;OCT SUB #@02 ; SUB CON ARGUMENTO OCTACL.
-59 ;DEC SUB #2 ; SUB CON ARGUMENTO DECIMAL.
-60 ;HEX SUB #$02 ; SUB CON ARGUMENTO HEXADECIMAL.
-61 ;HLT ; INSTRUCCION DE DETENCION.
-62 ;=============================================================
-63 
-64 ;=============================================================
-65 ; PRUEBA DE INSTRUCCION AND INMEDIATA.
-66 ;=============================================================
-67 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-68 ;L1 LDA #%111111 ; LDA CON ARGUMENTO DECIMAL.
-69 ;BIN AND #%000111 ; AND CON ARGUMENTO BINARIO.
-70 ;OCT AND #@07 ; AND CON ARGUMENTO OCTACL.
-71 ;DEC AND #3 ; AND CON ARGUMENTO DECIMAL.
-72 ;HEX AND #$01 ; AND CON ARGUMENTO HEXADECIMAL.
-73 ;HLT ; INSTRUCCION DE DETENCION.
-74 ;=============================================================
-75 
-76 ;=============================================================
-77 ; PRUEBA DE INSTRUCCION ORA INMEDIATA.
-78 ;=============================================================
-79 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-80 ;L1 LDA #%101000 ; LDA CON ARGUMENTO DECIMAL.
-81 ;BIN ORA #%000101 ; ORA CON ARGUMENTO BINARIO.
-82 ;OCT ORA #@20 ; ORA CON ARGUMENTO OCTACL.
-83 ;DEC ORA #2 ; ORA CON ARGUMENTO DECIMAL.
-84 ;HEX ORA #$00 ; ORA CON ARGUMENTO HEXADECIMAL.
-85 ;HLT ; INSTRUCCION DE DETENCION.
-86 ;=============================================================
+10 CONST = @0000
+11 ;CONST2 = 10
+12 ;CONST3 = %00001
+13 ;CONST4 = $A
+14 ;ABS LDA @0000
+15 ;BAS LDA CONST1
+16 ;L1 INP CONST1
+17 ;BUN LDA (CONST2)
+18 ;BIN LDA #%000001 ; LDA CON ARGUMENTO BINARIO.
+19 ;OCT LDA #@02 ; LDA CON ARGUMENTO OCTAL.
+20 ;HEX LDA #$03 ; LDA CON ARGUMENTO HEXADECIMAL.
+21 ;DEC LDA #4 ; LDA CON ARGUMENTO DECIMAL.
+22 ;L1 BNE L3+1
+23 ;L3 INA
+24 ;L1 SEC
+25 ;L4 NOP
+26 ;L6 CLA
+27 ;INP CONST+1
+28 BNE L1+1
+29 L1 INA
+30 HLT ; INSTRUCCION DE DETENCION.
+31 ;=============================================================
+32 
+33 ;=============================================================
+34 ;#2 PRUEBA DE INSTRUCCION ADD INMEDIATA.
+35 ;=============================================================
+36 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+37 ;L1 LDA #1 ; LDA CON ARGUMENTO DECIMAL.
+38 ;BIN ADD #%000010 ; ADD CON ARGUMENTO BINARIO.
+39 ;OCT ADD #@02 ; ADD CON ARGUMENTO OCTACL.
+40 ;DEC ADD #2 ; ADD CON ARGUMENTO DECIMAL.
+41 ;HEX ADD #$02 ; ADD CON ARGUMENTO HEXADECIMAL.
+42 ;HLT ; INSTRUCCION DE DETENCION.
+43 ;=============================================================
+44 
+45 ;=============================================================
+46 ;#3 PRUEBA DE INSTRUCCION SUB INMEDIATA.
+47 ;=============================================================
+48 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+49 ;L1 LDA #10 ; LDA CON ARGUMENTO DECIMAL.
+50 ;BIN SUB #%000010 ; SUB CON ARGUMENTO BINARIO.
+51 ;OCT SUB #@02 ; SUB CON ARGUMENTO OCTACL.
+52 ;DEC SUB #2 ; SUB CON ARGUMENTO DECIMAL.
+53 ;HEX SUB #$02 ; SUB CON ARGUMENTO HEXADECIMAL.
+54 ;HLT ; INSTRUCCION DE DETENCION.
+55 ;=============================================================
+56 
+57 ;=============================================================
+58 ;#4 PRUEBA DE INSTRUCCION AND INMEDIATA.
+59 ;=============================================================
+60 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+61 ;L1 LDA #%111111 ; LDA CON ARGUMENTO DECIMAL.
+62 ;BIN AND #%000111 ; AND CON ARGUMENTO BINARIO.
+63 ;OCT AND #@07 ; AND CON ARGUMENTO OCTACL.
+64 ;DEC AND #3 ; AND CON ARGUMENTO DECIMAL.
+65 ;HEX AND #$01 ; AND CON ARGUMENTO HEXADECIMAL.
+66 ;HLT ; INSTRUCCION DE DETENCION.
+67 ;=============================================================
+68 
+69 ;=============================================================
+70 ;#5 PRUEBA DE INSTRUCCION ORA INMEDIATA.
+71 ;=============================================================
+72 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+73 ;L1 LDA #%101000 ; LDA CON ARGUMENTO DECIMAL.
+74 ;BIN ORA #%000101 ; ORA CON ARGUMENTO BINARIO.
+75 ;OCT ORA #@20 ; ORA CON ARGUMENTO OCTACL.
+76 ;DEC ORA #2 ; ORA CON ARGUMENTO DECIMAL.
+77 ;HEX ORA #$00 ; ORA CON ARGUMENTO HEXADECIMAL.
+78 ;HLT ; INSTRUCCION DE DETENCION.
+79 ;=============================================================
+80 
+81 ;***********************************************************************************************************************
+82 
+83 
+84 ;***********************************************************************************************************************
+85 ; INSTRUCCIONES ABSOLUTAS
+86 ;***********************************************************************************************************************
 87 
-88 ;***********************************************************************************************************************
-89 
-90 
-91 ;***********************************************************************************************************************
-92 ; INSTRUCCIONES ABSOLUTAS
-93 ;***********************************************************************************************************************
-94 
-95 ;=============================================================
-96 ; PRUEBA DE INSTRUCCION LDA ABSOLUTA.
-97 ;=============================================================
-98 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-99 ;L1 LDA @01 ; LDA ABSOLUTO.
-100 ;HLT ; INSTRUCCION DE DETENCION.
-101 ;=============================================================
-102 
-103 ;=============================================================
-104 ; PRUEBA DE INSTRUCCION STA ABSOLUTA.
+88 ;=============================================================
+89 ;#6 PRUEBA DE INSTRUCCION LDA ABSOLUTA.
+90 ;=============================================================
+91 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+92 ;L1 LDA @01 ; LDA ABSOLUTO.
+93 ;HLT ; INSTRUCCION DE DETENCION.
+94 ;=============================================================
+95 
+96 ;=============================================================
+97 ;#7 PRUEBA DE INSTRUCCION STA ABSOLUTA.
+98 ;=============================================================
+99 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+100 ;L1 LDA #7 ; LDA INMEDIATO.
+101 ;L2 STA @0020 ; STA ABSOLUTO.
+102 ;L3 ADD #1 ; LDA INMEDIATO.
+103 ;L4 LDA @0020 ; LDA ABSOLUTO.
+104 ;HLT ; INSTRUCCION DE DETENCION.
 105 ;=============================================================
-106 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-107 ;L1 LDA #7 ; LDA INMEDIATO.
-108 ;L2 STA @0020 ; STA ABSOLUTO.
-109 ;L3 ADD #1 ; LDA INMEDIATO.
-110 ;L4 LDA @0020 ; LDA ABSOLUTO.
-111 ;HLT ; INSTRUCCION DE DETENCION.
-112 ;=============================================================
-113 
-114 ;=============================================================
-115 ; PRUEBA DE INSTRUCCION ADD ABSOLUTA.
+106 
+107 ;=============================================================
+108 ;#8 PRUEBA DE INSTRUCCION ADD ABSOLUTA.
+109 ;=============================================================
+110 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+111 ;L1 LDA #1 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+112 ;L2 STA @0020 ; STA ABSOLUTO.
+113 ;L3 LDA #2 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+114 ;L4 ADD @0020 ; ADD ABSOLUTA.
+115 ;HLT ; INSTRUCCION DE DETENCION.
 116 ;=============================================================
-117 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-118 ;L1 LDA #1 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-119 ;L2 STA @0020 ; STA ABSOLUTO.
-120 ;L3 LDA #2 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-121 ;L4 ADD @0020 ; ADD ABSOLUTA.
-122 ;HLT ; INSTRUCCION DE DETENCION.
-123 ;=============================================================
-124 
-125 ;=============================================================
-126 ; PRUEBA DE INSTRUCCION SUB ABSOLUTA.
+117 
+118 ;=============================================================
+119 ;#9 PRUEBA DE INSTRUCCION SUB ABSOLUTA.
+120 ;=============================================================
+121 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+122 ;L1 LDA #1 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+123 ;L2 STA @0020 ; STA ABSOLUTO.
+124 ;L3 LDA #2 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+125 ;L4 SUB @0020 ; SUB ABSOLUTA.
+126 ;HLT ; INSTRUCCION DE DETENCION.
 127 ;=============================================================
-128 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-129 ;L1 LDA #1 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-130 ;L2 STA @0020 ; STA ABSOLUTO.
-131 ;L3 LDA #2 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-132 ;L4 SUB @0020 ; SUB ABSOLUTA.
-133 ;HLT ; INSTRUCCION DE DETENCION.
-134 ;=============================================================
-135 
-136 ;=============================================================
-137 ; PRUEBA DE INSTRUCCION AND ABSOLUTA.
+128 
+129 ;=============================================================
+130 ;#10 PRUEBA DE INSTRUCCION AND ABSOLUTA.
+131 ;=============================================================
+132 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+133 ;L1 LDA #%111111 ; LDA INMEDIATO CON ARGUMENTO BINARIO.
+134 ;L2 STA @0020 ; STA ABSOLUTO.
+135 ;L3 LDA #%000111 ; LDA INMEDIATO CON ARGUMENTO BINARIO.
+136 ;L4 AND @0020 ; AND ABSOLUTAL.
+137 ;HLT ; INSTRUCCION DE DETENCION.
 138 ;=============================================================
-139 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-140 ;L1 LDA #%111111 ; LDA INMEDIATO CON ARGUMENTO BINARIO.
-141 ;L2 STA @0020 ; STA ABSOLUTO.
-142 ;L3 LDA #%000111 ; LDA INMEDIATO CON ARGUMENTO BINARIO.
-143 ;L4 AND @0020 ; AND ABSOLUTAL.
-144 ;HLT ; INSTRUCCION DE DETENCION.
-145 ;=============================================================
-146 
-147 ;=============================================================
-148 ; PRUEBA DE INSTRUCCION ORA ABSOLUTA.
+139 
+140 ;=============================================================
+141 ;#12 PRUEBA DE INSTRUCCION ORA ABSOLUTA.
+142 ;=============================================================
+143 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+144 ;L1 LDA #%111000 ; LDA INMEDIATO CON ARGUMENTO BINARIO.
+145 ;L2 STA @0020 ; STA ABSOLUTO.
+146 ;L3 LDA #%000111 ; LDA INMEDIATO CON ARGUMENTO BINARIO.
+147 ;L4 ORA @0020 ; ORA ABSOLUTA.
+148 ;HLT ; INSTRUCCION DE DETENCION.
 149 ;=============================================================
-150 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-151 ;L1 LDA #%111000 ; LDA INMEDIATO CON ARGUMENTO BINARIO.
-152 ;L2 STA @0020 ; STA ABSOLUTO.
-153 ;L3 LDA #%000111 ; LDA INMEDIATO CON ARGUMENTO BINARIO.
-154 ;L4 ORA @0020 ; ORA ABSOLUTA.
-155 ;HLT ; INSTRUCCION DE DETENCION.
+150 
+151 ;***********************************************************************************************************************
+152 
+153 ;***********************************************************************************************************************
+154 ;#13 INSTRUCCIONES INDIRECTAS
+155 ;***********************************************************************************************************************
 156 ;=============================================================
-157 
-158 ;***********************************************************************************************************************
-159 
-160 ;***********************************************************************************************************************
-161 ; INSTRUCCIONES INDIRECTAS
-162 ;***********************************************************************************************************************
-163 ;=============================================================
-164 ; PRUEBA DE INSTRUCCION LDA INDIRECTA.
-165 ;=============================================================
-166 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-167 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-168 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
-169 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-170 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
-171 ;L5 LDA #7 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-172 ;L6 STA @2211 ; STA ABSOLUTO, ESCRITURA DE 7 A @0102.
-173 ;L7 LDA (@0010) ; LDA INDIRECTO.
-174 ;HLT ; INSTRUCCION DE DETENCION.
-175 ;=============================================================
-176 
-177 ;=============================================================
-178 ; PRUEBA DE INSTRUCCION STA INDIRECTA.
-179 ;=============================================================
-180 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-181 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-182 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
-183 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-184 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
-185 ;L5 LDA #7 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-186 ;L6 STA (@0010) ; STA INDIRECTO, ESCRITURA DE 7 A @0102.
-187 ;L7 ADD #1 ; ADD INMEDIATO CON ARGUMENTO DECIMAL.
-188 ;L8 LDA @2211 ; LDA ABSOLUTO.
-189 ;HLT ; INSTRUCCION DE DETENCION.
-190 ;=============================================================
-191 
-192 ;=============================================================
-193 ; PRUEBA DE INSTRUCCION ADD INDIRECTA.
-194 ;=============================================================
-195 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-196 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-197 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
-198 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-199 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
-200 ;L5 LDA #6 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-201 ;L6 STA @2211 ; STA ABSOLUTO, ESCRITURA DE 7 A @2211
-202 ;L7 LDA #1 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-203 ;L8 ADD (@0010) ; ADD INDIRECTO, ESCRITURA DE 7 A @0102.
-204 ;L9 LDA @2211 ; LDA ABSOLUTO.
-205 ;HLT ; INSTRUCCION DE DETENCION.
-206 ;=============================================================
-207 
-208 ;=============================================================
-209 ; PRUEBA DE INSTRUCCION SUB INDIRECTA.
-210 ;=============================================================
-211 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-212 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-213 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
-214 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-215 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
-216 ;L5 LDA #1 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-217 ;L6 STA @2211 ; STA ABSOLUTO, ESCRITURA DE 7 A @2211
-218 ;L7 LDA #6 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-219 ;L8 SUB (@0010) ; SUB INDIRECTO.
-220 ;L9 LDA @2211 ; LDA ABSOLUTO.
-221 ;HLT ; INSTRUCCION DE DETENCION.
-222 ;=============================================================
-223 
-224 ;=============================================================
-225 ; PRUEBA DE INSTRUCCION AND INDIRECTA.
-226 ;=============================================================
-227 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-228 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-229 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
-230 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-231 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
-232 ;L5 LDA #%111111 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-233 ;L6 STA @2211 ; STA ABSOLUTO, ESCRITURA DE 7 A @2211
-234 ;L7 LDA #%000111 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-235 ;L8 AND (@0010) ; AND INDIRECTO.
-236 ;L9 LDA @2211 ; LDA ABSOLUTO.
-237 ;HLT ; INSTRUCCION DE DETENCION.
-238 ;=============================================================
-239 
-240 ;=============================================================
-241 ; PRUEBA DE INSTRUCCION ORA INDIRECTA.
-242 ;=============================================================
-243 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-244 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-245 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
-246 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-247 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
-248 ;L5 LDA #%111000 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-249 ;L6 STA @2211 ; STA ABSOLUTO, ESCRITURA DE 7 A @2211
-250 ;L7 LDA #%000111 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-251 ;L8 ORA (@0010) ; ORA INDIRECTO.
-252 ;L9 LDA @2211 ; LDA ABSOLUTO.
-253 ;HLT ; INSTRUCCION DE DETENCION.
+157 ; PRUEBA DE INSTRUCCION LDA INDIRECTA.
+158 ;=============================================================
+159 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+160 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+161 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
+162 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+163 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
+164 ;L5 LDA #7 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+165 ;L6 STA @2211 ; STA ABSOLUTO, ESCRITURA DE 7 A @0102.
+166 ;L7 LDA (@0010) ; LDA INDIRECTO.
+167 ;HLT ; INSTRUCCION DE DETENCION.
+168 ;=============================================================
+169 
+170 ;=============================================================
+171 ;#14 PRUEBA DE INSTRUCCION STA INDIRECTA.
+172 ;=============================================================
+173 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+174 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+175 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
+176 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+177 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
+178 ;L5 LDA #7 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+179 ;L6 STA (@0010) ; STA INDIRECTO, ESCRITURA DE 7 A @0102.
+180 ;L7 ADD #1 ; ADD INMEDIATO CON ARGUMENTO DECIMAL.
+181 ;L8 LDA @2211 ; LDA ABSOLUTO.
+182 ;HLT ; INSTRUCCION DE DETENCION.
+183 ;=============================================================
+184 
+185 ;=============================================================
+186 ;#15 PRUEBA DE INSTRUCCION ADD INDIRECTA.
+187 ;=============================================================
+188 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+189 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+190 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
+191 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+192 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
+193 ;L5 LDA #6 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+194 ;L6 STA @2211 ; STA ABSOLUTO, ESCRITURA DE 7 A @2211
+195 ;L7 LDA #1 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+196 ;L8 ADD (@0010) ; ADD INDIRECTO, ESCRITURA DE 7 A @0102.
+197 ;L9 LDA @2211 ; LDA ABSOLUTO.
+198 ;HLT ; INSTRUCCION DE DETENCION.
+199 ;=============================================================
+200 
+201 ;=============================================================
+202 ;#16 PRUEBA DE INSTRUCCION SUB INDIRECTA.
+203 ;=============================================================
+204 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+205 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+206 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
+207 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+208 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
+209 ;L5 LDA #1 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+210 ;L6 STA @2211 ; STA ABSOLUTO, ESCRITURA DE 7 A @2211
+211 ;L7 LDA #6 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+212 ;L8 SUB (@0010) ; SUB INDIRECTO.
+213 ;L9 LDA @2211 ; LDA ABSOLUTO.
+214 ;HLT ; INSTRUCCION DE DETENCION.
+215 ;=============================================================
+216 
+217 ;=============================================================
+218 ;#17 PRUEBA DE INSTRUCCION AND INDIRECTA.
+219 ;=============================================================
+220 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+221 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+222 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
+223 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+224 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
+225 ;L5 LDA #%111111 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+226 ;L6 STA @2211 ; STA ABSOLUTO, ESCRITURA DE 7 A @2211
+227 ;L7 LDA #%000111 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+228 ;L8 AND (@0010) ; AND INDIRECTO.
+229 ;L9 LDA @2211 ; LDA ABSOLUTO.
+230 ;HLT ; INSTRUCCION DE DETENCION.
+231 ;=============================================================
+232 
+233 ;=============================================================
+234 ;#18 PRUEBA DE INSTRUCCION ORA INDIRECTA.
+235 ;=============================================================
+236 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+237 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+238 ;L2 STA @0010 ; STA ABSOLUTO, ESCRITURA A PB.
+239 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+240 ;L4 STA @0011 ; STA ABSOLUTO, ESCRITURA A PA.
+241 ;L5 LDA #%111000 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+242 ;L6 STA @2211 ; STA ABSOLUTO, ESCRITURA DE 7 A @2211
+243 ;L7 LDA #%000111 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
+244 ;L8 ORA (@0010) ; ORA INDIRECTO.
+245 ;L9 LDA @2211 ; LDA ABSOLUTO.
+246 ;HLT ; INSTRUCCION DE DETENCION.
+247 ;=============================================================
+248 ;***********************************************************************************************************************
+249 
+250 ;***********************************************************************************************************************
+251 ; INSTRUCCIONES DE ACUMULADOR
+252 ;***********************************************************************************************************************
+253 
 254 ;=============================================================
-255 ;***********************************************************************************************************************
-256 
-257 ;***********************************************************************************************************************
-258 ; INSTRUCCIONES DE ACUMULADOR
-259 ;***********************************************************************************************************************
-260 
+255 ;#19 PRUEBA DE INSTRUCCION CLA DE ACUMULADOR.
+256 ;=============================================================
+257 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+258 ;L1 LDA #1 ; LDA CON ARGUMENTO DECIMAL.
+259 ;L2 CLA ; CLA DE ACUMULADOR, LIMPIA EL ACUMULADOR.
+260 ;HLT ; INSTRUCCION DE DETENCION.
 261 ;=============================================================
-262 ; PRUEBA DE INSTRUCCION CLA DE ACUMULADOR.
+262 
 263 ;=============================================================
-264 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-265 ;L1 LDA #1 ; LDA CON ARGUMENTO DECIMAL.
-266 ;L2 CLA ; CLA DE ACUMULADOR, LIMPIA EL ACUMULADOR.
-267 ;HLT ; INSTRUCCION DE DETENCION.
-268 ;=============================================================
-269 
+264 ;#20 PRUEBA DE INSTRUCCION CPA DE ACUMULADOR.
+265 ;=============================================================
+266 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+267 ;L1 LDA #%111000 ; LDA CON ARGUMENTO DECIMAL.
+268 ;L2 CPA ; CPA DE ACUMULADOR, COMPLEMENTA EL ACUMULADOR.
+269 ;HLT ; INSTRUCCION DE DETENCION.
 270 ;=============================================================
-271 ; PRUEBA DE INSTRUCCION CPA DE ACUMULADOR.
+271 
 272 ;=============================================================
-273 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-274 ;L1 LDA #%111000 ; LDA CON ARGUMENTO DECIMAL.
-275 ;L2 CPA ; CPA DE ACUMULADOR, COMPLEMENTA EL ACUMULADOR.
-276 ;HLT ; INSTRUCCION DE DETENCION.
-277 ;=============================================================
-278 
+273 ;#21 PRUEBA DE INSTRUCCION INA DE ACUMULADOR.
+274 ;=============================================================
+275 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+276 ;L1 LDA #1 ; LDA CON ARGUMENTO DECIMAL.
+277 ;L2 INA ; INA DE ACUMULADOR, INCREMENTA EL ACUMULADOR EN 1.
+278 ;HLT ; INSTRUCCION DE DETENCION.
 279 ;=============================================================
-280 ; PRUEBA DE INSTRUCCION INA DE ACUMULADOR.
+280 
 281 ;=============================================================
-282 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-283 ;L1 LDA #1 ; LDA CON ARGUMENTO DECIMAL.
-284 ;L2 INA ; INA DE ACUMULADOR, INCREMENTA EL ACUMULADOR EN 1.
-285 ;HLT ; INSTRUCCION DE DETENCION.
-286 ;=============================================================
-287 
+282 ;#22 PRUEBA DE INSTRUCCION INA DE ACUMULADOR.
+283 ;=============================================================
+284 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+285 ;L1 LDA #1 ; LDA CON ARGUMENTO DECIMAL.
+286 ;L2 DCA ; DCA DE ACUMULADOR, DECREMENTO EL ACUMULADOR EN 1.
+287 ;HLT ; INSTRUCCION DE DETENCION.
 288 ;=============================================================
-289 ; PRUEBA DE INSTRUCCION INA DE ACUMULADOR.
+289 
 290 ;=============================================================
-291 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-292 ;L1 LDA #1 ; LDA CON ARGUMENTO DECIMAL.
-293 ;L2 DCA ; DCA DE ACUMULADOR, DECREMENTO EL ACUMULADOR EN 1.
-294 ;HLT ; INSTRUCCION DE DETENCION.
-295 ;=============================================================
-296 
+291 ;#23 PRUEBA DE INSTRUCCION ROL DE ACUMULADOR.
+292 ;=============================================================
+293 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+294 ;L1 LDA #%111011 ; LDA CON ARGUMENTO DECIMAL.
+295 ;L2 ROL ; ROL DE ACUMULADOR, ROTA EL ACUMULADOR HACIA LA IZQ.
+296 ;HLT ; INSTRUCCION DE DETENCION.
 297 ;=============================================================
-298 ; PRUEBA DE INSTRUCCION ROL DE ACUMULADOR.
+298 
 299 ;=============================================================
-300 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-301 ;L1 LDA #%111011 ; LDA CON ARGUMENTO DECIMAL.
-302 ;L2 ROL ; ROL DE ACUMULADOR, ROTA EL ACUMULADOR HACIA LA IZQ.
-303 ;HLT ; INSTRUCCION DE DETENCION.
-304 ;=============================================================
-305 
+300 ;#24 PRUEBA DE INSTRUCCION ROR DE ACUMULADOR.
+301 ;=============================================================
+302 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+303 ;L1 LDA #%111011 ; LDA CON ARGUMENTO DECIMAL.
+304 ;L2 ROR ; ROR DE ACUMULADOR, ROTA EL ACUMULADOR HACIA LA DER.
+305 ;HLT ; INSTRUCCION DE DETENCION.
 306 ;=============================================================
-307 ; PRUEBA DE INSTRUCCION ROR DE ACUMULADOR.
-308 ;=============================================================
-309 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-310 ;L1 LDA #%111011 ; LDA CON ARGUMENTO DECIMAL.
-311 ;L2 ROR ; ROR DE ACUMULADOR, ROTA EL ACUMULADOR HACIA LA DER.
-312 ;HLT ; INSTRUCCION DE DETENCION.
+307 ;***********************************************************************************************************************
+308 
+309 ;***********************************************************************************************************************
+310 ; INSTRUCCIONES DE IMPLICITAS
+311 ;***********************************************************************************************************************
+312 
 313 ;=============================================================
-314 ;***********************************************************************************************************************
-315 
-316 ;***********************************************************************************************************************
-317 ; INSTRUCCIONES DE IMPLICITAS
-318 ;***********************************************************************************************************************
-319 
+314 ;#25 PRUEBA DE INSTRUCCION SEC IMPLICITA.
+315 ;=============================================================
+316 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+317 ;L1 LDA #0 ; LDA CON ARGUMENTO DECIMAL.
+318 ;L2 SEC ; SEC IMPLICITO, PONE EN ALTO LA BANDERA DE ACARREO.
+319 ;HLT ; INSTRUCCION DE DETENCION.
 320 ;=============================================================
-321 ; PRUEBA DE INSTRUCCION SEC IMPLICITA.
+321 
 322 ;=============================================================
-323 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-324 ;L1 LDA #0 ; LDA CON ARGUMENTO DECIMAL.
-325 ;L2 SEC ; SEC IMPLICITO, PONE EN ALTO LA BANDERA DE ACARREO.
-326 ;HLT ; INSTRUCCION DE DETENCION.
-327 ;=============================================================
-328 
-329 ;=============================================================
-330 ; PRUEBA DE INSTRUCCION CLC IMPLICITA.
-331 ;=============================================================
-332 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-333 ;L1 LDA #0 ; LDA CON ARGUMENTO DECIMAL.
-334 ;L2 SEC ; SEC IMPLICITO, PONE EN ALTO LA BANDERA DE ACARREO.
-335 ;L3 CLC ; CLC IMPLICITO, PONE EN BAJO LA BANDERA DE ACARREO.
-336 ;HLT ; INSTRUCCION DE DETENCION.
-337 ;=============================================================
-338 
+323 ;#26 PRUEBA DE INSTRUCCION CLC IMPLICITA.
+324 ;=============================================================
+325 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+326 ;L1 LDA #0 ; LDA CON ARGUMENTO DECIMAL.
+327 ;L2 SEC ; SEC IMPLICITO, PONE EN ALTO LA BANDERA DE ACARREO.
+328 ;L3 CLC ; CLC IMPLICITO, PONE EN BAJO LA BANDERA DE ACARREO.
+329 ;HLT ; INSTRUCCION DE DETENCION.
+330 ;=============================================================
+331 
+332 ;=============================================================
+333 ;#27 PRUEBA DE INSTRUCCION SEI IMPLICITA.
+334 ;=============================================================
+335 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+336 ;L1 LDA #0 ; LDA CON ARGUMENTO DECIMAL.
+337 ;L2 SEI ; SEI IMPLICITO, PONE EN ALTO LA BANDERA DE INTERRUP.
+338 ;HLT ; INSTRUCCION DE DETENCION.
 339 ;=============================================================
-340 ; PRUEBA DE INSTRUCCION SEI IMPLICITA.
+340 
 341 ;=============================================================
-342 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-343 ;L1 LDA #0 ; LDA CON ARGUMENTO DECIMAL.
-344 ;L2 SEI ; SEI IMPLICITO, PONE EN ALTO LA BANDERA DE INTERRUP.
-345 ;HLT ; INSTRUCCION DE DETENCION.
-346 ;=============================================================
-347 
-348 ;=============================================================
-349 ; PRUEBA DE INSTRUCCION CLI IMPLICITA.
-350 ;=============================================================
-351 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-352 ;L1 LDA #0 ; LDA CON ARGUMENTO DECIMAL.
-353 ;L2 SEI ; SEI IMPLICITO, PONE EN ALTO LA BANDERA DE INTERRUP.
-354 ;L3 CLI ; CLI IMPLICITO, PONE EN BAJO LA BANDERA DE INTERRUP.
-355 ;HLT ; INSTRUCCION DE DETENCION.
+342 ;#28 PRUEBA DE INSTRUCCION CLI IMPLICITA.
+343 ;=============================================================
+344 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+345 ;L1 LDA #0 ; LDA CON ARGUMENTO DECIMAL.
+346 ;L2 SEI ; SEI IMPLICITO, PONE EN ALTO LA BANDERA DE INTERRUP.
+347 ;L3 CLI ; CLI IMPLICITO, PONE EN BAJO LA BANDERA DE INTERRUP.
+348 ;HLT ; INSTRUCCION DE DETENCION.
+349 ;=============================================================
+350 ;***********************************************************************************************************************
+351 
+352 ;***********************************************************************************************************************
+353 ; INSTRUCCIONES DE RELATIVAS
+354 ;***********************************************************************************************************************
+355 
 356 ;=============================================================
-357 ;***********************************************************************************************************************
-358 
-359 ;***********************************************************************************************************************
-360 ; INSTRUCCIONES DE RELATIVAS
-361 ;***********************************************************************************************************************
-362 
+357 ;#29 PRUEBA DE INSTRUCCION BEQ RELATIVA.
+358 ;=============================================================
+359 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+360 ;L1 LDA #0 ; LDA CON ARGUMENTO DECIMAL.
+361 ;L2 BEQ L1 ; SALTA A L1 SI EL ACUMULADOR ES 0.
+362 ;HLT ; INSTRUCCION DE DETENCION.
 363 ;=============================================================
-364 ; PRUEBA DE INSTRUCCION BEQ RELATIVA.
+364 
 365 ;=============================================================
-366 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-367 ;L1 LDA #0 ; LDA CON ARGUMENTO DECIMAL.
-368 ;L2 BEQ L1 ; SALTA A L1 SI EL ACUMULADOR ES 0.
-369 ;HLT ; INSTRUCCION DE DETENCION.
-370 ;=============================================================
-371 
+366 ;#30 PRUEBA DE INSTRUCCION BNE RELATIVA.
+367 ;=============================================================
+368 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+369 ;L1 LDA #1 ; LDA CON ARGUMENTO DECIMAL.
+370 ;L2 BNE L1 ; SALTA A L1 SI EL ACUMULADOR ES DISTINTO DE 0.
+371 ;HLT ; INSTRUCCION DE DETENCION.
 372 ;=============================================================
-373 ; PRUEBA DE INSTRUCCION BNE RELATIVA.
+373 
 374 ;=============================================================
-375 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-376 ;L1 LDA #1 ; LDA CON ARGUMENTO DECIMAL.
-377 ;L2 BNE L1 ; SALTA A L1 SI EL ACUMULADOR ES DISTINTO DE 0.
-378 ;HLT ; INSTRUCCION DE DETENCION.
-379 ;=============================================================
-380 
-381 ;=============================================================
-382 ; PRUEBA DE INSTRUCCION BCC RELATIVA.
-383 ;=============================================================
-384 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-385 ;L1 SEC ; PONE EN ALTO LA BANDERA DE ACARREO.
-386 ;L2 CLC ; PONE EN BAJO LA BANDERA DE ACARREO.
-387 ;L3 BCC L2 ; SALTA A L1 SI LA BANDERA DE ACARREO ES 0.
-388 ;HLT ; INSTRUCCION DE DETENCION.
-389 ;=============================================================
-390 
-391 ;=============================================================
-392 ; PRUEBA DE INSTRUCCION BCS RELATIVA.
-393 ;=============================================================
-394 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-395 ;L1 CLC ; PONE EN BAJO LA BANDERA DE ACARREO.
-396 ;L2 SEC ; PONE EN ALTO LA BANDERA DE ACARREO.
-397 ;L3 BCS L2 ; SALTA A L1 SI LA BANDERA DE ACARREO ES 1.
-398 ;HLT ; INSTRUCCION DE DETENCION.
-399 ;=============================================================
-400 
+375 ;#31 PRUEBA DE INSTRUCCION BCC RELATIVA.
+376 ;=============================================================
+377 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+378 ;L1 SEC ; PONE EN ALTO LA BANDERA DE ACARREO.
+379 ;L2 CLC ; PONE EN BAJO LA BANDERA DE ACARREO.
+380 ;L3 BCC L2 ; SALTA A L1 SI LA BANDERA DE ACARREO ES 0.
+381 ;HLT ; INSTRUCCION DE DETENCION.
+382 ;=============================================================
+383 
+384 ;=============================================================
+385 ;#32 PRUEBA DE INSTRUCCION BCS RELATIVA.
+386 ;=============================================================
+387 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+388 ;L1 CLC ; PONE EN BAJO LA BANDERA DE ACARREO.
+389 ;L2 SEC ; PONE EN ALTO LA BANDERA DE ACARREO.
+390 ;L3 BCS L2 ; SALTA A L1 SI LA BANDERA DE ACARREO ES 1.
+391 ;HLT ; INSTRUCCION DE DETENCION.
+392 ;=============================================================
+393 
+394 ;=============================================================
+395 ;#33 PRUEBA DE INSTRUCCION BPL RELATIVA.
+396 ;=============================================================
+397 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+398 ;L1 LDA #%000001 ; LDA CON ARGUMENTO BINARIO.
+399 ;L2 BPL L1 ; SALTA A L1 SI EL ACUMULADOR ES POSITIVO.
+400 ;HLT ; INSTRUCCION DE DETENCION.
 401 ;=============================================================
-402 ; PRUEBA DE INSTRUCCION BPL RELATIVA.
+402 
 403 ;=============================================================
-404 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-405 ;L1 LDA #%000001 ; LDA CON ARGUMENTO BINARIO.
-406 ;L2 BPL L1 ; SALTA A L1 SI EL ACUMULADOR ES POSITIVO.
-407 ;HLT ; INSTRUCCION DE DETENCION.
-408 ;=============================================================
-409 
+404 ;#34 PRUEBA DE INSTRUCCION BMI RELATIVA.
+405 ;=============================================================
+406 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+407 ;L1 LDA #%100000 ; LDA CON ARGUMENTO BINARIO NEGATIVO.
+408 ;L2 BMI L1 ; SALTA A L1 SI EL ACUMULADOR ES NEGATIVO.
+409 ;HLT ; INSTRUCCION DE DETENCION.
 410 ;=============================================================
-411 ; PRUEBA DE INSTRUCCION BMI RELATIVA.
+411 
 412 ;=============================================================
-413 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-414 ;L1 LDA #%100000 ; LDA CON ARGUMENTO BINARIO NEGATIVO.
-415 ;L2 BMI L1 ; SALTA A L1 SI EL ACUMULADOR ES NEGATIVO.
-416 ;HLT ; INSTRUCCION DE DETENCION.
-417 ;=============================================================
-418 
-419 ;=============================================================
-420 ; PRUEBA DE INSTRUCCION BVC RELATIVA.
-421 ;=============================================================
-422 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-423 ;L1 LDA #1 ; LDA CON ARGUMENTO BINARIO.
-424 ;L2 ADD #1 ; SE AGREGA %001010 AL ACUMULADOR.
-425 ;L3 BVC L1 ; SALTA A L1 SI LA BANDERA DE REBASE ES 0.
-426 ;HLT ; INSTRUCCION DE DETENCION.
-427 ;=============================================================
-428 
-429 ;=============================================================
-430 ; PRUEBA DE INSTRUCCION BVS RELATIVA.
-431 ;=============================================================
-432 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-433 ;L1 LDA #%010110 ; LDA CON ARGUMENTO BINARIO.
-434 ;L2 ADD #%001010 ; SE AGREGA %001010 AL ACUMULADOR.
-435 ;L3 BVS L1 ; SALTA A L1 SI LA BANDERA DE REBASE ES 1.
-436 ;HLT ; INSTRUCCION DE DETENCION.
+413 ;#35 PRUEBA DE INSTRUCCION BVC RELATIVA.
+414 ;=============================================================
+415 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+416 ;L1 LDA #1 ; LDA CON ARGUMENTO BINARIO.
+417 ;L2 ADD #1 ; SE AGREGA %001010 AL ACUMULADOR.
+418 ;L3 BVC L1 ; SALTA A L1 SI LA BANDERA DE REBASE ES 0.
+419 ;HLT ; INSTRUCCION DE DETENCION.
+420 ;=============================================================
+421 
+422 ;=============================================================
+423 ;#36 PRUEBA DE INSTRUCCION BVS RELATIVA.
+424 ;=============================================================
+425 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+426 ;L1 LDA #%010110 ; LDA CON ARGUMENTO BINARIO.
+427 ;L2 ADD #%001010 ; SE AGREGA %001010 AL ACUMULADOR.
+428 ;L3 BVS L1 ; SALTA A L1 SI LA BANDERA DE REBASE ES 1.
+429 ;HLT ; INSTRUCCION DE DETENCION.
+430 ;=============================================================
+431 ;***********************************************************************************************************************
+432 
+433 ;***********************************************************************************************************************
+434 ; INSTRUCCIONES DE CONTROL
+435 ;***********************************************************************************************************************
+436 
 437 ;=============================================================
-438 ;***********************************************************************************************************************
-439 
-440 ;***********************************************************************************************************************
-441 ; INSTRUCCIONES DE CONTROL
-442 ;***********************************************************************************************************************
-443 
-444 ;=============================================================
-445 ; PRUEBA DE INSTRUCCION HLT DE CONTROL.
-446 ;=============================================================
-447 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-448 ;BIN LDA #%000001 ; LDA CON ARGUMENTO BINARIO.
-449 ;HLT ; INSTRUCCION DE CONTROL HTL, DETIENE LA EJECUCION.
-450 ;=============================================================
-451 
-452 ;=============================================================
-453 ; PRUEBA DE INSTRUCCION NOP DE CONTROL.
-454 ;=============================================================
-455 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-456 ;NOP ; INSTRUCCION DE CONTROL NOP.
-457 ;HLT ; INSTRUCCION DE CONTROL HTL, DETIENE LA EJECUCION.
+438 ;#37 PRUEBA DE INSTRUCCION HLT DE CONTROL.
+439 ;=============================================================
+440 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+441 ;BIN LDA #%000001 ; LDA CON ARGUMENTO BINARIO.
+442 ;HLT ; INSTRUCCION DE CONTROL HTL, DETIENE LA EJECUCION.
+443 ;=============================================================
+444 
+445 ;=============================================================
+446 ;#38 PRUEBA DE INSTRUCCION NOP DE CONTROL.
+447 ;=============================================================
+448 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+449 ;NOP ; INSTRUCCION DE CONTROL NOP.
+450 ;HLT ; INSTRUCCION DE CONTROL HTL, DETIENE LA EJECUCION.
+451 ;=============================================================
+452 ;***********************************************************************************************************************
+453 
+454 ;***********************************************************************************************************************
+455 ;#39 INSTRUCCIONES DE ENTRADA SALIDA
+456 ;***********************************************************************************************************************
+457 
 458 ;=============================================================
-459 ;***********************************************************************************************************************
-460 
-461 ;***********************************************************************************************************************
-462 ; INSTRUCCIONES DE ENTRADA SALIDA
-463 ;***********************************************************************************************************************
-464 
+459 ; PRUEBA DE INSTRUCCION OUT DE CONTROL.
+460 ;=============================================================
+461 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+462 ;BIN LDA #%000001 ; LDA CON ARGUMENTO BINARIO.
+463 ;OUT @01 ; ESCRITURA AL PUERTO DE SALIDA CON DIRECCION @01.
+464 ;HLT ; INSTRUCCION DE CONTROL HTL, DETIENE LA EJECUCION.
 465 ;=============================================================
-466 ; PRUEBA DE INSTRUCCION OUT DE CONTROL.
+466 
 467 ;=============================================================
-468 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-469 ;BIN LDA #%000001 ; LDA CON ARGUMENTO BINARIO.
-470 ;OUT @01 ; ESCRITURA AL PUERTO DE SALIDA CON DIRECCION @01.
-471 ;HLT ; INSTRUCCION DE CONTROL HTL, DETIENE LA EJECUCION.
-472 ;=============================================================
-473 
-474 ;=============================================================
-475 ; PRUEBA DE INSTRUCCION INP DE CONTROL.
-476 ;=============================================================
-477 * = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-478 BIN1 LDA #%000110 ; LDA CON ARGUMENTO BINARIO.
-479 INP @00 ; CARGA DEL PUERTO DE ENTRADA AL ACUMULADOR @01.
-480 INP @01 ; CARGA DEL PUERTO DE ENTRADA AL ACUMULADOR @01.
-481 HLT ; INSTRUCCION DE CONTROL HTL, DETIENE LA EJECUCION.
-482 ;=============================================================
-483 
-484 ;=============================================================
-485 ; PRUEBA DE INSTRUCCION STA INDIRECTA.
-486 ;=============================================================
-487 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
-488 ;L1 LDA #@11 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-489 ;L2 STA @1000 ; STA ABSOLUTO, ESCRITURA A PB.
-490 ;L3 LDA #@22 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-491 ;L4 STA @1001 ; STA ABSOLUTO, ESCRITURA A PA.
-492 ;L5 LDA #7 ; LDA INMEDIATO CON ARGUMENTO DECIMAL.
-493 ;L6 STA (@1000) ; STA INDIRECTO, ESCRITURA DE 7 A @0102.
-494 ;L7 ADD #1 ; ADD INMEDIATO CON ARGUMENTO DECIMAL.
-495 ;L8 LDA @2211 ; LDA ABSOLUTO.
-496 ;HLT ; INSTRUCCION DE DETENCION.
-497 ;=============================================================
-498 
-499 
-500 ;DBWRD @0000
-501 ;WRD @0000
-502 ;LALA1 = 66
-503 ;UPPER = 55
-504 ;LALA2 = 7
-505 ;BIN = %001000001000
-506 ;OCT = @12
-507 ;HEX = $FFFF
-508 ;DEC = 10
-509 ;LALA2 = @0007
-510 ;LALA3 = 11
-511 ;LALA4 = %111
-512 ;DBWRD @0000
-513 ;WRD @0000
-514 
-515 ;* = @000A DOESNT WORK
-516 ;* = * + 1
-517 ;PUNT1 = *
-518 ;PUNT2 = * + 20
-519 ;* = $3FFF
-520 ;* = @0010
-521 ;DBWRD = $000A
-522 ;DBWRD $000A
-523 ;WRD $000A
-524 
-525 
-526 ;DBWRD @0100
-527 ;WRD @0000
-528 
-529 ;DBWRD 0
-530 ;WRD 0
-531 
-532 ;DBWRD %100000000000
-533 ;WRD %100000
-534 
-535 ;* = 4096
-536 ;* = %000000000000
-537 
-538 ; TODAS LAS PRUEBAS HAN SIDO CORRECTAMENTE ENSAMBLADAS
-539 
-540 ; PRUEBA PC DIFERENTE DE 0
-541 
-542 ;PRUEBA DE NOP
-543 ;NOP
-544 ;L0 LDA #1
-545 ;INP @01
-546 ;OUT @01
-547 ;INP @01
-548 
-549 ;LDA @01
-550 ;STA @01
-551 
-552 ;PRUEBA DE STA IND
-553 ;L0 LDA #@01
-554 
-555 ;L1 STA @0300
-556 ;L2 LDA #@01
-557 ;L3 STA @0301
-558 ;L7 LDA #7
-559 ;L4 STA (@0300)
-560 ;L5 INA
-561 ;L6 LDA @0101
-562 ;HLT
-563 
-564 
-565 ;PRUEBA AND ABS
-566 ;L0 LDA #%000111
-567 ;L1 STA @0300
-568 ;L2 LDA #%111000
-569 ;L3 ORA @0300
-570 
-571 ;PRUEBA SUB ABS
-572 ;L0 LDA #1
-573 ;L1 STA @0300
-574 ;L2 INA
-575 ;L3 SUB @0300
-576 
-577 ;PRUEBA ADD ABS
-578 ;L0 LDA #1
-579 ;L1 STA @0300
-580 ;L2 INA
-581 ;L3 ADD @0300
-582 
-583 ;PRUEBA DE STA ABS
-584 ;L0 LDA #1
-585 ;L1 STA @0300
-586 ;L2 INA
-587 ;L3 LDA @0300
-588 
-589 ;L0 LDA #01
-590 ;L1 ADD @0001
-591 
-592 ;L0 LDA #63
-593 ;L1 ORA #%101001
-594 
-595 ; PRUEBA DE BCC
-596 ;L0 LDA #0
-597 ;L1 INA
-598 ;L2 BCC L0
-599 ;L3 LDA #1
-600 
-601 
-602 ; PRUEBA DE BNE
-603 ;L SEC
-604 ;L0 CLC
-605 ;L1 LDA #0
-606 ;L2 INA
-607 ;L6 BNE L2
-608 ;L4 INA
-609 ;L5 LDA #1
-610 
-611 ; PRUEBA DE BEQ
-612 ;L SEC
-613 ;L0 CLC
-614 ;L1 LDA #0
-615 ;L6 BEQ L1
-616 ;L4 INA
-617 ;L5 LDA #1
-618 
-619 ;PRUEBA DE LDA INMEDIATA
-620 ;L1 LDA #1
-621 ;L2 LDA #2
-622 ;L3 LDA #3
-623 ;L4 LDA #4
-624 ;L5 LDA #5
-625 
-626 ;PRUEBA DE SUB Y ADD INMEDIATAS
-627 ;L0 LDA #0
-628 ;L1 LDA #63
-629 ;L2 SUB #62
-630 ;L3 SUB #1
-631 ;L4 ADD #1
-632 ;L5 ADD #1
-633 
-634 ;K3 BNE K3
-635 ;K5 BNE K3
-636 ;K1 SEC
-637 ;K2 SEC
-638 ;BNE K1
-639 ;K3 BNE K3
-640 ;K5 BNE K3
-641 ;L1 LDA (@0001)
-642 ;BNE L1
-643 ;L2 LDA @0002
-644 ;L3 LDA @0002
-645 ;BNE L1
-646 ;L1 LDA @0001
-647 
-648 ;LDA LALA1
-649 ;LDA @0001
-650 ;L1 LDA BIN
-651 ;LDA OCT
-652 ;LDA DEC
-653 ;LDA HEX
-654 ;L1 LDA HEX
-655 ;L2 LDA #HEX
-656 ;LDA #HEX
-657 ;BNE L3
-658 ;BMI L1
-659 ;LOOP1 BNE L1
-660 ;L4 BMI L2
-661 ;LDA (BIN)
-662 ;LDA (OCT)
-663 ;LDA (DEC)
-664 ;LDA (HEX)
-665 
-666 ;LDA %1010
-667 ;LDA @12
-668 ;LDA 10
-669 ;LDA $0A
-670 ;LDA (%1010)
-671 ;LDA (@12)
-672 ;LDA (10)
-673 ;LDA ($0A)
-674 
-675 ;LDA #%1010
-676 ;LDA #@12
-677 ;LDA #10
-678 ;LDA $0A
-679 ;LDA #BIN
-680 ;LDA #OCT
-681 ;LDA #DEC
-682 ;LDA #HEX
-683 
-684 ;IMP SEC
-685 ;ACU CLA
-686 ;CTR TPA
-687 
-688 ;INP %1010
-689 ;INP @12
-690 ;INP 10
-691 ;INP $0A
-692 ;INP BIN
-693 ;INP OCT
-694 ;INP DEC
-695 ;INP HEX
-696 
-697 
-698 ;LDA %111
-699 ;L2 LDA (LALA1)
-700 ;L3 LDA (%01)
-701 ;LDA (@0001)
-702 ;BNE L2
-703 ;BMI L3
-704 ;LABEL BNE LALA2
-705 ;LALA3 BNE LABEL
-706 ;BNE LABEL
-707 ;BMI LALA2
-708 ;LOOP1 CPA
-709 ;INA
-710 ;ROR
-711 ;NOP
-712 ;INP LALA1
-713 ;L1 INP LALA2
-714 ;LABEL LDA (LALA1)
-715 ;BNE LABEL
-716 ;LABEL XXX LALA1
-717 ;LABEL LDA @0001
-718 ;LAB1 LDA PERRO
-719 ;BNE LABEL
-720 ;L1 BNE LALA
-721 ;LALA LDA #01
-722 ;LDA #$A
-723 ;LDA #LABEL
-724 ;LABEL LDA #@07
-725 ;LABEL1 LDA #@07
-726 ;BNE LABEL1
-727 ;INP $FF
-728 ;OUT %100
-729 ;HLT
-730 
-731 
-732 ;LDA #0
-733 ;HLT
-734 ;HLT
-735 ;HLT
-736 ;LDA #7
-737 ;LDA #7
-738 ;LDA #7
-739 ;HLT
-740 
-741 ;BEQ JUMP1
-742 ;LDA (@1000)
-743 ;SEC
-744 ;CLA
-745 ;TPA
-746 ;INP @77
-747 
+468 ;#40 PRUEBA DE INSTRUCCION INP DE CONTROL.
+469 ;=============================================================
+470 ;* = @0000 ; DECLARACION DEL PUNTERO DE POSICION.
+471 ;BIN1 LDA #%000110 ; LDA CON ARGUMENTO BINARIO.
+472 ;INP @00 ; CARGA DEL PUERTO DE ENTRADA AL ACUMULADOR @01.
+473 ;INP @01 ; CARGA DEL PUERTO DE ENTRADA AL ACUMULADOR @01.
+474 ;HLT ; INSTRUCCION DE CONTROL HTL, DETIENE LA EJECUCION.
+475 ;=============================================================

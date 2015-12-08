@@ -1,0 +1,2 @@
+g++  -g -Wall -std=c++11 -pedantic -Wno-long-long  -I. -I.. -I/usr/local/systemc-2.3.1/include  -c definitions_dec.cpp -o definitions_dec.o
+g++  -g -Wall -std=c++11 -pedantic -Wno-long-long  -I. -I.. -I/usr/local/systemc-2.3.1/include  -c module_transactor.cpp -o module_transactor.o
