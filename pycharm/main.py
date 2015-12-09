@@ -40,12 +40,12 @@ def main(argv):
     ch.setFormatter(formatter)
     logger.addHandler(ch)
     raw_file_name = 'raw_file.ASM'
-    logging.info("************************************")
-    logging.info('Resumen de resultados de ensamblado')
-    logging.info("************************************")
-    logging.info("====================================")
+    logging.info("****************************************")
+    logging.info('Sistema de Ensamblado y Ejecucion (SEE)')
+    logging.info("****************************************")
+    logging.info("========================================")
     logging.info('Inicia la ejecucion del ensamblador')
-    logging.info("====================================")
+    logging.info("========================================")
     logging.info('Archivo ASM cargado: '+raw_file_name)
     lines_counter = 0
     error = 0
@@ -88,9 +88,9 @@ def main(argv):
     # os.system(cpucr_vcd)
 
 if __name__ == "__main__": main(sys.argv[1:])
-logging.info("Fin de la ejecucion de SES!")
-logging.info("====================================")
-logging.info("************************************")
+logging.info("Fin de la ejecucion de SEE!")
+logging.info("========================================")
+logging.info("****************************************")
 
 ###########################################################################
 

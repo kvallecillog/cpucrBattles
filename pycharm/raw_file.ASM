@@ -25,8 +25,10 @@ CONST = @0000
 ;L4 NOP
 ;L6 CLA
 ;INP CONST+1
-BNE L1+1
+L BNE @03
 L1 INA
+;LDA CONST
+;BNE 14
 HLT ; Instruccion de detencion.
 ;=============================================================
 

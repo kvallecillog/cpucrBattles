@@ -539,14 +539,14 @@ def init_checker(data_list, lines_raw_list,error):
 
 def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
 
-    logging.info("====================================")
+    logging.info("========================================")
     logging.info("Inicia el analisis de etiquetas!")
-    logging.info("====================================")
+    logging.info("========================================")
     logging.info("Lista de lineas por analizar:")
-    logging.info("====================================")
+    logging.info("========================================")
     for data in data_list:
         logging.info(str(data).rstrip())
-    logging.info("====================================")
+    logging.info("========================================")
     cont_mem_pos = pos_cont_dec
     # Inicializacion el diccionario de constantes.
     label_dic = const_dic
@@ -608,7 +608,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
         for x in range(0, len(data_list)):
 
             if error == 0:
-                logging.info("####################################")
+                logging.info("****************************************")
                 logging.info("Linea en analisis: " + str(data_list[x]).rstrip())
                 data_list_x =''.join(data_list[x])
                 num_line = data_list_x.split(" ")
@@ -693,7 +693,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     else:
                                         label_dic[label_abs] = cont_mem_pos
                                         logging.info("Etiqueta ingresada al diccionario: " + str(label_dic))
-                                        const_abs = label_inst_abs_match.group(6)
+                                        const_abs = str(label_inst_abs_match.group(6))
                                         oper_lab_match = re.match(regex_oper_lab, const_abs)
                                         #  Se actualiza el contador de posicion.
                                         cont_mem_pos += 3
@@ -706,11 +706,11 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                     const_abs_dec = const_abs_dec + int(oper_lab_match.group(5))
                                                 const_abs_oct = format(const_abs_dec, '#06o')[-4:]
                                                 oper_abs ="@"+const_abs_oct
-                                                logging.info("Constante remplazada: " + str(const_abs) + " = " + str(oper_abs))
+                                                logging.info("Argumento remplazado: " + str(const_abs) + " = " + str(oper_abs))
                                                 label_regex = re.compile(r'\b'+re.escape(const_abs)+r'\b', re.IGNORECASE)
                                                 data_list_x = re.sub(label_regex,oper_abs, data_list_x)
                                                 data_list[x] = data_list_x
-                                                logging.info("Linea con constante remplazada: " + str(data_list).rstrip())
+                                                logging.info("Linea con Argumento remplazado: " + str(data_list).rstrip())
 
                                             else:
                                                 error_cont_id = "Error, constante: "+const_abs+", no fue definida dentro del ASM."
@@ -726,12 +726,12 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     label_abs = label_inst_abs_match.group(1)+" "
                                     label_regex = re.compile(r'\b'+re.escape(label_abs)+r'\b', re.IGNORECASE)
                                     data_list_x = re.sub(label_regex,"", data_list_x)
-                                    logging.info("Instruccion procesada: " + str(data_list_x))
+                                    logging.info("Instruccion procesada: " + str(data_list_x).rstrip())
                                     data_list[x] = data_list_x
 
                             elif label_inst_ind_match:
                                 # Actualizacion del contador de posicion de memoria.
-                                # El direccionamiento absoluto cuenta con 3 palabras.
+                                # El direccionamiento indirecto cuenta con 3 palabras.
                                 DIR = "ind"
                                 logging.info("Instruccion de direccionamiento: " + DIR)
                                 logging.info("Argumento extraido: " + str(label_inst_ind_match.group(6)))
@@ -759,11 +759,11 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                     const_ind_dec = const_ind_dec + int(oper_lab_match.group(5))
                                                 const_ind_oct = format(const_ind_dec, '#06o')[-4:]
                                                 oper_ind ="@"+const_ind_oct
-                                                logging.info("Constante remplazada: " + str(const_ind) + " = " + str(oper_ind))
+                                                logging.info("Argumento remplazado: " + str(const_ind) + " = " + str(oper_ind))
                                                 label_regex = re.compile(r'\b'+re.escape(const_ind)+r'\b', re.IGNORECASE)
                                                 data_list_x = re.sub(label_regex,oper_ind, data_list_x)
                                                 data_list[x] = data_list_x
-                                                logging.info("Linea con constante remplazada: " + str(data_list).rstrip())
+                                                logging.info("Linea con Argumento remplazado: " + str(data_list).rstrip())
                                             else:
                                                 error_cont_id = "Error, constante: "+const_ind+", no fue definida dentro del ASM."
                                                 error_list.append(error_cont_id)
@@ -777,7 +777,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     label_ind = label_inst_ind_match.group(1)+" "
                                     label_regex = re.compile(r'\b'+re.escape(label_ind)+r'\b', re.IGNORECASE)
                                     data_list_x = re.sub(label_regex,"", data_list_x)
-                                    logging.info("Instruccion procesada: " + str(data_list_x))
+                                    logging.info("Instruccion procesada: " + str(data_list_x).rstrip())
                                     data_list[x] = data_list_x
 
                             elif label_inst_inm_match:
@@ -809,11 +809,11 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                     const_inm_dec = const_inm_dec + int(oper_lab_match.group(5))
                                                     print("Valor calculado: ", const_inm_dec)
                                                 oper_inm = "@"+format(const_inm_dec, '#06o')[-2:]
-                                                logging.info("Constante remplazada: " + str(const_inm) + " = " + str(oper_inm))
+                                                logging.info("Argumento remplazado: " + str(const_inm) + " = " + str(oper_inm))
                                                 label_regex = re.compile(r'\b'+re.escape(const_inm)+r'\b', re.IGNORECASE)
                                                 data_list_x = re.sub(label_regex, oper_inm, data_list_x)
                                                 data_list[x] = data_list_x
-                                                logging.info("Linea con constante remplazada: " + str(data_list).rstrip())
+                                                logging.info("Linea con Argumento remplazado: " + str(data_list).rstrip())
                                             else:
                                                 error_cont_id = "Error, constante: "+const_inm+", no fue definida dentro del ASM."
                                                 error_list.append(error_cont_id)
@@ -827,12 +827,12 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     label_inm = label_inst_inm_match.group(1)+" "
                                     label_regex = re.compile(r'\b'+re.escape(label_inm)+r'\b', re.IGNORECASE)
                                     data_list_x = re.sub(label_regex, "", data_list_x)
-                                    logging.info("Instruccion procesada: " + str(data_list_x))
+                                    logging.info("Instruccion procesada: " + str(data_list_x).rstrip())
                                     data_list[x] = data_list_x
 
                             elif label_inst_io_match:
                                 # Actualizacion del contador de posicion de memoria.
-                                # El direccionamiento absoluto cuenta con 3 palabras.                                
+                                # El direccionamiento io cuenta con 3 palabras.
                                 DIR = "io"
                                 logging.info("Instruccion de direccionamiento: " + DIR)
                                 logging.info("Argumento extraido: " + str(label_inst_io_match.group(5)))
@@ -858,11 +858,11 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                     const_io_dec = int(label_dic[conts_io_str])
                                                     const_io_oct = format(const_io_dec, '#04o')[2:4]
                                                     oper_io ="@"+const_io_oct
-                                                    logging.info("Constante remplazada: " + str(const_io) + " = " + str(oper_io))
+                                                    logging.info("Argumento remplazado: " + str(const_io) + " = " + str(oper_io))
                                                     label_regex = re.compile(r'\b'+re.escape(const_io)+r'\b', re.IGNORECASE)
                                                     data_list_x = re.sub(label_regex,oper_io, data_list_x)
                                                     data_list[x] = data_list_x
-                                                    logging.info("Linea con constante remplazada: " + str(data_list).rstrip())
+                                                    logging.info("Linea con Argumento remplazado: " + str(data_list).rstrip())
                                                 else:
                                                     error_cont_id = "Error, constante: "+const_io+", no fue definida dentro del ASM."
                                                     error_list.append(error_cont_id)
@@ -876,12 +876,12 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     label_io = label_inst_io_match.group(1)+" "
                                     label_regex = re.compile(r'\b'+re.escape(label_io)+r'\b', re.IGNORECASE)
                                     data_list_x = re.sub(label_regex, "", data_list_x)
-                                    logging.info("Instruccion procesada: " + str(data_list_x))
+                                    logging.info("Instruccion procesada: " + str(data_list_x).rstrip())
                                     data_list[x] = data_list_x
 
                             elif label_inst_rel_match:
                                 # Actualizacion del contador de posicion de memoria.
-                                # El direccionamiento absoluto cuenta con 3 palabras.
+                                # El direccionamiento reloluto cuenta con 3 palabras.
                                 DIR = "rel"
                                 logging.info("Instruccion de direccionamiento: " + DIR)
                                 logging.info("Argumento extraido: " + str(label_inst_rel_match.group(6)))
@@ -917,18 +917,18 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                 const_rel_dec = const_rel_dec + int(oper_lab_match.group(5))
                                             const_rel_oct = format((const_rel_dec & 0xff), '#06o')[-4:]
                                             oper_rel = "@"+const_rel_oct
-                                            logging.info("Constante remplazada: " + str(const_rel) + " = " + str(oper_rel))
+                                            logging.info("Argumento remplazado: " + str(const_rel) + " = " + str(oper_rel))
                                             label_regex = re.compile(r'\b'+re.escape(const_rel)+r'\b', re.IGNORECASE)
                                             data_list_x = re.sub(label_regex, oper_rel, data_list_x)
                                             data_list[x] = data_list_x
-                                            logging.info("Linea con constante remplazada: " + str(data_list).rstrip())
+                                            logging.info("Linea con Argumento remplazado: " + str(data_list).rstrip())
                                         else:
                                             error_cont_id = "Error, identificador: "+const_rel+", no definido dentro del ASM."
                                             error_list.append(error_cont_id)
                                             logging.error(error_cont_id)
                                             error += 1
                                             break
-                                    logging.info("Instruccion procesada: " + str(data_list_x))
+                                    logging.info("Instruccion procesada: " + str(data_list_x).rstrip())
                             elif label_inst_acum_match:
                                 # Actualizacion del contador de posicion de memoria.
                                 # El direccionamiento acumulador cuenta con 1 palabra.
@@ -954,7 +954,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     label_acum = label_inst_acum_match.group(1)+" "
                                     label_regex = re.compile(r'\b'+re.escape(label_acum)+r'\b', re.IGNORECASE)
                                     data_list_x = re.sub(label_regex,"", data_list_x)
-                                    logging.info("Instruccion procesada: " + str(data_list_x))
+                                    logging.info("Instruccion procesada: " + str(data_list_x).rstrip())                                    
                                     data_list[x] = data_list_x
 
                             elif label_inst_ctrl_match:
@@ -982,7 +982,7 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                     label_ctrl = label_inst_ctrl_match.group(1)+" "
                                     label_regex = re.compile(r'\b'+re.escape(label_ctrl)+r'\b', re.IGNORECASE)
                                     data_list_x = re.sub(label_regex,"", data_list_x)
-                                    logging.info("Instruccion procesada: " + str(data_list_x))
+                                    logging.info("Instruccion procesada: " + str(data_list_x).rstrip())
                                     data_list[x] = data_list_x
 
                             elif label_inst_imp_match:
@@ -1047,17 +1047,17 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                     const_abs_dec = const_abs_dec + int(oper_lab_match.group(5))
                                             const_abs_oct = format(const_abs_dec, '#06o')[-4:]
                                             oper_abs ="@"+const_abs_oct
-                                            logging.info("Constante remplazada: " + str(const_abs) + " = " + str(oper_abs))
+                                            logging.info("Argumento remplazado: " + str(const_abs) + " = " + str(oper_abs))
                                             label_regex = re.compile(r'\b'+re.escape(const_abs)+r'\b', re.IGNORECASE)
                                             data_list_x = re.sub(label_regex,oper_abs, data_list_x)
                                             data_list[x] = data_list_x
-                                            logging.info("Linea con constante remplazada: " + str(data_list).rstrip())
+                                            logging.info("Linea con Argumento remplazado: " + str(data_list).rstrip())
                                             #  Se actualiza el contador de posicion.
                                             cont_mem_pos += 3
                                         else:
                                             error_cont_id = "Error, constante: "+const_abs+", no fue definida dentro del ASM."
                                             error_list.append(error_cont_id)
-                                            logging.error(error_id_dup)
+                                            logging.error(error_cont_id)
                                             error += 1
                                     else:
                                         logging.info("Linea con argumentos numericos: " + str(const_abs))
@@ -1084,11 +1084,11 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                     print("Valor calculado: ", const_ind_dec)
                                             const_ind_oct = format(const_ind_dec, '#06o')[-4:]
                                             oper_ind ="@"+const_ind_oct
-                                            logging.info("Constante remplazada: " + str(const_ind) + " = " + str(oper_ind))
+                                            logging.info("Argumento remplazado: " + str(const_ind) + " = " + str(oper_ind))
                                             label_regex = re.compile(r'\b'+re.escape(const_ind)+r'\b', re.IGNORECASE)
                                             data_list_x = re.sub(label_regex,oper_ind, data_list_x)
                                             data_list[x] = data_list_x
-                                            logging.info("Linea con constante remplazada: " + str(data_list).rstrip())
+                                            logging.info("Linea con Argumento remplazado: " + str(data_list).rstrip())
                                             #  Se actualiza el contador de posicion.
                                             cont_mem_pos += 3
                                         else:
@@ -1118,11 +1118,11 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                     const_inm_dec = const_inm_dec + int(oper_lab_match.group(5))
                                             const_inm_oct = format(const_inm_dec, '#06o')[-2:]
                                             oper_inm = "@"+const_inm_oct
-                                            logging.info("Constante remplazada: " + str(const_inm) + " = " + str(const_inm))
+                                            logging.info("Argumento remplazado: " + str(const_inm) + " = " + str(const_inm))
                                             label_regex = re.compile(r'\b'+re.escape(const_inm)+r'\b', re.IGNORECASE)
                                             data_list_x = re.sub(label_regex,oper_inm, data_list_x)
                                             data_list[x] = data_list_x
-                                            logging.info("Linea con constante remplazada: " + str(data_list).rstrip())
+                                            logging.info("Linea con Argumento remplazado: " + str(data_list).rstrip())
                                             #  Se actualiza el contador de posicion.
                                             cont_mem_pos += 2
                                         else:
@@ -1154,11 +1154,11 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                     const_io_dec = const_io_dec + int(oper_lab_match.group(5))
                                             const_io_oct = format(const_io_dec, '#04o')[2:4]
                                             oper_io ="@"+const_io_oct
-                                            logging.info("Constante remplazada: " + str(const_io) + " = " + str(oper_io))
+                                            logging.info("Argumento remplazado: " + str(const_io) + " = " + str(oper_io))
                                             label_regex = re.compile(r'\b'+re.escape(const_io)+r'\b', re.IGNORECASE)
                                             data_list_x = re.sub(label_regex,oper_io, data_list_x)
                                             data_list[x] = data_list_x
-                                            logging.info("Linea con constante remplazada: " + str(data_list).rstrip())
+                                            logging.info("Linea con Argumento remplazado: " + str(data_list).rstrip())
                                             #  Se actualiza el contador de posicion.
                                             cont_mem_pos += 2
                                         else:
@@ -1193,11 +1193,11 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                                                     const_rel_dec = const_rel_dec + int(oper_lab_match.group(5))
                                             const_rel_oct = format((const_rel_dec & 0xff), '#06o')[-4:]
                                             oper_rel = "@"+const_rel_oct
-                                            logging.info("Constante remplazada: " + str(const_rel) + " = " + str(oper_rel))
+                                            logging.info("Argumento remplazado: " + str(const_rel) + " = " + str(oper_rel))
                                             label_regex = re.compile(r'\b'+re.escape(const_rel)+r'\b', re.IGNORECASE)
                                             data_list_x = re.sub(label_regex, oper_rel, data_list_x)
                                             data_list[x] = data_list_x
-                                            logging.info("Linea con constante remplazada: " + str(data_list).rstrip())
+                                            logging.info("Linea con Argumento remplazado: " + str(data_list).rstrip())
                                         else:
                                             error_id_nodef = "Error, identificador: "+const_rel+", no definido dentro del ASM"
                                             logging.error(error_id_nodef)
@@ -1258,15 +1258,20 @@ def label_checker(data_list, lines_raw_list, error, pos_cont_dec,const_dic):
                 # print("Error, no se logro ensamblar, revise el codigo ASM.")
                 break
 
-    logging.info("####################################")
+    logging.info("****************************************")
     logging.info("Diccionario de identificadores extraidos: " + str(label_dic))
     return error, fi_list, error_list, data_list
 
 
 def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
-    # global label_rel
-    print("Checking instructions\n")
-
+    logging.info("========================================")
+    logging.info("Inicia el analisis de instrucciones!")
+    logging.info("========================================")
+    logging.info("Lista de lineas por analizar:")
+    logging.info("========================================")
+    for data in data_list:
+        logging.info(str(data).rstrip())
+    logging.info("========================================")
     cont_mem_pos = pos_cont_dec
 
     # Inicializacion el diccionario de constantes.
@@ -1281,8 +1286,8 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
     opcode_dic = dict(LDA_INM='000000', ADD_INM='010000', SUB_INM='011000', AND_INM='100000',
                       ORA_INM='101000',
 
-                      LDA_ABS='000001', STA_ABS='001001', ADD_ABS='010001', SUB_ABS='011001', AND_ABS='100001',
-                      ORA_ABS='101001', JMP_ABS='110001', JSR_ABS='111001', 
+                      LDA_abs='000001', STA_abs='001001', ADD_abs='010001', SUB_abs='011001', AND_abs='100001',
+                      ORA_abs='101001', JMP_abs='110001', JSR_abs='111001',
 
                       BEQ_REL='000010', BNE_REL='001010', BCS_REL='010010', BCC_REL='011010', BMI_REL='100010',
                       BPL_REL='101010', BVS_REL='110010', BVC_REL='111010',
@@ -1333,9 +1338,8 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
 
     # Se recorre toda la lista que contiene las lineas con la instruccion a evaluar.
     for x in range(0, len(data_list)):
-
-        # print("Contador de posicion actualizado:", cont_mem_pos)
-        
+        logging.info("****************************************")
+        logging.info("Linea en analisis: " + str(data_list[x]).rstrip())
         # Se transforma el contenido extraido de la lista a un string.
         data_list_x = ''.join(data_list[x])
         # Se obtiene el numero de linea,
@@ -1344,12 +1348,12 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
         non_num_line = " ".join(num_line[1:len(num_line)])
         # Se transforma a un int el numero de la linea.
         num_line_int = int(num_line[0])
-        # El numero de linea mapeado va del 1 al valor final, por lo que se ajusta 
+        # El numero de linea mapeado va del 1 al valor final, por lo que se ajusta
         # al index de la lista. Restando 1
         num_line_int_0 = int(num_line[0]) - 1
         data_source_line = lines_raw_list[num_line_int_0]
         data_source_line_list = data_source_line.split(" ")
-        # String que contiene el formato de notificacion de linea 
+        # String que contiene el formato de notificacion de linea
         # al usuario, i.e. "12 | BNE LABEL"
         data_source_line_n = " ".join(data_source_line_list[1:len(data_source_line_list)])
 
@@ -1374,79 +1378,59 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
         if inst_abs_match or inst_ind_match or inst_inm_match or inst_io_match \
                 or inst_rel_match or inst_acum_match or inst_ctrl_match or inst_imp_match:
 
-            print("Es una instruccion + argumento")
+            logging.info("Es una linea con inst + argumento")
 
             if inst_abs_match:
-
                 # Actualizacion del contador de posicion de memoria.
                 # El direccionamiento absoluto cuenta con 3 palabras.
-
+                DIR = "abs"
+                logging.info("Instruccion de direccionamiento: " + DIR)
+                
                 pc_list.append(cont_mem_pos)
-
-                inst_abs_key = inst_abs_match.group(1) + "_ABS"
-
-                print("OPCODE de INST:", opcode_dic[inst_abs_key])
+                inst_abs_key = inst_abs_match.group(1) + "_abs"
                 opcode_abs = opcode_dic[inst_abs_key]
-                print("La lista de instrucciones es:", data_list)
-
                 oper_abs = inst_abs_match.group(4)
 
                 oper_dec_match = re.match(regex_oper_dec, oper_abs)
                 if oper_dec_match:
                     oper_dec = int(oper_dec_match.group(1))
                     oper_dec_bin = format(oper_dec, '#014b')[-12:]
-                    print("Oper Decimal: ", oper_dec_match.group(1))
-                    print("Dec a Bin Oper: ", oper_dec_bin)
                     oper_abs_12b = oper_dec_bin
 
                 oper_oct_match = re.match(regex_oper_oct, oper_abs)
                 if oper_oct_match:
                     oper_oct = int(oper_oct_match.group(2), 8)
                     oper_oct_bin = format(oper_oct, '#014b')[-12:]
-                    print("Octal Operand: ", oper_oct)
-                    print("Octal to bin Operand: ", oper_oct_bin)
                     oper_abs_12b = oper_oct_bin
 
                 oper_bin_match = re.match(regex_oper_bin, oper_abs)
                 if oper_bin_match:
                     oper_bin = int(oper_bin_match.group(2), 2)
                     oper_bin_bin = format(oper_bin, '#014b')[-12:]
-                    print("Binary Operand: ", oper_bin_match.group(2))
-                    print("Bin 2 bin: ", oper_bin_bin)
                     oper_abs_12b = oper_bin_bin
 
                 oper_hex_match = re.match(regex_oper_hex, oper_abs)
                 if oper_hex_match:
                     oper_hex = int(oper_hex_match.group(2), 16)
                     oper_hex_hex = format(oper_hex, '#08b')[-6:]
-                    print("hexa Operand: ", oper_hex_match.group(2))
-                    print("hex 2 hex: ", oper_hex_hex)
                     oper_abs_12b = oper_hex_hex
-
-                # inst_abs_dic = dict(opcode=opcode_abs, oper=oper_abs_12b)
-                # fsm_dic[cont_mem_pos] = inst_abs_dic
 
                 abs_fi = str(cont_mem_pos) + " " + str(opcode_abs) + " " + str(oper_abs_12b)
                 cont_mem_pos += 3
                 fi_list.append(abs_fi)
 
-                # fsm_dic[PC, opcode, oper] = cont_mem_pos,opcode_abs,oper_abs
-                # print("FSM DICTIONARY:",fsm_dic)
-                # print("Operando!:", inst_abs_match.group(3))
-                print("This is an absolute instruction+argument:")
-                print("fi_list: ", fi_list)
-                print(num_line_int, "|", data_source_line_n)
+                logging.info("OPCODE: " + str(opcode_abs).rstrip())
+                logging.info("Operando: " + str(oper_abs_12b).rstrip())
+                logging.info("Instruccion ensamblada: " + str(abs_fi).rstrip())
 
             if inst_ind_match:
-
                 # Actualizacion del contador de posicion de memoria.
                 # El direccionamiento indirecto cuenta con 3 palabras.
+                DIR = "ind"
+                logging.info("Instruccion de direccionamiento: " + DIR)
 
                 pc_list.append(cont_mem_pos)
-
                 inst_ind_key = inst_ind_match.group(1) + "_IND"
-                print("OPCODE de INST:", opcode_dic[inst_ind_key])
-
                 opcode_ind = opcode_dic[inst_ind_key]
                 oper_ind = inst_ind_match.group(4)
                 inst_ind_dic = dict(opcode=opcode_ind, oper=oper_ind)
@@ -1456,62 +1440,42 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 if oper_dec_match:
                     oper_dec = int(oper_dec_match.group(1))
                     oper_dec_bin = format(oper_dec, '#014b')[-12:]
-                    print("Oper Decimal: ", oper_dec_match.group(1))
-                    print("Dec a Bin Oper: ", oper_dec_bin)
-                    oper_abs_12b = oper_dec_bin
+                    oper_ind_12b = oper_dec_bin
 
                 oper_oct_match = re.match(regex_oper_oct, oper_ind)
                 if oper_oct_match:
                     oper_oct = int(oper_oct_match.group(2), 8)
                     oper_oct_bin = format(oper_oct, '#014b')[-12:]
-                    print("Octal Operand: ", oper_oct)
-                    print("Octal to bin Operand: ", oper_oct_bin)
-                    oper_abs_12b = oper_oct_bin
+                    oper_ind_12b = oper_oct_bin
 
                 oper_bin_match = re.match(regex_oper_bin, oper_ind)
                 if oper_bin_match:
                     oper_bin = int(oper_bin_match.group(2), 2)
                     oper_bin_bin = format(oper_bin, '#014b')[-12:]
-                    print("Binary Operand: ", oper_bin_match.group(2))
-                    print("Bin 2 bin: ", oper_bin_bin)
-                    oper_abs_12b = oper_bin_bin
+                    oper_ind_12b = oper_bin_bin
 
                 oper_hex_match = re.match(regex_oper_hex, oper_ind)
                 if oper_hex_match:
                     oper_hex = int(oper_hex_match.group(2), 16)
                     oper_hex_hex = format(oper_hex, '#08b')[-6:]
-                    print("hexa Operand: ", oper_hex_match.group(2))
-                    print("hex 2 hex: ", oper_hex_hex)
-                    oper_abs_12b = oper_hex_hex
+                    oper_ind_12b = oper_hex_hex
 
-                ind_fi = str(cont_mem_pos) + " " + str(opcode_ind) + " " + str(oper_abs_12b)
+                ind_fi = str(cont_mem_pos) + " " + str(opcode_ind) + " " + str(oper_ind_12b)
                 cont_mem_pos += 3
                 fi_list.append(ind_fi)
 
-
-                # fsm_dic.update(cont_mem_pos=inst_ind_dic)
-                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_ind, oper=oper_ind)
-
-                # print("FSM DICTIONARY:",fsm_dic)
-
-                # print("Operando!:",inst_abs_match.group(3))
-                print("This is an indirect instruction+argument:")
-                print(num_line_int, "|", data_source_line_n)
+                logging.info("OPCODE: " + str(opcode_ind).rstrip())
+                logging.info("Operando: " + str(oper_ind_12b).rstrip())
+                logging.info("Instruccion ensamblada: " + str(ind_fi).rstrip())
 
             if inst_inm_match:
-
                 # Actualizacion del contador de posicion de memoria.
                 # El direccionamiento inmediato cuenta con 2 palabras.
-
+                DIR = "inm"
+                logging.info("Instruccion de direccionamiento: " + DIR)
+                
                 pc_list.append(cont_mem_pos)
-
                 inst_inm_key = inst_inm_match.group(1) + "_INM"
-                print("OPCODE de INST:", opcode_dic[inst_inm_key])
-
-                # opcode_inm = opcode_dic[inst_inm_key]
-                # oper_inm = inst_inm_match.group(4)
-                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_inm, oper=oper_inm)
-
                 opcode_inm = opcode_dic[inst_inm_key]
                 oper_inm = inst_inm_match.group(4)
                 inst_inm_dic = dict(opcode=opcode_inm, oper=oper_inm)
@@ -1521,68 +1485,47 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                 if oper_dec_match:
                     oper_dec = int(oper_dec_match.group(1))
                     oper_dec_bin = format(oper_dec, '#08b')[-6:]
-                    print("Oper Decimal: ", oper_dec_match.group(1))
-                    print("Dec a Bin Oper: ", oper_dec_bin)
-                    oper_abs_12b = "XXXXXX"+oper_dec_bin
-
+                    oper_inm_12b = "XXXXXX"+oper_dec_bin
 
                 oper_oct_match = re.match(regex_oper_oct, oper_inm)
                 if oper_oct_match:
                     oper_oct = int(oper_oct_match.group(2), 8)
                     oper_oct_bin = format(oper_oct, '#08b')[-6:]
-                    print("Octal Operand: ", oper_oct)
-                    print("Octal to bin Operand: ", oper_oct_bin)
-                    oper_abs_12b = "XXXXXX"+oper_oct_bin
+                    oper_inm_12b = "XXXXXX"+oper_oct_bin
 
 
                 oper_bin_match = re.match(regex_oper_bin, oper_inm)
                 if oper_bin_match:
                     oper_bin = int(oper_bin_match.group(2), 2)
                     oper_bin_bin = format(oper_bin, '#08b')[-6:]
-                    print("Binary Operand: ", oper_bin_match.group(2))
-                    print("Bin 2 bin: ", oper_bin_bin)
-                    oper_abs_12b = "XXXXXX"+oper_bin_bin
+                    oper_inm_12b = "XXXXXX"+oper_bin_bin
 
                 oper_hex_match = re.match(regex_oper_hex, oper_inm)
                 if oper_hex_match:
                     oper_hex = int(oper_hex_match.group(2), 16)
                     oper_hex_hex = format(oper_hex, '#08b')[-6:]
-                    print("hexa Operand: ", oper_hex_match.group(2))
-                    print("hex 2 hex: ", oper_hex_hex)
-                    oper_abs_12b = "XXXXXX"+oper_hex_hex
+                    oper_inm_12b = "XXXXXX"+oper_hex_hex
 
-
-                inm_fi = str(cont_mem_pos) + " " + str(opcode_inm) + " " + str(oper_abs_12b)
+                inm_fi = str(cont_mem_pos) + " " + str(opcode_inm) + " " + str(oper_inm_12b)
                 cont_mem_pos += 2
                 fi_list.append(inm_fi)
 
-                # print("FSM DICTIONARY:",fsm_dic)
-
-                # print("Operando!:",inst_abs_match.group(3))
-                print("This is an inmediate instruction+argument:")
-                print(num_line_int, "|", data_source_line_n)
+                logging.info("OPCODE: " + str(opcode_inm).rstrip())
+                logging.info("Operando: " + str(oper_inm_12b).rstrip())
+                logging.info("Instruccion ensamblada: " + str(inm_fi).rstrip())
 
             if inst_io_match:
 
                 # Actualizacion del contador de posicion de memoria.
                 # El direccionamiento IO cuenta con 2 palabras.
+                DIR = "io"
+                logging.info("Instruccion de direccionamiento: " + DIR)
 
                 pc_list.append(cont_mem_pos)
-
                 inst_io_key = inst_io_match.group(1) + "_IO"
                 print("OPCODE de INST:", opcode_dic[inst_io_key])
-
                 opcode_io = opcode_dic[inst_io_key]
                 oper_io = inst_io_match.group(4)
-
-                # oper_oct_match = re.match(regex_oper_oct, oper_io)
-                # if oper_oct_match:
-                #     oper_oct = int(oper_oct_match.group(2), 8)
-                #     oper_oct_bin = format(oper_oct, '#014b')[-6:]
-                #     print("Octal Operand: ", oper_oct)
-                #     print("Octal to bin Operand: ", oper_oct_bin)
-                #     oper_abs_12b = oper_oct_bin+"XXXXXX"
-                #
 
                 oper_dec_match = re.match(regex_oper_dec, oper_io)
                 if oper_dec_match:
@@ -1590,8 +1533,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                     oper_dec_bin = format(oper_dec, '#08b')[-6:]
                     print("Oper Decimal: ", oper_dec_match.group(1))
                     print("Dec a Bin Oper: ", oper_dec_bin)
-                    oper_abs_12b = "XXXXXX"+oper_dec_bin
-
+                    oper_io_12b = "XXXXXX"+oper_dec_bin
 
                 oper_oct_match = re.match(regex_oper_oct, oper_io)
                 if oper_oct_match:
@@ -1599,8 +1541,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                     oper_oct_bin = format(oper_oct, '#08b')[-6:]
                     print("Octal Operand: ", oper_oct)
                     print("Octal to bin Operand: ", oper_oct_bin)
-                    oper_abs_12b = "XXXXXX"+oper_oct_bin
-
+                    oper_io_12b = "XXXXXX"+oper_oct_bin
 
                 oper_bin_match = re.match(regex_oper_bin, oper_io)
                 if oper_bin_match:
@@ -1608,7 +1549,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                     oper_bin_bin = format(oper_bin, '#08b')[-6:]
                     print("Binary Operand: ", oper_bin_match.group(2))
                     print("Bin 2 bin: ", oper_bin_bin)
-                    oper_abs_12b = "XXXXXX"+oper_bin_bin
+                    oper_io_12b = "XXXXXX"+oper_bin_bin
 
                 oper_hex_match = re.match(regex_oper_hex, oper_io)
                 if oper_hex_match:
@@ -1616,149 +1557,138 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
                     oper_hex_hex = format(oper_hex, '#08b')[-6:]
                     print("hexa Operand: ", oper_hex_match.group(2))
                     print("hex 2 hex: ", oper_hex_hex)
-                    oper_abs_12b = "XXXXXX"+oper_hex_hex
+                    oper_io_12b = "XXXXXX"+oper_hex_hex
 
-                # inst_io_dic = dict(opcode=opcode_io, oper=oper_abs_12b)
-                # fsm_dic[cont_mem_pos] = inst_io_dic
-
-                io_fi = str(cont_mem_pos) + " " + str(opcode_io) + " " + str(oper_abs_12b)
+                io_fi = str(cont_mem_pos) + " " + str(opcode_io) + " " + str(oper_io_12b)
                 cont_mem_pos += 2
                 fi_list.append(io_fi)
 
-
-                # print("Operando!:",inst_abs_match.group(3))
-                print("This is an IO instruction+argument:")
-                print(num_line_int, "|", data_source_line_n)
+                logging.info("OPCODE: " + str(opcode_io).rstrip())
+                logging.info("Operando: " + str(oper_io_12b).rstrip())
+                logging.info("Instruccion ensamblada: " + str(io_fi).rstrip())
 
             if inst_rel_match:
                 # Actualizacion del contador de posicion de memoria.
                 # El direccionamiento relativo cuenta con 2 palabras.
 
-                pc_list.append(cont_mem_pos)
-
-                label_rel = inst_rel_match.group(4)
-
-                print("Label_rel", label_rel)
-                label_rel = int(label_rel[1:],8)
-                oper_rel = format(label_rel, '#014b')[-6:]
-                oper_rel = "XXXXXX"+str(oper_rel)
-                print("oper_rel", oper_rel)
-                # if label_rel in label_dic:
-                #     oper_rel = label_dic[label_rel]
-                #     print("oper_rel", oper_rel)
-                #     oper_rel = format(oper_rel, '#08b')[-6:]
-
-                inst_rel_key = inst_rel_match.group(1) + "_REL"
-                print("OPCODE de INST:", opcode_dic[inst_rel_key])
-
+                # pc_list.append(cont_mem_pos)
+                # label_rel = inst_rel_match.group(4)
+                # label_rel = int(label_rel[1:],8)
+                # oper_rel = format(label_rel, '#014b')[-6:]
+                # oper_rel = "XXXXXX"+str(oper_rel)
+                # inst_rel_key = inst_rel_match.group(1) + "_REL"
                 # opcode_rel = opcode_dic[inst_rel_key]
-                # # cont_mem_pos += VALOR DE ETIQUETA
-                # oper_rel = inst_rel_match.group(4)
-                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_rel, oper=oper_rel)
-                # print("FSM DICTIONARY:",fsm_dic)
+                # inst_rel_dic = dict(opcode=opcode_rel, oper=oper_rel)
+                # fsm_dic[cont_mem_pos] = inst_rel_dic
+                # rel_fi = str(cont_mem_pos) + " " + str(opcode_rel) + " " + str(oper_rel)
+                # cont_mem_pos += 2
+                # fi_list.append(rel_fi)
 
+                DIR = "rel"
+                logging.info("Instruccion de direccionamiento: " + DIR)
+                
+                pc_list.append(cont_mem_pos)
+                inst_rel_key = inst_rel_match.group(1) + "_REL"
                 opcode_rel = opcode_dic[inst_rel_key]
-                # oper_rel = inst_rel_match.group(4)
-                inst_rel_dic = dict(opcode=opcode_rel, oper=oper_rel)
-                print("inst_rel_dic",inst_rel_dic)
-                fsm_dic[cont_mem_pos] = inst_rel_dic
-                print("fsm_dic",fsm_dic)
-                rel_fi = str(cont_mem_pos) + " " + str(opcode_rel) + " " + str(oper_rel)
+                oper_rel = inst_rel_match.group(4)
+
+                oper_dec_match = re.match(regex_oper_dec, oper_rel)
+                if oper_dec_match:
+                    oper_dec = int(oper_dec_match.group(1))
+                    oper_dec_bin = format(oper_dec, '#014b')[-6:]
+                    oper_rel_12b = "XXXXXX"+oper_dec_bin
+
+                oper_oct_match = re.match(regex_oper_oct, oper_rel)
+                if oper_oct_match:
+                    oper_oct = int(oper_oct_match.group(2), 8)
+                    oper_oct_bin = format(oper_oct, '#014b')[-6:]
+                    oper_rel_12b = "XXXXXX"+oper_oct_bin
+
+                oper_bin_match = re.match(regex_oper_bin, oper_rel)
+                if oper_bin_match:
+                    oper_bin = int(oper_bin_match.group(2), 2)
+                    oper_bin_bin = format(oper_bin, '#014b')[-6:]
+                    oper_rel_12b = "XXXXXX"+oper_bin_bin
+
+                oper_hex_match = re.match(regex_oper_hex, oper_rel)
+                if oper_hex_match:
+                    oper_hex = int(oper_hex_match.group(2), 16)
+                    oper_hex_hex = format(oper_hex, '#08b')[-6:]
+                    oper_rel_12b = "XXXXXX"+oper_hex_hex
+
+                rel_fi = str(cont_mem_pos) + " " + str(opcode_rel) + " " + str(oper_rel_12b)
                 cont_mem_pos += 2
                 fi_list.append(rel_fi)
-                print("fi_list",fi_list)
-                # print("Operando!:",inst_abs_match.group(3))
-                print("This is a relative instruction+argument:")
-                print(num_line_int, "|", data_source_line_n)
+
+                logging.info("OPCODE: " + str(opcode_rel).rstrip())
+                logging.info("Operando: " + str(oper_rel_12b).rstrip())
+                logging.info("Instruccion ensamblada: " + str(rel_fi).rstrip())
+
 
             if inst_acum_match:
                 # Actualizacion del contador de posicion de memoria.
                 # El direccionamiento acumulador cuenta con 1 palabra.
-
+                DIR = "acum"
+                logging.info("Instruccion de direccionamiento: " + DIR)
+                
                 pc_list.append(cont_mem_pos)
-
                 inst_acum_key = inst_acum_match.group(1) + "_ACU"
-                print("OPCODE de INST:", opcode_dic[inst_acum_key])
-
-                # opcode_acum = opcode_dic[inst_acum_key]
-                # oper_acum = ""
-                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_acum, oper=oper_acum)
-                # print("FSM DICTIONARY:",fsm_dic)
-
                 opcode_acum = opcode_dic[inst_acum_key]
                 oper_acum = "XXXXXXXXXXXX"
                 inst_acum_dic = dict(opcode=opcode_acum, oper=oper_acum)
                 fsm_dic[cont_mem_pos] = inst_acum_dic
-
                 acum_fi = str(cont_mem_pos) + " " + str(opcode_acum) + " " + str(oper_acum)
                 cont_mem_pos += 1
                 fi_list.append(acum_fi)
 
-
-                # print("Operando!:",inst_abs_match.group(1))
-                print("This is an accumulator instruction+argument:")
-                print(num_line_int, "|", data_source_line_n)
+                logging.info("OPCODE: " + str(opcode_acum).rstrip())
+                logging.info("Instruccion ensamblada: " + str(acum_fi).rstrip())
 
             if inst_ctrl_match:
                 # Actualizacion del contador de posicion de memoria.
                 # El direccionamiento control cuenta con 1 palabra.
-
+                DIR = "ctrl"
+                logging.info("Instruccion de direccionamiento: " + DIR)
+                
                 pc_list.append(cont_mem_pos)
-
                 inst_ctrl_key = inst_ctrl_match.group(1) + "_CTR"
-                print("OPCODE de INST:", opcode_dic[inst_ctrl_key])
-
-                # opcode_ctrl = opcode_dic[inst_ctrl_key]
-                # oper_ctrl = "XXXXXXXXXXXX"
-                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_ctrl, oper=oper_ctrl)
-                # print("FSM DICTIONARY:",fsm_dic)
-
                 opcode_ctrl = opcode_dic[inst_ctrl_key]
                 oper_ctrl = "XXXXXXXXXXXX"
                 inst_ctrl_dic = dict(opcode=opcode_ctrl, oper=oper_ctrl)
                 fsm_dic[cont_mem_pos] = inst_ctrl_dic
-
                 ctrl_fi = str(cont_mem_pos) + " " + str(opcode_ctrl) + " " + str(oper_ctrl)
                 cont_mem_pos += 1
                 fi_list.append(ctrl_fi)
 
-                # print("Operando!:",inst_abs_match.group(2))
-                print("This is an control instruction+argument:")
-                print(num_line_int, "|", data_source_line_n)
+                logging.info("OPCODE: " + str(opcode_ctrl).rstrip())
+                logging.info("Instruccion ensamblada: " + str(ctrl_fi).rstrip())
 
             if inst_imp_match:
                 # Actualizacion del contador de posicion de memoria.
                 # El direccionamiento implicito cuenta con 1 palabra.
+                DIR = "imp"
+                logging.info("Instruccion de direccionamiento: " + DIR)
 
                 pc_list.append(cont_mem_pos)
-
                 inst_imp_key = inst_imp_match.group(1) + "_IMP"
-                print("OPCODE de INST:", opcode_dic[inst_imp_key])
-
-                # opcode_imp = opcode_dic[inst_imp_key]
-                # oper_ctrl = "XXXXXXXXXXXX"
-                # fsm_dic.update(pc=cont_mem_pos, opcode=opcode_imp, oper=oper_ctrl)
-                # print("FSM DICTIONARY:",fsm_dic)
-
                 opcode_imp = opcode_dic[inst_imp_key]
                 oper_imp = "XXXXXXXXXXXX"
                 inst_imp_dic = dict(opcode=opcode_imp, oper=oper_imp)
                 fsm_dic[cont_mem_pos] = inst_imp_dic
-
                 imp_fi = str(cont_mem_pos) + " " + str(opcode_imp) + " " + str(oper_imp)
                 cont_mem_pos += 1
                 fi_list.append(imp_fi)
 
-                # print("Operando!:",inst_abs_match.group(1))
-                print("This is an implicit instruction+argument:")
-                print(num_line_int, "|", data_source_line_n)
+                logging.info("OPCODE: " + str(opcode_imp).rstrip())
+                logging.info("Instruccion ensamblada: " + str(imp_fi).rstrip())
         else:
             error += 1
-            print("Error!: No valid instruction format.")
-            print(num_line_int, "|", data_source_line_n)
+            logging.error("Error, instruccion invalida linea:")
+            error_no_i_valid = "Error!: Instruccion invalida en linea: "+ str(num_line_int) +" | " + data_source_line_n
+            logging.error(error_no_i_valid)
 
+    logging.info("****************************************")
     return error, fi_list
-
 
 def obj_creator(fi_list, res_words_dic, lines_raw_list):
 
