@@ -1,0 +1,190 @@
+2015-12-09 01:22:48,336 - INFO - ****************************************
+2015-12-09 01:22:48,338 - INFO - Sistema de Ensamblado y Ejecucion (SEE)
+2015-12-09 01:22:48,338 - INFO - ****************************************
+2015-12-09 01:22:48,338 - INFO - ========================================
+2015-12-09 01:22:48,339 - INFO - Inicia la ejecucion del ensamblador
+2015-12-09 01:22:48,339 - INFO - ========================================
+2015-12-09 01:22:48,339 - INFO - Archivo ASM cargado: raw_file.ASM
+2015-12-09 01:22:48,339 - INFO - Archivo LOG: SEE.log
+2015-12-09 01:22:48,339 - WARNING - Base invalida, se asigno por defecto base: 8
+2015-12-09 01:22:48,363 - INFO - Lineas mapeadas y cargadas en lista!
+2015-12-09 01:22:48,389 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-09 01:22:48,396 - INFO - Lineas en blanco eliminadas de la lista!
+2015-12-09 01:22:48,396 - INFO - Comentarios eliminados de las lineas!
+2015-12-09 01:22:48,397 - INFO - Multiples espacios en blanco eliminados!
+2015-12-09 01:22:48,398 - INFO - Inicia el analisis del init!
+2015-12-09 01:22:48,406 - INFO - Linea con Puntero de Posicion: 
+2015-12-09 01:22:48,407 - INFO - 9 | * = @0000
+2015-12-09 01:22:48,407 - WARNING - Alerta: Linea de flujo principal!
+2015-12-09 01:22:48,407 - WARNING - 10 | BIN LDA #%000001
+2015-12-09 01:22:48,407 - WARNING - Alerta: Linea de flujo principal!
+2015-12-09 01:22:48,407 - WARNING - 11 | OCT LDA #@02
+2015-12-09 01:22:48,408 - WARNING - Alerta: Linea de flujo principal!
+2015-12-09 01:22:48,408 - WARNING - 12 | HEX LDA #$03
+2015-12-09 01:22:48,408 - WARNING - Alerta: Linea de flujo principal!
+2015-12-09 01:22:48,408 - WARNING - 13 | DEC LDA #4
+2015-12-09 01:22:48,409 - WARNING - Alerta: Linea de flujo principal!
+2015-12-09 01:22:48,409 - WARNING - 14 | HLT
+2015-12-09 01:22:48,409 - INFO - Constantes extraidas (En decimal): {}
+2015-12-09 01:22:48,409 - INFO - Finaliza el analisis del init!
+2015-12-09 01:22:48,409 - INFO - Etapa de init sin errores: 0
+2015-12-09 01:22:48,410 - INFO - ========================================
+2015-12-09 01:22:48,410 - INFO - Inicia el analisis de etiquetas!
+2015-12-09 01:22:48,410 - INFO - ========================================
+2015-12-09 01:22:48,410 - INFO - Lista de lineas por analizar:
+2015-12-09 01:22:48,410 - INFO - ========================================
+2015-12-09 01:22:48,410 - INFO - 10 BIN LDA #%000001
+2015-12-09 01:22:48,411 - INFO - 11 OCT LDA #@02
+2015-12-09 01:22:48,411 - INFO - 12 HEX LDA #$03
+2015-12-09 01:22:48,411 - INFO - 13 DEC LDA #4
+2015-12-09 01:22:48,411 - INFO - 14 HLT
+2015-12-09 01:22:48,411 - INFO - ========================================
+2015-12-09 01:22:48,437 - INFO - ****************************************
+2015-12-09 01:22:48,437 - INFO - Linea en analisis: 10 BIN LDA #%000001
+2015-12-09 01:22:48,438 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-09 01:22:48,438 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,438 - INFO - Argumento extraido: %000001
+2015-12-09 01:22:48,438 - INFO - Pasada #: 0
+2015-12-09 01:22:48,438 - INFO - Etiqueta extraida: BIN
+2015-12-09 01:22:48,438 - INFO - Etiqueta ingresada al diccionario: {'BIN': 0}
+2015-12-09 01:22:48,439 - INFO - Linea con argumentos numericos: %000001
+2015-12-09 01:22:48,439 - INFO - ****************************************
+2015-12-09 01:22:48,439 - INFO - Linea en analisis: 11 OCT LDA #@02
+2015-12-09 01:22:48,439 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-09 01:22:48,439 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,440 - INFO - Argumento extraido: @02
+2015-12-09 01:22:48,440 - INFO - Pasada #: 0
+2015-12-09 01:22:48,440 - INFO - Etiqueta extraida: OCT
+2015-12-09 01:22:48,440 - INFO - Etiqueta ingresada al diccionario: {'OCT': 2, 'BIN': 0}
+2015-12-09 01:22:48,440 - INFO - Linea con argumentos numericos: @02
+2015-12-09 01:22:48,440 - INFO - ****************************************
+2015-12-09 01:22:48,440 - INFO - Linea en analisis: 12 HEX LDA #$03
+2015-12-09 01:22:48,440 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-09 01:22:48,441 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,441 - INFO - Argumento extraido: $03
+2015-12-09 01:22:48,441 - INFO - Pasada #: 0
+2015-12-09 01:22:48,441 - INFO - Etiqueta extraida: HEX
+2015-12-09 01:22:48,441 - INFO - Etiqueta ingresada al diccionario: {'OCT': 2, 'BIN': 0, 'HEX': 4}
+2015-12-09 01:22:48,441 - INFO - Linea con argumentos numericos: $03
+2015-12-09 01:22:48,441 - INFO - ****************************************
+2015-12-09 01:22:48,442 - INFO - Linea en analisis: 13 DEC LDA #4
+2015-12-09 01:22:48,442 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-09 01:22:48,442 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,442 - INFO - Argumento extraido: 4
+2015-12-09 01:22:48,442 - INFO - Pasada #: 0
+2015-12-09 01:22:48,442 - INFO - Etiqueta extraida: DEC
+2015-12-09 01:22:48,443 - INFO - Etiqueta ingresada al diccionario: {'DEC': 6, 'OCT': 2, 'BIN': 0, 'HEX': 4}
+2015-12-09 01:22:48,443 - INFO - Linea con argumentos numericos: 4
+2015-12-09 01:22:48,443 - INFO - ****************************************
+2015-12-09 01:22:48,443 - INFO - Linea en analisis: 14 HLT
+2015-12-09 01:22:48,443 - INFO - Es una linea con inst + argumento
+2015-12-09 01:22:48,443 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-09 01:22:48,444 - INFO - Pasada #: 0
+2015-12-09 01:22:48,444 - INFO - ****************************************
+2015-12-09 01:22:48,444 - INFO - Linea en analisis: 10 BIN LDA #%000001
+2015-12-09 01:22:48,444 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-09 01:22:48,444 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,444 - INFO - Argumento extraido: %000001
+2015-12-09 01:22:48,444 - INFO - Pasada #: 1
+2015-12-09 01:22:48,445 - INFO - Instruccion procesada: 10 LDA #%000001
+2015-12-09 01:22:48,445 - INFO - ****************************************
+2015-12-09 01:22:48,445 - INFO - Linea en analisis: 11 OCT LDA #@02
+2015-12-09 01:22:48,445 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-09 01:22:48,445 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,445 - INFO - Argumento extraido: @02
+2015-12-09 01:22:48,446 - INFO - Pasada #: 1
+2015-12-09 01:22:48,446 - INFO - Instruccion procesada: 11 LDA #@02
+2015-12-09 01:22:48,446 - INFO - ****************************************
+2015-12-09 01:22:48,446 - INFO - Linea en analisis: 12 HEX LDA #$03
+2015-12-09 01:22:48,446 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-09 01:22:48,446 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,447 - INFO - Argumento extraido: $03
+2015-12-09 01:22:48,447 - INFO - Pasada #: 1
+2015-12-09 01:22:48,447 - INFO - Instruccion procesada: 12 LDA #$03
+2015-12-09 01:22:48,447 - INFO - ****************************************
+2015-12-09 01:22:48,447 - INFO - Linea en analisis: 13 DEC LDA #4
+2015-12-09 01:22:48,447 - INFO - Es una linea con etiqueta + inst + argumento
+2015-12-09 01:22:48,448 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,448 - INFO - Argumento extraido: 4
+2015-12-09 01:22:48,448 - INFO - Pasada #: 1
+2015-12-09 01:22:48,448 - INFO - Instruccion procesada: 13 LDA #4
+2015-12-09 01:22:48,448 - INFO - ****************************************
+2015-12-09 01:22:48,448 - INFO - Linea en analisis: 14 HLT
+2015-12-09 01:22:48,449 - INFO - Es una linea con inst + argumento
+2015-12-09 01:22:48,449 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-09 01:22:48,449 - INFO - Pasada #: 1
+2015-12-09 01:22:48,449 - INFO - ****************************************
+2015-12-09 01:22:48,449 - INFO - Diccionario de identificadores extraidos: {'DEC': 6, 'OCT': 2, 'BIN': 0, 'HEX': 4}
+2015-12-09 01:22:48,449 - INFO - Inicia Etapa de instrucciones!
+2015-12-09 01:22:48,449 - INFO - ========================================
+2015-12-09 01:22:48,450 - INFO - Inicia el analisis de instrucciones!
+2015-12-09 01:22:48,450 - INFO - ========================================
+2015-12-09 01:22:48,450 - INFO - Lista de lineas por analizar:
+2015-12-09 01:22:48,450 - INFO - ========================================
+2015-12-09 01:22:48,450 - INFO - 10 LDA #%000001
+2015-12-09 01:22:48,450 - INFO - 11 LDA #@02
+2015-12-09 01:22:48,450 - INFO - 12 LDA #$03
+2015-12-09 01:22:48,451 - INFO - 13 LDA #4
+2015-12-09 01:22:48,451 - INFO - 14 HLT
+2015-12-09 01:22:48,451 - INFO - ========================================
+2015-12-09 01:22:48,452 - INFO - ****************************************
+2015-12-09 01:22:48,452 - INFO - Linea en analisis: 10 LDA #%000001
+2015-12-09 01:22:48,452 - INFO - Es una linea con inst + argumento
+2015-12-09 01:22:48,452 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,452 - INFO - OPCODE: 000000
+2015-12-09 01:22:48,453 - INFO - Operando: XXXXXX000001
+2015-12-09 01:22:48,453 - INFO - Instruccion ensamblada: 0 000000 XXXXXX000001
+2015-12-09 01:22:48,453 - INFO - ****************************************
+2015-12-09 01:22:48,453 - INFO - Linea en analisis: 11 LDA #@02
+2015-12-09 01:22:48,453 - INFO - Es una linea con inst + argumento
+2015-12-09 01:22:48,453 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,453 - INFO - OPCODE: 000000
+2015-12-09 01:22:48,454 - INFO - Operando: XXXXXX000010
+2015-12-09 01:22:48,454 - INFO - Instruccion ensamblada: 2 000000 XXXXXX000010
+2015-12-09 01:22:48,454 - INFO - ****************************************
+2015-12-09 01:22:48,454 - INFO - Linea en analisis: 12 LDA #$03
+2015-12-09 01:22:48,454 - INFO - Es una linea con inst + argumento
+2015-12-09 01:22:48,454 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,455 - INFO - OPCODE: 000000
+2015-12-09 01:22:48,455 - INFO - Operando: XXXXXX000011
+2015-12-09 01:22:48,455 - INFO - Instruccion ensamblada: 4 000000 XXXXXX000011
+2015-12-09 01:22:48,455 - INFO - ****************************************
+2015-12-09 01:22:48,455 - INFO - Linea en analisis: 13 LDA #4
+2015-12-09 01:22:48,455 - INFO - Es una linea con inst + argumento
+2015-12-09 01:22:48,455 - INFO - Instruccion de direccionamiento: inm
+2015-12-09 01:22:48,455 - INFO - OPCODE: 000000
+2015-12-09 01:22:48,456 - INFO - Operando: XXXXXX000100
+2015-12-09 01:22:48,456 - INFO - Instruccion ensamblada: 6 000000 XXXXXX000100
+2015-12-09 01:22:48,456 - INFO - ****************************************
+2015-12-09 01:22:48,456 - INFO - Linea en analisis: 14 HLT
+2015-12-09 01:22:48,456 - INFO - Es una linea con inst + argumento
+2015-12-09 01:22:48,456 - INFO - Instruccion de direccionamiento: ctrl
+2015-12-09 01:22:48,456 - INFO - OPCODE: 100110
+2015-12-09 01:22:48,457 - INFO - Instruccion ensamblada: 8 100110 XXXXXXXXXXXX
+2015-12-09 01:22:48,457 - INFO - ****************************************
+2015-12-09 01:22:48,457 - INFO - Etapa de instruc sin errores: 0
+2015-12-09 01:22:48,467 - INFO - ========================================
+2015-12-09 01:22:48,467 - INFO - ########################################
+2015-12-09 01:22:48,468 - INFO - ========================================
+2015-12-09 01:22:48,468 - INFO - Contenido de memoria del programa objeto
+2015-12-09 01:22:48,468 - INFO - ========================================
+2015-12-09 01:22:48,468 - INFO - Programa objeto escrito en el archivo: ../clion/ram_init.txt
+2015-12-09 01:22:48,468 - INFO - ========================================
+2015-12-09 01:22:48,468 - INFO - Base numerica de contenido de memoria: 8
+2015-12-09 01:22:48,468 - INFO - ========================================
+2015-12-09 01:22:48,469 - INFO - |[Address]||[Data]|
+2015-12-09 01:22:48,469 - INFO - |[@0000]|=====|[@00]|
+2015-12-09 01:22:48,469 - INFO - |[@0001]|=====|[@01]|
+2015-12-09 01:22:48,469 - INFO - |[@0002]|=====|[@00]|
+2015-12-09 01:22:48,469 - INFO - |[@0003]|=====|[@02]|
+2015-12-09 01:22:48,469 - INFO - |[@0004]|=====|[@00]|
+2015-12-09 01:22:48,469 - INFO - |[@0005]|=====|[@03]|
+2015-12-09 01:22:48,469 - INFO - |[@0006]|=====|[@00]|
+2015-12-09 01:22:48,470 - INFO - |[@0007]|=====|[@04]|
+2015-12-09 01:22:48,470 - INFO - |[@0010]|=====|[@46]|
+2015-12-09 01:22:48,470 - INFO - ========================================
+2015-12-09 01:22:48,470 - INFO - ########################################
+2015-12-09 01:22:48,470 - INFO - ========================================
+2015-12-09 01:22:48,471 - INFO - Fin de la ejecucion de SEE!
+2015-12-09 01:22:48,471 - INFO - ========================================
+2015-12-09 01:22:48,471 - INFO - ****************************************

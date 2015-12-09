@@ -31,7 +31,7 @@ def main(argv):
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-    fh = logging.FileHandler('SES.log')
+    fh = logging.FileHandler('SEE.log')
     fh.setLevel(logging.DEBUG)
     fh.setFormatter(formatter)
     logger.addHandler(fh)
@@ -47,6 +47,8 @@ def main(argv):
     logging.info('Inicia la ejecucion del ensamblador')
     logging.info("========================================")
     logging.info('Archivo ASM cargado: '+raw_file_name)
+    logging.info('Archivo LOG: '+'SEE.log')
+
     lines_counter = 0
     error = 0
     data_list = []
