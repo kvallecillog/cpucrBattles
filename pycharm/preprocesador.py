@@ -1690,7 +1690,7 @@ def inst_checker(data_list, lines_raw_list, error, pos_cont_dec):
     logging.info("****************************************")
     return error, fi_list
 
-def obj_creator(fi_list, res_words_dic, lines_raw_list):
+def obj_creator(fi_list, res_words_dic, lines_raw_list, base_output):
 
     ram_init_file_name = '../clion/ram_init.txt'
     ram_init_file = open(ram_init_file_name, 'w+')
@@ -1699,15 +1699,25 @@ def obj_creator(fi_list, res_words_dic, lines_raw_list):
     object_file = open(object_file_name, 'w+')
     pc_file_name = '../clion/pc_init.txt'
     pc_file = open(pc_file_name, 'w+')
-    base = 10
 
-    cero = "0"
-    base_address = 10
     obj_line_dic = {}
+
+    # Base numerica de la impresion en pantalla del contenido de memoria.
+    # if not base_output:
+    #     base_output = 16
+
+    ####################################################################################
+    # Constantes fijas no cambiar.
+    # Base numerica del contenido de memoria a escribir al file ../clion/ram_init.txt.
+    #  No cambiar este valor, el programa de systemc depende de que sea decimal.
+    base = 10
+    base_address = 10
+    # Valor inicial por defecto del contenido de memoria de las 4096 posiciones de memoria.
+    cero = "0"
     cont_pos = 0
     dont_care = "XXXXXX"
-
-    # print(fi_list)
+    # Constantes fijas no cambiar.
+    ####################################################################################
 
     for fi in fi_list:
 
@@ -1772,78 +1782,102 @@ def obj_creator(fi_list, res_words_dic, lines_raw_list):
             address_pos += 1
         cont_pos += 1
 
-
+    # Escritura en memoria del contenido del programa objeto ensamblado.
     for i in range(0, 4096):
-
         if i in obj_line_dic:
             ram_init_file.writelines(obj_line_dic[i]+"\n")
-            # print("obj dic", obj_line_dic[i])
         else:
             ram_init_file.writelines(cero+"\n")
 
+    logging.info("========================================")
+    logging.info("########################################")
+    logging.info("========================================")
+    logging.info("Contenido de memoria del programa objeto")
+    logging.info("========================================")
     logging.info("Programa objeto escrito en el archivo: " + ram_init_file_name)
+    logging.info("========================================")
+    logging.info("Base numerica de contenido de memoria: " + str(base_output))
+    logging.info("========================================")
     logging.info("|[Address]||[Data]|")
     for key, value in obj_line_dic.items():
-        logging.info("|[" + str(key) +"]|"+"====="+ "|[" + str(value)+"]|" )
+        key_2_base = address_2_base(str(key), base_output)
+        value_2_base = data_2_base(str(value), base_output)
+        logging.info("|[" + str(key_2_base).upper() + "]|" + "=====" + "|[" + str(value_2_base).upper()+"]|")
+    logging.info("========================================")
+    logging.info("########################################")
+    logging.info("========================================")
 
     # print("Programa objeto escrito en archivo:", ram_init_file_name)
     # print("\nValor inicial de PC escrito en:", pc_file_name)
 
+
 def int_2_base(number, base):
 
+    base = int(base)
+
     if base == 2:
-
         number_bin = format(int(number, 2), '#08b')[-6:]
-
-        # print(number_bin)
         return number_bin
 
     elif base == 8:
-
-        # number_oct = oct(int(number,2))
         number_oct = "@"+format(int(number, 2), '#04o')[2:4]
-
-        # print(number_oct)
         return number_oct
 
     elif base == 10:
-
         number_dec = int(number,2)
-        # print(number_hex)
         return number_dec
 
     elif base == 16:
-
         number_hex = "$"+format(int(number, 2), '#04x')[2:4]
-        # number_hex = format(int(number,2), 'x') # hex(int(number,2))[-6:]
-        # print(number_hex)
         return number_hex
+
+    else:
+        logging.critical("Error interno: Base numerica no permitida")
+
 
 def address_2_base(number, base):
 
+    base = int(base)
+
     if base == 2:
-
         number_bin = format(int(number, 2), '#08b')[-12:]
-
-        # print(number_bin)
         return number_bin
 
     elif base == 8:
-
-        # number_oct = oct(int(number))
         number_oct = "@"+format(int(number), '#08o')[-4:]
-        # print(number_oct)
         return number_oct
 
     elif base == 10:
-
         number_dec = int(number)
-        # print(number_hex)
         return number_dec
 
     elif base == 16:
-
-        # number_hex = hex(int(number))
         number_hex = "$"+format(int(number),'#08x')[-3:]
-        # print(number_hex)
         return number_hex
+
+    else:
+        logging.critical("Error interno: Base numerica no permitida")
+
+
+def data_2_base(number, base):
+
+    base = int(base)
+
+    if base == 2:
+        number_bin = format(int(number, 2), '#06b')[-6:]
+        return number_bin
+
+    elif base == 8:
+        number_oct = "@"+format(int(number), '#06o')[-2:]
+        return number_oct
+
+    elif base == 10:
+        number_dec = int(number)
+        return number_dec
+
+    elif base == 16:
+        number_hex = "$"+format(int(number),'#06x')[-2:]
+        return number_hex
+
+    else:
+        logging.critical("Error interno: Base numerica no permitida")

@@ -33,8 +33,8 @@
             <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/main.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.58208954">
-                    <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+                  <state vertical-scroll-proportion="0.70149255">
+                    <caret line="64" column="27" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="27" />
                     <folding>
                       <element signature="e#542#552#0" expanded="true" />
                     </folding>
@@ -57,17 +57,17 @@
         <entry file="file://$PROJECT_DIR$/deleted_spaces_file.ASM">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="raw_file.ASM" pinned="false" current-in-tab="true">
+      <file leaf-file-name="raw_file.ASM" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/raw_file.ASM">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7777778">
-              <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -83,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="preprocesador.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="preprocesador.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/preprocesador.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="9.04918">
-              <caret line="1572" column="0" selection-start-line="1572" selection-start-column="0" selection-end-line="1572" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.18604651">
+              <caret line="1693" column="0" selection-start-line="1693" selection-start-column="0" selection-end-line="1693" selection-end-column="0" />
               <folding>
                 <element signature="e#406#415#0" expanded="true" />
               </folding>
@@ -125,9 +125,9 @@
         <option value="$PROJECT_DIR$/file.obj" />
         <option value="$PROJECT_DIR$/deleted_spaces_file.ASM" />
         <option value="$PROJECT_DIR$/user_file.ASM" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/preprocesador.py" />
         <option value="$PROJECT_DIR$/raw_file.ASM" />
+        <option value="$PROJECT_DIR$/preprocesador.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -440,16 +440,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1366" height="772" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22473118" sideWeight="0.8830975" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22376543" sideWeight="0.8830975" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24942966" sideWeight="0.4947839" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298585" sideWeight="0.7736318" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41203704" sideWeight="0.48473567" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287037" sideWeight="0.7803425" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287037" sideWeight="0.7803425" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.22636816" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44135803" sideWeight="0.21965748" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -867,7 +867,7 @@
     <entry file="file://$PROJECT_DIR$/deleted_spaces_file.ASM">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -880,10 +880,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/raw_file.ASM">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58208954">
-          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.70149255">
+          <caret line="64" column="27" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="27" />
           <folding>
             <element signature="e#542#552#0" expanded="true" />
           </folding>
@@ -892,19 +900,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/preprocesador.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="9.04918">
-          <caret line="1572" column="0" selection-start-line="1572" selection-start-column="0" selection-end-line="1572" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.18604651">
+          <caret line="1693" column="0" selection-start-line="1693" selection-start-column="0" selection-end-line="1693" selection-end-column="0" />
           <folding>
             <element signature="e#406#415#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/raw_file.ASM">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7777778">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>

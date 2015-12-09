@@ -50,6 +50,23 @@ def main(argv):
     lines_counter = 0
     error = 0
     data_list = []
+
+    if len(sys.argv) > 1:
+        if int(sys.argv[1]) == 16:
+         base_output = int(sys.argv[1])
+        elif int(sys.argv[1]) == 10:
+         base_output = int(sys.argv[1])
+        elif int(sys.argv[1]) == 8:
+         base_output = int(sys.argv[1])
+        elif int(sys.argv[1]) == 2:
+         base_output = int(sys.argv[1])
+        else:
+            logging.warning('Base invalida, se asigno por defecto base: 8')
+            base_output = 8
+    else:
+        logging.warning('Base invalida, se asigno por defecto base: 8')
+        base_output = 8
+
 ###########################################################################
 
 ###########################################################################
@@ -69,7 +86,7 @@ def main(argv):
             error_inst, fi_list = preprocesador.inst_checker(num_op_inst_list, lines_raw_list, error_label, pos_cont_dec)
             if error_inst == 0:
                 logging.info("Etapa de instruc sin errores: %d", error_inst)
-                obj_list = preprocesador.obj_creator(fi_list, res_words_dic, lines_raw_list)
+                obj_list = preprocesador.obj_creator(fi_list, res_words_dic, lines_raw_list, base_output)
                 # print("Advertencia: ",warning_list[len(warning_list)-1])
             else:
                 logging.error("Error encontrado en etapa de instrucciones!")

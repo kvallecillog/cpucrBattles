@@ -7,28 +7,10 @@
 ;#1  Prueba de instruccion LDA inmediata.
 ;=============================================================
 * = @0000 ; Declaracion del puntero de posicion.
-CONST = @0000
-;CONST2 = 10
-;CONST3 = %00001
-;CONST4 = $A
-;ABS LDA @0000
-;BAS LDA CONST1
-;L1 INP CONST1
-;BUN LDA (CONST2)
-;BIN LDA #%000001 ; LDA con argumento binario.
-;OCT LDA #@02 ; LDA con argumento octal.
-;HEX LDA #$03 ; LDA con argumento hexadecimal.
-;DEC LDA #4 ; LDA con argumento decimal.
-;L1 BNE L3+1
-;L3 INA
-;L1 SEC
-;L4 NOP
-;L6 CLA
-;INP CONST+1
-L BNE @03
-L1 INA
-;LDA CONST
-;BNE 14
+BIN LDA #%000001 ; LDA con argumento binario.
+OCT LDA #@02 ; LDA con argumento octal.
+HEX LDA #$03 ; LDA con argumento hexadecimal.
+DEC LDA #4 ; LDA con argumento decimal.
 HLT ; Instruccion de detencion.
 ;=============================================================
 
